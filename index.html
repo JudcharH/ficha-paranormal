@@ -1,78 +1,604 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sistema RPG Paranormal</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body{
+      margin:0;
+      padding:0;
+      background:#0f0f12;
+      color:white;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    .container{
+      width:95%;
+      max-width:1400px;
+      margin:auto;
+      padding:20px;
+    }
+
+    .topo{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .titulo{
+      font-size:32px;
+      font-weight:bold;
+    }
+
+    .status{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .box{
+      background:#1a1a1f;
+      padding:10px 15px;
+      border-radius:10px;
+      border:1px solid #333;
+      min-width:120px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:20px;
+      margin-bottom:25px;
+    }
+
+    .card{
+      background:#1a1a1f;
+      border:1px solid #333;
+      border-radius:15px;
+      padding:15px;
+    }
+
+    .card h2{
+      margin-top:0;
+      border-bottom:1px solid #333;
+      padding-bottom:10px;
+    }
+
+    input{
+      width:100%;
+      margin-bottom:10px;
+      padding:10px;
+      border:none;
+      border-radius:8px;
+      background:#2a2a30;
+      color:white;
+      box-sizing:border-box;
+    }
+
+    button{
+      cursor:pointer;
+      border:none;
+      border-radius:8px;
+      padding:10px 15px;
+      background:#6b2cff;
+      color:white;
+      font-weight:bold;
+      transition:0.2s;
+    }
+
+    button:hover{
+      opacity:0.85;
+    }
+
+    .lista{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .item{
+      background:#23232b;
+      border:1px solid #333;
+      border-radius:10px;
+      padding:10px;
+    }
+
+    .inventario{
+      margin-top:40px;
+      background:#16161c;
+      border:2px solid #333;
+      border-radius:20px;
+      padding:20px;
+      position:relative;
+    }
+
+    .inventario h2{
+      margin-top:0;
+    }
+
+    .inventario-item{
+      background:#23232b;
+      border-radius:10px;
+      padding:10px;
+      margin-bottom:10px;
+      border:1px solid #333;
+    }
+
+    .inventario-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .btn-add{
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      font-size:24px;
+      padding:0;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.7);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+    }
+
+    .modal-content{
+      width:90%;
+      max-width:700px;
+      max-height:85vh;
+      overflow-y:auto;
+      background:#1a1a1f;
+      border-radius:15px;
+      padding:20px;
+      border:1px solid #444;
+    }
+
+    .pesquisa{
+      margin-bottom:15px;
+    }
+
+    .item-loja{
+      background:#242430;
+      padding:12px;
+      border-radius:10px;
+      margin-bottom:10px;
+      border:1px solid #333;
+    }
+
+    .item-loja button{
+      margin-top:10px;
+    }
+
+    .condicao{
+      background:#381616;
+      padding:8px;
+      border-radius:8px;
+      margin-bottom:8px;
+      border:1px solid #702727;
+    }
+
+    .customizar{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid #444;
+    }
+
+    .linha-custom{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+
+    .linha-custom input{
+      margin:0;
+    }
+
+    .mini-btn{
+      padding:8px 10px;
+      font-size:12px;
+    }
+
+    @media(max-width:700px){
+
+      .topo{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .titulo{
+        font-size:24px;
+      }
+
+    }
+
+  </style>
 </head>
+
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
-      <h1>Sistema RPG Paranormal</h1>
-    </header>
+  <div class="topo">
+    <div class="titulo">
+      Sistema RPG Paranormal
+    </div>
 
-    <main>
+    <div class="status">
 
-      <section class="ficha">
-        <h2>Ficha</h2>
+      <div class="box">
+        ❤️ PV: <span id="pvAtual">40</span>/<span id="pvMax">40</span>
+      </div>
 
-        <div class="status-grid">
-          <div>
-            <label>PV Atual</label>
-            <input type="number" id="pvAtual" value="40" />
-          </div>
+      <div class="box">
+        🧠 PD: <span id="pdAtual">20</span>/<span id="pdMax">20</span>
+      </div>
 
-          <div>
-            <label>PV Máximo</label>
-            <input type="number" id="pvMax" value="40" />
-          </div>
+      <div class="box">
+        ⚡ PA: <span id="paAtual">3</span>
+      </div>
 
-          <div>
-            <label>PD Atual</label>
-            <input type="number" id="pdAtual" value="20" />
-          </div>
+    </div>
+  </div>
 
-          <div>
-            <label>PD Máximo</label>
-            <input type="number" id="pdMax" value="20" />
-          </div>
-        </div>
+  <div class="grid">
 
-        <h3>Condições</h3>
+    <div class="card">
+      <h2>Atributos</h2>
 
-        <div class="condicoes-box">
-          <select id="condicaoSelect"></select>
-          <button onclick="adicionarCondicao()">Adicionar</button>
-        </div>
+      <div class="lista">
 
-        <div id="listaCondicoes"></div>
-      </section>
+        <div class="item">💪 FOR: 3</div>
+        <div class="item">🏃 AGI: 4</div>
+        <div class="item">🧠 INT: 3</div>
+        <div class="item">❤️ VIG: 4</div>
+        <div class="item">👁️ PRE: 2</div>
 
-      <section class="inventario-area">
-        <div class="inventario-topo">
-          <h2>Inventário</h2>
-          <button id="abrirModal">+</button>
-        </div>
+      </div>
+    </div>
 
-        <div id="inventarioLista"></div>
-      </section>
+    <div class="card">
+      <h2>Condições</h2>
 
-    </main>
+      <div id="listaCondicoes"></div>
+
+      <button onclick="adicionarCondicao('Traumatizado')">
+        Adicionar Traumatizado
+      </button>
+
+      <button onclick="adicionarCondicao('Enfraquecido')">
+        Adicionar Enfraquecido
+      </button>
+
+      <button onclick="adicionarCondicao('Sangramento')">
+        Adicionar Sangramento
+      </button>
+
+    </div>
 
   </div>
 
-  <div class="modal" id="modalItens">
-    <div class="modal-conteudo">
+  <div class="inventario">
 
-      <div class="modal-topo">
-        <h2>Adicionar Item</h2>
-        <button onclick="fecharModal()">X</button>
+    <div class="inventario-top">
+
+      <h2>🎒 Inventário</h2>
+
+      <button class="btn-add" onclick="abrirModal()">
+        +
+      </button>
+
+    </div>
+
+    <div id="inventarioLista"></div>
+
+  </div>
+
+</div>
+
+<div class="modal" id="modalItens">
+
+  <div class="modal-content">
+
+    <h2>Adicionar Item</h2>
+
+    <input
+      type="text"
+      id="pesquisa"
+      class="pesquisa"
+      placeholder="Pesquisar item..."
+      onkeyup="filtrarItens()"
+    >
+
+    <div id="listaItens"></div>
+
+    <button onclick="fecharModal()">
+      Fechar
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+const itens = [
+
+  {
+    nome:"Espada",
+    dano:"1d10 + 2 + FOR",
+    critico:"x2",
+    tipo:"Corte",
+    alcance:"Adjacente",
+    peso:"3 EP"
+  },
+
+  {
+    nome:"Katana",
+    dano:"1d10 + 2 + FOR",
+    critico:"x2",
+    tipo:"Corte",
+    alcance:"Adjacente",
+    peso:"3 EP"
+  },
+
+  {
+    nome:"Pistola",
+    dano:"1d8 + AGI",
+    critico:"x3",
+    tipo:"Balístico",
+    alcance:"1-5",
+    peso:"2 EP"
+  },
+
+  {
+    nome:"Fuzil de assalto",
+    dano:"2d8 + AGI",
+    critico:"x3",
+    tipo:"Balístico",
+    alcance:"1-5",
+    peso:"4 EP"
+  },
+
+  {
+    nome:"Motosserra",
+    dano:"3d6 + FOR",
+    critico:"x3",
+    tipo:"Corte",
+    alcance:"Adjacente",
+    peso:"3 EP"
+  },
+
+  {
+    nome:"Proteção Pesada",
+    dano:"—",
+    critico:"—",
+    tipo:"Armadura",
+    alcance:"—",
+    peso:"4 EP"
+  }
+
+];
+
+const inventario = [];
+
+const condicoes = [];
+
+let pvMaxBase = 40;
+let pdMaxBase = 20;
+
+function atualizarStatus(){
+
+  let pvMax = pvMaxBase;
+  let pdMax = pdMaxBase;
+
+  if(condicoes.includes("Enfraquecido")){
+    pvMax -= 10;
+  }
+
+  if(condicoes.includes("Traumatizado")){
+    pdMax -= 8;
+  }
+
+  document.getElementById("pvMax").innerText = pvMax;
+  document.getElementById("pdMax").innerText = pdMax;
+
+}
+
+function adicionarCondicao(nome){
+
+  if(condicoes.includes(nome)) return;
+
+  condicoes.push(nome);
+
+  atualizarCondicoes();
+  atualizarStatus();
+
+}
+
+function atualizarCondicoes(){
+
+  const lista = document.getElementById("listaCondicoes");
+
+  lista.innerHTML = "";
+
+  condicoes.forEach(condicao => {
+
+    const div = document.createElement("div");
+
+    div.className = "condicao";
+
+    div.innerHTML = `
+      ${condicao}
+    `;
+
+    lista.appendChild(div);
+
+  });
+
+}
+
+function abrirModal(){
+
+  document.getElementById("modalItens").style.display = "flex";
+
+  renderizarItens(itens);
+
+}
+
+function fecharModal(){
+
+  document.getElementById("modalItens").style.display = "none";
+
+}
+
+function renderizarItens(lista){
+
+  const container = document.getElementById("listaItens");
+
+  container.innerHTML = "";
+
+  lista.forEach(item => {
+
+    const div = document.createElement("div");
+
+    div.className = "item-loja";
+
+    div.innerHTML = `
+
+      <strong>${item.nome}</strong><br><br>
+
+      ⚔️ Dano: ${item.dano}<br>
+      🎯 Crítico: ${item.critico}<br>
+      🧩 Tipo: ${item.tipo}<br>
+      📏 Alcance: ${item.alcance}<br>
+      🎒 Peso: ${item.peso}<br><br>
+
+      <button onclick='adicionarInventario(${JSON.stringify(item)})'>
+        Adicionar
+      </button>
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+function filtrarItens(){
+
+  const pesquisa = document
+    .getElementById("pesquisa")
+    .value
+    .toLowerCase();
+
+  const filtrados = itens.filter(item =>
+    item.nome.toLowerCase().includes(pesquisa)
+  );
+
+  renderizarItens(filtrados);
+
+}
+
+function adicionarInventario(item){
+
+  inventario.push(item);
+
+  atualizarInventario();
+
+}
+
+function atualizarInventario(){
+
+  const lista = document.getElementById("inventarioLista");
+
+  lista.innerHTML = "";
+
+  inventario.forEach((item,index)=>{
+
+    const div = document.createElement("div");
+
+    div.className = "inventario-item";
+
+    div.innerHTML = `
+
+      <strong>${item.nome}</strong><br><br>
+
+      ⚔️ Dano:
+      <input
+        value="${item.dano}"
+        onchange="editarItem(${index},'dano',this.value)"
+      >
+
+      📏 Alcance:
+      <input
+        value="${item.alcance}"
+        onchange="editarItem(${index},'alcance',this.value)"
+      >
+
+      🧩 Tipo:
+      <input
+        value="${item.tipo}"
+        onchange="editarItem(${index},'tipo',this.value)"
+      >
+
+      🎯 Crítico:
+      <input
+        value="${item.critico}"
+        onchange="editarItem(${index},'critico',this.value)"
+      >
+
+      <div class="linha-custom">
+
+        <button
+          class="mini-btn"
+          onclick="removerItem(${index})"
+        >
+          Remover
+        </button>
+
       </div>
 
-      <input
-        type="text"
+    `;
+
+    lista.appendChild(div);
+
+  });
+
+}
+
+function editarItem(index,campo,valor){
+
+  inventario[index][campo] = valor;
+
+}
+
+function removerItem(index){
+
+  inventario.splice(index,1);
+
+  atualizarInventario();
+
+}
+
+atualizarStatus();
+
+</script>
+
+</body>
 </html>
