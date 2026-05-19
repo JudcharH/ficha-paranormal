@@ -1,0 +1,22 @@
+const condicoes = [
+  "Sangramento",
+  "Envenenamento",
+  "Paralisia",
+  "Paralisia Total",
+  "Caído",
+  "Enjoado",
+  "Morrendo",
+  "Enfraquecido",
+  "Lentidão",
+  "Cansado",
+  "Controlado",
+  "Cego",
+  "Surdo",
+  "Traumatizado",
+  "Penumbra",
+  "Vulnerável",
+  "Desprevenido",
+  "Confuso",
+  "Chamas",
+  "Anti Vida"
+];

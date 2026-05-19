@@ -1,441 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema RPG Paranormal</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ficha Paranormal</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <script defer src="script.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<div class="background-glow"></div>
+  <div class="container">
 
-<div class="container">
+    <header>
+      <h1>Sistema RPG Paranormal</h1>
+    </header>
 
-    <!-- ========================= -->
-    <!-- TOPO -->
-    <!-- ========================= -->
+    <main>
 
-    <section class="top-section">
+      <section class="ficha">
+        <h2>Ficha</h2>
 
-        <!-- FOTO -->
-        <div class="photo-card">
+        <div class="status-grid">
+          <div>
+            <label>PV Atual</label>
+            <input type="number" id="pvAtual" value="40" />
+          </div>
 
-            <div class="photo-frame" id="photoPreview">
-                <span>FOTO DO PERSONAGEM</span>
-            </div>
+          <div>
+            <label>PV Máximo</label>
+            <input type="number" id="pvMax" value="40" />
+          </div>
 
-            <input type="file" id="photoInput" accept="image/*">
+          <div>
+            <label>PD Atual</label>
+            <input type="number" id="pdAtual" value="20" />
+          </div>
 
-            <!-- STATUS -->
-            <div class="status-grid">
-
-                <div class="status-box">
-
-                    <label>PV</label>
-
-                    <div class="double-input">
-                        <input type="number" id="pvAtual" value="50">
-                        <span>/</span>
-                        <input type="number" id="pvMax" value="50">
-                    </div>
-
-                </div>
-
-                <div class="status-box">
-
-                    <label>PD</label>
-
-                    <div class="double-input">
-                        <input type="number" id="pdAtual" value="20">
-                        <span>/</span>
-                        <input type="number" id="pdMax" value="20">
-                    </div>
-
-                </div>
-
-                <div class="status-box">
-
-                    <label>PA</label>
-
-                    <div class="double-input">
-                        <input type="number" id="paAtual" value="3">
-                        <span>/</span>
-                        <input type="number" id="paMax" value="3">
-                    </div>
-
-                </div>
-
-                <div class="status-box">
-
-                    <label>EP</label>
-
-                    <div class="double-input">
-                        <input type="number" id="epAtual" value="0">
-                        <span>/</span>
-                        <input type="number" id="epMax" value="5">
-                    </div>
-
-                </div>
-
-                <div class="status-box">
-
-                    <label>DEFESA</label>
-
-                    <input type="number" id="defesa" value="15">
-
-                </div>
-
-                <div class="status-box">
-
-                    <label>DESLOCAMENTO</label>
-
-                    <input type="text" id="deslocamento" value="6m">
-
-                </div>
-
-            </div>
-
+          <div>
+            <label>PD Máximo</label>
+            <input type="number" id="pdMax" value="20" />
+          </div>
         </div>
 
-        <!-- INFO PERSONAGEM -->
-        <div class="character-info">
+        <h3>Condições</h3>
 
-            <h1>FICHA PARANORMAL</h1>
-
-            <div class="info-grid">
-
-                <div class="field">
-                    <label>NOME</label>
-                    <input type="text">
-                </div>
-
-                <div class="field">
-                    <label>NÍVEL</label>
-                    <input type="number" id="nivel" value="1">
-                </div>
-
-                <div class="field">
-                    <label>ORIGEM</label>
-                    <input type="text">
-                </div>
-
-                <div class="field">
-                    <label>IDADE</label>
-                    <input type="text">
-                </div>
-
-            </div>
-
-            <!-- ATRIBUTOS -->
-            <div class="attributes">
-
-                <div class="attribute">
-                    <span>FOR</span>
-                    <input type="number" id="forca" value="1">
-                </div>
-
-                <div class="attribute">
-                    <span>AGI</span>
-                    <input type="number" id="agilidade" value="1">
-                </div>
-
-                <div class="attribute">
-                    <span>INT</span>
-                    <input type="number" id="intelecto" value="1">
-                </div>
-
-                <div class="attribute">
-                    <span>VIG</span>
-                    <input type="number" id="vigor" value="1">
-                </div>
-
-                <div class="attribute">
-                    <span>PRE</span>
-                    <input type="number" id="presenca" value="1">
-                </div>
-
-            </div>
-
+        <div class="condicoes-box">
+          <select id="condicaoSelect"></select>
+          <button onclick="adicionarCondicao()">Adicionar</button>
         </div>
 
-    </section>
+        <div id="listaCondicoes"></div>
+      </section>
 
-    <!-- ========================= -->
-    <!-- CONTEÚDO -->
-    <!-- ========================= -->
-
-    <section class="middle-section">
-
-        <!-- ========================= -->
-        <!-- PERÍCIAS -->
-        <!-- ========================= -->
-
-        <div class="panel skills-panel">
-
-            <div class="panel-header">
-                <h2>PERÍCIAS</h2>
-            </div>
-
-            <div class="skills-scroll">
-
-                <!-- MODELO -->
-
-                <div class="skill-row">
-
-                    <span class="skill-name">Acrobacia</span>
-
-                    <span class="skill-attr">(AGI)</span>
-
-                    <input type="number" class="skill-train" placeholder="Treino">
-
-                    <input type="number" class="skill-other" placeholder="Outros">
-
-                    <div class="skill-total">0</div>
-
-                    <button class="roll-skill">🎲</button>
-
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Adestramento</span>
-                    <span class="skill-attr">(PRE)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Artes</span>
-                    <span class="skill-attr">(PRE)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Atletismo</span>
-                    <span class="skill-attr">(FOR)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Atualidades</span>
-                    <span class="skill-attr">(INT)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Ciências</span>
-                    <span class="skill-attr">(INT)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Crime</span>
-                    <span class="skill-attr">(AGI)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Diplomacia</span>
-                    <span class="skill-attr">(PRE)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Enganação</span>
-                    <span class="skill-attr">(PRE)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Fortitude</span>
-                    <span class="skill-attr">(VIG)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-                <div class="skill-row">
-                    <span class="skill-name">Furtividade</span>
-                    <span class="skill-attr">(AGI)</span>
-                    <input type="number" class="skill-train" placeholder="Treino">
-                    <input type="number" class="skill-other" placeholder="Outros">
-                    <div class="skill-total">0</div>
-                    <button class="roll-skill">🎲</button>
-                </div>
-
-            </div>
-
+      <section class="inventario-area">
+        <div class="inventario-topo">
+          <h2>Inventário</h2>
+          <button id="abrirModal">+</button>
         </div>
 
-        <!-- ========================= -->
-        <!-- LADO DIREITO -->
-        <!-- ========================= -->
+        <div id="inventarioLista"></div>
+      </section>
 
-        <div class="right-side">
+    </main>
 
-            <!-- ROLAGEM -->
-            <div class="panel dice-panel">
+  </div>
 
-                <div class="panel-header">
-                    <h2>ROLAGEM</h2>
-                </div>
+  <div class="modal" id="modalItens">
+    <div class="modal-conteudo">
 
-                <div class="dice-box">
+      <div class="modal-topo">
+        <h2>Adicionar Item</h2>
+        <button onclick="fecharModal()">X</button>
+      </div>
 
-                    <input type="number" id="diceCount" placeholder="Qtd Dados">
-
-                    <input type="number" id="diceFaces" placeholder="Faces">
-
-                    <input type="number" id="diceBonus" placeholder="Bônus">
-
-                    <button id="rollDiceBtn">
-                        ROLAR
-                    </button>
-
-                    <div id="diceResult">
-                        Resultado...
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- CONDIÇÕES -->
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <h2>CONDIÇÕES</h2>
-
-                    <button class="add-btn" onclick="openConditionsModal()">
-                        +
-                    </button>
-
-                </div>
-
-                <div id="conditionsList" class="dynamic-list"></div>
-
-            </div>
-
-            <!-- HABILIDADES -->
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <h2>HABILIDADES</h2>
-
-                    <button class="add-btn" onclick="openSkillModal()">
-                        +
-                    </button>
-
-                </div>
-
-                <div id="skillsList" class="dynamic-list scroll-list"></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- INVENTÁRIO -->
-    <section class="bottom-section">
-
-        <div class="panel inventory-panel">
-
-            <div class="panel-header">
-
-                <h2>INVENTÁRIO</h2>
-
-                <button class="add-btn" onclick="openInventoryModal()">
-                    +
-                </button>
-
-            </div>
-
-            <div id="inventoryList" class="dynamic-list inventory-scroll"></div>
-
-        </div>
-
-        <!-- ASSIMILAÇÕES -->
-        <div class="panel assimilation-panel">
-
-            <div class="panel-header">
-
-                <h2>ASSIMILAÇÕES</h2>
-
-                <button class="add-btn" onclick="openAssimilationModal()">
-                    +
-                </button>
-
-            </div>
-
-            <div id="assimilationList" class="dynamic-list inventory-scroll"></div>
-
-        </div>
-
-    </section>
-
-</div>
-
-<!-- ========================= -->
-<!-- MODAL -->
-<!-- ========================= -->
-
-<div class="modal hidden" id="systemModal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2 id="modalTitle">Adicionar</h2>
-
-            <button class="close-btn" onclick="closeModal()">
-                ✕
-            </button>
-
-        </div>
-
-        <input type="text" id="searchInput" placeholder="Pesquisar...">
-
-        <div id="modalList" class="modal-list"></div>
-
-    </div>
-
-</div>
-
-</body>
+      <input
+        type="text"
 </html>
