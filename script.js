@@ -1,575 +1,453 @@
-/* =========================================
-   STATUS
-========================================= */
+// =========================
+//        FICHA RPG
+// =========================
 
-let pvAtual = 40
-let pvMax = 40
+const atributos = {
+    forca: 1,
+    agi: 1,
+    int: 1,
+    vig: 1,
+    pre: 1
+};
 
-let pdAtual = 20
-let pdMax = 20
+const estado = {
+    nivel: 1,
+    pvAtual: 0,
+    pvMax: 0,
+    pdAtual: 0,
+    pdMax: 0,
+    paAtual: 1,
+    paMax: 1,
+    condicoes: [],
+    inventario: [],
+    assimilacoes: [],
+    pericias: []
+};
 
-function atualizarStatus(){
+// =========================
+//      CÁLCULOS BASE
+// =========================
 
-    document.getElementById("pvBox").innerHTML =
-    `❤️ PV: ${pvAtual}/${pvMax}`
+function calcularPV() {
+    let base = (7 + atributos.vig) * estado.nivel;
 
-    document.getElementById("pdBox").innerHTML =
-    `🧠 PD: ${pdAtual}/${pdMax}`
-
-}
-
-/* =========================================
-   BANCO DE ITENS
-========================================= */
-
-const itens = [
-
-{
-nome:"Espada",
-dano:"1d10 + 2 + FOR",
-critico:"x2",
-tipo:"Corte",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Katana",
-dano:"1d10 + 2 + FOR",
-critico:"x2",
-tipo:"Corte",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Pistola",
-dano:"1d8 + AGI",
-critico:"x3",
-tipo:"Balístico",
-alcance:"1-5",
-peso:"2 EP"
-},
-
-{
-nome:"Fuzil de assalto",
-dano:"2d8 + AGI",
-critico:"x3",
-tipo:"Balístico",
-alcance:"1-5",
-peso:"4 EP"
-},
-
-{
-nome:"Motosserra",
-dano:"3d6 + FOR",
-critico:"x3",
-tipo:"Corte",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Proteção Pesada",
-dano:"—",
-critico:"—",
-tipo:"Armadura",
-alcance:"—",
-peso:"4 EP"
-},
-
-{
-nome:"Marreta",
-dano:"2d8 + 3 + FOR",
-critico:"x3",
-tipo:"Impacto",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Submetralhadora",
-dano:"2d6 + AGI",
-critico:"x2",
-tipo:"Balístico",
-alcance:"1-4",
-peso:"3 EP"
-},
-
-{
-nome:"Bazuca",
-dano:"10d8 + AGI",
-critico:"x2",
-tipo:"Fogo",
-alcance:"1-6",
-peso:"5 EP"
-},
-
-{
-nome:"Escudo Grande",
-dano:"—",
-critico:"—",
-tipo:"Defesa",
-alcance:"—",
-peso:"3 EP"
-}
-
-]
-
-/* =========================================
-   MODAL
-========================================= */
-
-function abrirModal(){
-
-    document.getElementById("modal").style.display = "flex"
-
-}
-
-function fecharModal(){
-
-    document.getElementById("modal").style.display = "none"
-
-}
-
-window.onclick = function(e){
-
-    if(e.target.id === "modal"){
-        fecharModal()
+    if (estado.condicoes.includes("Enfraquecido")) {
+        base -= 10;
     }
 
+    return Math.max(base, 1);
 }
 
-/* =========================================
-   RENDERIZAR ITENS
-========================================= */
+function calcularPD() {
+    let base = (5 + atributos.pre) * estado.nivel;
 
-function renderItens(lista = itens){
+    if (estado.condicoes.includes("Traumatizado")) {
+        base -= 8;
+    }
 
-    const div = document.getElementById("listaItens")
+    return Math.max(base, 0);
+}
 
-    div.innerHTML = ""
+function atualizarStatus() {
+    estado.pvMax = calcularPV();
+    estado.pdMax = calcularPD();
 
-    lista.forEach(item => {
+    document.getElementById("pvAtual").value = estado.pvAtual;
+    document.getElementById("pvMax").value = estado.pvMax;
 
-        div.innerHTML += `
+    document.getElementById("pdAtual").value = estado.pdAtual;
+    document.getElementById("pdMax").value = estado.pdMax;
 
-        <div class="card-item">
+    document.getElementById("paAtual").value = estado.paAtual;
+    document.getElementById("paMax").value = estado.paMax;
 
-            <h3>${item.nome}</h3>
+    document.getElementById("nivel").value = estado.nivel;
 
-            <p>⚔️ Dano: ${item.dano}</p>
-            <p>🎯 Crítico: ${item.critico}</p>
-            <p>🧩 Tipo: ${item.tipo}</p>
-            <p>📏 Alcance: ${item.alcance}</p>
-            <p>🎒 Peso: ${item.peso}</p>
+    atualizarAtributos();
+}
 
-            <br>
+function atualizarAtributos() {
+    document.getElementById("forca").value = atributos.forca;
+    document.getElementById("agi").value = atributos.agi;
+    document.getElementById("int").value = atributos.int;
+    document.getElementById("vig").value = atributos.vig;
+    document.getElementById("pre").value = atributos.pre;
+}
 
-            <button
-            class="botao"
-            onclick='adicionarInventario(${JSON.stringify(item)})'>
-            Adicionar
+// =========================
+//      ALTERAR CAMPOS
+// =========================
+
+function mudarNivel(valor) {
+    estado.nivel = Number(valor);
+    atualizarStatus();
+}
+
+function mudarAtributo(nome, valor) {
+    atributos[nome] = Number(valor);
+    atualizarStatus();
+}
+
+function mudarPVAtual(valor) {
+    estado.pvAtual = Number(valor);
+}
+
+function mudarPDAtual(valor) {
+    estado.pdAtual = Number(valor);
+}
+
+function mudarPAAtual(valor) {
+    estado.paAtual = Number(valor);
+}
+
+function mudarPAMax(valor) {
+    estado.paMax = Number(valor);
+}
+
+// =========================
+//        CONDIÇÕES
+// =========================
+
+const listaCondicoes = [
+    "Sangramento",
+    "Envenenamento",
+    "Paralisia",
+    "Paralisia Total",
+    "Caído",
+    "Enjoado",
+    "Morrendo",
+    "Enfraquecido",
+    "Lentidão",
+    "Cansado",
+    "Controlado",
+    "Cego",
+    "Surdo",
+    "Traumatizado",
+    "Penumbra",
+    "Vulnerável",
+    "Desprevenido",
+    "Confuso",
+    "Chamas",
+    "Anti-Vida"
+];
+
+function renderCondicoes() {
+    const area = document.getElementById("condicoesAtivas");
+    area.innerHTML = "";
+
+    estado.condicoes.forEach((condicao, index) => {
+        const div = document.createElement("div");
+        div.className = "condicao-item";
+
+        div.innerHTML = `
+            <span>${condicao}</span>
+            <button onclick="removerCondicao(${index})">X</button>
+        `;
+
+        area.appendChild(div);
+    });
+}
+
+function adicionarCondicao() {
+    const select = document.getElementById("selectCondicao");
+    const condicao = select.value;
+
+    if (!estado.condicoes.includes(condicao)) {
+        estado.condicoes.push(condicao);
+    }
+
+    atualizarStatus();
+    renderCondicoes();
+}
+
+function removerCondicao(index) {
+    estado.condicoes.splice(index, 1);
+
+    atualizarStatus();
+    renderCondicoes();
+}
+
+// =========================
+//        INVENTÁRIO
+// =========================
+
+const itensBase = [
+    {
+        nome: "Espada",
+        dano: "1d10 + 2 + FOR",
+        distancia: "Corpo a Corpo",
+        peso: 3,
+        modificacoes: []
+    },
+    {
+        nome: "Pistola",
+        dano: "1d8 + AGI",
+        distancia: "1-5",
+        peso: 2,
+        modificacoes: []
+    },
+    {
+        nome: "Katana",
+        dano: "1d10 + 2 + FOR",
+        distancia: "Corpo a Corpo",
+        peso: 3,
+        modificacoes: []
+    },
+    {
+        nome: "Fuzil de Assalto",
+        dano: "2d8 + AGI",
+        distancia: "1-5",
+        peso: 4,
+        modificacoes: []
+    }
+];
+
+const modificacoesDisponiveis = [
+    "Certeira",
+    "Cruel",
+    "Perigosa",
+    "Eletrificada",
+    "Espinhosa",
+    "Perfurante",
+    "Alongada",
+    "Calibre Grosso",
+    "Mira Laser",
+    "Silenciador",
+    "Explosiva",
+    "Letal"
+];
+
+function renderItensLista() {
+    const area = document.getElementById("listaItens");
+    area.innerHTML = "";
+
+    itensBase.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "item-lista";
+
+        div.innerHTML = `
+            <strong>${item.nome}</strong>
+            <p>Dano: ${item.dano}</p>
+            <p>Distância: ${item.distancia}</p>
+            <p>Peso: ${item.peso} EP</p>
+
+            <button onclick="adicionarInventario(${index})">
+                Adicionar
             </button>
+        `;
 
-        </div>
-
-        `
-
-    })
-
+        area.appendChild(div);
+    });
 }
 
-renderItens()
+function adicionarInventario(index) {
+    const item = JSON.parse(JSON.stringify(itensBase[index]));
 
-/* =========================================
-   PESQUISA
-========================================= */
+    estado.inventario.push(item);
 
-function filtrarItens(){
-
-    const texto =
-    document.getElementById("pesquisa")
-    .value
-    .toLowerCase()
-
-    const filtrados = itens.filter(item =>
-        item.nome.toLowerCase().includes(texto)
-    )
-
-    renderItens(filtrados)
-
+    renderInventario();
 }
 
-/* =========================================
-   INVENTÁRIO
-========================================= */
+function renderInventario() {
+    const area = document.getElementById("inventario");
+    area.innerHTML = "";
 
-function adicionarInventario(item){
+    estado.inventario.forEach((item, index) => {
+        const mods = item.modificacoes
+            .map(mod => `<span class="mod-tag">${mod}</span>`)
+            .join("");
 
-    const inventario =
-    document.getElementById("inventario")
+        const div = document.createElement("div");
+        div.className = "inventario-item";
 
-    inventario.innerHTML += `
+        div.innerHTML = `
+            <div class="inventario-topo">
+                <strong>${item.nome}</strong>
 
-    <div class="item">
-
-        <div class="item-info">
-
-            <h3>${item.nome}</h3>
-
-            <p>⚔️ Dano:
-            <span class="valor-dano">${item.dano}</span>
-            </p>
-
-            <p>🎯 Crítico:
-            <span class="valor-critico">${item.critico}</span>
-            </p>
-
-            <p>🧩 Tipo:
-            ${item.tipo}
-            </p>
-
-            <p>📏 Alcance:
-            <span class="valor-alcance">${item.alcance}</span>
-            </p>
-
-            <p>🎒 Peso:
-            ${item.peso}
-            </p>
-
-            <div class="customizacao">
-
-                <h4>🔧 Personalização</h4>
-
-                <label>Novo Dano</label>
-
-                <input
-                type="text"
-                placeholder="Ex: 2d10 + FOR"
-                class="input-dano"
-                >
-
-                <label>Novo Alcance</label>
-
-                <input
-                type="text"
-                placeholder="Ex: 1-6"
-                class="input-alcance"
-                >
-
-                <label>Modificação</label>
-
-                <select class="input-mod">
-
-                    <option>Sem modificação</option>
-
-                    <option>Certeira</option>
-                    <option>Cruel</option>
-                    <option>Perigosa</option>
-                    <option>Eletrificada</option>
-                    <option>Espinhosa</option>
-                    <option>Pesada</option>
-                    <option>Perfurante</option>
-
-                    <option>Alongada</option>
-                    <option>Calibre Grosso</option>
-                    <option>Pente Rápido</option>
-                    <option>Mira Laser</option>
-                    <option>Silenciador</option>
-                    <option>Explosiva</option>
-
-                </select>
-
-                <button
-                class="botao"
-                style="margin-top:10px"
-                onclick="salvarCustomizacao(this)">
-                Salvar Alterações
+                <button onclick="removerItem(${index})">
+                    Remover
                 </button>
-
             </div>
 
-        </div>
+            <div class="inventario-info">
+                <label>Dano</label>
+                <input 
+                    value="${item.dano}" 
+                    onchange="editarDano(${index}, this.value)"
+                >
 
-        <div>
+                <label>Distância</label>
+                <input 
+                    value="${item.distancia}" 
+                    onchange="editarDistancia(${index}, this.value)"
+                >
+            </div>
 
-            <button
-            class="botao"
-            onclick="removerItem(this)">
-            Remover
+            <div class="mods-area">
+                ${mods}
+            </div>
+
+            <button onclick="adicionarModificacao(${index})">
+                + Modificação
             </button>
+        `;
 
-        </div>
-
-    </div>
-
-    `
-
-    fecharModal()
-
+        area.appendChild(div);
+    });
 }
 
-/* =========================================
-   REMOVER ITEM
-========================================= */
-
-function removerItem(botao){
-
-    botao.parentElement.parentElement.remove()
-
+function editarDano(index, valor) {
+    estado.inventario[index].dano = valor;
 }
 
-/* =========================================
-   CUSTOMIZAÇÃO
-========================================= */
-
-function salvarCustomizacao(botao){
-
-    const item =
-    botao.closest(".item")
-
-    const novoDano =
-    item.querySelector(".input-dano").value
-
-    const novoAlcance =
-    item.querySelector(".input-alcance").value
-
-    const mod =
-    item.querySelector(".input-mod").value
-
-    if(novoDano !== ""){
-
-        item.querySelector(".valor-dano")
-        .innerText = novoDano
-
-    }
-
-    if(novoAlcance !== ""){
-
-        item.querySelector(".valor-alcance")
-        .innerText = novoAlcance
-
-    }
-
-    if(mod !== "Sem modificação"){
-
-        const modExistente =
-        item.querySelector(".mod-aplicada")
-
-        if(modExistente){
-
-            modExistente.innerText =
-            `🔧 Modificação: ${mod}`
-
-        }else{
-
-            item.querySelector(".item-info")
-            .innerHTML += `
-            <p class="mod-aplicada">
-            🔧 Modificação: ${mod}
-            </p>
-            `
-        }
-
-    }
-
+function editarDistancia(index, valor) {
+    estado.inventario[index].distancia = valor;
 }
 
-/* =========================================
-   CONDIÇÕES
-========================================= */
+function adicionarModificacao(index) {
+    const mod = prompt(
+        "Digite a modificação:\n\n" +
+        modificacoesDisponiveis.join("\n")
+    );
 
-function adicionarCondicao(nome){
-
-    const lista =
-    document.getElementById("listaCondicoes")
-
-    const existe =
-    [...document.querySelectorAll(".condicao")]
-    .find(c => c.dataset.nome === nome)
-
-    if(existe){
-        return
+    if (mod) {
+        estado.inventario[index].modificacoes.push(mod);
     }
 
-    let descricao = ""
-
-    /* =========================
-       FÍSICAS
-    ========================= */
-
-    if(nome === "Sangramento"){
-        descricao =
-        "Sofre 1d6 de dano por rodada."
-    }
-
-    if(nome === "Envenenamento"){
-        descricao =
-        "2d4 dano por rodada e -5 em Vigor."
-    }
-
-    if(nome === "Paralisia"){
-        descricao =
-        "Acertos garantidos e falha automática."
-    }
-
-    if(nome === "Paralisia Total"){
-        descricao =
-        "Pode ser finalizado abaixo de 20% PV."
-    }
-
-    if(nome === "Caído"){
-        descricao =
-        "-1 dado físico e -5 Defesa."
-    }
-
-    if(nome === "Enjoado"){
-        descricao =
-        "-3 em testes físicos."
-    }
-
-    if(nome === "Morrendo"){
-        descricao =
-        "Sem PA e inconsciente."
-    }
-
-    if(nome === "Enfraquecido"){
-
-        descricao =
-        "-5 FOR e -10 PV máximo."
-
-        pvMax -= 10
-
-        if(pvAtual > pvMax){
-            pvAtual = pvMax
-        }
-
-    }
-
-    if(nome === "Lentidão"){
-        descricao =
-        "-5 AGI e -3m deslocamento."
-    }
-
-    if(nome === "Cansado"){
-        descricao =
-        "Habilidades custam o dobro."
-    }
-
-    if(nome === "Chamas"){
-        descricao =
-        "1d8 fogo por rodada até gastar 1 PA."
-    }
-
-    if(nome === "Anti Vida"){
-        descricao =
-        "Cura reduzida pela metade."
-    }
-
-    /* =========================
-       MENTAIS
-    ========================= */
-
-    if(nome === "Controlado"){
-        descricao =
-        "Entrega PA ao conjurador."
-    }
-
-    if(nome === "Cego"){
-        descricao =
-        "-10 visão e ataques distância."
-    }
-
-    if(nome === "Surdo"){
-        descricao =
-        "-10 percepção auditiva."
-    }
-
-    if(nome === "Traumatizado"){
-
-        descricao =
-        "-5 Vontade e -8 PD máximo."
-
-        pdMax -= 8
-
-        if(pdAtual > pdMax){
-            pdAtual = pdMax
-        }
-
-    }
-
-    if(nome === "Penumbra"){
-        descricao =
-        "-5 percepção e -3 reflexos."
-    }
-
-    if(nome === "Vulnerável"){
-        descricao =
-        "Dano bônus dobrado."
-    }
-
-    if(nome === "Desprevenido"){
-        descricao =
-        "Sem reações e -3 Defesa."
-    }
-
-    if(nome === "Confuso"){
-        descricao =
-        "Move aleatoriamente."
-    }
-
-    atualizarStatus()
-
-    lista.innerHTML += `
-
-    <div
-    class="condicao"
-    data-nome="${nome}"
-    >
-
-        <button
-        class="remover-condicao"
-        onclick="removerCondicao(this,'${nome}')">
-        ×
-        </button>
-
-        <h3>${nome}</h3>
-
-        <p>${descricao}</p>
-
-    </div>
-
-    `
-
+    renderInventario();
 }
 
-/* =========================================
-   REMOVER CONDIÇÃO
-========================================= */
+function removerItem(index) {
+    estado.inventario.splice(index, 1);
 
-function removerCondicao(botao,nome){
-
-    if(nome === "Enfraquecido"){
-
-        pvMax += 10
-
-    }
-
-    if(nome === "Traumatizado"){
-
-        pdMax += 8
-
-    }
-
-    atualizarStatus()
-
-    botao.parentElement.remove()
-
+    renderInventario();
 }
 
-/* =========================================
-   INICIALIZAR
-========================================= */
+// =========================
+//        PERÍCIAS
+// =========================
 
-atualizarStatus()
+const listaPericias = [
+    "Atletismo",
+    "Acrobacia",
+    "Pontaria",
+    "Luta",
+    "Reflexos",
+    "Fortitude",
+    "Vontade",
+    "Ocultismo",
+    "Percepção",
+    "Investigação",
+    "Medicina",
+    "Furtividade",
+    "Diplomacia",
+    "Tecnologia"
+];
+
+function renderPericias() {
+    const area = document.getElementById("pericias");
+    area.innerHTML = "";
+
+    listaPericias.forEach(pericia => {
+        const div = document.createElement("div");
+        div.className = "pericia-item";
+
+        div.innerHTML = `
+            <span>${pericia}</span>
+            <input type="number" value="0">
+        `;
+
+        area.appendChild(div);
+    });
+}
+
+// =========================
+//      ASSIMILAÇÕES
+// =========================
+
+function adicionarAssimilacao() {
+    const input = document.getElementById("novaAssimilacao");
+
+    if (input.value.trim() === "") return;
+
+    estado.assimilacoes.push(input.value);
+
+    input.value = "";
+
+    renderAssimilacoes();
+}
+
+function renderAssimilacoes() {
+    const area = document.getElementById("assimilacoes");
+    area.innerHTML = "";
+
+    estado.assimilacoes.forEach((nome, index) => {
+        const div = document.createElement("div");
+        div.className = "assimilacao-item";
+
+        div.innerHTML = `
+            <span>${nome}</span>
+
+            <button onclick="removerAssimilacao(${index})">
+                X
+            </button>
+        `;
+
+        area.appendChild(div);
+    });
+}
+
+function removerAssimilacao(index) {
+    estado.assimilacoes.splice(index, 1);
+
+    renderAssimilacoes();
+}
+
+// =========================
+//      SALVAR FICHA
+// =========================
+
+function salvarFicha() {
+    localStorage.setItem(
+        "fichaRPG",
+        JSON.stringify({
+            estado,
+            atributos
+        })
+    );
+
+    alert("Ficha salva!");
+}
+
+function carregarFicha() {
+    const save = localStorage.getItem("fichaRPG");
+
+    if (!save) return;
+
+    const dados = JSON.parse(save);
+
+    Object.assign(estado, dados.estado);
+    Object.assign(atributos, dados.atributos);
+
+    atualizarStatus();
+    renderCondicoes();
+    renderInventario();
+    renderPericias();
+    renderAssimilacoes();
+}
+
+// =========================
+//      INICIALIZAÇÃO
+// =========================
+
+window.onload = () => {
+    atualizarStatus();
+
+    renderCondicoes();
+    renderItensLista();
+    renderInventario();
+    renderPericias();
+    renderAssimilacoes();
+
+    carregarFicha();
+};
