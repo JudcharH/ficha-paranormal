@@ -1,784 +1,202 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sistema RPG Paranormal</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-
-/* ===== FUNDO ===== */
-
-body{
-    margin:0;
-    padding:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:
-    radial-gradient(circle at top,#1a0033 0%,#050505 45%);
-    color:white;
-}
-
-/* ===== TOPO ===== */
-
-.topo{
-    width:100%;
-    padding:25px;
-    box-sizing:border-box;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:1px solid #2d2d2d;
-    background:rgba(0,0,0,0.55);
-    backdrop-filter:blur(10px);
-
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logo{
-    font-size:42px;
-    font-weight:bold;
-    background:linear-gradient(90deg,#ff004c,#7a5cff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-/* ===== STATUS ===== */
-
-.status-topo{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.status-card{
-    background:rgba(20,20,20,0.85);
-    border:1px solid #2f2f2f;
-    padding:12px 20px;
-    border-radius:14px;
-    font-weight:bold;
-    box-shadow:0 0 12px rgba(0,0,0,0.4);
-}
-
-/* ===== CONTAINER ===== */
-
-.container{
-    width:95%;
-    max-width:1600px;
-    margin:auto;
-    margin-top:30px;
-
-    display:grid;
-    grid-template-columns:340px 1fr;
-    gap:25px;
-}
-
-/* ===== PAINEIS ===== */
-
-.painel{
-    background:rgba(10,10,10,0.82);
-    border:1px solid #2d2d2d;
-    border-radius:24px;
-    padding:25px;
-
-    box-shadow:
-    0 0 20px rgba(0,0,0,0.4),
-    inset 0 0 20px rgba(255,255,255,0.02);
-}
-
-/* ===== ATRIBUTOS ===== */
-
-.atributo{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:16px;
-    margin-top:10px;
-
-    border-radius:14px;
-    background:#111;
-
-    border:1px solid #242424;
-}
-
-/* ===== CONDIÇÕES ===== */
-
-.condicoes{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:20px;
-}
-
-.condicao{
-    background:#2a1010;
-    border:1px solid #6e1f1f;
-    padding:14px;
-    border-radius:14px;
-    min-width:210px;
-
-    position:relative;
-}
-
-.remover-condicao{
-    position:absolute;
-    top:8px;
-    right:8px;
-
-    border:none;
-    width:26px;
-    height:26px;
-    border-radius:50%;
-
-    background:#ff004c;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.remover-condicao:hover{
-    transform:scale(1.1);
-}
-
-/* ===== BOTÕES ===== */
-
-button{
-    border:none;
-    cursor:pointer;
-    transition:0.2s;
-}
-
-.botao{
-    background:linear-gradient(90deg,#5f28ff,#8b3dff);
-    color:white;
-    padding:12px 18px;
-    border-radius:12px;
-    font-weight:bold;
-}
-
-.botao:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 12px rgba(120,70,255,0.5);
-}
-
-/* ===== INVENTÁRIO ===== */
-
-#inventario{
-    margin-top:20px;
-
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-}
-
-.item{
-    background:linear-gradient(180deg,#181818,#101010);
-    border:1px solid #2f2f2f;
-    border-radius:18px;
-
-    padding:20px;
-
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    align-items:flex-start;
-}
-
-.item-info{
-    flex:1;
-}
-
-.item h3{
-    margin-top:0;
-    color:#ffffff;
-}
-
-.item p{
-    margin:5px 0;
-    color:#cfcfcf;
-}
-
-/* ===== CUSTOMIZAÇÃO ===== */
-
-.customizacao{
-    margin-top:15px;
-    padding:15px;
-    border-radius:14px;
-    background:#0d0d0d;
-    border:1px solid #252525;
-}
-
-input, select{
-    width:100%;
-    padding:10px;
-    margin-top:6px;
-    margin-bottom:12px;
-
-    border:none;
-    border-radius:10px;
-
-    background:#191919;
-    color:white;
-}
-
-/* ===== BOTÃO FLUTUANTE ===== */
-
-.add-btn{
-    position:fixed;
-    right:35px;
-    bottom:35px;
-
-    width:72px;
-    height:72px;
-
-    border-radius:50%;
-
-    font-size:38px;
-    font-weight:bold;
-
-    background:linear-gradient(180deg,#6f2cff,#4710cc);
-    color:white;
-
-    box-shadow:
-    0 0 25px rgba(111,44,255,0.6);
-
-    z-index:90;
-}
-
-.add-btn:hover{
-    transform:scale(1.08);
-}
-
-/* ===== MODAL ===== */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.82);
-
-    display:none;
-    justify-content:center;
-    align-items:center;
-
-    z-index:999;
-}
-
-.modal-content{
-    width:90%;
-    max-width:1200px;
-    max-height:90vh;
-
-    overflow-y:auto;
-
-    background:linear-gradient(180deg,#191919,#111);
-
-    border:1px solid #333;
-    border-radius:26px;
-
-    padding:25px;
-}
-
-/* ===== GRID ITENS ===== */
-
-.lista-itens{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-    margin-top:20px;
-}
-
-.card-item{
-    background:#202030;
-    border:1px solid #3a3a55;
-
-    border-radius:18px;
-    padding:18px;
-
-    transition:0.2s;
-}
-
-.card-item:hover{
-    transform:translateY(-3px);
-}
-
-.card-item h3{
-    margin-top:0;
-}
-
-/* ===== RESPONSIVO ===== */
-
-@media(max-width:1100px){
-
-    .container{
-        grid-template-columns:1fr;
-    }
-
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ficha Paranormal RPG</title>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<!-- ===== TOPO ===== -->
-
-<div class="topo">
-
-    <div class="logo">
-        Sistema RPG Paranormal
-    </div>
-
-    <div class="status-topo">
-
-        <div class="status-card" id="pvBox">
-            ❤️ PV: 40/40
-        </div>
-
-        <div class="status-card" id="pdBox">
-            🧠 PD: 20/20
-        </div>
-
-        <div class="status-card">
-            ⚡ PA: 3
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ===== CONTAINER ===== -->
+<div class="background-overlay"></div>
 
 <div class="container">
 
-    <!-- ===== ESQUERDA ===== -->
-
-    <div>
-
-        <div class="painel">
-
-            <h2>📊 Atributos</h2>
-
-            <div class="atributo">
-                <span>💪 FOR</span>
-                <span>3</span>
-            </div>
-
-            <div class="atributo">
-                <span>⚡ AGI</span>
-                <span>4</span>
-            </div>
-
-            <div class="atributo">
-                <span>🧠 INT</span>
-                <span>3</span>
-            </div>
-
-            <div class="atributo">
-                <span>❤️ VIG</span>
-                <span>4</span>
-            </div>
-
-            <div class="atributo">
-                <span>👁️ PRE</span>
-                <span>2</span>
-            </div>
-
-        </div>
-
-        <div class="painel" style="margin-top:25px;">
-
-            <h2>🎒 Inventário</h2>
-
-            <div id="inventario"></div>
-
-        </div>
-
+  <!-- TOPO -->
+  <header class="topo">
+    <div class="titulo-box">
+      <h1>FICHA PARANORMAL</h1>
+      <p>Sistema de RPG Paranormal</p>
     </div>
 
-    <!-- ===== DIREITA ===== -->
+    <div class="nivel-box">
+      <label>Nível</label>
+      <input type="number" id="nivel" value="1" min="1">
+    </div>
+  </header>
 
-    <div>
+  <!-- STATUS -->
+  <section class="status-grid">
 
-        <div class="painel">
+    <div class="status-card vida">
+      <h2>PV</h2>
 
-            <h2>🩸 Condições</h2>
+      <div class="status-linha">
+        <input type="number" id="pvAtual" value="0">
+        <span>/</span>
+        <input type="number" id="pvMax" value="0">
+      </div>
+    </div>
 
-            <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+    <div class="status-card sanidade">
+      <h2>PD</h2>
 
-                <button class="botao" onclick="adicionarCondicao('Sangramento')">
-                    Adicionar Sangramento
-                </button>
+      <div class="status-linha">
+        <input type="number" id="pdAtual" value="0">
+        <span>/</span>
+        <input type="number" id="pdMax" value="0">
+      </div>
+    </div>
 
-                <button class="botao" onclick="adicionarCondicao('Enfraquecido')">
-                    Adicionar Enfraquecido
-                </button>
+    <div class="status-card esforco">
+      <h2>PA</h2>
 
-                <button class="botao" onclick="adicionarCondicao('Traumatizado')">
-                    Adicionar Traumatizado
-                </button>
+      <div class="status-linha">
+        <input type="number" id="paAtual" value="0">
+        <span>/</span>
+        <input type="number" id="paMax" value="3">
+      </div>
+    </div>
 
-                <button class="botao" onclick="adicionarCondicao('Chamas')">
-                    Adicionar Chamas
-                </button>
+  </section>
 
-            </div>
+  <!-- ATRIBUTOS -->
+  <section class="bloco">
+    <h2 class="titulo-secao">ATRIBUTOS</h2>
 
-            <div class="condicoes" id="listaCondicoes"></div>
+    <div class="atributos-grid">
 
-        </div>
+      <div class="atributo">
+        <label>FOR</label>
+        <input type="number" id="for">
+      </div>
+
+      <div class="atributo">
+        <label>AGI</label>
+        <input type="number" id="agi">
+      </div>
+
+      <div class="atributo">
+        <label>INT</label>
+        <input type="number" id="int">
+      </div>
+
+      <div class="atributo">
+        <label>VIG</label>
+        <input type="number" id="vig">
+      </div>
+
+      <div class="atributo">
+        <label>PRE</label>
+        <input type="number" id="pre">
+      </div>
 
     </div>
+  </section>
+
+  <!-- PERÍCIAS -->
+  <section class="bloco">
+    <div class="secao-topo">
+      <h2 class="titulo-secao">PERÍCIAS</h2>
+
+      <button class="btn-add" onclick="adicionarPericia()">
+        +
+      </button>
+    </div>
+
+    <div id="listaPericias"></div>
+  </section>
+
+  <!-- ASSIMILAÇÕES -->
+  <section class="bloco">
+    <div class="secao-topo">
+      <h2 class="titulo-secao">ASSIMILAÇÕES</h2>
+
+      <button class="btn-add" onclick="adicionarAssimilacao()">
+        +
+      </button>
+    </div>
+
+    <div id="listaAssimilacoes"></div>
+  </section>
+
+  <!-- CONDIÇÕES -->
+  <section class="bloco">
+    <div class="secao-topo">
+      <h2 class="titulo-secao">CONDIÇÕES</h2>
+
+      <button class="btn-add" onclick="abrirModalCondicoes()">
+        +
+      </button>
+    </div>
+
+    <div id="listaCondicoes"></div>
+  </section>
+
+  <!-- INVENTÁRIO -->
+  <section class="bloco inventario-bloco">
+
+    <div class="secao-topo">
+      <h2 class="titulo-secao">INVENTÁRIO</h2>
+
+      <button class="btn-add" onclick="abrirModalItens()">
+        +
+      </button>
+    </div>
+
+    <div id="inventarioLista"></div>
+
+  </section>
 
 </div>
 
-<!-- ===== BOTÃO FLUTUANTE ===== -->
+<!-- MODAL ITENS -->
+<div class="modal hidden" id="modalItens">
 
-<button class="add-btn" onclick="abrirModal()">
-    +
-</button>
+  <div class="modal-content">
 
-<!-- ===== MODAL ===== -->
+    <div class="modal-topo">
+      <h2>Adicionar Item</h2>
 
-<div class="modal" id="modal">
-
-    <div class="modal-content">
-
-        <h1>Adicionar Item</h1>
-
-        <input
-        type="text"
-        id="pesquisa"
-        placeholder="Pesquisar item..."
-        onkeyup="filtrarItens()"
-        >
-
-        <div class="lista-itens" id="listaItens"></div>
-
+      <button class="fechar-btn" onclick="fecharModalItens()">
+        ✕
+      </button>
     </div>
 
+    <input
+      type="text"
+      id="pesquisaItem"
+      placeholder="Pesquisar item..."
+      onkeyup="filtrarItens()"
+      class="pesquisa"
+    >
+
+    <div id="listaItensModal" class="lista-modal"></div>
+
+  </div>
 </div>
 
-<script>
+<!-- MODAL CONDIÇÕES -->
+<div class="modal hidden" id="modalCondicoes">
 
-/* =========================
-   STATUS
-========================= */
+  <div class="modal-content">
 
-let pvAtual = 40
-let pvMax = 40
+    <div class="modal-topo">
+      <h2>Adicionar Condição</h2>
 
-let pdAtual = 20
-let pdMax = 20
-
-function atualizarStatus(){
-
-    document.getElementById("pvBox").innerHTML =
-    `❤️ PV: ${pvAtual}/${pvMax}`
-
-    document.getElementById("pdBox").innerHTML =
-    `🧠 PD: ${pdAtual}/${pdMax}`
-
-}
-
-/* =========================
-   ITENS
-========================= */
-
-const itens = [
-
-{
-nome:"Espada",
-dano:"1d10 + 2 + FOR",
-critico:"x2",
-tipo:"Corte",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Katana",
-dano:"1d10 + 2 + FOR",
-critico:"x2",
-tipo:"Corte",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Pistola",
-dano:"1d8 + AGI",
-critico:"x3",
-tipo:"Balístico",
-alcance:"1-5",
-peso:"2 EP"
-},
-
-{
-nome:"Fuzil de assalto",
-dano:"2d8 + AGI",
-critico:"x3",
-tipo:"Balístico",
-alcance:"1-5",
-peso:"4 EP"
-},
-
-{
-nome:"Motosserra",
-dano:"3d6 + FOR",
-critico:"x3",
-tipo:"Corte",
-alcance:"Adjacente",
-peso:"3 EP"
-},
-
-{
-nome:"Proteção Pesada",
-dano:"—",
-critico:"—",
-tipo:"Armadura",
-alcance:"—",
-peso:"4 EP"
-}
-
-]
-
-/* =========================
-   MODAL
-========================= */
-
-function abrirModal(){
-
-    document.getElementById("modal").style.display = "flex"
-
-}
-
-window.onclick = function(e){
-
-    if(e.target.id === "modal"){
-        document.getElementById("modal").style.display = "none"
-    }
-
-}
-
-/* =========================
-   RENDERIZAR ITENS
-========================= */
-
-function renderItens(lista = itens){
-
-    const div = document.getElementById("listaItens")
-
-    div.innerHTML = ""
-
-    lista.forEach(item => {
-
-        div.innerHTML += `
-
-        <div class="card-item">
-
-            <h3>${item.nome}</h3>
-
-            <p>⚔️ Dano: ${item.dano}</p>
-            <p>🎯 Crítico: ${item.critico}</p>
-            <p>🧩 Tipo: ${item.tipo}</p>
-            <p>📏 Alcance: ${item.alcance}</p>
-            <p>🎒 Peso: ${item.peso}</p>
-
-            <br>
-
-            <button class="botao"
-            onclick='adicionarInventario(${JSON.stringify(item)})'>
-            Adicionar
-            </button>
-
-        </div>
-
-        `
-
-    })
-
-}
-
-renderItens()
-
-/* =========================
-   PESQUISA
-========================= */
-
-function filtrarItens(){
-
-    const texto =
-    document.getElementById("pesquisa")
-    .value
-    .toLowerCase()
-
-    const filtrados = itens.filter(item =>
-        item.nome.toLowerCase().includes(texto)
-    )
-
-    renderItens(filtrados)
-
-}
-
-/* =========================
-   INVENTÁRIO
-========================= */
-
-function adicionarInventario(item){
-
-    const inventario =
-    document.getElementById("inventario")
-
-    inventario.innerHTML += `
-
-    <div class="item">
-
-        <div class="item-info">
-
-            <h3>${item.nome}</h3>
-
-            <p>⚔️ Dano: ${item.dano}</p>
-            <p>🎯 Crítico: ${item.critico}</p>
-            <p>🧩 Tipo: ${item.tipo}</p>
-            <p>📏 Alcance: ${item.alcance}</p>
-            <p>🎒 Peso: ${item.peso}</p>
-
-            <div class="customizacao">
-
-                <h4>🔧 Customização</h4>
-
-                <label>Dado:</label>
-                <input type="text" placeholder="Ex: 2d10">
-
-                <label>Alcance:</label>
-                <input type="text" placeholder="Ex: 1-6">
-
-                <label>Modificação:</label>
-                <select>
-                    <option>Sem modificação</option>
-                    <option>Certeira</option>
-                    <option>Cruel</option>
-                    <option>Perigosa</option>
-                    <option>Eletrificada</option>
-                    <option>Pente Rápido</option>
-                </select>
-
-            </div>
-
-        </div>
-
-        <div>
-
-            <button class="botao"
-            onclick="this.parentElement.parentElement.remove()">
-            Remover
-            </button>
-
-        </div>
-
+      <button class="fechar-btn" onclick="fecharModalCondicoes()">
+        ✕
+      </button>
     </div>
 
-    `
+    <div id="listaCondicoesModal" class="lista-modal"></div>
 
-}
+  </div>
+</div>
 
-/* =========================
-   CONDIÇÕES
-========================= */
-
-function adicionarCondicao(nome){
-
-    const lista =
-    document.getElementById("listaCondicoes")
-
-    let descricao = ""
-
-    if(nome === "Sangramento"){
-        descricao = "Sofre 1d6 por rodada."
-    }
-
-    if(nome === "Enfraquecido"){
-
-        descricao =
-        "–5 FOR e –10 PV máximo."
-
-        pvMax -= 10
-
-        if(pvAtual > pvMax){
-            pvAtual = pvMax
-        }
-
-    }
-
-    if(nome === "Traumatizado"){
-
-        descricao =
-        "–5 Vontade e –8 PD máximo."
-
-        pdMax -= 8
-
-        if(pdAtual > pdMax){
-            pdAtual = pdMax
-        }
-
-    }
-
-    if(nome === "Chamas"){
-        descricao =
-        "Sofre 1d8 de fogo por rodada até gastar 1 PA."
-    }
-
-    atualizarStatus()
-
-    lista.innerHTML += `
-
-    <div class="condicao"
-    data-condicao="${nome}">
-
-        <button
-        class="remover-condicao"
-        onclick="removerCondicao(this,'${nome}')">
-        X
-        </button>
-
-        <h3>${nome}</h3>
-
-        <p>${descricao}</p>
-
-    </div>
-
-    `
-
-}
-
-/* =========================
-   REMOVER CONDIÇÃO
-========================= */
-
-function removerCondicao(botao,nome){
-
-    if(nome === "Enfraquecido"){
-        pvMax += 10
-    }
-
-    if(nome === "Traumatizado"){
-        pdMax += 8
-    }
-
-    atualizarStatus()
-
-    botao.parentElement.remove()
-
-}
-
-</script>
+<!-- SCRIPT -->
+<script src="script.js"></script>
 
 </body>
 </html>
