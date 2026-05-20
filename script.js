@@ -1,465 +1,575 @@
-// =========================
-// ITENS BASE
-// =========================
+/* =========================================
+   STATUS
+========================================= */
 
-const itens = [
+let pvAtual = 40
+let pvMax = 40
 
-  {
-    nome:"Espada",
-    dano:"1d10 + 2 + FOR",
-    critico:"x2",
-    tipo:"Corte",
-    alcance:"Adjacente",
-    peso:"3 EP"
-  },
-
-  {
-    nome:"Katana",
-    dano:"1d10 + 2 + FOR",
-    critico:"x2",
-    tipo:"Corte",
-    alcance:"Adjacente",
-    peso:"3 EP"
-  },
-
-  {
-    nome:"Pistola",
-    dano:"1d8 + AGI",
-    critico:"x3",
-    tipo:"Balístico",
-    alcance:"1-5",
-    peso:"2 EP"
-  },
-
-  {
-    nome:"Fuzil de assalto",
-    dano:"2d8 + AGI",
-    critico:"x3",
-    tipo:"Balístico",
-    alcance:"1-5",
-    peso:"4 EP"
-  },
-
-  {
-    nome:"Motosserra",
-    dano:"3d6 + FOR",
-    critico:"x3",
-    tipo:"Corte",
-    alcance:"Adjacente",
-    peso:"3 EP"
-  },
-
-  {
-    nome:"Proteção Pesada",
-    dano:"—",
-    critico:"—",
-    tipo:"Armadura",
-    alcance:"—",
-    peso:"4 EP"
-  }
-
-];
-
-// =========================
-// DADOS DO PERSONAGEM
-// =========================
-
-let pvAtual = 40;
-let pvMaxBase = 40;
-
-let pdAtual = 20;
-let pdMaxBase = 20;
-
-let paAtual = 3;
-
-// =========================
-// INVENTÁRIO
-// =========================
-
-const inventario = [];
-
-// =========================
-// CONDIÇÕES
-// =========================
-
-const condicoes = [];
-
-// =========================
-// STATUS
-// =========================
+let pdAtual = 20
+let pdMax = 20
 
 function atualizarStatus(){
 
-  let pvMax = pvMaxBase;
-  let pdMax = pdMaxBase;
+    document.getElementById("pvBox").innerHTML =
+    `❤️ PV: ${pvAtual}/${pvMax}`
 
-  // ENFRAQUECIDO
-  if(condicoes.includes("Enfraquecido")){
-    pvMax -= 10;
-  }
-
-  // TRAUMATIZADO
-  if(condicoes.includes("Traumatizado")){
-    pdMax -= 8;
-  }
-
-  // EVITAR NEGATIVOS
-  if(pvMax < 1){
-    pvMax = 1;
-  }
-
-  if(pdMax < 0){
-    pdMax = 0;
-  }
-
-  // AJUSTAR VIDA/PD
-  if(pvAtual > pvMax){
-    pvAtual = pvMax;
-  }
-
-  if(pdAtual > pdMax){
-    pdAtual = pdMax;
-  }
-
-  // ATUALIZAR HTML
-  document.getElementById("pvAtual").innerText = pvAtual;
-  document.getElementById("pvMax").innerText = pvMax;
-
-  document.getElementById("pdAtual").innerText = pdAtual;
-  document.getElementById("pdMax").innerText = pdMax;
-
-  document.getElementById("paAtual").innerText = paAtual;
+    document.getElementById("pdBox").innerHTML =
+    `🧠 PD: ${pdAtual}/${pdMax}`
 
 }
 
-// =========================
-// CONDIÇÕES
-// =========================
+/* =========================================
+   BANCO DE ITENS
+========================================= */
 
-function adicionarCondicao(nome){
+const itens = [
 
-  if(condicoes.includes(nome)){
-    return;
-  }
+{
+nome:"Espada",
+dano:"1d10 + 2 + FOR",
+critico:"x2",
+tipo:"Corte",
+alcance:"Adjacente",
+peso:"3 EP"
+},
 
-  condicoes.push(nome);
+{
+nome:"Katana",
+dano:"1d10 + 2 + FOR",
+critico:"x2",
+tipo:"Corte",
+alcance:"Adjacente",
+peso:"3 EP"
+},
 
-  atualizarCondicoes();
-  atualizarStatus();
+{
+nome:"Pistola",
+dano:"1d8 + AGI",
+critico:"x3",
+tipo:"Balístico",
+alcance:"1-5",
+peso:"2 EP"
+},
 
+{
+nome:"Fuzil de assalto",
+dano:"2d8 + AGI",
+critico:"x3",
+tipo:"Balístico",
+alcance:"1-5",
+peso:"4 EP"
+},
+
+{
+nome:"Motosserra",
+dano:"3d6 + FOR",
+critico:"x3",
+tipo:"Corte",
+alcance:"Adjacente",
+peso:"3 EP"
+},
+
+{
+nome:"Proteção Pesada",
+dano:"—",
+critico:"—",
+tipo:"Armadura",
+alcance:"—",
+peso:"4 EP"
+},
+
+{
+nome:"Marreta",
+dano:"2d8 + 3 + FOR",
+critico:"x3",
+tipo:"Impacto",
+alcance:"Adjacente",
+peso:"3 EP"
+},
+
+{
+nome:"Submetralhadora",
+dano:"2d6 + AGI",
+critico:"x2",
+tipo:"Balístico",
+alcance:"1-4",
+peso:"3 EP"
+},
+
+{
+nome:"Bazuca",
+dano:"10d8 + AGI",
+critico:"x2",
+tipo:"Fogo",
+alcance:"1-6",
+peso:"5 EP"
+},
+
+{
+nome:"Escudo Grande",
+dano:"—",
+critico:"—",
+tipo:"Defesa",
+alcance:"—",
+peso:"3 EP"
 }
 
-function removerCondicao(nome){
+]
 
-  const index = condicoes.indexOf(nome);
-
-  if(index !== -1){
-
-    condicoes.splice(index,1);
-
-  }
-
-  atualizarCondicoes();
-  atualizarStatus();
-
-}
-
-function atualizarCondicoes(){
-
-  const lista = document.getElementById("listaCondicoes");
-
-  lista.innerHTML = "";
-
-  condicoes.forEach(condicao => {
-
-    const div = document.createElement("div");
-
-    div.className = "condicao";
-
-    div.innerHTML = `
-
-      <strong>${condicao}</strong>
-
-      <br><br>
-
-      <button onclick="removerCondicao('${condicao}')">
-        Remover
-      </button>
-
-    `;
-
-    lista.appendChild(div);
-
-  });
-
-}
-
-// =========================
-// MODAL
-// =========================
+/* =========================================
+   MODAL
+========================================= */
 
 function abrirModal(){
 
-  document.getElementById("modalItens").style.display = "flex";
-
-  renderizarItens(itens);
+    document.getElementById("modal").style.display = "flex"
 
 }
 
 function fecharModal(){
 
-  document.getElementById("modalItens").style.display = "none";
+    document.getElementById("modal").style.display = "none"
 
 }
 
-// =========================
-// RENDERIZAR ITENS
-// =========================
+window.onclick = function(e){
 
-function renderizarItens(lista){
-
-  const container = document.getElementById("listaItens");
-
-  container.innerHTML = "";
-
-  lista.forEach(item => {
-
-    const div = document.createElement("div");
-
-    div.className = "item-loja";
-
-    div.innerHTML = `
-
-      <strong>${item.nome}</strong>
-
-      <br><br>
-
-      ⚔️ Dano: ${item.dano}<br>
-      🎯 Crítico: ${item.critico}<br>
-      🧩 Tipo: ${item.tipo}<br>
-      📏 Alcance: ${item.alcance}<br>
-      🎒 Peso: ${item.peso}<br><br>
-
-      <button onclick='adicionarInventario(${JSON.stringify(item)})'>
-        Adicionar
-      </button>
-
-    `;
-
-    container.appendChild(div);
-
-  });
+    if(e.target.id === "modal"){
+        fecharModal()
+    }
 
 }
 
-// =========================
-// PESQUISA
-// =========================
+/* =========================================
+   RENDERIZAR ITENS
+========================================= */
+
+function renderItens(lista = itens){
+
+    const div = document.getElementById("listaItens")
+
+    div.innerHTML = ""
+
+    lista.forEach(item => {
+
+        div.innerHTML += `
+
+        <div class="card-item">
+
+            <h3>${item.nome}</h3>
+
+            <p>⚔️ Dano: ${item.dano}</p>
+            <p>🎯 Crítico: ${item.critico}</p>
+            <p>🧩 Tipo: ${item.tipo}</p>
+            <p>📏 Alcance: ${item.alcance}</p>
+            <p>🎒 Peso: ${item.peso}</p>
+
+            <br>
+
+            <button
+            class="botao"
+            onclick='adicionarInventario(${JSON.stringify(item)})'>
+            Adicionar
+            </button>
+
+        </div>
+
+        `
+
+    })
+
+}
+
+renderItens()
+
+/* =========================================
+   PESQUISA
+========================================= */
 
 function filtrarItens(){
 
-  const pesquisa = document
-    .getElementById("pesquisa")
+    const texto =
+    document.getElementById("pesquisa")
     .value
-    .toLowerCase();
+    .toLowerCase()
 
-  const filtrados = itens.filter(item =>
-    item.nome.toLowerCase().includes(pesquisa)
-  );
+    const filtrados = itens.filter(item =>
+        item.nome.toLowerCase().includes(texto)
+    )
 
-  renderizarItens(filtrados);
+    renderItens(filtrados)
 
 }
 
-// =========================
-// INVENTÁRIO
-// =========================
+/* =========================================
+   INVENTÁRIO
+========================================= */
 
 function adicionarInventario(item){
 
-  inventario.push({
+    const inventario =
+    document.getElementById("inventario")
 
-    ...item,
+    inventario.innerHTML += `
 
-    modificacoes:[]
+    <div class="item">
 
-  });
+        <div class="item-info">
 
-  atualizarInventario();
+            <h3>${item.nome}</h3>
+
+            <p>⚔️ Dano:
+            <span class="valor-dano">${item.dano}</span>
+            </p>
+
+            <p>🎯 Crítico:
+            <span class="valor-critico">${item.critico}</span>
+            </p>
+
+            <p>🧩 Tipo:
+            ${item.tipo}
+            </p>
+
+            <p>📏 Alcance:
+            <span class="valor-alcance">${item.alcance}</span>
+            </p>
+
+            <p>🎒 Peso:
+            ${item.peso}
+            </p>
+
+            <div class="customizacao">
+
+                <h4>🔧 Personalização</h4>
+
+                <label>Novo Dano</label>
+
+                <input
+                type="text"
+                placeholder="Ex: 2d10 + FOR"
+                class="input-dano"
+                >
+
+                <label>Novo Alcance</label>
+
+                <input
+                type="text"
+                placeholder="Ex: 1-6"
+                class="input-alcance"
+                >
+
+                <label>Modificação</label>
+
+                <select class="input-mod">
+
+                    <option>Sem modificação</option>
+
+                    <option>Certeira</option>
+                    <option>Cruel</option>
+                    <option>Perigosa</option>
+                    <option>Eletrificada</option>
+                    <option>Espinhosa</option>
+                    <option>Pesada</option>
+                    <option>Perfurante</option>
+
+                    <option>Alongada</option>
+                    <option>Calibre Grosso</option>
+                    <option>Pente Rápido</option>
+                    <option>Mira Laser</option>
+                    <option>Silenciador</option>
+                    <option>Explosiva</option>
+
+                </select>
+
+                <button
+                class="botao"
+                style="margin-top:10px"
+                onclick="salvarCustomizacao(this)">
+                Salvar Alterações
+                </button>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <button
+            class="botao"
+            onclick="removerItem(this)">
+            Remover
+            </button>
+
+        </div>
+
+    </div>
+
+    `
+
+    fecharModal()
 
 }
 
-function atualizarInventario(){
+/* =========================================
+   REMOVER ITEM
+========================================= */
 
-  const lista = document.getElementById("inventarioLista");
+function removerItem(botao){
 
-  lista.innerHTML = "";
+    botao.parentElement.parentElement.remove()
 
-  inventario.forEach((item,index)=>{
+}
 
-    const mods = item.modificacoes.join(", ");
+/* =========================================
+   CUSTOMIZAÇÃO
+========================================= */
 
-    const div = document.createElement("div");
+function salvarCustomizacao(botao){
 
-    div.className = "inventario-item";
+    const item =
+    botao.closest(".item")
 
-    div.innerHTML = `
+    const novoDano =
+    item.querySelector(".input-dano").value
 
-      <strong>${item.nome}</strong>
+    const novoAlcance =
+    item.querySelector(".input-alcance").value
 
-      <br><br>
+    const mod =
+    item.querySelector(".input-mod").value
 
-      ⚔️ Dano:
-      <input
-        value="${item.dano}"
-        onchange="editarItem(${index},'dano',this.value)"
-      >
+    if(novoDano !== ""){
 
-      📏 Alcance:
-      <input
-        value="${item.alcance}"
-        onchange="editarItem(${index},'alcance',this.value)"
-      >
+        item.querySelector(".valor-dano")
+        .innerText = novoDano
 
-      🧩 Tipo:
-      <input
-        value="${item.tipo}"
-        onchange="editarItem(${index},'tipo',this.value)"
-      >
+    }
 
-      🎯 Crítico:
-      <input
-        value="${item.critico}"
-        onchange="editarItem(${index},'critico',this.value)"
-      >
+    if(novoAlcance !== ""){
 
-      🎒 Peso:
-      <input
-        value="${item.peso}"
-        onchange="editarItem(${index},'peso',this.value)"
-      >
+        item.querySelector(".valor-alcance")
+        .innerText = novoAlcance
 
-      <div class="customizar">
+    }
 
-        <strong>Modificações:</strong>
+    if(mod !== "Sem modificação"){
 
-        <br><br>
+        const modExistente =
+        item.querySelector(".mod-aplicada")
 
-        ${mods || "Nenhuma"}
+        if(modExistente){
 
-        <br><br>
+            modExistente.innerText =
+            `🔧 Modificação: ${mod}`
 
-        <button onclick="adicionarModificacao(${index})">
-          + Modificação
+        }else{
+
+            item.querySelector(".item-info")
+            .innerHTML += `
+            <p class="mod-aplicada">
+            🔧 Modificação: ${mod}
+            </p>
+            `
+        }
+
+    }
+
+}
+
+/* =========================================
+   CONDIÇÕES
+========================================= */
+
+function adicionarCondicao(nome){
+
+    const lista =
+    document.getElementById("listaCondicoes")
+
+    const existe =
+    [...document.querySelectorAll(".condicao")]
+    .find(c => c.dataset.nome === nome)
+
+    if(existe){
+        return
+    }
+
+    let descricao = ""
+
+    /* =========================
+       FÍSICAS
+    ========================= */
+
+    if(nome === "Sangramento"){
+        descricao =
+        "Sofre 1d6 de dano por rodada."
+    }
+
+    if(nome === "Envenenamento"){
+        descricao =
+        "2d4 dano por rodada e -5 em Vigor."
+    }
+
+    if(nome === "Paralisia"){
+        descricao =
+        "Acertos garantidos e falha automática."
+    }
+
+    if(nome === "Paralisia Total"){
+        descricao =
+        "Pode ser finalizado abaixo de 20% PV."
+    }
+
+    if(nome === "Caído"){
+        descricao =
+        "-1 dado físico e -5 Defesa."
+    }
+
+    if(nome === "Enjoado"){
+        descricao =
+        "-3 em testes físicos."
+    }
+
+    if(nome === "Morrendo"){
+        descricao =
+        "Sem PA e inconsciente."
+    }
+
+    if(nome === "Enfraquecido"){
+
+        descricao =
+        "-5 FOR e -10 PV máximo."
+
+        pvMax -= 10
+
+        if(pvAtual > pvMax){
+            pvAtual = pvMax
+        }
+
+    }
+
+    if(nome === "Lentidão"){
+        descricao =
+        "-5 AGI e -3m deslocamento."
+    }
+
+    if(nome === "Cansado"){
+        descricao =
+        "Habilidades custam o dobro."
+    }
+
+    if(nome === "Chamas"){
+        descricao =
+        "1d8 fogo por rodada até gastar 1 PA."
+    }
+
+    if(nome === "Anti Vida"){
+        descricao =
+        "Cura reduzida pela metade."
+    }
+
+    /* =========================
+       MENTAIS
+    ========================= */
+
+    if(nome === "Controlado"){
+        descricao =
+        "Entrega PA ao conjurador."
+    }
+
+    if(nome === "Cego"){
+        descricao =
+        "-10 visão e ataques distância."
+    }
+
+    if(nome === "Surdo"){
+        descricao =
+        "-10 percepção auditiva."
+    }
+
+    if(nome === "Traumatizado"){
+
+        descricao =
+        "-5 Vontade e -8 PD máximo."
+
+        pdMax -= 8
+
+        if(pdAtual > pdMax){
+            pdAtual = pdMax
+        }
+
+    }
+
+    if(nome === "Penumbra"){
+        descricao =
+        "-5 percepção e -3 reflexos."
+    }
+
+    if(nome === "Vulnerável"){
+        descricao =
+        "Dano bônus dobrado."
+    }
+
+    if(nome === "Desprevenido"){
+        descricao =
+        "Sem reações e -3 Defesa."
+    }
+
+    if(nome === "Confuso"){
+        descricao =
+        "Move aleatoriamente."
+    }
+
+    atualizarStatus()
+
+    lista.innerHTML += `
+
+    <div
+    class="condicao"
+    data-nome="${nome}"
+    >
+
+        <button
+        class="remover-condicao"
+        onclick="removerCondicao(this,'${nome}')">
+        ×
         </button>
 
-      </div>
+        <h3>${nome}</h3>
 
-      <br>
+        <p>${descricao}</p>
 
-      <button onclick="removerItem(${index})">
-        Remover
-      </button>
+    </div>
 
-    `;
-
-    lista.appendChild(div);
-
-  });
+    `
 
 }
 
-function editarItem(index,campo,valor){
+/* =========================================
+   REMOVER CONDIÇÃO
+========================================= */
 
-  inventario[index][campo] = valor;
+function removerCondicao(botao,nome){
 
-}
+    if(nome === "Enfraquecido"){
 
-function removerItem(index){
+        pvMax += 10
 
-  inventario.splice(index,1);
+    }
 
-  atualizarInventario();
+    if(nome === "Traumatizado"){
 
-}
+        pdMax += 8
 
-function adicionarModificacao(index){
+    }
 
-  const mod = prompt("Digite a modificação:");
+    atualizarStatus()
 
-  if(!mod){
-    return;
-  }
-
-  inventario[index].modificacoes.push(mod);
-
-  atualizarInventario();
+    botao.parentElement.remove()
 
 }
 
-// =========================
-// VIDA E PD
-// =========================
+/* =========================================
+   INICIALIZAR
+========================================= */
 
-function curarPV(valor){
-
-  let pvMax = parseInt(
-    document.getElementById("pvMax").innerText
-  );
-
-  pvAtual += valor;
-
-  if(pvAtual > pvMax){
-    pvAtual = pvMax;
-  }
-
-  atualizarStatus();
-
-}
-
-function perderPV(valor){
-
-  pvAtual -= valor;
-
-  if(pvAtual < 0){
-    pvAtual = 0;
-  }
-
-  atualizarStatus();
-
-}
-
-function ganharPD(valor){
-
-  let pdMax = parseInt(
-    document.getElementById("pdMax").innerText
-  );
-
-  pdAtual += valor;
-
-  if(pdAtual > pdMax){
-    pdAtual = pdMax;
-  }
-
-  atualizarStatus();
-
-}
-
-function perderPD(valor){
-
-  pdAtual -= valor;
-
-  if(pdAtual < 0){
-    pdAtual = 0;
-  }
-
-  atualizarStatus();
-
-}
-
-// =========================
-// INICIAR
-// =========================
-
-atualizarStatus();
-atualizarCondicoes();
+atualizarStatus()

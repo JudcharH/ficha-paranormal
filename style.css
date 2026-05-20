@@ -1,191 +1,519 @@
-/* =========================
-   GERAL
-========================= */
+/* =========================================
+   RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* =========================================
+   BODY
+========================================= */
 
 body{
-    background:#0f0f0f;
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:
+    radial-gradient(circle at top,#1f0036 0%,#080808 40%,#020202 100%);
+
     color:white;
-    font-family:Arial, sans-serif;
-    margin:0;
-    padding:20px;
+    min-height:100vh;
 }
 
-/* =========================
-   TÍTULOS
-========================= */
+/* =========================================
+   SCROLLBAR
+========================================= */
 
-h1,h2,h3{
-    margin-top:0;
+::-webkit-scrollbar{
+    width:10px;
 }
 
-/* =========================
-   STATUS
-========================= */
+::-webkit-scrollbar-track{
+    background:#111;
+}
 
-.status{
+::-webkit-scrollbar-thumb{
+    background:#5e2eff;
+    border-radius:10px;
+}
+
+/* =========================================
+   TOPO
+========================================= */
+
+.topo{
+    width:100%;
+    padding:25px 40px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    background:rgba(0,0,0,0.45);
+
+    border-bottom:1px solid #262626;
+
+    backdrop-filter:blur(10px);
+
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.logo{
+    font-size:42px;
+    font-weight:900;
+
+    background:linear-gradient(90deg,#ff0055,#7d5cff);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* =========================================
+   STATUS SUPERIOR
+========================================= */
+
+.status-topo{
     display:flex;
     gap:15px;
     flex-wrap:wrap;
+}
+
+.status-card{
+    background:rgba(20,20,20,0.95);
+
+    border:1px solid #313131;
+
+    border-radius:18px;
+
+    padding:14px 20px;
+
+    font-weight:bold;
+
+    min-width:140px;
+    text-align:center;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.35),
+    inset 0 0 12px rgba(255,255,255,0.02);
+
+    transition:0.2s;
+}
+
+.status-card:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container{
+    width:95%;
+    max-width:1600px;
+
+    margin:auto;
+    margin-top:30px;
+
+    display:grid;
+    grid-template-columns:360px 1fr;
+    gap:25px;
+}
+
+/* =========================================
+   PAINÉIS
+========================================= */
+
+.painel{
+    background:rgba(10,10,10,0.82);
+
+    border:1px solid #2f2f2f;
+
+    border-radius:28px;
+
+    padding:25px;
+
+    box-shadow:
+    0 0 30px rgba(0,0,0,0.4),
+    inset 0 0 20px rgba(255,255,255,0.02);
+}
+
+.painel h2{
     margin-bottom:20px;
+    font-size:32px;
 }
 
-.card{
-    background:#1b1b1b;
-    border:1px solid #333;
-    border-radius:10px;
-    padding:15px;
-    min-width:180px;
+/* =========================================
+   ATRIBUTOS
+========================================= */
+
+.atributo{
+    background:#101010;
+
+    border:1px solid #252525;
+
+    border-radius:16px;
+
+    padding:16px 18px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:12px;
+
+    transition:0.2s;
 }
 
-/* =========================
+.atributo:hover{
+    transform:translateX(4px);
+
+    border-color:#6d3dff;
+}
+
+/* =========================================
    BOTÕES
-========================= */
+========================================= */
 
 button{
-    background:#8b0000;
     border:none;
-    color:white;
-    padding:8px 12px;
-    border-radius:6px;
+    outline:none;
     cursor:pointer;
     transition:0.2s;
 }
 
-button:hover{
-    background:#b30000;
-}
+.botao{
+    background:linear-gradient(90deg,#5d2bff,#8b43ff);
 
-/* =========================
-   INPUTS
-========================= */
-
-input{
-    background:#181818;
-    border:1px solid #444;
     color:white;
-    padding:6px;
-    border-radius:5px;
-    margin-top:4px;
-    margin-bottom:8px;
-    width:100%;
-    box-sizing:border-box;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 0 14px rgba(98,55,255,0.35);
 }
 
-/* =========================
+.botao:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 0 18px rgba(124,80,255,0.55);
+}
+
+/* =========================================
    INVENTÁRIO
-========================= */
+========================================= */
 
 #inventario{
-    margin-top:40px;
-    background:#151515;
-    border:2px solid #333;
-    border-radius:12px;
-    padding:20px;
-}
-
-#inventarioLista{
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:18px;
 }
 
-.inventario-item{
-    background:#1d1d1d;
-    border:1px solid #444;
-    border-radius:10px;
-    padding:15px;
+.item{
+    background:linear-gradient(180deg,#181818,#111111);
+
+    border:1px solid #303030;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    display:flex;
+    justify-content:space-between;
+    gap:25px;
+
+    transition:0.2s;
 }
 
-.customizar{
-    margin-top:15px;
-    padding:10px;
-    background:#141414;
-    border-radius:8px;
-    border:1px solid #333;
+.item:hover{
+    transform:translateY(-3px);
+
+    border-color:#7347ff;
 }
 
-/* =========================
+.item-info{
+    flex:1;
+}
+
+.item h3{
+    margin-bottom:12px;
+    font-size:28px;
+}
+
+.item p{
+    margin:7px 0;
+    color:#dddddd;
+}
+
+/* =========================================
+   CUSTOMIZAÇÃO
+========================================= */
+
+.customizacao{
+    margin-top:20px;
+
+    background:#0d0d0d;
+
+    border:1px solid #242424;
+
+    border-radius:16px;
+
+    padding:18px;
+}
+
+.customizacao h4{
+    margin-bottom:15px;
+}
+
+.customizacao label{
+    display:block;
+    margin-bottom:5px;
+    margin-top:12px;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+
+input,
+select{
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#181818;
+
+    color:white;
+
+    margin-bottom:10px;
+
+    border:1px solid #2a2a2a;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#7347ff;
+}
+
+/* =========================================
    CONDIÇÕES
-========================= */
+========================================= */
 
-#listaCondicoes{
+.condicoes{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
-    margin-top:10px;
+    gap:14px;
+
+    margin-top:20px;
 }
 
 .condicao{
-    background:#2a1111;
-    border:1px solid #662222;
-    border-radius:8px;
-    padding:12px;
-    min-width:180px;
+    background:linear-gradient(180deg,#2a1010,#170808);
+
+    border:1px solid #6f1c1c;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    min-width:230px;
+
+    position:relative;
+
+    box-shadow:
+    0 0 16px rgba(120,0,0,0.15);
 }
 
-/* =========================
+.condicao h3{
+    margin-bottom:10px;
+}
+
+.remover-condicao{
+    position:absolute;
+
+    top:10px;
+    right:10px;
+
+    width:28px;
+    height:28px;
+
+    border-radius:50%;
+
+    background:#ff0055;
+
+    color:white;
+
+    font-weight:bold;
+}
+
+.remover-condicao:hover{
+    transform:scale(1.1);
+}
+
+/* =========================================
+   BOTÃO FLUTUANTE
+========================================= */
+
+.add-btn{
+    position:fixed;
+
+    right:35px;
+    bottom:35px;
+
+    width:78px;
+    height:78px;
+
+    border-radius:50%;
+
+    font-size:42px;
+    font-weight:bold;
+
+    background:linear-gradient(180deg,#6f2cff,#4314bf);
+
+    color:white;
+
+    box-shadow:
+    0 0 30px rgba(111,44,255,0.6);
+
+    z-index:90;
+}
+
+.add-btn:hover{
+    transform:scale(1.08);
+}
+
+/* =========================================
    MODAL
-========================= */
+========================================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.8);
+
+    background:rgba(0,0,0,0.82);
+
     display:none;
     justify-content:center;
     align-items:center;
+
     z-index:999;
 }
 
 .modal-content{
-    background:#111;
     width:90%;
-    max-width:900px;
-    max-height:85vh;
+    max-width:1250px;
+    max-height:90vh;
+
     overflow-y:auto;
-    border-radius:12px;
-    padding:20px;
-    border:2px solid #444;
+
+    background:linear-gradient(180deg,#191919,#101010);
+
+    border:1px solid #343434;
+
+    border-radius:28px;
+
+    padding:30px;
+
+    box-shadow:
+    0 0 35px rgba(0,0,0,0.45);
 }
 
-/* =========================
-   LISTA DE ITENS
-========================= */
+.modal-content h1{
+    margin-bottom:20px;
+}
 
-#listaItens{
+/* =========================================
+   GRID ITENS
+========================================= */
+
+.lista-itens{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(290px,1fr));
+
+    gap:20px;
+
     margin-top:20px;
 }
 
-.item-loja{
-    background:#1a1a1a;
-    border:1px solid #333;
-    border-radius:10px;
-    padding:15px;
+.card-item{
+    background:linear-gradient(180deg,#232338,#181828);
+
+    border:1px solid #3d3d5f;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    transition:0.2s;
 }
 
-/* =========================
-   PESQUISA
-========================= */
+.card-item:hover{
+    transform:translateY(-4px);
 
-#pesquisa{
-    margin-top:10px;
+    border-color:#8b6cff;
 }
 
-/* =========================
-   RESPONSIVIDADE
-========================= */
+.card-item h3{
+    margin-bottom:15px;
+}
+
+.card-item p{
+    margin:7px 0;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media(max-width:1150px){
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+}
 
 @media(max-width:700px){
 
-    .status{
+    .topo{
+        padding:20px;
+    }
+
+    .logo{
+        font-size:30px;
+    }
+
+    .status-card{
+        width:100%;
+    }
+
+    .item{
         flex-direction:column;
     }
 
-    .card{
-        width:100%;
+    .painel{
+        padding:20px;
     }
 
 }
