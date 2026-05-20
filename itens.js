@@ -52,5 +52,5 @@ const itens = [
     alcance: "—",
     efeito: "+5 Medicina",
     ep: 2
-  }
-];
+  },
+]
