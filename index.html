@@ -1,202 +1,316 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ficha Paranormal RPG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Paranormal</title>
 
-  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="background-overlay"></div>
+    <div class="container">
 
-<div class="container">
+        <!-- HEADER -->
+        <div class="top-bar">
+            <h1>FICHA PARANORMAL</h1>
+        </div>
 
-  <!-- TOPO -->
-  <header class="topo">
-    <div class="titulo-box">
-      <h1>FICHA PARANORMAL</h1>
-      <p>Sistema de RPG Paranormal</p>
+        <!-- PERSONAGEM -->
+        <section class="character-section">
+
+            <!-- FOTO -->
+            <div class="photo-area">
+
+                <div class="photo-preview" id="photoPreview">
+                    FOTO
+                </div>
+
+                <input type="file" id="photoInput" accept="image/*">
+
+            </div>
+
+            <!-- INFOS -->
+            <div class="character-info">
+
+                <div class="info-grid">
+
+                    <div class="field">
+                        <label>Nome</label>
+                        <input type="text">
+                    </div>
+
+                    <div class="field">
+                        <label>Nível</label>
+                        <input type="number" value="1">
+                    </div>
+
+                    <div class="field">
+                        <label>Origem</label>
+                        <input type="text">
+                    </div>
+
+                    <div class="field">
+                        <label>Idade</label>
+                        <input type="number">
+                    </div>
+
+                </div>
+
+                <!-- STATUS -->
+                <div class="status-grid">
+
+                    <div class="status-box">
+                        <span>PV Atual</span>
+                        <input type="number" id="pvAtual">
+                    </div>
+
+                    <div class="status-box">
+                        <span>PV Máximo</span>
+                        <input type="number" id="pvMax">
+                    </div>
+
+                    <div class="status-box">
+                        <span>PD Atual</span>
+                        <input type="number" id="pdAtual">
+                    </div>
+
+                    <div class="status-box">
+                        <span>PD Máximo</span>
+                        <input type="number" id="pdMax">
+                    </div>
+
+                    <div class="status-box">
+                        <span>Defesa</span>
+                        <input type="number">
+                    </div>
+
+                    <div class="status-box">
+                        <span>Deslocamento</span>
+                        <input type="text" value="9m">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ATRIBUTOS -->
+        <section class="card">
+
+            <h2>ATRIBUTOS</h2>
+
+            <div class="attributes-grid">
+
+                <div class="attribute">
+                    <span>FOR</span>
+                    <input type="number" id="forca" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>AGI</span>
+                    <input type="number" id="agilidade" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>INT</span>
+                    <input type="number" id="intelecto" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>VIG</span>
+                    <input type="number" id="vigor" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>PRE</span>
+                    <input type="number" id="presenca" value="1">
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PERÍCIAS -->
+        <section class="card">
+
+            <div class="section-title">
+                <h2>PERÍCIAS</h2>
+            </div>
+
+            <div class="skills-list">
+
+                <!-- EXEMPLOS -->
+                <div class="skill-row">
+                    <span class="skill-name">Acrobacia</span>
+                    <span class="skill-attr">(AGI)</span>
+
+                    <input type="number" class="skill-train" placeholder="Treino">
+
+                    <input type="number" class="skill-bonus" placeholder="Outros">
+
+                    <span class="skill-total">0</span>
+                </div>
+
+                <div class="skill-row">
+                    <span class="skill-name">Atletismo</span>
+                    <span class="skill-attr">(FOR)</span>
+
+                    <input type="number" class="skill-train" placeholder="Treino">
+
+                    <input type="number" class="skill-bonus" placeholder="Outros">
+
+                    <span class="skill-total">0</span>
+                </div>
+
+                <div class="skill-row">
+                    <span class="skill-name">Ocultismo</span>
+                    <span class="skill-attr">(INT)</span>
+
+                    <input type="number" class="skill-train" placeholder="Treino">
+
+                    <input type="number" class="skill-bonus" placeholder="Outros">
+
+                    <span class="skill-total">0</span>
+                </div>
+
+                <div class="skill-row">
+                    <span class="skill-name">Pontaria</span>
+                    <span class="skill-attr">(AGI)</span>
+
+                    <input type="number" class="skill-train" placeholder="Treino">
+
+                    <input type="number" class="skill-bonus" placeholder="Outros">
+
+                    <span class="skill-total">0</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ASSIMILAÇÕES -->
+        <section class="card">
+
+            <div class="section-title">
+
+                <h2>ASSIMILAÇÕES</h2>
+
+                <button class="add-btn">
+                    +
+                </button>
+
+            </div>
+
+            <div id="assimilationList">
+
+            </div>
+
+        </section>
+
+        <!-- HABILIDADES -->
+        <section class="card">
+
+            <div class="section-title">
+
+                <h2>HABILIDADES GERAIS</h2>
+
+                <button class="add-btn">
+                    +
+                </button>
+
+            </div>
+
+            <div id="abilitiesList">
+
+            </div>
+
+        </section>
+
+        <!-- INVENTÁRIO -->
+        <section class="card">
+
+            <div class="section-title">
+
+                <h2>INVENTÁRIO</h2>
+
+                <button class="add-btn">
+                    +
+                </button>
+
+            </div>
+
+            <div id="inventoryList">
+
+            </div>
+
+        </section>
+
     </div>
 
-    <div class="nivel-box">
-      <label>Nível</label>
-      <input type="number" id="nivel" value="1" min="1">
-    </div>
-  </header>
+    <!-- PAINEL DE DADOS -->
+    <div class="dice-panel">
 
-  <!-- STATUS -->
-  <section class="status-grid">
+        <h2>🎲 Rolagem</h2>
 
-    <div class="status-card vida">
-      <h2>PV</h2>
+        <div class="dice-inputs">
 
-      <div class="status-linha">
-        <input type="number" id="pvAtual" value="0">
-        <span>/</span>
-        <input type="number" id="pvMax" value="0">
-      </div>
-    </div>
+            <div class="dice-field">
+                <label>Dados</label>
+                <input type="number" id="diceCount" value="1">
+            </div>
 
-    <div class="status-card sanidade">
-      <h2>PD</h2>
+            <div class="dice-field">
+                <label>Tipo</label>
+                <input type="number" id="diceType" value="20">
+            </div>
 
-      <div class="status-linha">
-        <input type="number" id="pdAtual" value="0">
-        <span>/</span>
-        <input type="number" id="pdMax" value="0">
-      </div>
-    </div>
+            <div class="dice-field">
+                <label>Bônus</label>
+                <input type="number" id="diceBonus" value="0">
+            </div>
 
-    <div class="status-card esforco">
-      <h2>PA</h2>
+        </div>
 
-      <div class="status-linha">
-        <input type="number" id="paAtual" value="0">
-        <span>/</span>
-        <input type="number" id="paMax" value="3">
-      </div>
-    </div>
+        <!-- BOTÕES DE ATRIBUTO -->
+        <div class="attribute-rolls">
 
-  </section>
+            <button onclick="rollAttribute('forca')">
+                FOR
+            </button>
 
-  <!-- ATRIBUTOS -->
-  <section class="bloco">
-    <h2 class="titulo-secao">ATRIBUTOS</h2>
+            <button onclick="rollAttribute('agilidade')">
+                AGI
+            </button>
 
-    <div class="atributos-grid">
+            <button onclick="rollAttribute('intelecto')">
+                INT
+            </button>
 
-      <div class="atributo">
-        <label>FOR</label>
-        <input type="number" id="for">
-      </div>
+            <button onclick="rollAttribute('vigor')">
+                VIG
+            </button>
 
-      <div class="atributo">
-        <label>AGI</label>
-        <input type="number" id="agi">
-      </div>
+            <button onclick="rollAttribute('presenca')">
+                PRE
+            </button>
 
-      <div class="atributo">
-        <label>INT</label>
-        <input type="number" id="int">
-      </div>
+        </div>
 
-      <div class="atributo">
-        <label>VIG</label>
-        <input type="number" id="vig">
-      </div>
+        <button class="roll-button" onclick="rollDice()">
+            ROLAR
+        </button>
 
-      <div class="atributo">
-        <label>PRE</label>
-        <input type="number" id="pre">
-      </div>
+        <div class="dice-result" id="diceResult">
+
+            Aguardando rolagem...
+
+        </div>
 
     </div>
-  </section>
 
-  <!-- PERÍCIAS -->
-  <section class="bloco">
-    <div class="secao-topo">
-      <h2 class="titulo-secao">PERÍCIAS</h2>
-
-      <button class="btn-add" onclick="adicionarPericia()">
-        +
-      </button>
-    </div>
-
-    <div id="listaPericias"></div>
-  </section>
-
-  <!-- ASSIMILAÇÕES -->
-  <section class="bloco">
-    <div class="secao-topo">
-      <h2 class="titulo-secao">ASSIMILAÇÕES</h2>
-
-      <button class="btn-add" onclick="adicionarAssimilacao()">
-        +
-      </button>
-    </div>
-
-    <div id="listaAssimilacoes"></div>
-  </section>
-
-  <!-- CONDIÇÕES -->
-  <section class="bloco">
-    <div class="secao-topo">
-      <h2 class="titulo-secao">CONDIÇÕES</h2>
-
-      <button class="btn-add" onclick="abrirModalCondicoes()">
-        +
-      </button>
-    </div>
-
-    <div id="listaCondicoes"></div>
-  </section>
-
-  <!-- INVENTÁRIO -->
-  <section class="bloco inventario-bloco">
-
-    <div class="secao-topo">
-      <h2 class="titulo-secao">INVENTÁRIO</h2>
-
-      <button class="btn-add" onclick="abrirModalItens()">
-        +
-      </button>
-    </div>
-
-    <div id="inventarioLista"></div>
-
-  </section>
-
-</div>
-
-<!-- MODAL ITENS -->
-<div class="modal hidden" id="modalItens">
-
-  <div class="modal-content">
-
-    <div class="modal-topo">
-      <h2>Adicionar Item</h2>
-
-      <button class="fechar-btn" onclick="fecharModalItens()">
-        ✕
-      </button>
-    </div>
-
-    <input
-      type="text"
-      id="pesquisaItem"
-      placeholder="Pesquisar item..."
-      onkeyup="filtrarItens()"
-      class="pesquisa"
-    >
-
-    <div id="listaItensModal" class="lista-modal"></div>
-
-  </div>
-</div>
-
-<!-- MODAL CONDIÇÕES -->
-<div class="modal hidden" id="modalCondicoes">
-
-  <div class="modal-content">
-
-    <div class="modal-topo">
-      <h2>Adicionar Condição</h2>
-
-      <button class="fechar-btn" onclick="fecharModalCondicoes()">
-        ✕
-      </button>
-    </div>
-
-    <div id="listaCondicoesModal" class="lista-modal"></div>
-
-  </div>
-</div>
-
-<!-- SCRIPT -->
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
