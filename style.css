@@ -1,85 +1,191 @@
-* 
-#abrirModal {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+/* =========================
+   GERAL
+========================= */
+
+body{
+    background:#0f0f0f;
+    color:white;
+    font-family:Arial, sans-serif;
+    margin:0;
+    padding:20px;
 }
 
-.item-inventario {
-  background: #222;
-  border: 1px solid #444;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
+/* =========================
+   TÍTULOS
+========================= */
+
+h1,h2,h3{
+    margin-top:0;
 }
 
-.item-linha {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
-.item-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.card{
+    background:#1b1b1b;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:15px;
+    min-width:180px;
 }
 
-.custom-box {
-  margin-top: 10px;
-  display: none;
-  flex-direction: column;
-  gap: 10px;
+/* =========================
+   BOTÕES
+========================= */
+
+button{
+    background:#8b0000;
+    border:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:0.2s;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-
-  display: none;
-  justify-content: center;
-  align-items: center;
-
-  padding: 20px;
+button:hover{
+    background:#b30000;
 }
 
-.modal-conteudo {
-  width: 100%;
-  max-width: 900px;
-  background: #1c1c1c;
-  border-radius: 10px;
-  padding: 20px;
+/* =========================
+   INPUTS
+========================= */
 
-  max-height: 90vh;
-  overflow-y: auto;
+input{
+    background:#181818;
+    border:1px solid #444;
+    color:white;
+    padding:6px;
+    border-radius:5px;
+    margin-top:4px;
+    margin-bottom:8px;
+    width:100%;
+    box-sizing:border-box;
 }
 
-.modal-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* =========================
+   INVENTÁRIO
+========================= */
 
-  margin-bottom: 20px;
+#inventario{
+    margin-top:40px;
+    background:#151515;
+    border:2px solid #333;
+    border-radius:12px;
+    padding:20px;
 }
 
-#listaItens {
-  margin-top: 20px;
+#inventarioLista{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
 }
 
-.item-card {
-  background: #252525;
-  border: 1px solid #444;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 10px;
+.inventario-item{
+    background:#1d1d1d;
+    border:1px solid #444;
+    border-radius:10px;
+    padding:15px;
 }
 
-.item-card h3 {
-  margin-bottom: 10px;
+.customizar{
+    margin-top:15px;
+    padding:10px;
+    background:#141414;
+    border-radius:8px;
+    border:1px solid #333;
 }
 
-.item-card p {
-  margin-bottom: 5px;
+/* =========================
+   CONDIÇÕES
+========================= */
+
+#listaCondicoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
+}
+
+.condicao{
+    background:#2a1111;
+    border:1px solid #662222;
+    border-radius:8px;
+    padding:12px;
+    min-width:180px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    background:#111;
+    width:90%;
+    max-width:900px;
+    max-height:85vh;
+    overflow-y:auto;
+    border-radius:12px;
+    padding:20px;
+    border:2px solid #444;
+}
+
+/* =========================
+   LISTA DE ITENS
+========================= */
+
+#listaItens{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.item-loja{
+    background:#1a1a1a;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:15px;
+}
+
+/* =========================
+   PESQUISA
+========================= */
+
+#pesquisa{
+    margin-top:10px;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media(max-width:700px){
+
+    .status{
+        flex-direction:column;
+    }
+
+    .card{
+        width:100%;
+    }
+
 }
