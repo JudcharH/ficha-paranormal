@@ -110,18 +110,6 @@ function rollAttribute(attributeId){
     rollDice();
 
 }
-// ===============================
-// ATUALIZAÇÃO EM TEMPO REAL
-// ===============================
-
-document.querySelectorAll("input").forEach(input => {
-
-    input.addEventListener("input", updateSkills);
-
-});
-
-updateSkills();
-
 
 // ===============================
 // SISTEMA DE HABILIDADES
@@ -420,3 +408,122 @@ function addItem(){
 
 document.querySelectorAll(".add-btn")[2]
     .addEventListener("click", addItem);
+    // ===============================
+// PV E PD AUTOMÁTICOS
+// ===============================
+
+const nivelInput = document.querySelector(
+    'input[value="1"]'
+);
+
+const vigorInput =
+    document.getElementById("vigor");
+
+const presencaInput =
+    document.getElementById("presenca");
+
+function atualizarStatus(){
+
+    const nivel =
+        Number(nivelInput.value) || 1;
+
+    const vigor =
+        Number(vigorInput.value) || 1;
+
+    const presenca =
+        Number(presencaInput.value) || 1;
+
+    const pvMax =
+        (7 + vigor) * nivel;
+
+    const pdMax =
+        (5 + presenca) * nivel;
+
+    document.getElementById("pvMax").value =
+        pvMax;
+
+    document.getElementById("pdMax").value =
+        pdMax;
+
+}
+
+nivelInput.addEventListener(
+    "input",
+    atualizarStatus
+);
+
+vigorInput.addEventListener(
+    "input",
+    atualizarStatus
+);
+
+presencaInput.addEventListener(
+    "input",
+    atualizarStatus
+);
+
+atualizarStatus();
+
+
+// ===============================
+// ROLAGEM DE PERÍCIAS
+// ===============================
+
+document.querySelectorAll(".skill-roll")
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const row =
+            button.parentElement;
+
+        const attr =
+            row.dataset.attr;
+
+        const atributo =
+            Number(
+                document.getElementById(attr).value
+            );
+
+        const bonus =
+            Number(
+                row.querySelector(".skill-value").value
+            ) || 0;
+
+        let resultados = [];
+
+        for(let i = 0; i < atributo; i++){
+
+            resultados.push(
+                Math.floor(Math.random() * 20) + 1
+            );
+
+        }
+
+        const maior =
+            Math.max(...resultados);
+
+        const total =
+            maior + bonus;
+
+        document.getElementById(
+            "diceResult"
+        ).innerHTML = `
+
+            <div class="dice-rolls">
+                ${resultados.join(" • ")}
+            </div>
+
+            <div class="dice-big">
+                ${maior}
+            </div>
+
+            <div class="dice-total">
+                Resultado Final: ${total}
+            </div>
+
+        `;
+
+    });
+
+});
