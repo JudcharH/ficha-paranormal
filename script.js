@@ -850,8 +850,113 @@ function createInventoryCard(item){
     .appendChild(card);
 
 }
+// ======================================
+// MODIFICAÇÕES
+// ======================================
 
+const modifications = [
 
+    "Mira Laser",
+    "Silenciador",
+    "Punho Reforçado",
+    "Coronha Tática",
+    "Lâmina Serrilhada",
+    "Catalisador",
+    "Proteção Ritualística"
+
+];
+
+function addModification(button){
+
+    const existente =
+        button.parentElement.querySelector(".mods-search");
+
+    // evita abrir duas pesquisas
+    if(existente) return;
+
+    const searchBox =
+        document.createElement("div");
+
+    searchBox.classList.add("mods-search");
+
+    searchBox.innerHTML = `
+
+        <input
+            type="text"
+            class="mods-input"
+            placeholder="Pesquisar modificação..."
+        >
+
+        <div class="mods-results"></div>
+
+    `;
+
+    button.parentElement.appendChild(searchBox);
+
+    const input =
+        searchBox.querySelector(".mods-input");
+
+    const results =
+        searchBox.querySelector(".mods-results");
+
+    function renderMods(search = ""){
+
+        results.innerHTML = "";
+
+        modifications
+        .filter(mod =>
+            mod.toLowerCase()
+            .includes(search.toLowerCase())
+        )
+        .forEach(mod => {
+
+            const item =
+                document.createElement("div");
+
+            item.classList.add("mod-result");
+
+            item.innerText = mod;
+
+            item.onclick = () => {
+
+                const tag =
+                    document.createElement("div");
+
+                tag.classList.add("mod-tag");
+
+                tag.innerHTML = `
+
+                    ${mod}
+
+                    <button onclick="this.parentElement.remove()">
+                        X
+                    </button>
+
+                `;
+
+                button.parentElement
+                .querySelector(".mods-list")
+                .appendChild(tag);
+
+                searchBox.remove();
+
+            };
+
+            results.appendChild(item);
+
+        });
+
+    }
+
+    input.addEventListener("input", function(){
+
+        renderMods(this.value);
+
+    });
+
+    renderMods();
+
+}
 
 // ======================================
 // CONDIÇÕES
