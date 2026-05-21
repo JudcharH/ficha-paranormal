@@ -11,7 +11,10 @@ body{
     background:#050505;
     color:white;
     font-family:'Orbitron', sans-serif;
+
     overflow-x:hidden;
+
+    padding-right:320px;
 
 }
 
@@ -21,7 +24,9 @@ body{
 
 .container{
 
-    width:calc(100% - 340px);
+    width:100%;
+    max-width:calc(100% - 340px);
+
     padding:25px;
 
 }
@@ -329,10 +334,10 @@ body{
     display:grid;
 
     grid-template-columns:
-    180px
+    minmax(140px,1fr)
     80px
-    100px
-    100px
+    80px
+    80px
     80px;
 
     align-items:center;
@@ -578,6 +583,19 @@ body{
 
 }
 
+input:focus,
+button:focus,
+select:focus{
+
+    outline:none;
+
+    border-color:#9d4dff;
+
+    box-shadow:
+    0 0 10px rgba(157,77,255,.4);
+
+}
+
 /* BOTÕES ATRIBUTOS */
 
 .attribute-rolls{
@@ -725,6 +743,10 @@ body{
 
 @media(max-width:1400px){
 
+    body{
+        padding-right:0;
+    }
+
     .container{
 
         width:100%;
@@ -767,11 +789,15 @@ body{
 
     .skill-row{
 
-        grid-template-columns:1fr;
+    grid-template-columns:
+    1fr
+    1fr;
+
+}
 
     }
 
-}
+
 
 /* ========================= */
 /* SCROLL DAS PERÍCIAS */
@@ -899,7 +925,7 @@ body{
     justify-content: center;
     align-items: center;
 
-    z-index: 9999;
+    z-index: 99999;
 
 }
 
@@ -954,7 +980,7 @@ body{
 
 }
 
-#itemSearch{
+#modalItemSearch{
 
     width: 100%;
 
@@ -1027,6 +1053,47 @@ body{
     margin-top: 10px;
 
     font-size: 14px;
+
+}
+
+.inventory-info{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr 80px;
+
+    gap:12px;
+
+    margin-top:15px;
+
+}
+
+.inventory-info input{
+
+    background:#0a0a0a;
+
+    border:1px solid #333;
+
+    color:white;
+
+    padding:10px;
+
+    border-radius:10px;
+
+}
+
+#photoInput{
+
+    background:#111;
+
+    border:1px solid #333;
+
+    color:white;
+
+    padding:10px;
+
+    border-radius:12px;
 
 }
 
@@ -1217,7 +1284,7 @@ body{
 
     align-items: center;
 
-    z-index: 9999;
+    z-index: 99999;
 
 }
 
@@ -1349,5 +1416,111 @@ body{
     color: #ff8080;
 
     font-weight: bold;
+
+}
+
+.mods-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:12px;
+
+}
+
+.mod-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#1f1f1f;
+
+    border:1px solid #7b2cff;
+
+    border-radius:10px;
+
+    padding:8px 12px;
+
+}
+
+.mod-card button{
+
+    background:crimson;
+
+    border:none;
+
+    color:white;
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+}
+
+.mini-add-btn{
+
+    margin-top:12px;
+
+    width:32px;
+    height:32px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#7b2cff;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0d0d0d;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#7b2cff;
+
+    border-radius:20px;
+
+}
+
+.card,
+.attribute,
+.status-box,
+.inventory-card,
+.ability-card{
+
+    transition:.25s;
+
+}
+
+.card:hover,
+.attribute:hover,
+.status-box:hover{
+
+    transform:translateY(-2px);
 
 }

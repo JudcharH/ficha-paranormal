@@ -179,7 +179,7 @@ function addAbility(){
 
             <h3>${habilidade.nome}</h3>
 
-            <button onclick="removeCard(this)">
+            <button onclick="this.parentElement.remove()">
                 X
             </button>
 
@@ -1087,7 +1087,7 @@ function createInventoryCard(item){
 
             <h3>${item.nome}</h3>
 
-            <button onclick="removeCard(this)">
+            <button onclick="this.parentElement.remove()">
                 X
             </button>
 
@@ -1178,12 +1178,6 @@ const modificacoes = [
 
 ];
 
-
-
-    const mod = prompt(
-        "Digite a modificação:"
-    );
-
     if(!mod) return;
 
     const existe = modificacoes.find(m =>
@@ -1215,49 +1209,6 @@ const modificacoes = [
         .querySelector(".mods-list")
         .appendChild(modTag);
 
-}
-
-
-
-    const modsList = button.parentElement
-        .querySelector(".mods-list");
-
-    const modRow = document.createElement("div");
-
-    modRow.classList.add("mod-row");
-
-    const select = document.createElement("select");
-
-    modificacoes.forEach(mod => {
-
-        const option = document.createElement("option");
-
-        option.value = mod;
-        option.innerText = mod;
-
-        select.appendChild(option);
-
-    });
-
-    const removeBtn = document.createElement("button");
-
-    removeBtn.innerText = "X";
-
-    removeBtn.classList.add("remove-mod-btn");
-
-    removeBtn.onclick = () => {
-
-        modRow.remove();
-
-    };
-
-    modRow.appendChild(select);
-
-    modRow.appendChild(removeBtn);
-
-    modsList.appendChild(modRow);
-
-}
 
 function updateEP(){
 
@@ -1298,26 +1249,6 @@ function updateEP(){
 
     if(!mod) return;
 
-    const modsList = button.parentElement
-        .querySelector(".mods-list");
-
-    const modDiv = document.createElement("div");
-
-    modDiv.classList.add("mod-item");
-
-    modDiv.innerHTML = `
-
-        <span>${mod}</span>
-
-        <button onclick="this.parentElement.remove()">
-            X
-        </button>
-
-    `;
-
-    modsList.appendChild(modDiv);
-
-}
 
 // botão inventário
 
@@ -1410,8 +1341,6 @@ function updateSkills(){
 // ROLAGEM DE PERÍCIAS
 // ===============================
 
-document.querySelectorAll(".skill-roll")
-.forEach(button => {
 
     button.addEventListener("click", () => {
 
@@ -1481,42 +1410,6 @@ updateSkills();
 // CÁLCULO AUTOMÁTICO PV/PD
 // ===============================
 
-function updateStatus(){
-
-    const nivel = Number(
-        document.getElementById("nivel").value
-    ) || 1;
-
-    const vigor = Number(
-        document.getElementById("vigor").value
-    ) || 0;
-
-    const presenca = Number(
-        document.getElementById("presenca").value
-    ) || 0;
-
-    // PV = (7 + VIG) × nível
-    const pv = (7 + vigor) * nivel;
-
-    // PD = (5 + PRE) × nível
-    const pd = (5 + presenca) * nivel;
-
-    document.getElementById("pvMax").value = pv;
-
-    document.getElementById("pdMax").value = pd;
-
-}
-
-document.getElementById("nivel")
-    .addEventListener("input", updateStatus);
-
-document.getElementById("vigor")
-    .addEventListener("input", updateStatus);
-
-document.getElementById("presenca")
-    .addEventListener("input", updateStatus);
-
-updateStatus();
 
 // ===============================
 // CONDIÇÕES
@@ -1548,94 +1441,7 @@ const conditions = [
 
 ];
 
-function addCondition(){
 
-    const nome = prompt(
-        "Digite a condição:"
-    );
-
-    if(!nome) return;
-
-    const existe = conditions.find(c =>
-        c.toLowerCase() === nome.toLowerCase()
-    );
-
-    if(!existe){
-
-        alert("Condição não encontrada.");
-        return;
-
-    }
-
-    const card = document.createElement("div");
-
-    card.classList.add("condition-card");
-
-    card.innerHTML = `
-
-        <span>${existe}</span>
-
-        <button onclick="removeCondition(this, '${existe}')">
-            X
-        </button>
-
-    `;
-
-    document.getElementById("conditionsList")
-        .appendChild(card);
-
-    applyCondition(existe);
-
-}
-
-function applyCondition(condition){
-
-    const pvMax = document.getElementById("pvMax");
-
-    const pdMax = document.getElementById("pdMax");
-
-    if(condition === "Enfraquecido"){
-
-        pvMax.value =
-            Number(pvMax.value) - 10;
-
-    }
-
-    if(condition === "Traumatizado"){
-
-        pdMax.value =
-            Number(pdMax.value) - 8;
-
-    }
-
-}
-
-function removeCondition(button, condition){
-
-    const pvMax = document.getElementById("pvMax");
-
-    const pdMax = document.getElementById("pdMax");
-
-    if(condition === "Enfraquecido"){
-
-        pvMax.value =
-            Number(pvMax.value) + 10;
-
-    }
-
-    if(condition === "Traumatizado"){
-
-        pdMax.value =
-            Number(pdMax.value) + 8;
-
-    }
-
-    button.parentElement.remove();
-
-}
-
-document.getElementById("conditionBtn")
-    .addEventListener("click", addCondition);
 
     // ===============================
 // CONDIÇÕES
@@ -2138,9 +1944,6 @@ document.getElementById("modalItemSearch")
 // ===============================
 
 
-document.getElementById("inventoryBtn")
-.addEventListener("click", openInventoryModal);
-
 // ===============================
 // MODIFICAÇÕES
 // ===============================
@@ -2174,41 +1977,3 @@ const modifications = [
 // ADICIONAR MODIFICAÇÃO
 // ===============================
 
-function addModification(button){
-
-    const mod = prompt(
-        "Digite a modificação:"
-    );
-
-    if(!mod) return;
-
-    const existe = modifications.find(m =>
-        m.toLowerCase() === mod.toLowerCase()
-    );
-
-    if(!existe){
-
-        alert("Modificação não encontrada.");
-        return;
-
-    }
-
-    const modCard = document.createElement("div");
-
-    modCard.classList.add("mod-card");
-
-    modCard.innerHTML = `
-
-        <span>${existe}</span>
-
-        <button onclick="removeCard(this)">
-            X
-        </button>
-
-    `;
-
-    button.parentElement
-        .querySelector(".mods-list")
-        .appendChild(modCard);
-
-}
