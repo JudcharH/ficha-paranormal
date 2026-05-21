@@ -506,3 +506,362 @@ function selectAssimilation(nome){
     document.querySelector(".assimilation-menu").remove();
 
 }
+
+// ======================================
+// INVENTÁRIO
+// ======================================
+
+const itens = [
+
+    {
+        nome:"Faca",
+        descricao:"1d4 + FOR",
+        ep:1,
+        categoria:"Corpo a Corpo",
+        usos:0
+    },
+
+    {
+        nome:"Pistola",
+        descricao:"1d8 + AGI",
+        ep:2,
+        categoria:"Arma de Fogo",
+        usos:0
+    },
+
+    {
+        nome:"Kit Médico",
+        descricao:"Cura",
+        ep:2,
+        categoria:"Item",
+        usos:5
+    }
+
+];
+
+// ======================================
+// MODAL INVENTÁRIO
+// ======================================
+
+function openInventoryModal(){
+
+    document.getElementById("inventoryModal")
+    .style.display = "flex";
+
+    renderModalItems("");
+
+}
+
+function closeInventoryModal(){
+
+    document.getElementById("inventoryModal")
+    .style.display = "none";
+
+}
+
+function renderModalItems(search){
+
+    const list =
+    document.getElementById("modalItemsList");
+
+    list.innerHTML = "";
+
+    itens
+    .filter(item =>
+        item.nome.toLowerCase()
+        .includes(search.toLowerCase())
+    )
+    .forEach(item => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("modal-item");
+
+        div.innerHTML = `
+
+            <h3>${item.nome}</h3>
+
+            <span>${item.categoria}</span>
+
+            <p>${item.descricao}</p>
+
+        `;
+
+        div.onclick = () => {
+
+            createInventoryCard(item);
+
+            closeInventoryModal();
+
+        };
+
+        list.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("itemSearch")
+.addEventListener("input", function(){
+
+    renderModalItems(this.value);
+
+});
+
+// ======================================
+// ITEM INVENTÁRIO
+// ======================================
+
+function createInventoryCard(item){
+
+    const card = document.createElement("div");
+
+    card.classList.add("inventory-card");
+
+    card.innerHTML = `
+
+        <div class="ability-header">
+
+            <h3 contenteditable="true">
+                ${item.nome}
+            </h3>
+
+            <button onclick="removeCard(this)">
+                X
+            </button>
+
+        </div>
+
+        <div class="inventory-info">
+
+            <div>
+
+                <label>Dano</label>
+
+                <input
+                type="text"
+                value="${item.descricao}">
+
+            </div>
+
+            <div>
+
+                <label>Categoria</label>
+
+                <input
+                type="text"
+                value="${item.categoria}">
+
+            </div>
+
+            <div>
+
+                <label>EP</label>
+
+                <input
+                type="number"
+                value="${item.ep}">
+
+            </div>
+
+            <div>
+
+                <label>Usos</label>
+
+                <input
+                type="number"
+                value="${item.usos}">
+
+            </div>
+
+        </div>
+
+        <div class="mod-area">
+
+            <h4>Modificações</h4>
+
+            <div class="mods-list"></div>
+
+            <button
+            class="mini-add-btn"
+            onclick="addModification(this)">
+                +
+            </button>
+
+        </div>
+
+    `;
+
+    document.getElementById("inventoryList")
+    .appendChild(card);
+
+}
+
+// ======================================
+// MODIFICAÇÕES
+// ======================================
+
+const modifications = [
+
+    "Mira Laser",
+    "Silenciador",
+    "Punho Reforçado",
+    "Alongada",
+    "Tática",
+    "Calibre Grosso"
+
+];
+
+function addModification(button){
+
+    const nome =
+    prompt("Digite a modificação:");
+
+    if(!nome) return;
+
+    const existe =
+    modifications.find(m =>
+        m.toLowerCase() === nome.toLowerCase()
+    );
+
+    if(!existe){
+
+        alert("Modificação não encontrada.");
+
+        return;
+
+    }
+
+    const tag = document.createElement("div");
+
+    tag.classList.add("mod-tag");
+
+    tag.innerHTML = `
+
+        <span>${existe}</span>
+
+        <button onclick="removeModification(this)">
+            X
+        </button>
+
+    `;
+
+    button.parentElement
+    .querySelector(".mods-list")
+    .appendChild(tag);
+
+}
+
+function removeModification(button){
+
+    button.parentElement.remove();
+
+}
+
+// ======================================
+// CONDIÇÕES
+// ======================================
+
+const condicoes = [
+
+    "Sangramento",
+    "Paralisia",
+    "Caído",
+    "Cego",
+    "Confuso"
+
+];
+
+document.getElementById("conditionBtn")
+.addEventListener("click", addCondition);
+
+function addCondition(){
+
+    const nome =
+    prompt("Digite a condição:");
+
+    if(!nome) return;
+
+    const existe =
+    condicoes.find(c =>
+        c.toLowerCase() === nome.toLowerCase()
+    );
+
+    if(!existe){
+
+        alert("Condição não encontrada.");
+
+        return;
+
+    }
+
+    const jaExiste =
+    [...document.querySelectorAll(".condition-card span")]
+    .some(span =>
+        span.innerText === existe
+    );
+
+    if(jaExiste){
+
+        alert("Essa condição já está ativa.");
+
+        return;
+
+    }
+
+    const card = document.createElement("div");
+
+    card.classList.add("condition-card");
+
+    card.innerHTML = `
+
+        <span>${existe}</span>
+
+        <button onclick="removeCondition(this)">
+            X
+        </button>
+
+    `;
+
+    document.getElementById("conditionsList")
+    .appendChild(card);
+
+}
+
+function removeCondition(button){
+
+    button.parentElement.remove();
+
+}
+
+// ======================================
+// SAVE
+// ======================================
+
+function saveFicha(){
+
+    localStorage.setItem(
+        "fichaParanormal",
+        document.body.innerHTML
+    );
+
+}
+
+function loadFicha(){
+
+    const data =
+    localStorage.getItem("fichaParanormal");
+
+    if(!data) return;
+
+}
+
+document.addEventListener("input", saveFicha);
+
+document.addEventListener("click", () => {
+
+    setTimeout(saveFicha, 100);
+
+});
+
+loadFicha();
