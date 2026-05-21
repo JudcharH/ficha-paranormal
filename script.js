@@ -1027,7 +1027,7 @@ const itens = [
 
 ];
 
-const itemSearch = document.getElementById("itemSearch");
+const itemSearch = document.getElementById("modalItemSearch")
 const itemResults = document.getElementById("itemResults");
 
 itemSearch.addEventListener("input", function(){
@@ -2158,7 +2158,7 @@ function renderModalItems(search){
 // PESQUISA
 // ===============================
 
-document.getElementById("itemSearch")
+document.getElementById("modalItemSearch")
 .addEventListener("input", function(){
 
     renderModalItems(this.value);
