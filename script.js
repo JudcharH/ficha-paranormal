@@ -767,7 +767,7 @@ function createInventoryCard(item){
 
     card.innerHTML = `
 
-        <div class="ability-header">
+        <div class="ability-header inventory-roll">
 
             <h3 contenteditable="true">
                 ${item.nome}
@@ -1642,5 +1642,152 @@ function closeMenu(){
         menu.remove();
 
     }
+
+}
+
+// ======================================
+// EP TOTAL
+// ======================================
+
+function updateEP(){
+
+    let total = 0;
+
+    document.querySelectorAll(".item-ep")
+    .forEach(input => {
+
+        total += Number(input.value) || 0;
+
+    });
+
+    let epBox =
+        document.getElementById("epTotal");
+
+    if(!epBox){
+
+        epBox =
+            document.createElement("div");
+
+        epBox.id = "epTotal";
+
+        epBox.classList.add("status-box");
+
+        epBox.innerHTML = `
+
+            <span>EP Total</span>
+
+            <input
+                type="text"
+                value="0"
+                readonly
+            >
+
+        `;
+
+        document.querySelector(".status-grid")
+        .appendChild(epBox);
+
+    }
+
+    epBox.querySelector("input").value =
+        total;
+
+}
+
+// ======================================
+// AUTO UPDATE EP
+// ======================================
+
+document.addEventListener("input", function(e){
+
+    if(
+        e.target.classList.contains("item-ep")
+    ){
+
+        updateEP();
+
+    }
+
+});
+
+updateEP();
+
+// ======================================
+// ROLAR ITEM
+// ======================================
+
+document.addEventListener("click", function(e){
+
+    const header =
+        e.target.closest(".inventory-roll");
+
+    if(!header) return;
+
+    // impede clicar no botão X
+    if(e.target.tagName === "BUTTON") return;
+
+    const card =
+        header.closest(".inventory-card");
+
+    const dano =
+        card.querySelectorAll("input")[0].value;
+
+    rollItemDamage(dano);
+
+});
+
+function rollItemDamage(formula){
+
+    const match =
+        formula.match(/(\d+)d(\d+)/i);
+
+    if(!match){
+
+        document.getElementById("diceResult")
+        .innerHTML = `
+
+            <div class="dice-total">
+                Fórmula inválida
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const quantidade =
+        Number(match[1]);
+
+    const tipo =
+        Number(match[2]);
+
+    let rolls = [];
+
+    for(let i = 0; i < quantidade; i++){
+
+        rolls.push(randomDice(tipo));
+
+    }
+
+    const total =
+        rolls.reduce((a,b)=>a+b,0);
+
+    document.getElementById("diceResult")
+    .innerHTML = `
+
+        <div class="dice-skill-name">
+            Dano
+        </div>
+
+        <div class="dice-rolls">
+            ${rolls.join(" • ")}
+        </div>
+
+        <div class="dice-big">
+            ${total}
+        </div>
+
+    `;
 
 }

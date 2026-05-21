@@ -1691,3 +1691,21 @@ select:focus{
     background:#242424;
 
 }
+
+/* ========================= */
+/* ITEM ROLÁVEL */
+/* ========================= */
+
+.inventory-roll{
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.inventory-roll:hover{
+
+    opacity:.8;
+
+}
