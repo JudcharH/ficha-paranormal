@@ -758,22 +758,21 @@ if(itemSearch){
 // ITEM INVENTÁRIO
 // ======================================
 
-function createInventoryCard(item){
+function createInventoryCard(item) {
 
-    const card =
-        document.createElement("div");
+    const card = document.createElement("div");
 
     card.classList.add("inventory-card");
 
     card.innerHTML = `
 
-        <div class="ability-header inventory-roll">
+        <div class="inventory-top">
 
             <h3 contenteditable="true">
                 ${item.nome}
             </h3>
 
-            <button onclick="removeCard(this)">
+            <button class="remove-btn">
                 X
             </button>
 
@@ -782,69 +781,60 @@ function createInventoryCard(item){
         <div class="inventory-info">
 
             <div>
-
                 <label>Dano</label>
-
-                <input
-                    type="text"
-                    value="${item.descricao}"
-                >
-
+                <input type="text" value="${item.descricao}">
             </div>
 
             <div>
-
                 <label>Categoria</label>
-
-                <input
-                    type="text"
-                    value="${item.categoria}"
-                >
-
+                <input type="text" value="${item.categoria}">
             </div>
 
             <div>
-
                 <label>EP</label>
-
-                <input
-                    type="number"
-                    value="${item.ep}"
-                >
-
+                <input type="number" value="${item.ep}">
             </div>
 
             <div>
-
                 <label>Usos</label>
-
-                <input
-                    type="number"
-                    value="${item.usos}"
-                >
-
+                <input type="number" value="${item.usos}">
             </div>
 
         </div>
 
         <div class="mod-area">
 
-            <h4>Modificações</h4>
+            <div class="mods-header">
 
-            <div class="mods-list">
+                <h4>Modificações</h4>
+
+                <button class="mini-add-btn">
+                    +
+                </button>
 
             </div>
 
-            <button
-                class="mini-add-btn"
-                onclick="addModification(this)"
-            >
-                +
-            </button>
+            <div class="mods-list"></div>
 
         </div>
 
     `;
+
+    card.querySelector(".remove-btn")
+    .addEventListener("click", () => {
+
+        card.remove();
+
+    });
+
+    card.querySelector(".mini-add-btn")
+    .addEventListener("click", () => {
+
+        openModificationMenu(
+            card.querySelector(".mods-list")
+        );
+
+    });
 
     document.getElementById("inventoryList")
     .appendChild(card);

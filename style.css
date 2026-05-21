@@ -1709,3 +1709,46 @@ select:focus{
     opacity:.8;
 
 }
+
+.inventory-top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.inventory-top h3{
+
+    color:#d7b8ff;
+
+}
+
+.remove-btn{
+
+    width:30px;
+    height:30px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:crimson;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.mods-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
