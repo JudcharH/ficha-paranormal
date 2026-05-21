@@ -14,7 +14,21 @@ body{
 
     overflow-x:hidden;
 
-    padding-right:300px;
+    padding-right:280px;
+
+}
+
+.container{
+
+    width:calc(100% - 280px);
+
+    padding:20px;
+
+}
+
+.dice-panel{
+
+    width:280px;
 
 }
 

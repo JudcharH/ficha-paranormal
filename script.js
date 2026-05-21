@@ -825,3 +825,52 @@ function addModification(button) {
     .appendChild(tag);
 
 }
+
+function addModification(button){
+
+    const mod = prompt("Nome da modificação:");
+
+    if(!mod) return;
+
+    const existe = modifications.find(m =>
+        m.toLowerCase() === mod.toLowerCase()
+    );
+
+    if(!existe){
+
+        alert("Modificação não encontrada.");
+        return;
+
+    }
+
+    const modTag = document.createElement("div");
+
+    modTag.classList.add("mod-tag");
+
+    modTag.innerHTML = `
+
+        ${existe}
+
+        <button onclick="this.parentElement.remove()">
+            X
+        </button>
+
+    `;
+
+    button.parentElement
+        .querySelector(".mods-list")
+        .appendChild(modTag);
+
+}
+
+const conditionButton =
+    document.getElementById("conditionBtn");
+
+if(conditionButton){
+
+    conditionButton.addEventListener(
+        "click",
+        addCondition
+    );
+
+}
