@@ -865,3 +865,231 @@ document.addEventListener("click", () => {
 });
 
 loadFicha();
+
+// ======================================
+// MODIFICAÇÕES
+// ======================================
+
+const modifications = [
+
+    "Mira Laser",
+    "Silenciador",
+    "Calibre Grosso",
+    "Empunhadura",
+    "Proteção Ritualística"
+
+];
+
+function addModification(button){
+
+    const mod = prompt("Nome da modificação:");
+
+    if(!mod) return;
+
+    const existe = modifications.find(m =>
+        m.toLowerCase() === mod.toLowerCase()
+    );
+
+    if(!existe){
+
+        alert("Modificação não encontrada.");
+        return;
+
+    }
+
+    const lista =
+        button.parentElement.querySelector(".mods-list");
+
+    const repetida = [...lista.querySelectorAll(".mod-tag")]
+    .some(tag =>
+        tag.querySelector("span").innerText === existe
+    );
+
+    if(repetida){
+
+        alert("Essa modificação já foi adicionada.");
+        return;
+
+    }
+
+    const modTag = document.createElement("div");
+
+    modTag.classList.add("mod-tag");
+
+    modTag.innerHTML = `
+
+        <span>${existe}</span>
+
+        <button>
+            X
+        </button>
+
+    `;
+
+    modTag.querySelector("button")
+    .addEventListener("click", function(){
+
+        modTag.remove();
+
+        saveFicha();
+
+    });
+
+    lista.appendChild(modTag);
+
+    saveFicha();
+
+}
+
+// ======================================
+// CONDIÇÕES
+// ======================================
+
+const condicoes = [
+
+    "Sangramento",
+    "Paralisia",
+    "Caído",
+    "Cego",
+    "Confuso"
+
+];
+
+function aplicarCondicao(nome){
+
+    console.log("Aplicando condição:", nome);
+
+}
+
+function removerCondicaoEfeito(nome){
+
+    console.log("Removendo condição:", nome);
+
+}
+
+function addCondition(){
+
+    const nome = prompt(
+        "Digite a condição:\n\n" +
+        condicoes.join("\n")
+    );
+
+    if(!nome) return;
+
+    const existe = condicoes.find(c =>
+        c.toLowerCase() === nome.toLowerCase()
+    );
+
+    if(!existe){
+
+        alert("Condição não encontrada.");
+        return;
+
+    }
+
+    const lista =
+        document.getElementById("conditionsList");
+
+    const repetida =
+        [...lista.querySelectorAll(".condition-card span")]
+        .some(span =>
+            span.innerText === existe
+        );
+
+    if(repetida){
+
+        alert("Essa condição já está ativa.");
+        return;
+
+    }
+
+    const card =
+        document.createElement("div");
+
+    card.classList.add("condition-card");
+
+    card.innerHTML = `
+
+        <span>${existe}</span>
+
+        <button>
+            X
+        </button>
+
+    `;
+
+    card.querySelector("button")
+    .addEventListener("click", function(){
+
+        removerCondicaoEfeito(existe);
+
+        card.remove();
+
+        saveFicha();
+
+    });
+
+    lista.appendChild(card);
+
+    aplicarCondicao(existe);
+
+    saveFicha();
+
+}
+
+// ======================================
+// BOTÃO CONDIÇÃO
+// ======================================
+
+const conditionBtn =
+    document.getElementById("conditionBtn");
+
+if(conditionBtn){
+
+    conditionBtn.addEventListener("click", addCondition);
+
+}
+
+// ======================================
+// SAVE / LOAD
+// ======================================
+
+function saveFicha(){
+
+    localStorage.setItem(
+        "fichaParanormal",
+        document.body.innerHTML
+    );
+
+}
+
+function loadFicha(){
+
+    const save =
+        localStorage.getItem("fichaParanormal");
+
+    if(!save) return;
+
+}
+
+// ======================================
+// AUTO SAVE
+// ======================================
+
+document.addEventListener("input", () => {
+
+    saveFicha();
+
+});
+
+document.addEventListener("click", () => {
+
+    setTimeout(saveFicha, 100);
+
+});
+
+// ======================================
+// START
+// ======================================
+
+loadFicha();
