@@ -1325,68 +1325,6 @@ function updateEP(){
 
 }
 
-
-
-// ===============================
-// ADICIONAR ITEM
-// ===============================
-
-card.innerHTML = `
-
-    <div class="ability-header">
-
-        <h3>${item.nome}</h3>
-
-        <button onclick="removeCard(this)">
-            X
-        </button>
-
-    </div>
-
-    <div class="item-category">
-        ${item.categoria || "Item"}
-    </div>
-
-    <div class="inventory-info">
-
-        <label>Dano</label>
-        <input type="text"
-            value="${item.descricao}">
-
-        <label>Alcance</label>
-        <input type="text"
-            value="${item.alcance}">
-
-        <label>EP</label>
-        <input type="number"
-            value="${item.ep}">
-
-    </div>
-
-    <div class="uses-box">
-
-        <span>Usos</span>
-
-        <input type="number"
-            value="${item.usos || 0}">
-
-    </div>
-
-    <div class="mod-area">
-
-        <h4>Modificações</h4>
-
-        <div class="mods-list"></div>
-
-        <button class="mini-add-btn"
-            onclick="addModification(this)">
-            +
-        </button>
-
-    </div>
-
-`;
-
 function addModification(button){
 
     const mod = prompt("Nome da modificação:");
