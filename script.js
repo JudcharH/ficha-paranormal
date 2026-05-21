@@ -1109,6 +1109,7 @@ function createInventoryCard(item){
 
             <label>EP</label>
             <input type="number"
+                class="item-ep"
                 value="${item.ep || 0}">
 
         </div>
@@ -1177,7 +1178,7 @@ const modificacoes = [
 
 ];
 
-function addModification(button){
+
 
     const mod = prompt(
         "Digite a modificação:"
@@ -1216,41 +1217,7 @@ function addModification(button){
 
 }
 
-const modificacoes = [
 
-    // corpo a corpo
-
-    "Certeira",
-    "Cruel",
-    "Discreta",
-    "Perigosa",
-    "Eletrificada",
-    "Espinhosa",
-    "Resistente",
-    "Pesada",
-    "Perfurante",
-
-    // distância
-
-    "Alongada",
-    "Calibre Grosso",
-    "Pente Rápido",
-    "Mira Laser",
-    "Mira Telescópica",
-    "Visão de Calor",
-    "Silenciador",
-    "Explosiva",
-    "Letal",
-
-    // proteção
-
-    "Antibombas",
-    "Blindada",
-    "Reforçada"
-
-];
-
-function addModification(button){
 
     const modsList = button.parentElement
         .querySelector(".mods-list");
@@ -1325,7 +1292,7 @@ function updateEP(){
 
 }
 
-function addModification(button){
+
 
     const mod = prompt("Nome da modificação:");
 
@@ -1359,9 +1326,10 @@ function addModification(button){
 // PV E PD AUTOMÁTICOS
 // ===============================
 
-const nivelInput = document.querySelector(
-    'input[value="1"]'
-);
+const nivelInput =
+    document.getElementById("nivel");
+
+
 
 const vigorInput =
     document.getElementById("vigor");
@@ -1797,9 +1765,9 @@ function removerCondicaoEfeito(nome){
 
 }
 
-document.querySelector(".add-condition-btn")
+document.getElementById("conditionBtn")
     .addEventListener("click", addCondition);
-
+    
     // ===============================
 // SAVE AUTOMÁTICO
 // ===============================
@@ -2170,7 +2138,7 @@ document.getElementById("modalItemSearch")
 // ===============================
 
 
-document.querySelectorAll(".add-btn")[2]
+document.getElementById("inventoryBtn")
 .addEventListener("click", openInventoryModal);
 
 // ===============================
