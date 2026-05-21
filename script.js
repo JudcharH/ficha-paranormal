@@ -837,7 +837,7 @@ function createInventoryCard(item){
 
             <button
                 class="mini-add-btn"
-                onclick="addModification(this)"
+                onclick="openModificationMenu(this)"
             >
                 +
             </button>
@@ -1239,3 +1239,263 @@ observer.observe(document.body, {
 // ======================================
 // FIM
 // ======================================
+
+// ======================================
+// MENU MODIFICAÇÕES
+// ======================================
+
+function openModificationMenu(button){
+
+    let html = "";
+
+    modifications.forEach(mod => {
+
+        html += `
+
+            <div
+                class="assimilation-option"
+                onclick="selectModification(
+                    '${mod}',
+                    this
+                )"
+            >
+
+                <h3>${mod}</h3>
+
+            </div>
+
+        `;
+
+    });
+
+    const menu =
+        document.createElement("div");
+
+    menu.classList.add("assimilation-menu");
+
+    menu.innerHTML = `
+
+        <div class="assimilation-menu-content">
+
+            <div class="menu-header">
+
+                <h2>MODIFICAÇÕES</h2>
+
+                <button onclick="closeMenu()">
+                    X
+                </button>
+
+            </div>
+
+            <input
+                type="text"
+                id="modSearch"
+                placeholder="Pesquisar modificação..."
+            >
+
+            <div
+                class="assimilation-options"
+                id="modOptions"
+            >
+
+                ${html}
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(menu);
+
+    menu.dataset.targetCard =
+        button.closest(".inventory-card")
+        .querySelector(".mods-list");
+
+    document.getElementById("modSearch")
+    .addEventListener("input", function(){
+
+        const value =
+            this.value.toLowerCase();
+
+        document.querySelectorAll(
+            "#modOptions .assimilation-option"
+        )
+        .forEach(option => {
+
+            option.style.display =
+                option.innerText
+                .toLowerCase()
+                .includes(value)
+                ? "flex"
+                : "none";
+
+        });
+
+    });
+
+}
+
+function selectModification(nome){
+
+    const target =
+        document.querySelector(".assimilation-menu")
+        .dataset.targetCard;
+
+    const modsList =
+        document.querySelector(target);
+
+    const tag =
+        document.createElement("div");
+
+    tag.classList.add("mod-tag");
+
+    tag.innerHTML = `
+
+        ${nome}
+
+        <button onclick="this.parentElement.remove()">
+            X
+        </button>
+
+    `;
+
+    modsList.appendChild(tag);
+
+    closeMenu();
+
+}
+
+// ======================================
+// MENU CONDIÇÕES
+// ======================================
+
+function openConditionMenu(){
+
+    let html = "";
+
+    condicoes.forEach(condicao => {
+
+        html += `
+
+            <div
+                class="assimilation-option"
+                onclick="selectCondition('${condicao}')"
+            >
+
+                <h3>${condicao}</h3>
+
+            </div>
+
+        `;
+
+    });
+
+    const menu =
+        document.createElement("div");
+
+    menu.classList.add("assimilation-menu");
+
+    menu.innerHTML = `
+
+        <div class="assimilation-menu-content">
+
+            <div class="menu-header">
+
+                <h2>CONDIÇÕES</h2>
+
+                <button onclick="closeMenu()">
+                    X
+                </button>
+
+            </div>
+
+            <input
+                type="text"
+                id="conditionSearch"
+                placeholder="Pesquisar condição..."
+            >
+
+            <div
+                class="assimilation-options"
+                id="conditionOptions"
+            >
+
+                ${html}
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(menu);
+
+    document.getElementById("conditionSearch")
+    .addEventListener("input", function(){
+
+        const value =
+            this.value.toLowerCase();
+
+        document.querySelectorAll(
+            "#conditionOptions .assimilation-option"
+        )
+        .forEach(option => {
+
+            option.style.display =
+                option.innerText
+                .toLowerCase()
+                .includes(value)
+                ? "flex"
+                : "none";
+
+        });
+
+    });
+
+}
+
+function selectCondition(nome){
+
+    const jaExiste =
+        [...document.querySelectorAll(".condition-card span")]
+        .some(span =>
+            span.innerText === nome
+        );
+
+    if(jaExiste){
+
+        alert("Essa condição já está ativa.");
+
+        return;
+
+    }
+
+    const card =
+        document.createElement("div");
+
+    card.classList.add("condition-card");
+
+    card.innerHTML = `
+
+        <span>${nome}</span>
+
+        <button onclick="removeCondition(this)">
+            X
+        </button>
+
+    `;
+
+    document.getElementById("conditionsList")
+    .appendChild(card);
+
+    closeMenu();
+
+}
+
+// ======================================
+// TROCA BOTÕES
+// ======================================
+
+document.getElementById("conditionBtn")
+.onclick = openConditionMenu;
