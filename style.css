@@ -38,9 +38,11 @@ body{
 
 .container{
 
-    width: calc(100% - 300px);
+    width:100%;
 
     padding:20px;
+
+    padding-right:300px;
 
 }
 
@@ -543,9 +545,6 @@ body{
     border-left:2px solid #732dff;
 
     padding:20px;
-
-    box-shadow:
-    -5px 0 25px rgba(123,47,255,.35);
 
 }
 

@@ -863,14 +863,15 @@ function addModification(button){
 
 }
 
-const conditionButton =
-    document.getElementById("conditionBtn");
+window.addEventListener("DOMContentLoaded", () => {
 
-if(conditionButton){
+    const conditionBtn =
+        document.getElementById("conditionBtn");
 
-    conditionButton.addEventListener(
-        "click",
-        addCondition
-    );
+    if(conditionBtn){
 
-}
+        conditionBtn.onclick = addCondition;
+
+    }
+
+});
