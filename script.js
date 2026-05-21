@@ -758,21 +758,22 @@ if(itemSearch){
 // ITEM INVENTÁRIO
 // ======================================
 
-function createInventoryCard(item) {
+function createInventoryCard(item){
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("inventory-card");
 
     card.innerHTML = `
 
-        <div class="inventory-top">
+        <div class="ability-header">
 
             <h3 contenteditable="true">
                 ${item.nome}
             </h3>
 
-            <button class="remove-btn">
+            <button onclick="removeCard(this)">
                 X
             </button>
 
@@ -781,173 +782,76 @@ function createInventoryCard(item) {
         <div class="inventory-info">
 
             <div>
+
                 <label>Dano</label>
-                <input type="text" value="${item.descricao}">
+
+                <input
+                    type="text"
+                    value="${item.descricao}"
+                >
+
             </div>
 
             <div>
+
                 <label>Categoria</label>
-                <input type="text" value="${item.categoria}">
+
+                <input
+                    type="text"
+                    value="${item.categoria}"
+                >
+
             </div>
 
             <div>
+
                 <label>EP</label>
-                <input type="number" value="${item.ep}">
+
+                <input
+                    type="number"
+                    value="${item.ep}"
+                >
+
             </div>
 
             <div>
+
                 <label>Usos</label>
-                <input type="number" value="${item.usos}">
+
+                <input
+                    type="number"
+                    value="${item.usos}"
+                >
+
             </div>
 
         </div>
 
         <div class="mod-area">
 
-            <div class="mods-header">
+            <h4>Modificações</h4>
 
-                <h4>Modificações</h4>
-
-                <button class="mini-add-btn">
-                    +
-                </button>
+            <div class="mods-list">
 
             </div>
 
-            <div class="mods-list"></div>
+            <button
+                class="mini-add-btn"
+                onclick="addModification(this)"
+            >
+                +
+            </button>
 
         </div>
 
     `;
-
-    card.querySelector(".remove-btn")
-    .addEventListener("click", () => {
-
-        card.remove();
-
-    });
-
-    card.querySelector(".mini-add-btn")
-    .addEventListener("click", () => {
-
-        openModificationMenu(
-            card.querySelector(".mods-list")
-        );
-
-    });
 
     document.getElementById("inventoryList")
     .appendChild(card);
 
 }
 
-// ======================================
-// MODIFICAÇÕES
-// ======================================
 
-const modifications = [
-
-    "Mira Laser",
-    "Silenciador",
-    "Punho Reforçado",
-    "Coronha Tática",
-    "Lâmina Serrilhada",
-    "Catalisador",
-    "Proteção Ritualística"
-
-];
-
-function addModification(button){
-
-    const existente =
-        button.parentElement.querySelector(".mods-search");
-
-    // evita abrir duas pesquisas
-    if(existente) return;
-
-    const searchBox =
-        document.createElement("div");
-
-    searchBox.classList.add("mods-search");
-
-    searchBox.innerHTML = `
-
-        <input
-            type="text"
-            class="mods-input"
-            placeholder="Pesquisar modificação..."
-        >
-
-        <div class="mods-results"></div>
-
-    `;
-
-    button.parentElement.appendChild(searchBox);
-
-    const input =
-        searchBox.querySelector(".mods-input");
-
-    const results =
-        searchBox.querySelector(".mods-results");
-
-    function renderMods(search = ""){
-
-        results.innerHTML = "";
-
-        modifications
-        .filter(mod =>
-            mod.toLowerCase()
-            .includes(search.toLowerCase())
-        )
-        .forEach(mod => {
-
-            const item =
-                document.createElement("div");
-
-            item.classList.add("mod-result");
-
-            item.innerText = mod;
-
-            item.onclick = () => {
-
-                const tag =
-                    document.createElement("div");
-
-                tag.classList.add("mod-tag");
-
-                tag.innerHTML = `
-
-                    ${mod}
-
-                    <button onclick="this.parentElement.remove()">
-                        X
-                    </button>
-
-                `;
-
-                button.parentElement
-                .querySelector(".mods-list")
-                .appendChild(tag);
-
-                searchBox.remove();
-
-            };
-
-            results.appendChild(item);
-
-        });
-
-    }
-
-    input.addEventListener("input", function(){
-
-        renderMods(this.value);
-
-    });
-
-    renderMods();
-
-}
 
 // ======================================
 // CONDIÇÕES
@@ -1632,152 +1536,5 @@ function closeMenu(){
         menu.remove();
 
     }
-
-}
-
-// ======================================
-// EP TOTAL
-// ======================================
-
-function updateEP(){
-
-    let total = 0;
-
-    document.querySelectorAll(".item-ep")
-    .forEach(input => {
-
-        total += Number(input.value) || 0;
-
-    });
-
-    let epBox =
-        document.getElementById("epTotal");
-
-    if(!epBox){
-
-        epBox =
-            document.createElement("div");
-
-        epBox.id = "epTotal";
-
-        epBox.classList.add("status-box");
-
-        epBox.innerHTML = `
-
-            <span>EP Total</span>
-
-            <input
-                type="text"
-                value="0"
-                readonly
-            >
-
-        `;
-
-        document.querySelector(".status-grid")
-        .appendChild(epBox);
-
-    }
-
-    epBox.querySelector("input").value =
-        total;
-
-}
-
-// ======================================
-// AUTO UPDATE EP
-// ======================================
-
-document.addEventListener("input", function(e){
-
-    if(
-        e.target.classList.contains("item-ep")
-    ){
-
-        updateEP();
-
-    }
-
-});
-
-updateEP();
-
-// ======================================
-// ROLAR ITEM
-// ======================================
-
-document.addEventListener("click", function(e){
-
-    const header =
-        e.target.closest(".inventory-roll");
-
-    if(!header) return;
-
-    // impede clicar no botão X
-    if(e.target.tagName === "BUTTON") return;
-
-    const card =
-        header.closest(".inventory-card");
-
-    const dano =
-        card.querySelectorAll("input")[0].value;
-
-    rollItemDamage(dano);
-
-});
-
-function rollItemDamage(formula){
-
-    const match =
-        formula.match(/(\d+)d(\d+)/i);
-
-    if(!match){
-
-        document.getElementById("diceResult")
-        .innerHTML = `
-
-            <div class="dice-total">
-                Fórmula inválida
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-    const quantidade =
-        Number(match[1]);
-
-    const tipo =
-        Number(match[2]);
-
-    let rolls = [];
-
-    for(let i = 0; i < quantidade; i++){
-
-        rolls.push(randomDice(tipo));
-
-    }
-
-    const total =
-        rolls.reduce((a,b)=>a+b,0);
-
-    document.getElementById("diceResult")
-    .innerHTML = `
-
-        <div class="dice-skill-name">
-            Dano
-        </div>
-
-        <div class="dice-rolls">
-            ${rolls.join(" • ")}
-        </div>
-
-        <div class="dice-big">
-            ${total}
-        </div>
-
-    `;
 
 }

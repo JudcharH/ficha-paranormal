@@ -34,7 +34,15 @@ body{
 /* CONTAINER */
 /* ========================= */
 
+.container{
 
+    width:100%;
+
+    padding:20px;
+
+    padding-right:300px;
+
+}
 
 
 /* ========================= */
@@ -1627,128 +1635,5 @@ select:focus{
         grid-template-columns:1fr;
 
     }
-
-}
-
-/* ========================= */
-/* PESQUISA MODS */
-/* ========================= */
-
-.mods-search{
-
-    margin-top:12px;
-
-}
-
-.mods-input{
-
-    width:100%;
-
-    background:#111;
-
-    border:1px solid #444;
-
-    color:white;
-
-    padding:10px;
-
-    border-radius:10px;
-
-}
-
-.mods-results{
-
-    margin-top:10px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-}
-
-.mod-result{
-
-    background:#1a1a1a;
-
-    border:1px solid #333;
-
-    padding:10px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.mod-result:hover{
-
-    border-color:#7b2cff;
-
-    background:#242424;
-
-}
-
-/* ========================= */
-/* ITEM ROLÁVEL */
-/* ========================= */
-
-.inventory-roll{
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.inventory-roll:hover{
-
-    opacity:.8;
-
-}
-
-.inventory-top{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:15px;
-
-}
-
-.inventory-top h3{
-
-    color:#d7b8ff;
-
-}
-
-.remove-btn{
-
-    width:30px;
-    height:30px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:crimson;
-
-    color:white;
-
-    cursor:pointer;
-
-}
-
-.mods-header{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:10px;
 
 }
