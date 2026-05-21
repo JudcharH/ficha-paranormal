@@ -920,59 +920,7 @@ const condicoes = [
 
 ];
 
-function addCondition(){
 
-    const nome =
-        prompt("Digite a condição:");
-
-    if(!nome) return;
-
-    const existe =
-        condicoes.find(c =>
-            c.toLowerCase() === nome.toLowerCase()
-        );
-
-    if(!existe){
-
-        alert("Condição não encontrada.");
-
-        return;
-
-    }
-
-    const jaExiste =
-        [...document.querySelectorAll(".condition-card span")]
-        .some(span =>
-            span.innerText === existe
-        );
-
-    if(jaExiste){
-
-        alert("Essa condição já está ativa.");
-
-        return;
-
-    }
-
-    const card =
-        document.createElement("div");
-
-    card.classList.add("condition-card");
-
-    card.innerHTML = `
-
-        <span>${existe}</span>
-
-        <button onclick="removeCondition(this)">
-            X
-        </button>
-
-    `;
-
-    document.getElementById("conditionsList")
-    .appendChild(card);
-
-}
 
 function removeCondition(button){
 
@@ -1254,10 +1202,7 @@ function openModificationMenu(button){
 
             <div
                 class="assimilation-option"
-                onclick="selectModification(
-                    '${mod}',
-                    this
-                )"
+                onclick="selectModification('${mod}')"
             >
 
                 <h3>${mod}</h3>
@@ -1306,11 +1251,11 @@ function openModificationMenu(button){
 
     `;
 
-    document.body.appendChild(menu);
-
-    menu.dataset.targetCard =
-        button.closest(".inventory-card")
+    menu.modTarget =
+        button.parentElement
         .querySelector(".mods-list");
+
+    document.body.appendChild(menu);
 
     document.getElementById("modSearch")
     .addEventListener("input", function(){
@@ -1338,12 +1283,11 @@ function openModificationMenu(button){
 
 function selectModification(nome){
 
-    const target =
-        document.querySelector(".assimilation-menu")
-        .dataset.targetCard;
+    const menu =
+        document.querySelector(".assimilation-menu");
 
     const modsList =
-        document.querySelector(target);
+        menu.modTarget;
 
     const tag =
         document.createElement("div");
@@ -1363,6 +1307,8 @@ function selectModification(nome){
     modsList.appendChild(tag);
 
     closeMenu();
+
+    saveFicha();
 
 }
 
@@ -1497,5 +1443,15 @@ function selectCondition(nome){
 // TROCA BOTÕES
 // ======================================
 
-document.getElementById("conditionBtn")
-.onclick = openConditionMenu;
+const conditionBtn =
+    document.getElementById("conditionBtn");
+
+if(conditionBtn){
+
+    conditionBtn.onclick = function(){
+
+        openConditionMenu();
+
+    };
+
+}
