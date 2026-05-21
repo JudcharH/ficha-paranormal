@@ -285,20 +285,61 @@ const habilidades = [
 
 function addAbility() {
 
-    const nome =
-        prompt("Nome da habilidade:");
+    let html = "";
 
-    if (!nome) return;
+    habilidades.forEach(habilidade => {
+
+        html += `
+
+            <div class="assimilation-option"
+            onclick="selectAbility('${habilidade.nome}')">
+
+                <h3>${habilidade.nome}</h3>
+
+                <span>
+                    ${habilidade.custo} ${habilidade.tipo}
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+    const menu = document.createElement("div");
+
+    menu.classList.add("assimilation-menu");
+
+    menu.innerHTML = `
+
+        <div class="assimilation-menu-content">
+
+            <div class="menu-header">
+
+                <h2>HABILIDADES</h2>
+
+                <button onclick="this.closest('.assimilation-menu').remove()">
+                    X
+                </button>
+
+            </div>
+
+            ${html}
+
+        </div>
+
+    `;
+
+    document.body.appendChild(menu);
+
+}
+
+function selectAbility(nome) {
 
     const habilidade =
-        habilidades.find(h =>
-            h.nome.toLowerCase() === nome.toLowerCase()
-        );
+        habilidades.find(h => h.nome === nome);
 
-    if (!habilidade) {
-        alert("Habilidade não encontrada.");
-        return;
-    }
+    if(!habilidade) return;
 
     const card =
         document.createElement("div");
@@ -309,7 +350,9 @@ function addAbility() {
 
         <div class="ability-header">
 
-            <h3>${habilidade.nome}</h3>
+            <h3 contenteditable="true">
+                ${habilidade.nome}
+            </h3>
 
             <button onclick="removeCard(this)">
                 X
@@ -317,7 +360,9 @@ function addAbility() {
 
         </div>
 
-        <p>${habilidade.descricao}</p>
+        <p contenteditable="true">
+            ${habilidade.descricao}
+        </p>
 
         <span>
             Custo: ${habilidade.custo} ${habilidade.tipo}
@@ -327,6 +372,8 @@ function addAbility() {
 
     document.getElementById("abilitiesList")
     .appendChild(card);
+
+    document.querySelector(".assimilation-menu").remove();
 }
 
 // ======================================
@@ -572,7 +619,9 @@ function createInventoryCard(item) {
 
         <div class="ability-header">
 
-            <h3>${item.nome}</h3>
+            <h3 contenteditable="true">
+                ${item.nome}
+            </h3>
 
             <button onclick="removeCard(this)">
                 X
@@ -580,16 +629,49 @@ function createInventoryCard(item) {
 
         </div>
 
-        <p>${item.descricao}</p>
+        <div class="inventory-info">
 
-        <span>Categoria: ${item.categoria}</span>
+            <label>Dano</label>
 
-        <span>EP: ${item.ep}</span>
+            <input type="text"
+            value="${item.descricao}">
+
+            <label>Categoria</label>
+
+            <input type="text"
+            value="${item.categoria}">
+
+            <label>EP</label>
+
+            <input type="number"
+            class="item-ep"
+            value="${item.ep}">
+
+            <label>Usos</label>
+
+            <input type="number"
+            value="${item.usos}">
+
+        </div>
+
+        <div class="mod-area">
+
+            <h4>Modificações</h4>
+
+            <div class="mods-list"></div>
+
+            <button class="mini-add-btn"
+            onclick="addModification(this)">
+                +
+            </button>
+
+        </div>
 
     `;
 
     document.getElementById("inventoryList")
     .appendChild(card);
+
 }
 
 // ======================================
@@ -608,20 +690,52 @@ const condicoes = [
 
 function addCondition() {
 
-    const nome =
-        prompt("Digite a condição:");
+    let html = "";
 
-    if (!nome) return;
+    condicoes.forEach(condicao => {
 
-    const existe =
-        condicoes.find(c =>
-            c.toLowerCase() === nome.toLowerCase()
-        );
+        html += `
 
-    if (!existe) {
-        alert("Condição não encontrada.");
-        return;
-    }
+            <div class="assimilation-option"
+            onclick="selectCondition('${condicao}')">
+
+                <h3>${condicao}</h3>
+
+            </div>
+
+        `;
+
+    });
+
+    const menu = document.createElement("div");
+
+    menu.classList.add("assimilation-menu");
+
+    menu.innerHTML = `
+
+        <div class="assimilation-menu-content">
+
+            <div class="menu-header">
+
+                <h2>CONDIÇÕES</h2>
+
+                <button onclick="this.closest('.assimilation-menu').remove()">
+                    X
+                </button>
+
+            </div>
+
+            ${html}
+
+        </div>
+
+    `;
+
+    document.body.appendChild(menu);
+
+}
+
+function selectCondition(nome) {
 
     const card =
         document.createElement("div");
@@ -630,7 +744,7 @@ function addCondition() {
 
     card.innerHTML = `
 
-        <span>${existe}</span>
+        <span>${nome}</span>
 
         <button onclick="removeCard(this)">
             X
@@ -640,10 +754,9 @@ function addCondition() {
 
     document.getElementById("conditionsList")
     .appendChild(card);
-}
 
-document.getElementById("conditionBtn")
-.addEventListener("click", addCondition);
+    document.querySelector(".assimilation-menu").remove();
+}
 
 // ======================================
 // SAVE / LOAD
@@ -684,3 +797,31 @@ document.addEventListener("click", () => {
 });
 
 loadFicha();
+
+function addModification(button) {
+
+    const mod =
+        prompt("Nome da modificação:");
+
+    if(!mod) return;
+
+    const tag =
+        document.createElement("div");
+
+    tag.classList.add("mod-tag");
+
+    tag.innerHTML = `
+
+        ${mod}
+
+        <button onclick="this.parentElement.remove()">
+            X
+        </button>
+
+    `;
+
+    button.parentElement
+    .querySelector(".mods-list")
+    .appendChild(tag);
+
+}
