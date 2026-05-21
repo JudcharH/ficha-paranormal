@@ -1,9 +1,12 @@
 // ======================================
-// FOTO
+// FOTO PERSONAGEM
 // ======================================
 
-const photoInput = document.getElementById("photoInput");
-const photoPreview = document.getElementById("photoPreview");
+const photoInput =
+    document.getElementById("photoInput");
+
+const photoPreview =
+    document.getElementById("photoPreview");
 
 if(photoInput){
 
@@ -18,7 +21,16 @@ if(photoInput){
         reader.onload = function(e){
 
             photoPreview.innerHTML = `
-                <img src="${e.target.result}">
+
+                <img
+                    src="${e.target.result}"
+                    style="
+                        width:100%;
+                        height:100%;
+                        object-fit:cover;
+                    "
+                >
+
             `;
 
         };
@@ -42,13 +54,13 @@ function randomDice(type){
 function rollDice(){
 
     const quantidade =
-    Number(document.getElementById("diceCount").value) || 1;
+        Number(document.getElementById("diceCount").value) || 1;
 
     const tipo =
-    Number(document.getElementById("diceType").value) || 20;
+        Number(document.getElementById("diceType").value) || 20;
 
     const bonus =
-    Number(document.getElementById("diceBonus").value) || 0;
+        Number(document.getElementById("diceBonus").value) || 0;
 
     let rolls = [];
 
@@ -67,9 +79,11 @@ function rollDice(){
     if(tipo === 20 && maior === 20){
 
         critico = `
+
             <div class="critical-text">
                 CRÍTICO!
             </div>
+
         `;
 
     }
@@ -94,14 +108,23 @@ function rollDice(){
 
 }
 
+// ======================================
+// ROLAR ATRIBUTO
+// ======================================
+
 function rollAttribute(attributeId){
 
     const atributo =
-    Number(document.getElementById(attributeId).value) || 1;
+        Number(document.getElementById(attributeId).value) || 1;
 
-    document.getElementById("diceCount").value = atributo;
+    document.getElementById("diceCount").value =
+        atributo;
 
-    document.getElementById("diceType").value = 20;
+    document.getElementById("diceType").value =
+        20;
+
+    document.getElementById("diceBonus").value =
+        0;
 
     rollDice();
 
@@ -114,31 +137,40 @@ function rollAttribute(attributeId){
 function atualizarStatus(){
 
     const nivel =
-    Number(document.getElementById("nivel").value) || 1;
+        Number(document.getElementById("nivel").value) || 1;
 
     const vigor =
-    Number(document.getElementById("vigor").value) || 1;
+        Number(document.getElementById("vigor").value) || 1;
 
     const presenca =
-    Number(document.getElementById("presenca").value) || 1;
+        Number(document.getElementById("presenca").value) || 1;
 
-    const pvMax = (7 + vigor) * nivel;
+    const pvMax =
+        (7 + vigor) * nivel;
 
-    const pdMax = (5 + presenca) * nivel;
+    const pdMax =
+        (5 + presenca) * nivel;
 
-    document.getElementById("pvMax").value = pvMax;
+    document.getElementById("pvMax").value =
+        pvMax;
 
-    document.getElementById("pdMax").value = pdMax;
+    document.getElementById("pdMax").value =
+        pdMax;
 
 }
 
-["nivel","vigor","presenca"].forEach(id => {
+["nivel","vigor","presenca"]
+.forEach(id => {
 
-    const el = document.getElementById(id);
+    const el =
+        document.getElementById(id);
 
     if(el){
 
-        el.addEventListener("input", atualizarStatus);
+        el.addEventListener(
+            "input",
+            atualizarStatus
+        );
 
     }
 
@@ -153,82 +185,132 @@ atualizarStatus();
 function updateSkills(){
 
     const rows =
-    document.querySelectorAll(".skill-row");
+        document.querySelectorAll(".skill-row");
 
     rows.forEach(row => {
 
         const treino =
-        Number(row.querySelector(".skill-train").value) || 0;
+            Number(
+                row.querySelector(".skill-train").value
+            ) || 0;
 
         const bonus =
-        Number(row.querySelector(".skill-bonus").value) || 0;
+            Number(
+                row.querySelector(".skill-bonus").value
+            ) || 0;
 
-        const total = treino + bonus;
+        const total =
+            treino + bonus;
 
-        row.querySelector(".skill-total").innerText =
-        `+${total}`;
+        row.querySelector(".skill-total")
+        .innerText = `+${total}`;
 
     });
 
 }
 
-document.querySelectorAll(".skill-train, .skill-bonus")
+document.querySelectorAll(
+    ".skill-train, .skill-bonus"
+)
 .forEach(input => {
 
-    input.addEventListener("input", updateSkills);
+    input.addEventListener(
+        "input",
+        updateSkills
+    );
 
 });
 
 updateSkills();
 
 // ======================================
-// ROLAR PERÍCIA
+// PEGAR ATRIBUTO
 // ======================================
 
 function getAttributeValue(attr){
 
-    if(attr.includes("FOR")) return Number(document.getElementById("forca").value) || 1;
+    if(attr.includes("FOR")){
 
-    if(attr.includes("AGI")) return Number(document.getElementById("agilidade").value) || 1;
+        return Number(
+            document.getElementById("forca").value
+        ) || 1;
 
-    if(attr.includes("INT")) return Number(document.getElementById("intelecto").value) || 1;
+    }
 
-    if(attr.includes("VIG")) return Number(document.getElementById("vigor").value) || 1;
+    if(attr.includes("AGI")){
 
-    if(attr.includes("PRE")) return Number(document.getElementById("presenca").value) || 1;
+        return Number(
+            document.getElementById("agilidade").value
+        ) || 1;
+
+    }
+
+    if(attr.includes("INT")){
+
+        return Number(
+            document.getElementById("intelecto").value
+        ) || 1;
+
+    }
+
+    if(attr.includes("VIG")){
+
+        return Number(
+            document.getElementById("vigor").value
+        ) || 1;
+
+    }
+
+    if(attr.includes("PRE")){
+
+        return Number(
+            document.getElementById("presenca").value
+        ) || 1;
+
+    }
 
     return 1;
 
 }
 
+// ======================================
+// ROLAR PERÍCIA
+// ======================================
+
 function rollSkill(row){
 
     const attr =
-    row.querySelector(".skill-attr").innerText;
+        row.querySelector(".skill-attr").innerText;
 
     const atributo =
-    getAttributeValue(attr);
+        getAttributeValue(attr);
 
     const treino =
-    Number(row.querySelector(".skill-train").value) || 0;
+        Number(
+            row.querySelector(".skill-train").value
+        ) || 0;
 
     const bonus =
-    Number(row.querySelector(".skill-bonus").value) || 0;
+        Number(
+            row.querySelector(".skill-bonus").value
+        ) || 0;
 
-    let rolls = [];
+    let resultados = [];
 
     for(let i = 0; i < atributo; i++){
 
-        rolls.push(randomDice(20));
+        resultados.push(randomDice(20));
 
     }
 
-    const maior = Math.max(...rolls);
+    const maior =
+        Math.max(...resultados);
 
-    const total = maior + treino + bonus;
+    const total =
+        maior + treino + bonus;
 
     const nome =
-    row.querySelector(".skill-name").innerText;
+        row.querySelector(".skill-name").innerText;
 
     document.getElementById("diceResult").innerHTML = `
 
@@ -237,7 +319,7 @@ function rollSkill(row){
         </div>
 
         <div class="dice-rolls">
-            ${rolls.join(" • ")}
+            ${resultados.join(" • ")}
         </div>
 
         <div class="dice-big">
@@ -266,30 +348,49 @@ document.querySelectorAll(".clickable-skill")
 });
 
 // ======================================
+// REMOVER CARD
+// ======================================
+
+function removeCard(button){
+
+    const card =
+        button.closest(
+            ".ability-card, .inventory-card, .assimilation-card"
+        );
+
+    if(card){
+
+        card.remove();
+
+    }
+
+}
+
+// ======================================
 // HABILIDADES
 // ======================================
 
 const habilidades = [
 
     {
-        nome:"Ataque Especial",
-        custo:3,
-        tipo:"PD",
-        descricao:"Recebe bônus de ataque ou dano."
+        nome: "Ataque Especial",
+        custo: 3,
+        tipo: "PD",
+        descricao: "Recebe bônus de ataque ou dano."
     },
 
     {
-        nome:"Golpe Pesado",
-        custo:3,
-        tipo:"PD",
-        descricao:"Seu dano sobe um passo."
+        nome: "Golpe Pesado",
+        custo: 3,
+        tipo: "PD",
+        descricao: "Seu dano sobe um passo."
     },
 
     {
-        nome:"Casca Grossa",
-        custo:4,
-        tipo:"PD",
-        descricao:"Recebe +1 PV por nível."
+        nome: "Casca Grossa",
+        custo: 4,
+        tipo: "PD",
+        descricao: "Recebe +1 PV por nível."
     }
 
 ];
@@ -302,14 +403,20 @@ function addAbility(){
 
         html += `
 
-            <div class="assimilation-option"
-            onclick="selectAbility('${habilidade.nome}')">
+            <div
+                class="assimilation-option"
+                onclick="selectAbility('${habilidade.nome}')"
+            >
 
-                <h3>${habilidade.nome}</h3>
+                <div>
 
-                <span>
-                    ${habilidade.custo} ${habilidade.tipo}
-                </span>
+                    <h3>${habilidade.nome}</h3>
+
+                    <span>
+                        ${habilidade.custo} ${habilidade.tipo}
+                    </span>
+
+                </div>
 
             </div>
 
@@ -317,11 +424,10 @@ function addAbility(){
 
     });
 
-    const menu = document.createElement("div");
+    const menu =
+        document.createElement("div");
 
     menu.classList.add("assimilation-menu");
-
-    menu.style.display = "flex";
 
     menu.innerHTML = `
 
@@ -331,7 +437,7 @@ function addAbility(){
 
                 <h2>HABILIDADES</h2>
 
-                <button onclick="this.closest('.assimilation-menu').remove()">
+                <button onclick="closeMenu()">
                     X
                 </button>
 
@@ -350,11 +456,12 @@ function addAbility(){
 function selectAbility(nome){
 
     const habilidade =
-    habilidades.find(h => h.nome === nome);
+        habilidades.find(h => h.nome === nome);
 
     if(!habilidade) return;
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("ability-card");
 
@@ -377,7 +484,9 @@ function selectAbility(nome){
         </p>
 
         <span>
-            Custo: ${habilidade.custo} ${habilidade.tipo}
+            Custo:
+            ${habilidade.custo}
+            ${habilidade.tipo}
         </span>
 
     `;
@@ -385,18 +494,7 @@ function selectAbility(nome){
     document.getElementById("abilitiesList")
     .appendChild(card);
 
-    document.querySelector(".assimilation-menu").remove();
-
-}
-
-// ======================================
-// REMOVER
-// ======================================
-
-function removeCard(button){
-
-    button.closest(".ability-card, .inventory-card, .assimilation-card")
-    .remove();
+    closeMenu();
 
 }
 
@@ -407,15 +505,17 @@ function removeCard(button){
 const assimilations = [
 
     {
-        nome:"Teleporte Cinético",
-        elemento:"Energia",
-        descricao:"Teleporta até 3m."
+        nome: "Teleporte Cinético",
+        elemento: "Energia",
+        custo: 4,
+        descricao: "Teleporta até 3m."
     },
 
     {
-        nome:"Aceleração",
-        elemento:"Energia",
-        descricao:"Recebe ação adicional."
+        nome: "Aceleração",
+        elemento: "Energia",
+        custo: 4,
+        descricao: "Recebe ação extra temporária."
     }
 
 ];
@@ -428,12 +528,18 @@ function openAssimilationMenu(){
 
         html += `
 
-            <div class="assimilation-option"
-            onclick="selectAssimilation('${a.nome}')">
+            <div
+                class="assimilation-option"
+                onclick="selectAssimilation('${a.nome}')"
+            >
 
-                <h3>${a.nome}</h3>
+                <div>
 
-                <span>${a.elemento}</span>
+                    <h3>${a.nome}</h3>
+
+                    <span>${a.elemento}</span>
+
+                </div>
 
             </div>
 
@@ -441,11 +547,10 @@ function openAssimilationMenu(){
 
     });
 
-    const menu = document.createElement("div");
+    const menu =
+        document.createElement("div");
 
     menu.classList.add("assimilation-menu");
-
-    menu.style.display = "flex";
 
     menu.innerHTML = `
 
@@ -455,7 +560,7 @@ function openAssimilationMenu(){
 
                 <h2>ASSIMILAÇÕES</h2>
 
-                <button onclick="this.closest('.assimilation-menu').remove()">
+                <button onclick="closeMenu()">
                     X
                 </button>
 
@@ -474,19 +579,30 @@ function openAssimilationMenu(){
 function selectAssimilation(nome){
 
     const assimilation =
-    assimilations.find(a => a.nome === nome);
+        assimilations.find(a => a.nome === nome);
 
     if(!assimilation) return;
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("assimilation-card");
 
     card.innerHTML = `
 
-        <div class="ability-header">
+        <div class="assimilation-header">
 
-            <h3>${assimilation.nome}</h3>
+            <div>
+
+                <h3>
+                    ${assimilation.nome}
+                </h3>
+
+                <div class="assimilation-element">
+                    ${assimilation.elemento}
+                </div>
+
+            </div>
 
             <button onclick="removeCard(this)">
                 X
@@ -494,16 +610,38 @@ function selectAssimilation(nome){
 
         </div>
 
-        <span>${assimilation.elemento}</span>
+        <div class="assimilation-description">
+            ${assimilation.descricao}
+        </div>
 
-        <p>${assimilation.descricao}</p>
+        <div class="assimilation-cost">
+            Custo:
+            ${assimilation.custo} PV
+        </div>
 
     `;
 
     document.getElementById("assimilationList")
     .appendChild(card);
 
-    document.querySelector(".assimilation-menu").remove();
+    closeMenu();
+
+}
+
+// ======================================
+// FECHAR MENU
+// ======================================
+
+function closeMenu(){
+
+    const menu =
+        document.querySelector(".assimilation-menu");
+
+    if(menu){
+
+        menu.remove();
+
+    }
 
 }
 
@@ -514,27 +652,27 @@ function selectAssimilation(nome){
 const itens = [
 
     {
-        nome:"Faca",
-        descricao:"1d4 + FOR",
-        ep:1,
-        categoria:"Corpo a Corpo",
-        usos:0
+        nome: "Faca",
+        descricao: "1d4 + FOR",
+        ep: 1,
+        categoria: "Corpo a Corpo",
+        usos: 0
     },
 
     {
-        nome:"Pistola",
-        descricao:"1d8 + AGI",
-        ep:2,
-        categoria:"Arma de Fogo",
-        usos:0
+        nome: "Pistola",
+        descricao: "1d8 + AGI",
+        ep: 2,
+        categoria: "Arma de Fogo",
+        usos: 0
     },
 
     {
-        nome:"Kit Médico",
-        descricao:"Cura",
-        ep:2,
-        categoria:"Item",
-        usos:5
+        nome: "Kit Médico",
+        descricao: "Cura PV",
+        ep: 2,
+        categoria: "Consumível",
+        usos: 5
     }
 
 ];
@@ -562,18 +700,20 @@ function closeInventoryModal(){
 function renderModalItems(search){
 
     const list =
-    document.getElementById("modalItemsList");
+        document.getElementById("modalItemsList");
 
     list.innerHTML = "";
 
     itens
     .filter(item =>
-        item.nome.toLowerCase()
+        item.nome
+        .toLowerCase()
         .includes(search.toLowerCase())
     )
     .forEach(item => {
 
-        const div = document.createElement("div");
+        const div =
+            document.createElement("div");
 
         div.classList.add("modal-item");
 
@@ -601,12 +741,18 @@ function renderModalItems(search){
 
 }
 
-document.getElementById("itemSearch")
-.addEventListener("input", function(){
+const itemSearch =
+    document.getElementById("itemSearch");
 
-    renderModalItems(this.value);
+if(itemSearch){
 
-});
+    itemSearch.addEventListener("input", function(){
+
+        renderModalItems(this.value);
+
+    });
+
+}
 
 // ======================================
 // ITEM INVENTÁRIO
@@ -614,7 +760,8 @@ document.getElementById("itemSearch")
 
 function createInventoryCard(item){
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("inventory-card");
 
@@ -639,8 +786,9 @@ function createInventoryCard(item){
                 <label>Dano</label>
 
                 <input
-                type="text"
-                value="${item.descricao}">
+                    type="text"
+                    value="${item.descricao}"
+                >
 
             </div>
 
@@ -649,8 +797,9 @@ function createInventoryCard(item){
                 <label>Categoria</label>
 
                 <input
-                type="text"
-                value="${item.categoria}">
+                    type="text"
+                    value="${item.categoria}"
+                >
 
             </div>
 
@@ -659,8 +808,9 @@ function createInventoryCard(item){
                 <label>EP</label>
 
                 <input
-                type="number"
-                value="${item.ep}">
+                    type="number"
+                    value="${item.ep}"
+                >
 
             </div>
 
@@ -669,8 +819,9 @@ function createInventoryCard(item){
                 <label>Usos</label>
 
                 <input
-                type="number"
-                value="${item.usos}">
+                    type="number"
+                    value="${item.usos}"
+                >
 
             </div>
 
@@ -680,11 +831,14 @@ function createInventoryCard(item){
 
             <h4>Modificações</h4>
 
-            <div class="mods-list"></div>
+            <div class="mods-list">
+
+            </div>
 
             <button
-            class="mini-add-btn"
-            onclick="addModification(this)">
+                class="mini-add-btn"
+                onclick="addModification(this)"
+            >
                 +
             </button>
 
@@ -705,24 +859,23 @@ const modifications = [
 
     "Mira Laser",
     "Silenciador",
-    "Punho Reforçado",
-    "Alongada",
-    "Tática",
-    "Calibre Grosso"
+    "Calibre Grosso",
+    "Cruel",
+    "Perigosa"
 
 ];
 
 function addModification(button){
 
-    const nome =
-    prompt("Digite a modificação:");
+    const mod =
+        prompt("Digite a modificação:");
 
-    if(!nome) return;
+    if(!mod) return;
 
     const existe =
-    modifications.find(m =>
-        m.toLowerCase() === nome.toLowerCase()
-    );
+        modifications.find(m =>
+            m.toLowerCase() === mod.toLowerCase()
+        );
 
     if(!existe){
 
@@ -732,15 +885,16 @@ function addModification(button){
 
     }
 
-    const tag = document.createElement("div");
+    const tag =
+        document.createElement("div");
 
     tag.classList.add("mod-tag");
 
     tag.innerHTML = `
 
-        <span>${existe}</span>
+        ${existe}
 
-        <button onclick="removeModification(this)">
+        <button onclick="this.parentElement.remove()">
             X
         </button>
 
@@ -749,12 +903,6 @@ function addModification(button){
     button.parentElement
     .querySelector(".mods-list")
     .appendChild(tag);
-
-}
-
-function removeModification(button){
-
-    button.parentElement.remove();
 
 }
 
@@ -772,20 +920,17 @@ const condicoes = [
 
 ];
 
-document.getElementById("conditionBtn")
-.addEventListener("click", addCondition);
-
 function addCondition(){
 
     const nome =
-    prompt("Digite a condição:");
+        prompt("Digite a condição:");
 
     if(!nome) return;
 
     const existe =
-    condicoes.find(c =>
-        c.toLowerCase() === nome.toLowerCase()
-    );
+        condicoes.find(c =>
+            c.toLowerCase() === nome.toLowerCase()
+        );
 
     if(!existe){
 
@@ -796,10 +941,10 @@ function addCondition(){
     }
 
     const jaExiste =
-    [...document.querySelectorAll(".condition-card span")]
-    .some(span =>
-        span.innerText === existe
-    );
+        [...document.querySelectorAll(".condition-card span")]
+        .some(span =>
+            span.innerText === existe
+        );
 
     if(jaExiste){
 
@@ -809,7 +954,8 @@ function addCondition(){
 
     }
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("condition-card");
 
@@ -835,209 +981,6 @@ function removeCondition(button){
 }
 
 // ======================================
-// SAVE
-// ======================================
-
-function saveFicha(){
-
-    localStorage.setItem(
-        "fichaParanormal",
-        document.body.innerHTML
-    );
-
-}
-
-function loadFicha(){
-
-    const data =
-    localStorage.getItem("fichaParanormal");
-
-    if(!data) return;
-
-}
-
-document.addEventListener("input", saveFicha);
-
-document.addEventListener("click", () => {
-
-    setTimeout(saveFicha, 100);
-
-});
-
-loadFicha();
-
-// ======================================
-// MODIFICAÇÕES
-// ======================================
-
-const modifications = [
-
-    "Mira Laser",
-    "Silenciador",
-    "Calibre Grosso",
-    "Empunhadura",
-    "Proteção Ritualística"
-
-];
-
-function addModification(button){
-
-    const mod = prompt("Nome da modificação:");
-
-    if(!mod) return;
-
-    const existe = modifications.find(m =>
-        m.toLowerCase() === mod.toLowerCase()
-    );
-
-    if(!existe){
-
-        alert("Modificação não encontrada.");
-        return;
-
-    }
-
-    const lista =
-        button.parentElement.querySelector(".mods-list");
-
-    const repetida = [...lista.querySelectorAll(".mod-tag")]
-    .some(tag =>
-        tag.querySelector("span").innerText === existe
-    );
-
-    if(repetida){
-
-        alert("Essa modificação já foi adicionada.");
-        return;
-
-    }
-
-    const modTag = document.createElement("div");
-
-    modTag.classList.add("mod-tag");
-
-    modTag.innerHTML = `
-
-        <span>${existe}</span>
-
-        <button>
-            X
-        </button>
-
-    `;
-
-    modTag.querySelector("button")
-    .addEventListener("click", function(){
-
-        modTag.remove();
-
-        saveFicha();
-
-    });
-
-    lista.appendChild(modTag);
-
-    saveFicha();
-
-}
-
-// ======================================
-// CONDIÇÕES
-// ======================================
-
-const condicoes = [
-
-    "Sangramento",
-    "Paralisia",
-    "Caído",
-    "Cego",
-    "Confuso"
-
-];
-
-function aplicarCondicao(nome){
-
-    console.log("Aplicando condição:", nome);
-
-}
-
-function removerCondicaoEfeito(nome){
-
-    console.log("Removendo condição:", nome);
-
-}
-
-function addCondition(){
-
-    const nome = prompt(
-        "Digite a condição:\n\n" +
-        condicoes.join("\n")
-    );
-
-    if(!nome) return;
-
-    const existe = condicoes.find(c =>
-        c.toLowerCase() === nome.toLowerCase()
-    );
-
-    if(!existe){
-
-        alert("Condição não encontrada.");
-        return;
-
-    }
-
-    const lista =
-        document.getElementById("conditionsList");
-
-    const repetida =
-        [...lista.querySelectorAll(".condition-card span")]
-        .some(span =>
-            span.innerText === existe
-        );
-
-    if(repetida){
-
-        alert("Essa condição já está ativa.");
-        return;
-
-    }
-
-    const card =
-        document.createElement("div");
-
-    card.classList.add("condition-card");
-
-    card.innerHTML = `
-
-        <span>${existe}</span>
-
-        <button>
-            X
-        </button>
-
-    `;
-
-    card.querySelector("button")
-    .addEventListener("click", function(){
-
-        removerCondicaoEfeito(existe);
-
-        card.remove();
-
-        saveFicha();
-
-    });
-
-    lista.appendChild(card);
-
-    aplicarCondicao(existe);
-
-    saveFicha();
-
-}
-
-// ======================================
 // BOTÃO CONDIÇÃO
 // ======================================
 
@@ -1046,7 +989,10 @@ const conditionBtn =
 
 if(conditionBtn){
 
-    conditionBtn.addEventListener("click", addCondition);
+    conditionBtn.addEventListener(
+        "click",
+        addCondition
+    );
 
 }
 
@@ -1056,19 +1002,65 @@ if(conditionBtn){
 
 function saveFicha(){
 
+    const data = {
+
+        html:
+            document.getElementById("inventoryList").innerHTML,
+
+        abilities:
+            document.getElementById("abilitiesList").innerHTML,
+
+        assimilations:
+            document.getElementById("assimilationList").innerHTML,
+
+        conditions:
+            document.getElementById("conditionsList").innerHTML
+
+    };
+
     localStorage.setItem(
         "fichaParanormal",
-        document.body.innerHTML
+        JSON.stringify(data)
     );
 
 }
 
 function loadFicha(){
 
-    const save =
-        localStorage.getItem("fichaParanormal");
+    const data =
+        JSON.parse(
+            localStorage.getItem("fichaParanormal")
+        );
 
-    if(!save) return;
+    if(!data) return;
+
+    if(data.html){
+
+        document.getElementById("inventoryList")
+        .innerHTML = data.html;
+
+    }
+
+    if(data.abilities){
+
+        document.getElementById("abilitiesList")
+        .innerHTML = data.abilities;
+
+    }
+
+    if(data.assimilations){
+
+        document.getElementById("assimilationList")
+        .innerHTML = data.assimilations;
+
+    }
+
+    if(data.conditions){
+
+        document.getElementById("conditionsList")
+        .innerHTML = data.conditions;
+
+    }
 
 }
 
@@ -1089,7 +1081,161 @@ document.addEventListener("click", () => {
 });
 
 // ======================================
-// START
+// LOAD
 // ======================================
 
 loadFicha();
+
+// ======================================
+// FECHAR MODAL AO CLICAR FORA
+// ======================================
+
+const inventoryModal =
+    document.getElementById("inventoryModal");
+
+if(inventoryModal){
+
+    inventoryModal.addEventListener("click", function(e){
+
+        if(e.target === inventoryModal){
+
+            closeInventoryModal();
+
+        }
+
+    });
+
+}
+
+// ======================================
+// ENTER NOS INPUTS
+// ======================================
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+        if(
+            e.target.tagName === "INPUT"
+        ){
+
+            e.preventDefault();
+
+            e.target.blur();
+
+        }
+
+    }
+
+});
+
+// ======================================
+// DEBUG
+// ======================================
+
+console.log("Ficha carregada com sucesso.");
+
+// ======================================
+// REAPLICAR EVENTOS APÓS LOAD
+// ======================================
+
+function rebindEvents(){
+
+    // =========================
+    // REMOVER CONDIÇÕES
+    // =========================
+
+    document.querySelectorAll(".condition-card button")
+    .forEach(button => {
+
+        button.onclick = function(){
+
+            this.parentElement.remove();
+
+            saveFicha();
+
+        };
+
+    });
+
+    // =========================
+    // REMOVER MODS
+    // =========================
+
+    document.querySelectorAll(".mod-tag button")
+    .forEach(button => {
+
+        button.onclick = function(){
+
+            this.parentElement.remove();
+
+            saveFicha();
+
+        };
+
+    });
+
+    // =========================
+    // REMOVER CARDS
+    // =========================
+
+    document.querySelectorAll(
+        ".ability-header button"
+    )
+    .forEach(button => {
+
+        button.onclick = function(){
+
+            removeCard(this);
+
+        };
+
+    });
+
+    // =========================
+    // ROLAR PERÍCIAS
+    // =========================
+
+    document.querySelectorAll(".clickable-skill")
+    .forEach(skill => {
+
+        skill.onclick = function(e){
+
+            if(
+                e.target.tagName === "INPUT"
+            ) return;
+
+            rollSkill(this);
+
+        };
+
+    });
+
+}
+
+// ======================================
+// EXECUTA APÓS LOAD
+// ======================================
+
+rebindEvents();
+
+// ======================================
+// OBSERVER
+// ======================================
+
+const observer = new MutationObserver(() => {
+
+    rebindEvents();
+
+});
+
+observer.observe(document.body, {
+
+    childList: true,
+    subtree: true
+
+});
+
+// ======================================
+// FIM
+// ======================================
