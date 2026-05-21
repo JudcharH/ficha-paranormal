@@ -14,8 +14,6 @@ body{
 
     overflow-x:hidden;
 
-    padding-right:280px;
-
 }
 
 .container{
@@ -36,15 +34,7 @@ body{
 /* CONTAINER */
 /* ========================= */
 
-.container{
 
-    width:100%;
-
-    padding:20px;
-
-    padding-right:300px;
-
-}
 
 
 /* ========================= */

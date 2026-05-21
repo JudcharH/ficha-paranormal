@@ -688,75 +688,74 @@ const condicoes = [
 
 ];
 
-function addCondition() {
+function addCondition(){
 
-    let html = "";
+    const nome = prompt("Digite a condição:");
 
-    condicoes.forEach(condicao => {
+    if(!nome) return;
 
-        html += `
+    const existe = condicoes.find(c =>
+        c.toLowerCase() === nome.toLowerCase()
+    );
 
-            <div class="assimilation-option"
-            onclick="selectCondition('${condicao}')">
+    if(!existe){
 
-                <h3>${condicao}</h3>
+        alert("Condição não encontrada.");
+        return;
 
-            </div>
+    }
 
-        `;
+    // impede repetir condição
 
-    });
+    const jaExiste = [...document.querySelectorAll(".condition-card span")]
+    .some(span => span.innerText === existe);
 
-    const menu = document.createElement("div");
+    if(jaExiste){
 
-    menu.classList.add("assimilation-menu");
+        alert("Essa condição já está ativa.");
+        return;
 
-    menu.innerHTML = `
+    }
 
-        <div class="assimilation-menu-content">
-
-            <div class="menu-header">
-
-                <h2>CONDIÇÕES</h2>
-
-                <button onclick="this.closest('.assimilation-menu').remove()">
-                    X
-                </button>
-
-            </div>
-
-            ${html}
-
-        </div>
-
-    `;
-
-    document.body.appendChild(menu);
-
-}
-
-function selectCondition(nome) {
-
-    const card =
-        document.createElement("div");
+    const card = document.createElement("div");
 
     card.classList.add("condition-card");
 
-    card.innerHTML = `
+    const texto = document.createElement("span");
 
-        <span>${nome}</span>
+    texto.innerText = existe;
 
-        <button onclick="removeCard(this)">
-            X
-        </button>
+    const btn = document.createElement("button");
 
-    `;
+    btn.innerText = "X";
+
+    btn.addEventListener("click", function(){
+
+        removerCondicaoEfeito(existe);
+
+        card.remove();
+
+        saveFicha();
+
+    });
+
+    card.appendChild(texto);
+
+    card.appendChild(btn);
 
     document.getElementById("conditionsList")
-    .appendChild(card);
+        .appendChild(card);
+
+    aplicarCondicao(existe);
+
+    saveFicha();
+
+}
+
+
 
     document.querySelector(".assimilation-menu").remove();
-}
+
 
 // ======================================
 // SAVE / LOAD
@@ -826,6 +825,26 @@ function addModification(button) {
 
 }
 
+document.querySelectorAll(".condition-card button")
+.forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        const card = this.parentElement;
+
+        const nome =
+            card.querySelector("span").innerText;
+
+        removerCondicaoEfeito(nome);
+
+        card.remove();
+
+        saveFicha();
+
+    });
+
+});
+
 function addModification(button){
 
     const mod = prompt("Nome da modificação:");
@@ -863,15 +882,3 @@ function addModification(button){
 
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-
-    const conditionBtn =
-        document.getElementById("conditionBtn");
-
-    if(conditionBtn){
-
-        conditionBtn.onclick = addCondition;
-
-    }
-
-});
