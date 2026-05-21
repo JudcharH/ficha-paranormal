@@ -837,7 +837,7 @@ function createInventoryCard(item){
 
             <button
                 class="mini-add-btn"
-                onclick="openModificationMenu(this)"
+                onclick="addModification(this)"
             >
                 +
             </button>
@@ -859,50 +859,103 @@ const modifications = [
 
     "Mira Laser",
     "Silenciador",
-    "Calibre Grosso",
-    "Cruel",
-    "Perigosa"
+    "Punho Reforçado",
+    "Coronha Tática",
+    "Lâmina Serrilhada",
+    "Catalisador",
+    "Proteção Ritualística"
 
 ];
 
 function addModification(button){
 
-    const mod =
-        prompt("Digite a modificação:");
+    const existente =
+        button.parentElement.querySelector(".mods-search");
 
-    if(!mod) return;
+    // evita abrir duas pesquisas
+    if(existente) return;
 
-    const existe =
-        modifications.find(m =>
-            m.toLowerCase() === mod.toLowerCase()
-        );
-
-    if(!existe){
-
-        alert("Modificação não encontrada.");
-
-        return;
-
-    }
-
-    const tag =
+    const searchBox =
         document.createElement("div");
 
-    tag.classList.add("mod-tag");
+    searchBox.classList.add("mods-search");
 
-    tag.innerHTML = `
+    searchBox.innerHTML = `
 
-        ${existe}
+        <input
+            type="text"
+            class="mods-input"
+            placeholder="Pesquisar modificação..."
+        >
 
-        <button onclick="this.parentElement.remove()">
-            X
-        </button>
+        <div class="mods-results"></div>
 
     `;
 
-    button.parentElement
-    .querySelector(".mods-list")
-    .appendChild(tag);
+    button.parentElement.appendChild(searchBox);
+
+    const input =
+        searchBox.querySelector(".mods-input");
+
+    const results =
+        searchBox.querySelector(".mods-results");
+
+    function renderMods(search = ""){
+
+        results.innerHTML = "";
+
+        modifications
+        .filter(mod =>
+            mod.toLowerCase()
+            .includes(search.toLowerCase())
+        )
+        .forEach(mod => {
+
+            const item =
+                document.createElement("div");
+
+            item.classList.add("mod-result");
+
+            item.innerText = mod;
+
+            item.onclick = () => {
+
+                const tag =
+                    document.createElement("div");
+
+                tag.classList.add("mod-tag");
+
+                tag.innerHTML = `
+
+                    ${mod}
+
+                    <button onclick="this.parentElement.remove()">
+                        X
+                    </button>
+
+                `;
+
+                button.parentElement
+                .querySelector(".mods-list")
+                .appendChild(tag);
+
+                searchBox.remove();
+
+            };
+
+            results.appendChild(item);
+
+        });
+
+    }
+
+    input.addEventListener("input", function(){
+
+        renderMods(this.value);
+
+    });
+
+    renderMods();
 
 }
 
@@ -920,7 +973,90 @@ const condicoes = [
 
 ];
 
+function addCondition(){
 
+    let html = "";
+
+    condicoes.forEach(condicao => {
+
+        html += `
+
+            <div
+                class="assimilation-option"
+                onclick="selectCondition('${condicao}')"
+            >
+
+                <h3>${condicao}</h3>
+
+            </div>
+
+        `;
+
+    });
+
+    const menu =
+        document.createElement("div");
+
+    menu.classList.add("assimilation-menu");
+
+    menu.innerHTML = `
+
+        <div class="assimilation-menu-content">
+
+            <div class="menu-header">
+
+                <h2>CONDIÇÕES</h2>
+
+                <button onclick="closeMenu()">
+                    X
+                </button>
+
+            </div>
+
+            <input
+                type="text"
+                id="conditionSearch"
+                placeholder="Pesquisar condição..."
+            >
+
+            <div
+                class="assimilation-options"
+                id="conditionOptions"
+            >
+
+                ${html}
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(menu);
+
+    document.getElementById("conditionSearch")
+    .addEventListener("input", function(){
+
+        const value =
+            this.value.toLowerCase();
+
+        document.querySelectorAll(
+            "#conditionOptions .assimilation-option"
+        )
+        .forEach(option => {
+
+            option.style.display =
+                option.innerText
+                .toLowerCase()
+                .includes(value)
+                ? "flex"
+                : "none";
+
+        });
+
+    });
+
+}
 
 function removeCondition(button){
 
@@ -1202,7 +1338,10 @@ function openModificationMenu(button){
 
             <div
                 class="assimilation-option"
-                onclick="selectModification('${mod}')"
+                onclick="selectModification(
+                    '${mod}',
+                    this
+                )"
             >
 
                 <h3>${mod}</h3>
@@ -1251,11 +1390,11 @@ function openModificationMenu(button){
 
     `;
 
-    menu.modTarget =
-        button.parentElement
-        .querySelector(".mods-list");
-
     document.body.appendChild(menu);
+
+    menu.dataset.targetCard =
+        button.closest(".inventory-card")
+        .querySelector(".mods-list");
 
     document.getElementById("modSearch")
     .addEventListener("input", function(){
@@ -1283,11 +1422,12 @@ function openModificationMenu(button){
 
 function selectModification(nome){
 
-    const menu =
-        document.querySelector(".assimilation-menu");
+    const target =
+        document.querySelector(".assimilation-menu")
+        .dataset.targetCard;
 
     const modsList =
-        menu.modTarget;
+        document.querySelector(target);
 
     const tag =
         document.createElement("div");
@@ -1307,8 +1447,6 @@ function selectModification(nome){
     modsList.appendChild(tag);
 
     closeMenu();
-
-    saveFicha();
 
 }
 
@@ -1443,15 +1581,66 @@ function selectCondition(nome){
 // TROCA BOTÕES
 // ======================================
 
-const conditionBtn =
-    document.getElementById("conditionBtn");
+document.getElementById("conditionBtn")
+.onclick = openConditionMenu;
 
-if(conditionBtn){
+function selectCondition(nome){
 
-    conditionBtn.onclick = function(){
+    const jaExiste =
+        [...document.querySelectorAll(".condition-card span")]
+        .some(span =>
+            span.innerText === nome
+        );
 
-        openConditionMenu();
+    if(jaExiste){
 
-    };
+        alert("Essa condição já está ativa.");
+
+        return;
+
+    }
+
+    const card =
+        document.createElement("div");
+
+    card.classList.add("condition-card");
+
+    card.innerHTML = `
+
+        <span>${nome}</span>
+
+        <button onclick="removeCondition(this)">
+            X
+        </button>
+
+    `;
+
+    document.getElementById("conditionsList")
+    .appendChild(card);
+
+    closeMenu();
+
+    saveFicha();
+
+}
+
+function removeCondition(button){
+
+    button.parentElement.remove();
+
+    saveFicha();
+
+}
+
+function closeMenu(){
+
+    const menu =
+        document.querySelector(".assimilation-menu");
+
+    if(menu){
+
+        menu.remove();
+
+    }
 
 }
