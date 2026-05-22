@@ -964,11 +964,25 @@ function addModification(button){
 
 const condicoes = [
 
-    "Sangramento",
-    "Paralisia",
-    "Caído",
-    "Cego",
-    "Confuso"
+    {
+        nome:"Sangramento",
+        dano:"1d6"
+    },
+
+    {
+        nome:"Chamas",
+        dano:"2d6"
+    },
+
+    {
+        nome:"Paralisia",
+        dano:null
+    },
+
+    {
+        nome:"Caído",
+        dano:null
+    }
 
 ];
 
@@ -982,7 +996,7 @@ function addCondition(){
 
             <div
                 class="assimilation-option"
-                onclick="selectCondition('${condicao}')"
+                onclick="selectCondition('${condicao.nome}')"
             >
 
                 <h3>${condicao}</h3>
@@ -1463,7 +1477,7 @@ function openConditionMenu(){
 
             <div
                 class="assimilation-option"
-                onclick="selectCondition('${condicao}')"
+                onclick="selectCondition('${condicao.nome}')"
             >
 
                 <h3>${condicao}</h3>
@@ -1563,6 +1577,10 @@ function selectCondition(nome){
 
         <span>${nome}</span>
 
+<small class="condition-damage">
+    ${condicao.dano || "Sem dano"}
+</small>
+
         <button onclick="removeCondition(this)">
             X
         </button>
@@ -1608,6 +1626,10 @@ function selectCondition(nome){
 
         <span>${nome}</span>
 
+<small class="condition-damage">
+    ${condicao.dano || "Sem dano"}
+</small>
+
         <button onclick="removeCondition(this)">
             X
         </button>
@@ -1641,5 +1663,99 @@ function closeMenu(){
         menu.remove();
 
     }
+
+}
+
+function nextTurn(){
+
+    // =====================
+    // RESET PA
+    // =====================
+
+    document.getElementById("paAtual").value = 3;
+
+    // =====================
+    // CONDIÇÕES
+    // =====================
+
+    let danoTotal = 0;
+
+    document.querySelectorAll(".condition-card span")
+    .forEach(condicaoEl => {
+
+        const nome =
+            condicaoEl.innerText;
+
+        const condicao =
+            condicoes.find(c =>
+                c.nome === nome
+            );
+
+        if(
+            condicao &&
+            condicao.dano
+        ){
+
+            const formula =
+                condicao.dano;
+
+            const partes =
+                formula.split("d");
+
+            const quantidade =
+                Number(partes[0]);
+
+            const tipo =
+                Number(partes[1]);
+
+            for(let i = 0; i < quantidade; i++){
+
+                danoTotal +=
+                    randomDice(tipo);
+
+            }
+
+        }
+
+    });
+
+    // =====================
+    // APLICAR PV
+    // =====================
+
+    const pvAtual =
+        document.getElementById("pvAtual");
+
+    let pv =
+        Number(pvAtual.value) || 0;
+
+    pv -= danoTotal;
+
+    if(pv < 0){
+
+        pv = 0;
+
+    }
+
+    pvAtual.value = pv;
+
+    // =====================
+    // RESULTADO
+    // =====================
+
+    document.getElementById("diceResult")
+    .innerHTML = `
+
+        <div class="dice-big">
+            ${danoTotal}
+        </div>
+
+        <div class="dice-total">
+            Dano das condições
+        </div>
+
+    `;
+
+    saveFicha();
 
 }

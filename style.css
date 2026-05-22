@@ -1687,3 +1687,95 @@ select:focus{
     }
 
 }
+
+.pa-box{
+
+    margin-top:20px;
+
+    background:#111;
+
+    border:2px solid #7b2cff;
+
+    border-radius:16px;
+
+    padding:15px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 15px rgba(123,47,255,.25);
+
+}
+
+.pa-box span{
+
+    display:block;
+
+    color:#c79cff;
+
+    font-size:18px;
+
+    margin-bottom:10px;
+
+}
+
+.pa-box input{
+
+    width:100%;
+
+    background:black;
+
+    border:none;
+
+    color:white;
+
+    font-size:34px;
+
+    text-align:center;
+
+    padding:10px;
+
+    border-radius:12px;
+
+}
+
+#paMaxText{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#999;
+
+}
+.turn-button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#181818;
+
+    border:1px solid #7b2cff;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.turn-button:hover{
+
+    background:#7b2cff;
+
+}
