@@ -1477,10 +1477,10 @@ function openConditionMenu(){
 
             <div
                 class="assimilation-option"
-                onclick="selectCondition('${condicao.nome}')"
+                oonclick="selectCondition('${condicao.nome}')"
             >
 
-                <h3>${condicao}</h3>
+                <h3>${condicao.nome}</h3>
 
             </div>
 
@@ -1553,6 +1553,11 @@ function openConditionMenu(){
 }
 
 function selectCondition(nome){
+    
+    const condicao =
+    condicoes.find(c =>
+        c.nome === nome
+    );
 
     const jaExiste =
         [...document.querySelectorAll(".condition-card span")]
