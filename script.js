@@ -999,7 +999,7 @@ function addCondition(){
                 onclick="selectCondition('${condicao.nome}')"
             >
 
-                <h3>${condicao}</h3>
+                <h3>${condicao.nome}</h3>
 
             </div>
 
@@ -1477,7 +1477,7 @@ function openConditionMenu(){
 
             <div
                 class="assimilation-option"
-                oonclick="selectCondition('${condicao.nome}')"
+                onclick="selectCondition('${condicao.nome}')"
             >
 
                 <h3>${condicao.nome}</h3>
@@ -1553,7 +1553,7 @@ function openConditionMenu(){
 }
 
 function selectCondition(nome){
-    
+
     const condicao =
     condicoes.find(c =>
         c.nome === nome
@@ -1606,49 +1606,7 @@ function selectCondition(nome){
 document.getElementById("conditionBtn")
 .onclick = openConditionMenu;
 
-function selectCondition(nome){
 
-    const jaExiste =
-        [...document.querySelectorAll(".condition-card span")]
-        .some(span =>
-            span.innerText === nome
-        );
-
-    if(jaExiste){
-
-        alert("Essa condição já está ativa.");
-
-        return;
-
-    }
-
-    const card =
-        document.createElement("div");
-
-    card.classList.add("condition-card");
-
-    card.innerHTML = `
-
-        <span>${nome}</span>
-
-<small class="condition-damage">
-    ${condicao.dano || "Sem dano"}
-</small>
-
-        <button onclick="removeCondition(this)">
-            X
-        </button>
-
-    `;
-
-    document.getElementById("conditionsList")
-    .appendChild(card);
-
-    closeMenu();
-
-    saveFicha();
-
-}
 
 function removeCondition(button){
 
