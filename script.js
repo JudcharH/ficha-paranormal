@@ -1555,9 +1555,55 @@ function openConditionMenu(){
 function selectCondition(nome){
 
     const condicao =
-    condicoes.find(c =>
-        c.nome === nome
-    );
+        condicoes.find(c =>
+            c.nome === nome
+        );
+
+    // =========================
+    // SANGRAMENTO STACK
+    // =========================
+
+    if(nome === "Sangramento"){
+
+        const existente =
+            [...document.querySelectorAll(".condition-card")]
+            .find(card =>
+                card.querySelector("span")
+                .innerText === "Sangramento"
+            );
+
+        if(existente){
+
+            const damageEl =
+                existente.querySelector(".condition-damage");
+
+            let texto =
+                damageEl.innerText;
+
+            let partes =
+                texto.split("d");
+
+            let quantidade =
+                Number(partes[0]);
+
+            quantidade++;
+
+            damageEl.innerText =
+                `${quantidade}d6`;
+
+            closeMenu();
+
+            saveFicha();
+
+            return;
+
+        }
+
+    }
+
+    // =========================
+    // BLOQUEIA DUPLICADAS
+    // =========================
 
     const jaExiste =
         [...document.querySelectorAll(".condition-card span")]
@@ -1565,13 +1611,20 @@ function selectCondition(nome){
             span.innerText === nome
         );
 
-    if(jaExiste){
+    if(
+        jaExiste &&
+        nome !== "Sangramento"
+    ){
 
         alert("Essa condição já está ativa.");
 
         return;
 
     }
+
+    // =========================
+    // CRIA CARD
+    // =========================
 
     const card =
         document.createElement("div");
@@ -1582,9 +1635,9 @@ function selectCondition(nome){
 
         <span>${nome}</span>
 
-<small class="condition-damage">
-    ${condicao.dano || "Sem dano"}
-</small>
+        <small class="condition-damage">
+            ${condicao.dano || "Sem dano"}
+        </small>
 
         <button onclick="removeCondition(this)">
             X
@@ -1596,6 +1649,8 @@ function selectCondition(nome){
     .appendChild(card);
 
     closeMenu();
+
+    saveFicha();
 
 }
 
