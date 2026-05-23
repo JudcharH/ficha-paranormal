@@ -1704,18 +1704,19 @@ function nextTurn(){
         const nome =
             condicaoEl.innerText;
 
-        const condicao =
-            condicoes.find(c =>
-                c.nome === nome
-            );
+        const card =
+    condicaoEl.closest(".condition-card");
 
-        if(
-            condicao &&
-            condicao.dano
-        ){
+const damageEl =
+    card.querySelector(".condition-damage");
 
-            const formula =
-                condicao.dano;
+const formula =
+    damageEl.innerText;
+
+if(
+    formula &&
+    formula !== "Sem dano"
+){
 
             const partes =
                 formula.split("d");
