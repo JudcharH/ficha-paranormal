@@ -289,99 +289,75 @@ updateSkills();
 
 function getAttributeValue(attr){
 
-    // =====================
     // FORÇA
-    // =====================
 
     if(attr.includes("FOR")){
 
-        const base =
+        return (
             Number(
                 document.getElementById("forca").value
-            ) || 1;
-
-        return Math.max(
-            1,
-            base + atributosPenalidades.forca
-        );
+            ) || 1
+        ) + atributosPenalidades.forca;
 
     }
 
-    // =====================
     // AGILIDADE
-    // =====================
 
     if(attr.includes("AGI")){
 
-        const base =
+        return (
             Number(
                 document.getElementById("agilidade").value
-            ) || 1;
-
-        return Math.max(
-            1,
-            base + atributosPenalidades.agilidade
-        );
+            ) || 1
+        ) + atributosPenalidades.agilidade;
 
     }
 
-    // =====================
     // INTELECTO
-    // =====================
 
     if(attr.includes("INT")){
 
-        const base =
+        return (
             Number(
                 document.getElementById("intelecto").value
-            ) || 1;
-
-        return Math.max(
-            1,
-            base + atributosPenalidades.intelecto
-        );
+            ) || 1
+        ) + atributosPenalidades.intelecto;
 
     }
 
-    // =====================
     // VIGOR
-    // =====================
 
     if(attr.includes("VIG")){
 
-        const base =
+        return (
             Number(
                 document.getElementById("vigor").value
-            ) || 1;
-
-        return Math.max(
-            1,
-            base + atributosPenalidades.vigor
-        );
+            ) || 1
+        ) + atributosPenalidades.vigor;
 
     }
 
-    // =====================
     // PRESENÇA
-    // =====================
 
     if(attr.includes("PRE")){
 
-        const base =
+        return (
             Number(
                 document.getElementById("presenca").value
-            ) || 1;
-
-        return Math.max(
-            1,
-            base + atributosPenalidades.presenca
-        );
+            ) || 1
+        ) + atributosPenalidades.presenca;
 
     }
 
     return 1;
 
 }
+
+document.addEventListener("click", () => {
+
+    aplicarEfeitosCondicoes();
+
+});
 
 function updateConditionsEffects(){
 
@@ -2206,16 +2182,16 @@ function recalculateConditions(){
 }
 
 // ======================================
-// PENALIDADES DOS ATRIBUTOS
+// PENALIDADES DE ATRIBUTOS
 // ======================================
 
 const atributosPenalidades = {
 
-    forca: 0,
-    agilidade: 0,
-    vigor: 0,
-    intelecto: 0,
-    presenca: 0
+    forca:0,
+    agilidade:0,
+    vigor:0,
+    intelecto:0,
+    presenca:0
 
 };
 
@@ -2225,7 +2201,7 @@ const atributosPenalidades = {
 
 function aplicarEfeitosCondicoes(){
 
-    // RESETAR PENALIDADES
+    // RESETAR
 
     atributosPenalidades.forca = 0;
     atributosPenalidades.agilidade = 0;
@@ -2241,9 +2217,7 @@ function aplicarEfeitosCondicoes(){
         const nome =
             condicaoEl.innerText;
 
-        // =====================
         // ENFRAQUECIDO
-        // =====================
 
         if(nome === "Enfraquecido"){
 
@@ -2251,9 +2225,7 @@ function aplicarEfeitosCondicoes(){
 
         }
 
-        // =====================
         // LENTIDÃO
-        // =====================
 
         if(nome === "Lentidão"){
 
@@ -2261,9 +2233,7 @@ function aplicarEfeitosCondicoes(){
 
         }
 
-        // =====================
         // ENVENENAMENTO
-        // =====================
 
         if(nome === "Envenenamento"){
 
@@ -2271,9 +2241,7 @@ function aplicarEfeitosCondicoes(){
 
         }
 
-        // =====================
         // TRAUMATIZADO
-        // =====================
 
         if(nome === "Traumatizado"){
 
@@ -2282,9 +2250,5 @@ function aplicarEfeitosCondicoes(){
         }
 
     });
-
-    // ATUALIZA STATUS/PERÍCIAS
-
-    updateConditionsEffects();
 
 }
