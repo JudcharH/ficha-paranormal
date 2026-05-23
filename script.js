@@ -2000,4 +2000,3 @@ if(
 
 }
 
-function recalculateConditions(){
