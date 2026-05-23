@@ -1746,6 +1746,25 @@ function closeMenu(){
 
 function nextTurn(){
 
+    // =====================
+    // PEGA PA MÁXIMO
+    // =====================
+
+    const paTexto =
+        document.getElementById("paMaxText")
+        .innerText;
+
+    const paMax =
+        Number(
+            paTexto.replace(/\D/g, "")
+        );
+
+    // =====================
+    // RESET PA
+    // =====================
+
+    document.getElementById("paAtual").value =
+        paMax;
 
     // =====================
     // CONDIÇÕES
@@ -1759,19 +1778,18 @@ function nextTurn(){
         const nome =
             condicaoEl.innerText;
 
-        const card =
-    condicaoEl.closest(".condition-card");
+        const condicao =
+            condicoes.find(c =>
+                c.nome === nome
+            );
 
-const damageEl =
-    card.querySelector(".condition-damage");
+        if(
+            condicao &&
+            condicao.dano
+        ){
 
-const formula =
-    damageEl.innerText;
-
-if(
-    formula &&
-    formula !== "Sem dano"
-){
+            const formula =
+                condicao.dano;
 
             const partes =
                 formula.split("d");
@@ -1794,7 +1812,7 @@ if(
     });
 
     // =====================
-    // APLICAR PV
+    // APLICA DANO
     // =====================
 
     const pvAtual =
@@ -1833,4 +1851,3 @@ if(
     saveFicha();
 
 }
-
