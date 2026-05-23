@@ -184,6 +184,34 @@ function atualizarStatus(){
 atualizarStatus();
 atualizarPA();
 
+function atualizarPA(){
+
+    const nivel =
+        Number(
+            document.getElementById("nivel").value
+        ) || 1;
+
+    const paMax =
+        4 + Math.floor(nivel / 10);
+
+    const paAtual =
+        document.getElementById("paAtual");
+
+    const texto =
+        document.getElementById("paMaxText");
+
+    texto.innerText =
+        `PA Máximo: ${paMax}`;
+
+    // impede passar do máximo
+    if(Number(paAtual.value) > paMax){
+
+        paAtual.value = paMax;
+
+    }
+
+}
+
 // ======================================
 // PERÍCIAS
 // ======================================
