@@ -383,7 +383,7 @@
 
                 <h2>ASSIMILAÇÕES</h2>
 
-                <button class="add-btn" onclick="openAssimilationMenu()">
+                <button class="add-btn" id="assimilationBtn">
     +
 </button>
 
@@ -402,7 +402,7 @@
 
                 <h2>HABILIDADES GERAIS</h2>
 
-                <button class="add-btn" onclick="addAbility()">
+                <button class="add-btn" id="abilityBtn">
     +
 </button>
 
@@ -421,7 +421,7 @@
 
         <h2>CONDIÇÕES</h2>
 
-        <button class="add-btn" onclick="addCondition()">
+        <button class="add-btn"  id="conditionBtn">
             +
         </button>
 
@@ -442,7 +442,7 @@
 
                 <h2>INVENTÁRIO</h2>
 
-                <button class="add-btn" onclick="openInventoryModal()">
+                <button class="add-btn" id="inventoryBtn">
     +
 </button>
 
@@ -496,29 +496,35 @@
         <!-- BOTÕES DE ATRIBUTO -->
         <div class="attribute-rolls">
 
-            <button onclick="rollAttribute('forca')">
+            <button>
+                 class="attribute-roll-btn"
+    data-attr="forca"
                 FOR
             </button>
-
-            <button onclick="rollAttribute('agilidade')">
+             class="attribute-roll-btn"
+    data-attr="agilidade"
+            <button>
                 AGI
             </button>
-
-            <button onclick="rollAttribute('intelecto')">
+             class="attribute-roll-btn"
+    data-attr="intelecto"
+            <button>
                 INT
             </button>
-
-            <button onclick="rollAttribute('vigor')">
+             class="attribute-roll-btn"
+    data-attr="vigor"
+            <button>
                 VIG
             </button>
-
-            <button onclick="rollAttribute('presenca')">
+             class="attribute-roll-btn"
+    data-attr="presença"
+            <button>
                 PRE
             </button>
 
         </div>
 
-        <button class="roll-button" onclick="rollDice()">
+        <button class="roll-button" id="rollDiceBtn">
             ROLAR
         </button>
 
@@ -529,9 +535,7 @@
         </div>
 
         <button
-    class="next-turn-btn"
-    onclick="nextTurn()"
->
+    class="next-turn-btn" id="nextTurnBtn">
     PASSAR RODADA
 </button>
 
@@ -571,7 +575,16 @@
 
 </div>
 
-    <script src="script.js"></script>
+    <script src="js/utils.js"></script>
+<script src="js/dice.js"></script>
+<script src="js/status.js"></script>
+<script src="js/skills.js"></script>
+<script src="js/conditions.js"></script>
+<script src="js/inventory.js"></script>
+<script src="js/abilities.js"></script>
+<script src="js/assimilations.js"></script>
+<script src="js/save.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
