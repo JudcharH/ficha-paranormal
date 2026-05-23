@@ -1041,82 +1041,98 @@ const condicoes = [
 
     {
         nome:"Paralisia",
+        dano:null,
         descricao:"Acerto Garantido"
     },
 
     {
         nome:"Paralisia Total",
+        dano:null,
         descricao:"Acerto garantido+"
     },
 
     {
         nome:"Enjoado",
+        dano:null,
         descricao:"-3 em testes físicos"
     },
 
     {
         nome:"Morrendo",
+        dano:null,
         descricao:"Não possui PA"
     },
 
     {
         nome:"Enfraquecido",
+        dano:null,
         descricao:"-5 em testes de Força, -10 no PV máximo"
     },
 
     {
         nome:"Lentidão",
+        dano:null,
         descricao:"-5 em testes de Agilidade, -3m de deslocamento"
     },
 
     {
         nome:"Cansado",
+        dano:null,
         descricao:"Habilidades custam o dobro"
     },
 
     {
         nome:"Controlado",
+        dano:null,
         descricao:"Entrega seus PA para o conjurador"
     },
 
     {
         nome:"Cego",
+        dano:null,
         descricao:"-10 em Percepção, -10 em ataques à distância"
     },
 
     {
         nome:"Surdo",
+        dano:null,
         descricao:"-10 em Percepção"
     },
 
     {
         nome:"Traumatizado",
+        dano:null,
         descricao:"-5 em testes de Vontade, -8 no PD máximo"
     },
 
     {
         nome:"Penumbra",
+        dano:null,
         descricao:"-5 em Percepção, -3 em Reflexos"
     },
 
     {
         nome:"Vulnerável",
+        dano:null,
         descricao:"Sofre o dobro de dano bônus"
     },
 
     {
         nome:"Desprevenido",
+        dano:null,
         descricao:"-3 na Defesa, Não pode usar reações"
     },
 
     {
         nome:"Confuso",
+        dano:null,
         descricao:"Move-se aleatoriamente, Consome 1 PA por rodada"
     },
 
     {
         nome:"Caído",
-        dano:null
+        dano:null,
+        descricao:"-1 dado em testes físicos, -5 Defesa"
     }
 
 ];
@@ -2000,3 +2016,225 @@ if(
 
 }
 
+function recalculateConditions(){
+
+    // =====================
+    // RESET VISUAL
+    // =====================
+
+    let defesaBonus = 0;
+
+    let deslocamentoBonus = 0;
+
+    let vigorPenalty = 0;
+
+    let forcaPenalty = 0;
+
+    let agilidadePenalty = 0;
+
+    let presencaPenalty = 0;
+
+    let intelectoPenalty = 0;
+
+    let pvPenalty = 0;
+
+    let pdPenalty = 0;
+
+    let vontadePenalty = 0;
+
+    let percepçaoPenalty = 0;
+
+    let pontariaPenalty = 0;
+
+    let reflexosPenalty = 0;
+
+    // =====================
+    // LER CONDIÇÕES
+    // =====================
+
+    document.querySelectorAll(".condition-card span")
+.forEach(condicaoEl => {
+
+    const nome =
+        condicaoEl.innerText;
+
+    // =====================
+    // ENVENENAMENTO
+    // =====================
+
+    if(nome === "Envenenamento"){
+
+        vigorPenalty -= 5;
+
+    }
+
+    // =====================
+    // ENJOADO
+    // =====================
+
+    if(nome === "Enjoado"){
+
+        agilidadePenalty -= 3;
+
+        vigorPenalty -= 3;
+
+        forcaPenalty -= 3;
+
+    }
+
+    // =====================
+    // CAÍDO
+    // =====================
+
+    if(nome === "Caído"){
+
+        defesaBonus -= 5;
+
+    }
+
+    // =====================
+    // DESPREVENIDO
+    // =====================
+
+    if(nome === "Desprevenido"){
+
+        defesaBonus -= 3;
+
+    }
+
+    // =====================
+    // ENFRAQUECIDO
+    // =====================
+
+    if(nome === "Enfraquecido"){
+
+        forcaPenalty -= 5;
+
+        pvPenalty -= 10;
+
+    }
+
+    // =====================
+    // CEGO
+    // =====================
+
+    if(nome === "Cego"){
+
+        pontariaPenalty -= 10;
+
+        percepçaoPenalty -= 10;
+
+    }
+
+    // =====================
+    // SURDO
+    // =====================
+
+    if(nome === "Surdo"){
+
+        percepçaoPenalty -= 10;
+
+    }
+
+    // =====================
+    // PENUMBRA
+    // =====================
+
+    if(nome === "Penumbra"){
+
+        reflexosPenalty -= 3;
+
+        percepçaoPenalty -= 5;
+
+    }
+
+    // =====================
+    // LENTIDÃO
+    // =====================
+
+    if(nome === "Lentidão"){
+
+        agilidadePenalty -= 5;
+
+        deslocamentoBonus -= 3;
+
+    }
+
+    // =====================
+    // TRAUMATIZADO
+    // =====================
+
+    if(nome === "Traumatizado"){
+
+        vontadePenalty -= 5;
+
+        pdPenalty -= 8;
+
+    }
+
+});
+
+    // =====================
+    // APLICAR DEFESA
+    // =====================
+
+    const defesaEl =
+        document.getElementById("defesa");
+
+    if(defesaEl){
+
+        const base =
+            Number(
+                defesaEl.dataset.base
+            ) || Number(defesaEl.value);
+
+        defesaEl.dataset.base = base;
+
+        defesaEl.value =
+            base + defesaBonus;
+
+    }
+
+    // =====================
+    // PV MAX
+    // =====================
+
+    const pvMax =
+        document.getElementById("pvMax");
+
+    if(pvMax){
+
+        const base =
+            Number(
+                pvMax.dataset.base
+            ) || Number(pvMax.value);
+
+        pvMax.dataset.base = base;
+
+        pvMax.value =
+            base + pvPenalty;
+
+    }
+
+    // =====================
+    // PD MAX
+    // =====================
+
+    const pdMax =
+        document.getElementById("pdMax");
+
+    if(pdMax){
+
+        const base =
+            Number(
+                pdMax.dataset.base
+            ) || Number(pdMax.value);
+
+        pdMax.dataset.base = base;
+
+        pdMax.value =
+            base + pdPenalty;
+
+    }
+
+}
