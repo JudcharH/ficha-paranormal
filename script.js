@@ -72,7 +72,47 @@ function rollDice(){
 
     const maior = Math.max(...rolls);
 
-    const total = maior + bonus;
+    let penalidade = 0;
+
+if(attr.includes("FOR")){
+
+    penalidade =
+        atributosPenalidades.forca;
+
+}
+
+if(attr.includes("AGI")){
+
+    penalidade =
+        atributosPenalidades.agilidade;
+
+}
+
+if(attr.includes("INT")){
+
+    penalidade =
+        atributosPenalidades.intelecto;
+
+}
+
+if(attr.includes("VIG")){
+
+    penalidade =
+        atributosPenalidades.vigor;
+
+}
+
+if(attr.includes("PRE")){
+
+    penalidade =
+        atributosPenalidades.presenca;
+
+}
+
+const total =
+    maior + treino + bonus + penalidade;
+
+    
 
     let critico = "";
 
@@ -85,6 +125,8 @@ function rollDice(){
             </div>
 
         `;
+
+        
 
     }
 
@@ -398,8 +440,81 @@ function rollSkill(row){
     const maior =
         Math.max(...resultados);
 
-    const total =
-        maior + treino + bonus;
+    // =====================
+// PENALIDADES
+// =====================
+
+let penalidade = 0;
+
+// FORÇA
+
+if(attr.includes("FOR")){
+
+    penalidade +=
+        window.forcaPenalty || 0;
+
+}
+
+// AGILIDADE
+
+if(attr.includes("AGI")){
+
+    penalidade +=
+        window.agilidadePenalty || 0;
+
+}
+
+// INTELECTO
+
+if(attr.includes("INT")){
+
+    penalidade +=
+        window.intelectoPenalty || 0;
+
+}
+
+// VIGOR
+
+if(attr.includes("VIG")){
+
+    penalidade +=
+        window.vigorPenalty || 0;
+
+}
+
+// PRESENÇA
+
+if(attr.includes("PRE")){
+
+    penalidade +=
+        window.presencaPenalty || 0;
+
+}
+
+// VONTADE
+
+const skillName =
+    row.querySelector(".skill-name")
+    .innerText;
+
+if(
+    skillName.includes("Vontade")
+){
+
+    penalidade +=
+        window.vontadePenalty || 0;
+
+}
+
+// =====================
+// TOTAL
+// =====================
+
+const total =
+    maior +
+    treino +
+    bonus +
+    penalidade;
 
     const nome =
         row.querySelector(".skill-name").innerText;
@@ -2027,28 +2142,28 @@ if(
 }
 
 function recalculateConditions(){
+// ======================================
+// EFEITOS AUTOMÁTICOS DAS CONDIÇÕES
+// ======================================
+
+function aplicarEfeitosCondicoes(){
 
     // =====================
-    // RESET VISUAL
+    // RESET
     // =====================
 
-    let defesaBonus = 0;
+    window.forcaPenalty = 0;
+    window.agilidadePenalty = 0;
+    window.vigorPenalty = 0;
+    window.intelectoPenalty = 0;
+    window.presencaPenalty = 0;
 
-    let deslocamentoBonus = 0;
+    window.vontadePenalty = 0;
 
-    let vigorPenalty = 0;
+    window.defesaPenalty = 0;
 
-    let forcaPenalty = 0;
-
-    let agilidadePenalty = 0;
-
-    let presencaPenalty = 0;
-
-    let intelectoPenalty = 0;
-
-    let pvPenalty = 0;
-
-    let pdPenalty = 0;
+    window.pvPenalty = 0;
+    window.pdPenalty = 0;
 
     // =====================
     // LER CONDIÇÕES
@@ -2061,34 +2176,14 @@ function recalculateConditions(){
             condicaoEl.innerText;
 
         // =====================
-        // CAÍDO
-        // =====================
-
-        if(nome === "Caído"){
-
-            defesaBonus -= 5;
-
-        }
-
-        // =====================
-        // DESPREVENIDO
-        // =====================
-
-        if(nome === "Desprevenido"){
-
-            defesaBonus -= 3;
-
-        }
-
-        // =====================
         // ENFRAQUECIDO
         // =====================
 
         if(nome === "Enfraquecido"){
 
-            forcaPenalty -= 5;
+            window.forcaPenalty -= 5;
 
-            pvPenalty -= 10;
+            window.pvPenalty -= 10;
 
         }
 
@@ -2098,9 +2193,17 @@ function recalculateConditions(){
 
         if(nome === "Lentidão"){
 
-            agilidadePenalty -= 5;
+            window.agilidadePenalty -= 5;
 
-            deslocamentoBonus -= 3;
+        }
+
+        // =====================
+        // ENVENENAMENTO
+        // =====================
+
+        if(nome === "Envenenamento"){
+
+            window.vigorPenalty -= 5;
 
         }
 
@@ -2110,30 +2213,67 @@ function recalculateConditions(){
 
         if(nome === "Traumatizado"){
 
-            pdPenalty -= 8;
+            window.presencaPenalty -= 5;
+
+            window.vontadePenalty -= 5;
+
+            window.pdPenalty -= 8;
+
+        }
+
+        // =====================
+        // ENJOADO
+        // =====================
+
+        if(nome === "Enjoado"){
+
+            window.forcaPenalty -= 3;
+
+            window.agilidadePenalty -= 3;
+
+            window.vigorPenalty -= 3;
+
+        }
+
+        // =====================
+        // CAÍDO
+        // =====================
+
+        if(nome === "Caído"){
+
+            window.defesaPenalty -= 5;
+
+        }
+
+        // =====================
+        // DESPREVENIDO
+        // =====================
+
+        if(nome === "Desprevenido"){
+
+            window.defesaPenalty -= 3;
 
         }
 
     });
 
     // =====================
-    // APLICAR DEFESA
+    // DEFESA
     // =====================
 
-    const defesaEl =
+    const defesa =
         document.getElementById("defesa");
 
-    if(defesaEl){
+    if(defesa){
 
         const base =
-            Number(
-                defesaEl.dataset.base
-            ) || Number(defesaEl.value);
+            Number(defesa.dataset.base)
+            || Number(defesa.value);
 
-        defesaEl.dataset.base = base;
+        defesa.dataset.base = base;
 
-        defesaEl.value =
-            base + defesaBonus;
+        defesa.value =
+            base + window.defesaPenalty;
 
     }
 
@@ -2147,14 +2287,13 @@ function recalculateConditions(){
     if(pvMax){
 
         const base =
-            Number(
-                pvMax.dataset.base
-            ) || Number(pvMax.value);
+            Number(pvMax.dataset.base)
+            || Number(pvMax.value);
 
         pvMax.dataset.base = base;
 
         pvMax.value =
-            base + pvPenalty;
+            base + window.pvPenalty;
 
     }
 
@@ -2168,87 +2307,14 @@ function recalculateConditions(){
     if(pdMax){
 
         const base =
-            Number(
-                pdMax.dataset.base
-            ) || Number(pdMax.value);
+            Number(pdMax.dataset.base)
+            || Number(pdMax.value);
 
         pdMax.dataset.base = base;
 
         pdMax.value =
-            base + pdPenalty;
+            base + window.pdPenalty;
 
     }
-
-}
-
-// ======================================
-// PENALIDADES DE ATRIBUTOS
-// ======================================
-
-const atributosPenalidades = {
-
-    forca:0,
-    agilidade:0,
-    vigor:0,
-    intelecto:0,
-    presenca:0
-
-};
-
-// ======================================
-// EFEITOS AUTOMÁTICOS DAS CONDIÇÕES
-// ======================================
-
-function aplicarEfeitosCondicoes(){
-
-    // RESETAR
-
-    atributosPenalidades.forca = 0;
-    atributosPenalidades.agilidade = 0;
-    atributosPenalidades.vigor = 0;
-    atributosPenalidades.intelecto = 0;
-    atributosPenalidades.presenca = 0;
-
-    // LER CONDIÇÕES
-
-    document.querySelectorAll(".condition-card span")
-    .forEach(condicaoEl => {
-
-        const nome =
-            condicaoEl.innerText;
-
-        // ENFRAQUECIDO
-
-        if(nome === "Enfraquecido"){
-
-            atributosPenalidades.forca -= 5;
-
-        }
-
-        // LENTIDÃO
-
-        if(nome === "Lentidão"){
-
-            atributosPenalidades.agilidade -= 5;
-
-        }
-
-        // ENVENENAMENTO
-
-        if(nome === "Envenenamento"){
-
-            atributosPenalidades.vigor -= 5;
-
-        }
-
-        // TRAUMATIZADO
-
-        if(nome === "Traumatizado"){
-
-            atributosPenalidades.presenca -= 5;
-
-        }
-
-    });
 
 }
