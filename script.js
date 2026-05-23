@@ -169,7 +169,12 @@ function atualizarStatus(){
 
         el.addEventListener(
             "input",
-            atualizarStatus
+            () => {
+
+                atualizarStatus();
+                atualizarPA();
+
+            }
         );
 
     }
@@ -177,6 +182,7 @@ function atualizarStatus(){
 });
 
 atualizarStatus();
+atualizarPA();
 
 // ======================================
 // PERÍCIAS
@@ -1690,7 +1696,7 @@ function nextTurn(){
     // RESET PA
     // =====================
 
-    document.getElementById("paAtual").value = 3;
+    document.getElementById("paAtual").value = 4;
 
     // =====================
     // CONDIÇÕES
@@ -1776,5 +1782,30 @@ if(
     `;
 
     saveFicha();
+
+}
+
+function atualizarPA(){
+
+    const nivel =
+        Number(
+            document.getElementById("nivel").value
+        ) || 1;
+
+    const pa =
+        4 + Math.floor(nivel / 10);
+
+    const paInput =
+        document.getElementById("paAtual");
+
+    paInput.max = pa;
+
+    if(
+        Number(paInput.value) > pa
+    ){
+
+        paInput.value = pa;
+
+    }
 
 }
