@@ -1744,47 +1744,7 @@ function selectCondition(nome){
 
     }
 
-    // =========================
-    // ENVENENAMENTO STACK
-    // =========================
-
-    if(nome === "Envenenamento"){
-
-        const existente =
-            [...document.querySelectorAll(".condition-card")]
-            .find(card =>
-                card.querySelector("span")
-                .innerText === "ENvenenamento"
-            );
-
-        if(existente){
-
-            const damageEl =
-                existente.querySelector(".condition-damage");
-
-            let texto =
-                damageEl.innerText;
-
-            let partes =
-                texto.split("d");
-
-            let quantidade =
-                Number(partes[0]);
-
-            quantidade++;
-
-            damageEl.innerText =
-                `${quantidade}d4`;
-
-            closeMenu();
-
-            saveFicha();
-
-            return;
-
-        }
-
-    }
+    
 
     // =========================
     // BLOQUEIA DUPLICADAS
@@ -1799,27 +1759,6 @@ function selectCondition(nome){
     if(
         jaExiste &&
         nome !== "Sangramento"
-    ){
-
-        alert("Essa condição já está ativa.");
-
-        return;
-
-    }
-
-     // =========================
-    // BLOQUEIA DUPLICADAS
-    // =========================
-
-    const jaExiste =
-        [...document.querySelectorAll(".condition-card span")]
-        .some(span =>
-            span.innerText === nome
-        );
-
-    if(
-        jaExiste &&
-        nome !== "Envenenamento"
     ){
 
         alert("Essa condição já está ativa.");
