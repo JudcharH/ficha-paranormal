@@ -2026,7 +2026,7 @@ function recalculateConditions(){
 
     let vontadePenalty = 0;
 
-    let percepçãoPenalty = 0;
+    let percepçaoPenalty = 0;
 
     let pontariaPenalty = 0;
 
@@ -2037,133 +2037,126 @@ function recalculateConditions(){
     // =====================
 
     document.querySelectorAll(".condition-card span")
-    .forEach(condicaoEl => {
+.forEach(condicaoEl => {
 
-        const nome =
-            condicaoEl.innerText;
+    const nome =
+        condicaoEl.innerText;
 
-        // =====================
-        // ENVENENAMENTO
-        // =====================
+    // =====================
+    // ENVENENAMENTO
+    // =====================
 
-        if(nome === "Envenenamento"){
+    if(nome === "Envenenamento"){
 
-            vigorPenalty -= 5;
+        vigorPenalty -= 5;
 
-        }
+    }
 
-        const nome =
-            condicaoEl.innerText;
+    // =====================
+    // ENJOADO
+    // =====================
 
-        // =====================
-        // ENJOADO
-        // =====================
+    if(nome === "Enjoado"){
 
-        if(nome === "Enjoado"){
+        agilidadePenalty -= 3;
 
-            agilidadePenalty -= 3;
+        vigorPenalty -= 3;
 
-            vigorPenalty -= 3;
+        forcaPenalty -= 3;
 
-            forcaPenalty -= 3;
+    }
 
-        }
+    // =====================
+    // CAÍDO
+    // =====================
 
-        const nome =
-            condicaoEl.innerText;
+    if(nome === "Caído"){
 
-        // =====================
-        // CAÍDO
-        // =====================
+        defesaBonus -= 5;
 
-        if(nome === "Caído"){
+    }
 
-            defesaBonus -= 5;
+    // =====================
+    // DESPREVENIDO
+    // =====================
 
-        }
+    if(nome === "Desprevenido"){
 
-        // =====================
-        // DESPREVENIDO
-        // =====================
+        defesaBonus -= 3;
 
-        if(nome === "Desprevenido"){
+    }
 
-            defesaBonus -= 3;
+    // =====================
+    // ENFRAQUECIDO
+    // =====================
 
-        }
+    if(nome === "Enfraquecido"){
 
-        // =====================
-        // ENFRAQUECIDO
-        // =====================
+        forcaPenalty -= 5;
 
-        if(nome === "Enfraquecido"){
+        pvPenalty -= 10;
 
-            forcaPenalty -= 5;
+    }
 
-            pvPenalty -= 10;
+    // =====================
+    // CEGO
+    // =====================
 
-        }
+    if(nome === "Cego"){
 
-        // =====================
-        // CEGO
-        // =====================
+        pontariaPenalty -= 10;
 
-        if(nome === "Cego"){
+        percepçaoPenalty -= 10;
 
-            pontariaPenalty -= 10;
+    }
 
-            percepçãoPenalty -= 10;
+    // =====================
+    // SURDO
+    // =====================
 
-        }
+    if(nome === "Surdo"){
 
-        // =====================
-        // Surdo
-        // =====================
+        percepçaoPenalty -= 10;
 
-        if(nome === "Surdo"){
+    }
 
-            percepçãoPenalty -= 10;
+    // =====================
+    // PENUMBRA
+    // =====================
 
-        }
+    if(nome === "Penumbra"){
 
-        // =====================
-        // PENUMBRA
-        // =====================
+        reflexosPenalty -= 3;
 
-        if(nome === "Penumbra"){
+        percepçaoPenalty -= 5;
 
-            reflexosPenalty -= 3;
+    }
 
-            percepçãoPenalty -= 5;
+    // =====================
+    // LENTIDÃO
+    // =====================
 
-        }
+    if(nome === "Lentidão"){
 
-        // =====================
-        // LENTIDÃO
-        // =====================
+        agilidadePenalty -= 5;
 
-        if(nome === "Lentidão"){
+        deslocamentoBonus -= 3;
 
-            agilidadePenalty -= 5;
+    }
 
-            deslocamentoBonus -= 3;
+    // =====================
+    // TRAUMATIZADO
+    // =====================
 
-        }
+    if(nome === "Traumatizado"){
 
-        // =====================
-        // TRAUMATIZADO
-        // =====================
+        vontadePenalty -= 5;
 
-        if(nome === "Traumatizado"){
+        pdPenalty -= 8;
 
-            vontadePenalty -= 5;
+    }
 
-
-            pdPenalty -= 8;
-
-        }
-
-    });
+});
 
     // =====================
     // APLICAR DEFESA
