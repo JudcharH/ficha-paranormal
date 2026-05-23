@@ -1778,18 +1778,20 @@ function nextTurn(){
         const nome =
             condicaoEl.innerText;
 
-        const condicao =
-            condicoes.find(c =>
-                c.nome === nome
-            );
+        const card =
+    condicaoEl.closest(".condition-card");
 
-        if(
-            condicao &&
-            condicao.dano
-        ){
+const danoTexto =
+    card.querySelector(".condition-damage")
+    .innerText;
+
+if(
+    danoTexto &&
+    danoTexto.includes("d")
+){
 
             const formula =
-                condicao.dano;
+    danoTexto;
 
             const partes =
                 formula.split("d");
