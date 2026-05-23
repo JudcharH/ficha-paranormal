@@ -1212,6 +1212,15 @@ function removeCondition(button){
 
     recalculateConditions();
 
+    function removeCondition(button){
+
+    button.parentElement.remove();
+
+    updateConditionsEffects();
+
+    saveFicha();
+
+}
 }
 
 
@@ -1230,6 +1239,8 @@ if(conditionBtn){
     );
 
 }
+
+updateConditionsEffects();
 
 // ======================================
 // SAVE / LOAD
@@ -2443,3 +2454,223 @@ function aplicarEfeitosCondicoes(){
     }
 
 }
+
+function updateConditionsEffects(){
+
+    // =========================
+    // RESET
+    // =========================
+
+    let defesaPenalty = 0;
+
+    let forcaPenalty = 0;
+    let agilidadePenalty = 0;
+    let vigorPenalty = 0;
+    let presencaPenalty = 0;
+    let intelectoPenalty = 0;
+
+    let pvPenalty = 0;
+    let pdPenalty = 0;
+
+    // =========================
+    // LER CONDIÇÕES
+    // =========================
+
+    document.querySelectorAll(".condition-card span")
+    .forEach(condicaoEl => {
+
+        const nome =
+            condicaoEl.innerText;
+
+        // =========================
+        // CAÍDO
+        // =========================
+
+        if(nome === "Caído"){
+
+            defesaPenalty -= 5;
+
+        }
+
+        // =========================
+        // ENFRAQUECIDO
+        // =========================
+
+        if(nome === "Enfraquecido"){
+
+            forcaPenalty -= 5;
+
+            pvPenalty -= 10;
+
+        }
+
+        // =========================
+        // LENTIDÃO
+        // =========================
+
+        if(nome === "Lentidão"){
+
+            agilidadePenalty -= 5;
+
+        }
+
+        // =========================
+        // ENVENENAMENTO
+        // =========================
+
+        if(nome === "Envenenamento"){
+
+            vigorPenalty -= 5;
+
+        }
+
+        // =========================
+        // ENJOADO
+        // =========================
+
+        if(nome === "Enjoado"){
+
+            forcaPenalty -= 3;
+            agilidadePenalty -= 3;
+            vigorPenalty -= 3;
+
+        }
+
+        // =========================
+        // TRAUMATIZADO
+        // =========================
+
+        if(nome === "Traumatizado"){
+
+            presencaPenalty -= 5;
+
+            pdPenalty -= 8;
+
+        }
+
+        // =========================
+        // DESPREVENIDO
+        // =========================
+
+        if(nome === "Desprevenido"){
+
+            defesaPenalty -= 3;
+
+        }
+
+    });
+
+    // =========================
+    // ATRIBUTOS
+    // =========================
+
+    applyAttributeEffect(
+        "forca",
+        forcaPenalty
+    );
+
+    applyAttributeEffect(
+        "agilidade",
+        agilidadePenalty
+    );
+
+    applyAttributeEffect(
+        "vigor",
+        vigorPenalty
+    );
+
+    applyAttributeEffect(
+        "presenca",
+        presencaPenalty
+    );
+
+    applyAttributeEffect(
+        "intelecto",
+        intelectoPenalty
+    );
+
+    // =========================
+    // DEFESA
+    // =========================
+
+    const defesa =
+        document.getElementById("defesa");
+
+    if(defesa){
+
+        const base =
+            Number(defesa.dataset.base)
+            || Number(defesa.value);
+
+        defesa.dataset.base = base;
+
+        defesa.value =
+            base + defesaPenalty;
+
+    }
+
+    // =========================
+    // PV MAX
+    // =========================
+
+    const pvMax =
+        document.getElementById("pvMax");
+
+    if(pvMax){
+
+        const base =
+            Number(pvMax.dataset.base)
+            || Number(pvMax.value);
+
+        pvMax.dataset.base = base;
+
+        pvMax.value =
+            base + pvPenalty;
+
+    }
+
+    // =========================
+    // PD MAX
+    // =========================
+
+    const pdMax =
+        document.getElementById("pdMax");
+
+    if(pdMax){
+
+        const base =
+            Number(pdMax.dataset.base)
+            || Number(pdMax.value);
+
+        pdMax.dataset.base = base;
+
+        pdMax.value =
+            base + pdPenalty;
+
+    }
+
+}
+
+// =========================
+// FUNÇÃO ATRIBUTOS
+// =========================
+
+function applyAttributeEffect(id, penalty){
+
+    const input =
+        document.getElementById(id);
+
+    if(!input) return;
+
+    const base =
+        Number(input.dataset.base)
+        || Number(input.value);
+
+    input.dataset.base = base;
+
+    input.value =
+        base + penalty;
+
+}
+
+updateConditionsEffects();
