@@ -194,6 +194,8 @@ function atualizarPA(){
     // =====================
     // PA MÁXIMO
     // =====================
+    const paAtual =
+        4 + Math.floor(nivel / 10);
 
     const paMax =
         4 + Math.floor(nivel / 10);
