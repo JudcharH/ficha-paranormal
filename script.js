@@ -1041,98 +1041,82 @@ const condicoes = [
 
     {
         nome:"Paralisia",
-        dano:null,
-        descricao:"Acerto Garantido"
+        dano:null
     },
 
     {
         nome:"Paralisia Total",
-        dano:null,
-        descricao:"Acerto garantido+"
+        dano:null
     },
 
     {
         nome:"Enjoado",
-        dano:null,
-        descricao:"-3 em testes físicos"
+        dano:null
     },
 
     {
         nome:"Morrendo",
-        dano:null,
-        descricao:"Não possui PA"
+        dano:null
     },
 
     {
         nome:"Enfraquecido",
-        dano:null,
-        descricao:"-5 em testes de Força, -10 no PV máximo"
+        dano:null
     },
 
     {
         nome:"Lentidão",
-        dano:null,
-        descricao:"-5 em testes de Agilidade, -3m de deslocamento"
+        dano:null
     },
 
     {
         nome:"Cansado",
-        dano:null,
-        descricao:"Habilidades custam o dobro"
+        dano:null
     },
 
     {
         nome:"Controlado",
-        dano:null,
-        descricao:"Entrega seus PA para o conjurador"
+        dano:null
     },
 
     {
         nome:"Cego",
-        dano:null,
-        descricao:"-10 em Percepção, -10 em ataques à distância"
+        dano:null
     },
 
     {
         nome:"Surdo",
-        dano:null,
-        descricao:"-10 em Percepção"
+        dano:null
     },
 
     {
         nome:"Traumatizado",
-        dano:null,
-        descricao:"-5 em testes de Vontade, -8 no PD máximo"
+        dano:null
     },
 
     {
         nome:"Penumbra",
-        dano:null,
-        descricao:"-5 em Percepção, -3 em Reflexos"
+        dano:null
     },
 
     {
         nome:"Vulnerável",
-        dano:null,
-        descricao:"Sofre o dobro de dano bônus"
+        dano:null
     },
 
     {
         nome:"Desprevenido",
-        dano:null,
-        descricao:"-3 na Defesa, Não pode usar reações"
+        dano:null
     },
 
     {
         nome:"Confuso",
-        dano:null,
-        descricao:"Move-se aleatoriamente, Consome 1 PA por rodada"
+        dano:null
     },
 
     {
         nome:"Caído",
-        dano:null,
-        descricao:"-1 dado em testes físicos, -5 Defesa"
+        dano:null
     }
 
 ];
@@ -2040,139 +2024,71 @@ function recalculateConditions(){
 
     let pdPenalty = 0;
 
-    let vontadePenalty = 0;
-
-    let percepçaoPenalty = 0;
-
-    let pontariaPenalty = 0;
-
-    let reflexosPenalty = 0;
-
     // =====================
     // LER CONDIÇÕES
     // =====================
 
     document.querySelectorAll(".condition-card span")
-.forEach(condicaoEl => {
+    .forEach(condicaoEl => {
 
-    const nome =
-        condicaoEl.innerText;
+        const nome =
+            condicaoEl.innerText;
 
-    // =====================
-    // ENVENENAMENTO
-    // =====================
+        // =====================
+        // CAÍDO
+        // =====================
 
-    if(nome === "Envenenamento"){
+        if(nome === "Caído"){
 
-        vigorPenalty -= 5;
+            defesaBonus -= 5;
 
-    }
+        }
 
-    // =====================
-    // ENJOADO
-    // =====================
+        // =====================
+        // DESPREVENIDO
+        // =====================
 
-    if(nome === "Enjoado"){
+        if(nome === "Desprevenido"){
 
-        agilidadePenalty -= 3;
+            defesaBonus -= 3;
 
-        vigorPenalty -= 3;
+        }
 
-        forcaPenalty -= 3;
+        // =====================
+        // ENFRAQUECIDO
+        // =====================
 
-    }
+        if(nome === "Enfraquecido"){
 
-    // =====================
-    // CAÍDO
-    // =====================
+            forcaPenalty -= 5;
 
-    if(nome === "Caído"){
+            pvPenalty -= 10;
 
-        defesaBonus -= 5;
+        }
 
-    }
+        // =====================
+        // LENTIDÃO
+        // =====================
 
-    // =====================
-    // DESPREVENIDO
-    // =====================
+        if(nome === "Lentidão"){
 
-    if(nome === "Desprevenido"){
+            agilidadePenalty -= 5;
 
-        defesaBonus -= 3;
+            deslocamentoBonus -= 3;
 
-    }
+        }
 
-    // =====================
-    // ENFRAQUECIDO
-    // =====================
+        // =====================
+        // TRAUMATIZADO
+        // =====================
 
-    if(nome === "Enfraquecido"){
+        if(nome === "Traumatizado"){
 
-        forcaPenalty -= 5;
+            pdPenalty -= 8;
 
-        pvPenalty -= 10;
+        }
 
-    }
-
-    // =====================
-    // CEGO
-    // =====================
-
-    if(nome === "Cego"){
-
-        pontariaPenalty -= 10;
-
-        percepçaoPenalty -= 10;
-
-    }
-
-    // =====================
-    // SURDO
-    // =====================
-
-    if(nome === "Surdo"){
-
-        percepçaoPenalty -= 10;
-
-    }
-
-    // =====================
-    // PENUMBRA
-    // =====================
-
-    if(nome === "Penumbra"){
-
-        reflexosPenalty -= 3;
-
-        percepçaoPenalty -= 5;
-
-    }
-
-    // =====================
-    // LENTIDÃO
-    // =====================
-
-    if(nome === "Lentidão"){
-
-        agilidadePenalty -= 5;
-
-        deslocamentoBonus -= 3;
-
-    }
-
-    // =====================
-    // TRAUMATIZADO
-    // =====================
-
-    if(nome === "Traumatizado"){
-
-        vontadePenalty -= 5;
-
-        pdPenalty -= 8;
-
-    }
-
-});
+    });
 
     // =====================
     // APLICAR DEFESA
