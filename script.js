@@ -191,8 +191,16 @@ function atualizarPA(){
             document.getElementById("nivel").value
         ) || 1;
 
+    // =====================
+    // PA MÁXIMO
+    // =====================
+
     const paMax =
         4 + Math.floor(nivel / 10);
+
+    // =====================
+    // ELEMENTOS
+    // =====================
 
     const paAtual =
         document.getElementById("paAtual");
@@ -200,11 +208,20 @@ function atualizarPA(){
     const texto =
         document.getElementById("paMaxText");
 
+    // =====================
+    // TEXTO
+    // =====================
+
     texto.innerText =
         `PA Máximo: ${paMax}`;
 
-    // impede passar do máximo
-    if(Number(paAtual.value) > paMax){
+    // =====================
+    // LIMITADOR
+    // =====================
+
+    if(
+        Number(paAtual.value) > paMax
+    ){
 
         paAtual.value = paMax;
 
@@ -1720,11 +1737,6 @@ function closeMenu(){
 
 function nextTurn(){
 
-    // =====================
-    // RESET PA
-    // =====================
-
-    document.getElementById("paAtual").value = 4;
 
     // =====================
     // CONDIÇÕES
@@ -1813,27 +1825,3 @@ if(
 
 }
 
-function atualizarPA(){
-
-    const nivel =
-        Number(
-            document.getElementById("nivel").value
-        ) || 1;
-
-    const pa =
-        4 + Math.floor(nivel / 10);
-
-    const paInput =
-        document.getElementById("paAtual");
-
-    paInput.max = pa;
-
-    if(
-        Number(paInput.value) > pa
-    ){
-
-        paInput.value = pa;
-
-    }
-
-}
