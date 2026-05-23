@@ -1297,6 +1297,8 @@ function loadFicha(){
 
     }
 
+    aplicarEfeitosCondicoes();
+
 }
 
 // ======================================
@@ -1695,24 +1697,18 @@ function selectCondition(nome){
     const condicao =
         condicoes.find(c =>
             c.nome === nome
-            
         );
 
-        recalculateConditions();
-
-        
-
-    // =========================
-    // SANGRAMENTO STACK
-    // =========================
+    // =====================
+    // STACK SANGRAMENTO
+    // =====================
 
     if(nome === "Sangramento"){
 
         const existente =
             [...document.querySelectorAll(".condition-card")]
             .find(card =>
-                card.querySelector("span")
-                .innerText === "Sangramento"
+                card.querySelector("span").innerText === "Sangramento"
             );
 
         if(existente){
@@ -1729,14 +1725,17 @@ function selectCondition(nome){
             let quantidade =
                 Number(partes[0]);
 
+            let tipo =
+                Number(partes[1]);
+
             quantidade++;
 
             damageEl.innerText =
-                `${quantidade}d6`;
-
-            closeMenu();
+                `${quantidade}d${tipo}`;
 
             saveFicha();
+
+            closeMenu();
 
             return;
 
@@ -1744,11 +1743,53 @@ function selectCondition(nome){
 
     }
 
-    
+    // =====================
+    // STACK ENVENENAMENTO
+    // =====================
 
-    // =========================
-    // BLOQUEIA DUPLICADAS
-    // =========================
+    if(nome === "Envenenamento"){
+
+        const existente =
+            [...document.querySelectorAll(".condition-card")]
+            .find(card =>
+                card.querySelector("span").innerText === "Envenenamento"
+            );
+
+        if(existente){
+
+            const damageEl =
+                existente.querySelector(".condition-damage");
+
+            let texto =
+                damageEl.innerText;
+
+            let partes =
+                texto.split("d");
+
+            let quantidade =
+                Number(partes[0]);
+
+            let tipo =
+                Number(partes[1]);
+
+            quantidade += 2;
+
+            damageEl.innerText =
+                `${quantidade}d${tipo}`;
+
+            saveFicha();
+
+            closeMenu();
+
+            return;
+
+        }
+
+    }
+
+    // =====================
+    // BLOQUEAR DUPLICADAS
+    // =====================
 
     const jaExiste =
         [...document.querySelectorAll(".condition-card span")]
@@ -1756,10 +1797,7 @@ function selectCondition(nome){
             span.innerText === nome
         );
 
-    if(
-        jaExiste &&
-        nome !== "Sangramento"
-    ){
+    if(jaExiste){
 
         alert("Essa condição já está ativa.");
 
@@ -1767,9 +1805,9 @@ function selectCondition(nome){
 
     }
 
-    // =========================
-    // CRIA CARD
-    // =========================
+    // =====================
+    // CRIAR CARD
+    // =====================
 
     const card =
         document.createElement("div");
@@ -1797,6 +1835,10 @@ function selectCondition(nome){
 
     saveFicha();
 
+    recalculateConditions();
+
+    aplicarEfeitosCondicoes();
+
 }
 
 // ======================================
@@ -1813,6 +1855,8 @@ function removeCondition(button){
     button.parentElement.remove();
 
     saveFicha();
+
+    aplicarEfeitosCondicoes();
 
 }
 
@@ -2089,6 +2133,312 @@ function recalculateConditions(){
 
         pdMax.value =
             base + pdPenalty;
+
+    }
+
+}
+
+// ======================================
+// EFEITOS AUTOMÁTICOS DAS CONDIÇÕES
+// ======================================
+
+function aplicarEfeitosCondicoes(){
+
+    // =====================
+    // RESET
+    // =====================
+
+    let defesaBonus = 0;
+
+    let deslocamentoBonus = 0;
+
+    let vigorPenalty = 0;
+
+    let forcaPenalty = 0;
+
+    let agilidadePenalty = 0;
+
+    let presencaPenalty = 0;
+
+    let intelectoPenalty = 0;
+
+    let pvPenalty = 0;
+
+    let pdPenalty = 0;
+
+    let vontadePenalty = 0;
+
+    let percepcaoPenalty = 0;
+
+    let pontariaPenalty = 0;
+
+    let reflexosPenalty = 0;
+
+    let paPenalty = 0;
+
+    // =====================
+    // LER CONDIÇÕES
+    // =====================
+
+    document.querySelectorAll(".condition-card span")
+    .forEach(condicaoEl => {
+
+        const nome =
+            condicaoEl.innerText;
+
+        // =====================
+        // ENVENENAMENTO
+        // =====================
+
+        if(nome === "Envenenamento"){
+
+            vigorPenalty -= 5;
+
+        }
+
+        // =====================
+        // ENJOADO
+        // =====================
+
+        if(nome === "Enjoado"){
+
+            agilidadePenalty -= 3;
+
+            vigorPenalty -= 3;
+
+            forcaPenalty -= 3;
+
+        }
+
+        // =====================
+        // CAÍDO
+        // =====================
+
+        if(nome === "Caído"){
+
+            defesaBonus -= 5;
+
+        }
+
+        // =====================
+        // DESPREVENIDO
+        // =====================
+
+        if(nome === "Desprevenido"){
+
+            defesaBonus -= 3;
+
+        }
+
+        // =====================
+        // ENFRAQUECIDO
+        // =====================
+
+        if(nome === "Enfraquecido"){
+
+            forcaPenalty -= 5;
+
+            pvPenalty -= 10;
+
+        }
+
+        // =====================
+        // CEGO
+        // =====================
+
+        if(nome === "Cego"){
+
+            pontariaPenalty -= 10;
+
+            percepcaoPenalty -= 10;
+
+        }
+
+        // =====================
+        // SURDO
+        // =====================
+
+        if(nome === "Surdo"){
+
+            percepcaoPenalty -= 10;
+
+        }
+
+        // =====================
+        // PENUMBRA
+        // =====================
+
+        if(nome === "Penumbra"){
+
+            reflexosPenalty -= 3;
+
+            percepcaoPenalty -= 5;
+
+        }
+
+        // =====================
+        // LENTIDÃO
+        // =====================
+
+        if(nome === "Lentidão"){
+
+            agilidadePenalty -= 5;
+
+            deslocamentoBonus -= 3;
+
+        }
+
+        // =====================
+        // TRAUMATIZADO
+        // =====================
+
+        if(nome === "Traumatizado"){
+
+            vontadePenalty -= 5;
+
+            pdPenalty -= 8;
+
+        }
+
+        // =====================
+        // CONFUSO
+        // =====================
+
+        if(nome === "Confuso"){
+
+            paPenalty -= 1;
+
+        }
+
+        // =====================
+        // MORRENDO
+        // =====================
+
+        if(nome === "Morrendo"){
+
+            paPenalty -= 999;
+
+        }
+
+    });
+
+    // =====================
+    // DEFESA
+    // =====================
+
+    const defesaEl =
+        document.getElementById("defesa");
+
+    if(defesaEl){
+
+        const base =
+            Number(defesaEl.dataset.base)
+            || Number(defesaEl.value)
+            || 0;
+
+        defesaEl.dataset.base = base;
+
+        defesaEl.value =
+            base + defesaBonus;
+
+    }
+
+    // =====================
+    // PV MAX
+    // =====================
+
+    const pvMax =
+        document.getElementById("pvMax");
+
+    if(pvMax){
+
+        const base =
+            Number(pvMax.dataset.base)
+            || Number(pvMax.value)
+            || 0;
+
+        pvMax.dataset.base = base;
+
+        pvMax.value =
+            base + pvPenalty;
+
+    }
+
+    // =====================
+    // PD MAX
+    // =====================
+
+    const pdMax =
+        document.getElementById("pdMax");
+
+    if(pdMax){
+
+        const base =
+            Number(pdMax.dataset.base)
+            || Number(pdMax.value)
+            || 0;
+
+        pdMax.dataset.base = base;
+
+        pdMax.value =
+            base + pdPenalty;
+
+    }
+
+    // =====================
+    // DESLOCAMENTO
+    // =====================
+
+    const deslocamentoEl =
+        document.getElementById("deslocamento");
+
+    if(deslocamentoEl){
+
+        const base =
+            Number(deslocamentoEl.dataset.base)
+            || Number(deslocamentoEl.value)
+            || 0;
+
+        deslocamentoEl.dataset.base = base;
+
+        deslocamentoEl.value =
+            base + deslocamentoBonus;
+
+    }
+
+    // =====================
+    // PA
+    // =====================
+
+    const paAtual =
+        document.getElementById("paAtual");
+
+    if(paAtual){
+
+        const nivel =
+            Number(
+                document.getElementById("nivel").value
+            ) || 1;
+
+        let paMax = 4;
+
+        if(nivel >= 10){
+
+            paMax++;
+
+        }
+
+        if(nivel >= 20){
+
+            paMax++;
+
+        }
+
+        paAtual.value =
+            Math.max(
+                0,
+                paMax + paPenalty
+            );
 
     }
 
