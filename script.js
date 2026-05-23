@@ -184,6 +184,15 @@ function atualizarStatus(){
 atualizarStatus();
 atualizarPA();
 
+document.getElementById("paAtual").value =
+    4 + Math.floor(
+        (
+            Number(
+                document.getElementById("nivel").value
+            ) || 1
+        ) / 10
+    );
+
 function atualizarPA(){
 
     const nivel =
