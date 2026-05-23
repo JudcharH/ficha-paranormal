@@ -74,20 +74,6 @@ function rollDice(){
 
     const total = maior + bonus;
 
-    let critico = "";
-
-    if(tipo === 20 && maior === 20){
-
-        critico = `
-
-            <div class="critical-text">
-                CRÍTICO!
-            </div>
-
-        `;
-
-    }
-
     document.getElementById("diceResult").innerHTML = `
 
         <div class="dice-rolls">
@@ -102,33 +88,33 @@ function rollDice(){
             Total: ${total}
         </div>
 
-        ${critico}
-
     `;
 
 }
 
 // ======================================
-// ROLAR ATRIBUTO
+// PENALIDADES
 // ======================================
 
-function rollAttribute(attributeId){
+const atributosPenalidades = {
 
-    const atributo =
-        Number(document.getElementById(attributeId).value) || 1;
+    forca:0,
+    agilidade:0,
+    vigor:0,
+    intelecto:0,
+    presenca:0
 
-    document.getElementById("diceCount").value =
-        atributo;
+};
 
-    document.getElementById("diceType").value =
-        20;
+const periciasPenalidades = {
 
-    document.getElementById("diceBonus").value =
-        0;
+    fortitude:0,
+    reflexos:0,
+    vontade:0,
+    percepcao:0,
+    pontaria:0
 
-    rollDice();
-
-}
+};
 
 // ======================================
 // STATUS
@@ -140,22 +126,77 @@ function atualizarStatus(){
         Number(document.getElementById("nivel").value) || 1;
 
     const vigor =
-        Number(document.getElementById("vigor").value) || 1;
+        (
+            Number(document.getElementById("vigor").value) || 1
+        ) + atributosPenalidades.vigor;
 
     const presenca =
-        Number(document.getElementById("presenca").value) || 1;
+        (
+            Number(document.getElementById("presenca").value) || 1
+        ) + atributosPenalidades.presenca;
 
-    const pvMax =
+    let pvMax =
         (7 + vigor) * nivel;
 
-    const pdMax =
+    let pdMax =
         (5 + presenca) * nivel;
+
+    // =====================
+    // CONDIÇÕES
+    // =====================
+
+    if(
+        document.querySelector(
+            '.condition-card span[data-name="Enfraquecido"]'
+        )
+    ){
+
+        pvMax -= 10;
+
+    }
+
+    if(
+        document.querySelector(
+            '.condition-card span[data-name="Traumatizado"]'
+        )
+    ){
+
+        pdMax -= 8;
+
+    }
 
     document.getElementById("pvMax").value =
         pvMax;
 
     document.getElementById("pdMax").value =
         pdMax;
+
+}
+
+function atualizarPA(){
+
+    const nivel =
+        Number(
+            document.getElementById("nivel").value
+        ) || 1;
+
+    const paMax =
+        4 + Math.floor(nivel / 10);
+
+    const paAtual =
+        document.getElementById("paAtual");
+
+    document.getElementById("paMaxText")
+    .innerText =
+        `PA Máximo: ${paMax}`;
+
+    if(
+        Number(paAtual.value) > paMax
+    ){
+
+        paAtual.value = paMax;
+
+    }
 
 }
 
@@ -181,60 +222,83 @@ function atualizarStatus(){
 
 });
 
-atualizarStatus();
-atualizarPA();
+// ======================================
+// ATRIBUTOS
+// ======================================
 
-document.getElementById("paAtual").value =
-    4 + Math.floor(
-        (
+function getAttributeValue(attr){
+
+    // =====================
+    // FORÇA
+    // =====================
+
+    if(attr.includes("FOR")){
+
+        return (
             Number(
-                document.getElementById("nivel").value
+                document.getElementById("forca").value
             ) || 1
-        ) / 10
-    );
-
-function atualizarPA(){
-
-    const nivel =
-        Number(
-            document.getElementById("nivel").value
-        ) || 1;
-
-    // =====================
-    // PA MÁXIMO
-    // =====================
-
-    const paMax =
-        4 + Math.floor(nivel / 10);
-
-    // =====================
-    // ELEMENTOS
-    // =====================
-
-    const paAtual =
-        document.getElementById("paAtual");
-
-    const texto =
-        document.getElementById("paMaxText");
-
-    // =====================
-    // TEXTO
-    // =====================
-
-    texto.innerText =
-        `PA Máximo: ${paMax}`;
-
-    // =====================
-    // LIMITADOR
-    // =====================
-
-    if(
-        Number(paAtual.value) > paMax
-    ){
-
-        paAtual.value = paMax;
+        ) + atributosPenalidades.forca;
 
     }
+
+    // =====================
+    // AGILIDADE
+    // =====================
+
+    if(attr.includes("AGI")){
+
+        return (
+            Number(
+                document.getElementById("agilidade").value
+            ) || 1
+        ) + atributosPenalidades.agilidade;
+
+    }
+
+    // =====================
+    // INTELECTO
+    // =====================
+
+    if(attr.includes("INT")){
+
+        return (
+            Number(
+                document.getElementById("intelecto").value
+            ) || 1
+        ) + atributosPenalidades.intelecto;
+
+    }
+
+    // =====================
+    // VIGOR
+    // =====================
+
+    if(attr.includes("VIG")){
+
+        return (
+            Number(
+                document.getElementById("vigor").value
+            ) || 1
+        ) + atributosPenalidades.vigor;
+
+    }
+
+    // =====================
+    // PRESENÇA
+    // =====================
+
+    if(attr.includes("PRE")){
+
+        return (
+            Number(
+                document.getElementById("presenca").value
+            ) || 1
+        ) + atributosPenalidades.presenca;
+
+    }
+
+    return 1;
 
 }
 
@@ -259,123 +323,66 @@ function updateSkills(){
                 row.querySelector(".skill-bonus").value
             ) || 0;
 
-        const total =
-            treino + bonus;
-
         row.querySelector(".skill-total")
-        .innerText = `+${total}`;
+        .innerText =
+            `+${treino + bonus}`;
 
     });
 
 }
 
-document.querySelectorAll(
-    ".skill-train, .skill-bonus"
-)
-.forEach(input => {
+function getSkillPenalty(nome){
 
-    input.addEventListener(
-        "input",
-        updateSkills
-    );
+    nome =
+        nome.toLowerCase();
 
-});
+    if(nome.includes("fortitude")){
 
-updateSkills();
-
-// ======================================
-// PEGAR ATRIBUTO
-// ======================================
-
-function getAttributeValue(attr){
-
-    // FORÇA
-
-    if(attr.includes("FOR")){
-
-        return (
-            Number(
-                document.getElementById("forca").value
-            ) || 1
-        ) + atributosPenalidades.forca;
+        return periciasPenalidades.fortitude;
 
     }
 
-    // AGILIDADE
+    if(nome.includes("reflex")){
 
-    if(attr.includes("AGI")){
-
-        return (
-            Number(
-                document.getElementById("agilidade").value
-            ) || 1
-        ) + atributosPenalidades.agilidade;
+        return periciasPenalidades.reflexos;
 
     }
 
-    // INTELECTO
+    if(nome.includes("vontade")){
 
-    if(attr.includes("INT")){
-
-        return (
-            Number(
-                document.getElementById("intelecto").value
-            ) || 1
-        ) + atributosPenalidades.intelecto;
+        return periciasPenalidades.vontade;
 
     }
 
-    // VIGOR
+    if(nome.includes("percep")){
 
-    if(attr.includes("VIG")){
-
-        return (
-            Number(
-                document.getElementById("vigor").value
-            ) || 1
-        ) + atributosPenalidades.vigor;
+        return periciasPenalidades.percepcao;
 
     }
 
-    // PRESENÇA
+    if(nome.includes("pontaria")){
 
-    if(attr.includes("PRE")){
-
-        return (
-            Number(
-                document.getElementById("presenca").value
-            ) || 1
-        ) + atributosPenalidades.presenca;
+        return periciasPenalidades.pontaria;
 
     }
 
-    return 1;
+    return 0;
 
 }
-
-document.addEventListener("click", () => {
-
-    aplicarEfeitosCondicoes();
-
-});
-
-function updateConditionsEffects(){
-
-    updateSkills();
-
-}
-
-// ======================================
-// ROLAR PERÍCIA
-// ======================================
 
 function rollSkill(row){
 
     const attr =
         row.querySelector(".skill-attr").innerText;
 
-    const atributo =
+    let atributo =
         getAttributeValue(attr);
+
+    if(atributo < 1){
+
+        atributo = 1;
+
+    }
 
     const treino =
         Number(
@@ -386,6 +393,12 @@ function rollSkill(row){
         Number(
             row.querySelector(".skill-bonus").value
         ) || 0;
+
+    const nome =
+        row.querySelector(".skill-name").innerText;
+
+    const penalidade =
+        getSkillPenalty(nome);
 
     let resultados = [];
 
@@ -399,12 +412,13 @@ function rollSkill(row){
         Math.max(...resultados);
 
     const total =
-        maior + treino + bonus;
+        maior +
+        treino +
+        bonus +
+        penalidade;
 
-    const nome =
-        row.querySelector(".skill-name").innerText;
-
-    document.getElementById("diceResult").innerHTML = `
+    document.getElementById("diceResult")
+    .innerHTML = `
 
         <div class="dice-skill-name">
             ${nome}
@@ -440,613 +454,748 @@ document.querySelectorAll(".clickable-skill")
 });
 
 // ======================================
-// REMOVER CARD
+// CONDIÇÕES
 // ======================================
 
-function removeCard(button){
+const condicoes = [
 
-    const card =
-        button.closest(
-            ".ability-card, .inventory-card, .assimilation-card"
+    {
+        nome:"Sangramento",
+        dano:"1d6"
+    },
+
+    {
+        nome:"Chamas",
+        dano:"2d6"
+    },
+
+    {
+        nome:"Envenenamento",
+        dano:"2d4"
+    },
+
+    {
+        nome:"Paralisia",
+        dano:null
+    },
+
+    {
+        nome:"Paralisia Total",
+        dano:null
+    },
+
+    {
+        nome:"Enjoado",
+        dano:null
+    },
+
+    {
+        nome:"Morrendo",
+        dano:null
+    },
+
+    {
+        nome:"Enfraquecido",
+        dano:null
+    },
+
+    {
+        nome:"Lentidão",
+        dano:null
+    },
+
+    {
+        nome:"Cansado",
+        dano:null
+    },
+
+    {
+        nome:"Controlado",
+        dano:null
+    },
+
+    {
+        nome:"Cego",
+        dano:null
+    },
+
+    {
+        nome:"Surdo",
+        dano:null
+    },
+
+    {
+        nome:"Traumatizado",
+        dano:null
+    },
+
+    {
+        nome:"Penumbra",
+        dano:null
+    },
+
+    {
+        nome:"Vulnerável",
+        dano:null
+    },
+
+    {
+        nome:"Desprevenido",
+        dano:null
+    },
+
+    {
+        nome:"Confuso",
+        dano:null
+    },
+
+    {
+        nome:"Caído",
+        dano:null
+    }
+
+];
+
+// ======================================
+// EFEITOS CONDIÇÕES
+// ======================================
+
+function aplicarEfeitosCondicoes(){
+
+    // RESET
+
+    atributosPenalidades.forca = 0;
+    atributosPenalidades.agilidade = 0;
+    atributosPenalidades.vigor = 0;
+    atributosPenalidades.intelecto = 0;
+    atributosPenalidades.presenca = 0;
+
+    periciasPenalidades.fortitude = 0;
+    periciasPenalidades.reflexos = 0;
+    periciasPenalidades.vontade = 0;
+    periciasPenalidades.percepcao = 0;
+    periciasPenalidades.pontaria = 0;
+
+    // LER CONDIÇÕES
+
+    document.querySelectorAll(".condition-card span")
+    .forEach(condicaoEl => {
+
+        const nome =
+            condicaoEl.dataset.name;
+
+        // =====================
+        // ENVENENAMENTO
+        // =====================
+
+        if(nome === "Envenenamento"){
+
+            atributosPenalidades.vigor -= 5;
+
+        }
+
+        // =====================
+        // ENJOADO
+        // =====================
+
+        if(nome === "Enjoado"){
+
+            atributosPenalidades.forca -= 3;
+            atributosPenalidades.agilidade -= 3;
+            atributosPenalidades.vigor -= 3;
+
+        }
+
+        // =====================
+        // ENFRAQUECIDO
+        // =====================
+
+        if(nome === "Enfraquecido"){
+
+            atributosPenalidades.forca -= 5;
+
+        }
+
+        // =====================
+        // LENTIDÃO
+        // =====================
+
+        if(nome === "Lentidão"){
+
+            atributosPenalidades.agilidade -= 5;
+
+        }
+
+        // =====================
+        // TRAUMATIZADO
+        // =====================
+
+        if(nome === "Traumatizado"){
+
+            periciasPenalidades.vontade -= 5;
+
+        }
+
+        // =====================
+        // CEGO
+        // =====================
+
+        if(nome === "Cego"){
+
+            periciasPenalidades.percepcao -= 10;
+            periciasPenalidades.pontaria -= 10;
+
+        }
+
+        // =====================
+        // SURDO
+        // =====================
+
+        if(nome === "Surdo"){
+
+            periciasPenalidades.percepcao -= 10;
+
+        }
+
+        // =====================
+        // PENUMBRA
+        // =====================
+
+        if(nome === "Penumbra"){
+
+            periciasPenalidades.percepcao -= 5;
+            periciasPenalidades.reflexos -= 3;
+
+        }
+
+    });
+
+    atualizarStatus();
+
+}
+
+// ======================================
+// MENU CONDIÇÕES
+// ======================================
+
+function openConditionMenu(){
+
+    let html = "";
+
+    condicoes.forEach(condicao => {
+
+        html += `
+
+            <div
+                class="assimilation-option"
+                onclick="selectCondition('${condicao.nome}')"
+            >
+
+                <h3>${condicao.nome}</h3>
+
+            </div>
+
+        `;
+
+    });
+
+    const menu =
+        document.createElement("div");
+
+    menu.classList.add("assimilation-menu");
+
+    menu.innerHTML = `
+
+        <div class="assimilation-menu-content">
+
+            <div class="menu-header">
+
+                <h2>CONDIÇÕES</h2>
+
+                <button onclick="closeMenu()">
+                    X
+                </button>
+
+            </div>
+
+            <div
+                class="assimilation-options"
+            >
+
+                ${html}
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(menu);
+
+}
+
+function selectCondition(nome){
+
+    const condicao =
+        condicoes.find(c =>
+            c.nome === nome
         );
 
-    if(card){
+    // =====================
+    // STACK SANGRAMENTO
+    // =====================
 
-        card.remove();
+    if(nome === "Sangramento"){
+
+        const existente =
+            [...document.querySelectorAll(".condition-card")]
+            .find(card =>
+                card.querySelector("span").dataset.name === "Sangramento"
+            );
+
+        if(existente){
+
+            const damageEl =
+                existente.querySelector(".condition-damage");
+
+            let texto =
+                damageEl.innerText;
+
+            let partes =
+                texto.split("d");
+
+            let quantidade =
+                Number(partes[0]);
+
+            quantidade++;
+
+            damageEl.innerText =
+                `${quantidade}d6`;
+
+            closeMenu();
+
+            return;
+
+        }
 
     }
 
-}
+    // =====================
+    // STACK ENVENENAMENTO
+    // =====================
 
-// ======================================
-// HABILIDADES
-// ======================================
+    if(nome === "Envenenamento"){
 
-const habilidades = [
+        const existente =
+            [...document.querySelectorAll(".condition-card")]
+            .find(card =>
+                card.querySelector("span").dataset.name === "Envenenamento"
+            );
 
-    {
-        nome: "Ataque Especial",
-        custo: 3,
-        tipo: "PD",
-        descricao: "Recebe bônus de ataque ou dano."
-    },
+        if(existente){
 
-    {
-        nome: "Golpe Pesado",
-        custo: 3,
-        tipo: "PD",
-        descricao: "Seu dano sobe um passo."
-    },
+            const damageEl =
+                existente.querySelector(".condition-damage");
 
-    {
-        nome: "Casca Grossa",
-        custo: 4,
-        tipo: "PD",
-        descricao: "Recebe +1 PV por nível."
+            let texto =
+                damageEl.innerText;
+
+            let partes =
+                texto.split("d");
+
+            let quantidade =
+                Number(partes[0]);
+
+            quantidade += 2;
+
+            damageEl.innerText =
+                `${quantidade}d4`;
+
+            closeMenu();
+
+            return;
+
+        }
+
     }
 
-];
+    // =====================
+    // EVITA DUPLICADA
+    // =====================
 
-function addAbility(){
+    const jaExiste =
+        [...document.querySelectorAll(".condition-card span")]
+        .some(span =>
+            span.dataset.name === nome
+        );
 
-    let html = "";
+    if(
+        jaExiste &&
+        nome !== "Sangramento" &&
+        nome !== "Envenenamento"
+    ){
 
-    habilidades.forEach(habilidade => {
+        return;
 
-        html += `
-
-            <div
-                class="assimilation-option"
-                onclick="selectAbility('${habilidade.nome}')"
-            >
-
-                <div>
-
-                    <h3>${habilidade.nome}</h3>
-
-                    <span>
-                        ${habilidade.custo} ${habilidade.tipo}
-                    </span>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-
-    const menu =
-        document.createElement("div");
-
-    menu.classList.add("assimilation-menu");
-
-    menu.innerHTML = `
-
-        <div class="assimilation-menu-content">
-
-            <div class="menu-header">
-
-                <h2>HABILIDADES</h2>
-
-                <button onclick="closeMenu()">
-                    X
-                </button>
-
-            </div>
-
-            ${html}
-
-        </div>
-
-    `;
-
-    document.body.appendChild(menu);
-
-}
-
-function selectAbility(nome){
-
-    const habilidade =
-        habilidades.find(h => h.nome === nome);
-
-    if(!habilidade) return;
+    }
 
     const card =
         document.createElement("div");
 
-    card.classList.add("ability-card");
+    card.classList.add("condition-card");
 
     card.innerHTML = `
 
-        <div class="ability-header">
-
-            <h3 contenteditable="true">
-                ${habilidade.nome}
-            </h3>
-
-            <button onclick="removeCard(this)">
-                X
-            </button>
-
-        </div>
-
-        <p contenteditable="true">
-            ${habilidade.descricao}
-        </p>
-
-        <span>
-            Custo:
-            ${habilidade.custo}
-            ${habilidade.tipo}
+        <span data-name="${nome}">
+            ${nome}
         </span>
 
+        <small class="condition-damage">
+            ${condicao.dano || "Sem dano"}
+        </small>
+
+        <button onclick="removeCondition(this)">
+            X
+        </button>
+
     `;
 
-    document.getElementById("abilitiesList")
+    document.getElementById("conditionsList")
     .appendChild(card);
+
+    aplicarEfeitosCondicoes();
 
     closeMenu();
 
 }
 
+function removeCondition(button){
+
+    button.parentElement.remove();
+
+    aplicarEfeitosCondicoes();
+
+}
+
 // ======================================
-// ASSIMILAÇÕES
+// PASSAR RODADA
 // ======================================
 
-const assimilations = [
+function nextTurn(){
 
-    {
-        nome: "Teleporte Cinético",
-        elemento: "Energia",
-        custo: 4,
-        descricao: "Teleporta até 3m."
-    },
+    const paTexto =
+        document.getElementById("paMaxText")
+        .innerText;
 
-    {
-        nome: "Aceleração",
-        elemento: "Energia",
-        custo: 4,
-        descricao: "Recebe ação extra temporária."
-    }
+    const paMax =
+        Number(
+            paTexto.replace(/\D/g, "")
+        );
 
-];
+    document.getElementById("paAtual").value =
+        paMax;
 
-function openAssimilationMenu(){
+    let danoTotal = 0;
 
-    let html = "";
+    document.querySelectorAll(".condition-card")
+    .forEach(card => {
 
-    assimilations.forEach(a => {
+        const danoTexto =
+            card.querySelector(".condition-damage")
+            .innerText;
 
-        html += `
+        if(
+            danoTexto &&
+            danoTexto.includes("d")
+        ){
 
-            <div
-                class="assimilation-option"
-                onclick="selectAssimilation('${a.nome}')"
-            >
+            const partes =
+                danoTexto.split("d");
 
-                <div>
+            const quantidade =
+                Number(partes[0]);
 
-                    <h3>${a.nome}</h3>
+            const tipo =
+                Number(partes[1]);
 
-                    <span>${a.elemento}</span>
+            for(let i = 0; i < quantidade; i++){
 
-                </div>
+                danoTotal +=
+                    randomDice(tipo);
 
-            </div>
+            }
 
-        `;
+        }
 
     });
 
-    const menu =
-        document.createElement("div");
+    const pvAtual =
+        document.getElementById("pvAtual");
 
-    menu.classList.add("assimilation-menu");
+    let pv =
+        Number(pvAtual.value) || 0;
 
-    menu.innerHTML = `
+    pv -= danoTotal;
 
-        <div class="assimilation-menu-content">
+    if(pv < 0){
 
-            <div class="menu-header">
+        pv = 0;
 
-                <h2>ASSIMILAÇÕES</h2>
+    }
 
-                <button onclick="closeMenu()">
-                    X
-                </button>
+    pvAtual.value = pv;
 
-            </div>
+    document.getElementById("diceResult")
+    .innerHTML = `
 
-            ${html}
+        <div class="dice-big">
+            ${danoTotal}
+        </div>
 
+        <div class="dice-total">
+            Dano das condições
         </div>
 
     `;
 
-    document.body.appendChild(menu);
-
-}
-
-function selectAssimilation(nome){
-
-    const assimilation =
-        assimilations.find(a => a.nome === nome);
-
-    if(!assimilation) return;
-
-    const card =
-        document.createElement("div");
-
-    card.classList.add("assimilation-card");
-
-    card.innerHTML = `
-
-        <div class="assimilation-header">
-
-            <div>
-
-                <h3>
-                    ${assimilation.nome}
-                </h3>
-
-                <div class="assimilation-element">
-                    ${assimilation.elemento}
-                </div>
-
-            </div>
-
-            <button onclick="removeCard(this)">
-                X
-            </button>
-
-        </div>
-
-        <div class="assimilation-description">
-            ${assimilation.descricao}
-        </div>
-
-        <div class="assimilation-cost">
-            Custo:
-            ${assimilation.custo} PV
-        </div>
-
-    `;
-
-    document.getElementById("assimilationList")
-    .appendChild(card);
-
-    closeMenu();
-
 }
 
 // ======================================
-// FECHAR MENU
+// INICIALIZAÇÃO
 // ======================================
 
-function closeMenu(){
-
-    const menu =
-        document.querySelector(".assimilation-menu");
-
-    if(menu){
-
-        menu.remove();
-
-    }
-
-}
+atualizarStatus();
+atualizarPA();
+updateSkills();
+aplicarEfeitosCondicoes();
 
 // ======================================
-// INVENTÁRIO
+// CONDIÇÕES + EFEITOS AUTOMÁTICOS
 // ======================================
 
-const itens = [
-
-    {
-        nome: "Faca",
-        descricao: "1d4 + FOR",
-        ep: 1,
-        categoria: "Corpo a Corpo",
-        usos: 0
-    },
-
-    {
-        nome: "Pistola",
-        descricao: "1d8 + AGI",
-        ep: 2,
-        categoria: "Arma de Fogo",
-        usos: 0
-    },
-
-    {
-        nome: "Kit Médico",
-        descricao: "Cura PV",
-        ep: 2,
-        categoria: "Consumível",
-        usos: 5
-    }
-
-];
-
 // ======================================
-// MODAL INVENTÁRIO
+// PENALIDADES GLOBAIS
 // ======================================
 
-function openInventoryModal(){
+let atributosPenalidades = {
 
-    document.getElementById("inventoryModal")
-    .style.display = "flex";
+    forca:0,
+    agilidade:0,
+    vigor:0,
+    intelecto:0,
+    presenca:0,
 
-    renderModalItems("");
+    defesa:0,
+    deslocamento:0,
 
-}
+    pv:0,
+    pd:0,
 
-function closeInventoryModal(){
+    vontade:0,
+    percepcao:0,
+    reflexos:0,
+    pontaria:0
 
-    document.getElementById("inventoryModal")
-    .style.display = "none";
+};
 
-}
+// ======================================
+// APLICAR EFEITOS DAS CONDIÇÕES
+// ======================================
 
-function renderModalItems(search){
+function aplicarEfeitosCondicoes(){
 
-    const list =
-        document.getElementById("modalItemsList");
+    // RESET
 
-    list.innerHTML = "";
+    atributosPenalidades = {
 
-    itens
-    .filter(item =>
-        item.nome
-        .toLowerCase()
-        .includes(search.toLowerCase())
-    )
-    .forEach(item => {
+        forca:0,
+        agilidade:0,
+        vigor:0,
+        intelecto:0,
+        presenca:0,
 
-        const div =
-            document.createElement("div");
+        defesa:0,
+        deslocamento:0,
 
-        div.classList.add("modal-item");
+        pv:0,
+        pd:0,
 
-        div.innerHTML = `
+        vontade:0,
+        percepcao:0,
+        reflexos:0,
+        pontaria:0
 
-            <h3>${item.nome}</h3>
+    };
 
-            <span>${item.categoria}</span>
+    // =====================
+    // LER CONDIÇÕES
+    // =====================
 
-            <p>${item.descricao}</p>
+    document.querySelectorAll(".condition-card span")
+    .forEach(condicaoEl => {
 
-        `;
+        const nome =
+            condicaoEl.innerText;
 
-        div.onclick = () => {
+        // =====================
+        // ENVENENAMENTO
+        // =====================
 
-            createInventoryCard(item);
+        if(nome === "Envenenamento"){
 
-            closeInventoryModal();
+            atributosPenalidades.vigor -= 5;
 
-        };
+        }
 
-        list.appendChild(div);
+        // =====================
+        // ENJOADO
+        // =====================
+
+        if(nome === "Enjoado"){
+
+            atributosPenalidades.forca -= 3;
+            atributosPenalidades.agilidade -= 3;
+            atributosPenalidades.vigor -= 3;
+
+        }
+
+        // =====================
+        // CAÍDO
+        // =====================
+
+        if(nome === "Caído"){
+
+            atributosPenalidades.defesa -= 5;
+
+        }
+
+        // =====================
+        // DESPREVENIDO
+        // =====================
+
+        if(nome === "Desprevenido"){
+
+            atributosPenalidades.defesa -= 3;
+
+        }
+
+        // =====================
+        // ENFRAQUECIDO
+        // =====================
+
+        if(nome === "Enfraquecido"){
+
+            atributosPenalidades.forca -= 5;
+            atributosPenalidades.pv -= 10;
+
+        }
+
+        // =====================
+        // CEGO
+        // =====================
+
+        if(nome === "Cego"){
+
+            atributosPenalidades.pontaria -= 10;
+            atributosPenalidades.percepcao -= 10;
+
+        }
+
+        // =====================
+        // SURDO
+        // =====================
+
+        if(nome === "Surdo"){
+
+            atributosPenalidades.percepcao -= 10;
+
+        }
+
+        // =====================
+        // PENUMBRA
+        // =====================
+
+        if(nome === "Penumbra"){
+
+            atributosPenalidades.percepcao -= 5;
+            atributosPenalidades.reflexos -= 3;
+
+        }
+
+        // =====================
+        // LENTIDÃO
+        // =====================
+
+        if(nome === "Lentidão"){
+
+            atributosPenalidades.agilidade -= 5;
+            atributosPenalidades.deslocamento -= 3;
+
+        }
+
+        // =====================
+        // TRAUMATIZADO
+        // =====================
+
+        if(nome === "Traumatizado"){
+
+            atributosPenalidades.vontade -= 5;
+            atributosPenalidades.pd -= 8;
+
+        }
 
     });
 
-}
+    // ======================================
+    // APLICAR PV / PD / DEFESA
+    // ======================================
 
-const itemSearch =
-    document.getElementById("itemSearch");
+    atualizarStatus();
 
-if(itemSearch){
+    const defesa =
+        document.getElementById("defesa");
 
-    itemSearch.addEventListener("input", function(){
+    if(defesa){
 
-        renderModalItems(this.value);
+        const base =
+            Number(defesa.dataset.base)
+            || Number(defesa.value)
+            || 0;
 
-    });
+        defesa.dataset.base = base;
 
-}
-
-// ======================================
-// ITEM INVENTÁRIO
-// ======================================
-
-function createInventoryCard(item){
-
-    const card =
-        document.createElement("div");
-
-    card.classList.add("inventory-card");
-
-    card.innerHTML = `
-
-        <div class="ability-header">
-
-            <h3 contenteditable="true">
-                ${item.nome}
-            </h3>
-
-            <button onclick="removeCard(this)">
-                X
-            </button>
-
-        </div>
-
-        <div class="inventory-info">
-
-            <div>
-
-                <label>Dano</label>
-
-                <input
-                    type="text"
-                    value="${item.descricao}"
-                >
-
-            </div>
-
-            <div>
-
-                <label>Categoria</label>
-
-                <input
-                    type="text"
-                    value="${item.categoria}"
-                >
-
-            </div>
-
-            <div>
-
-                <label>EP</label>
-
-                <input
-                    type="number"
-                    value="${item.ep}"
-                >
-
-            </div>
-
-            <div>
-
-                <label>Usos</label>
-
-                <input
-                    type="number"
-                    value="${item.usos}"
-                >
-
-            </div>
-
-        </div>
-
-        <div class="mod-area">
-
-            <h4>Modificações</h4>
-
-            <div class="mods-list">
-
-            </div>
-
-            <button
-                class="mini-add-btn"
-                onclick="addModification(this)"
-            >
-                +
-            </button>
-
-        </div>
-
-    `;
-
-    document.getElementById("inventoryList")
-    .appendChild(card);
-
-}
-// ======================================
-// MODIFICAÇÕES
-// ======================================
-
-const modifications = [
-
-    "Mira Laser",
-    "Silenciador",
-    "Punho Reforçado",
-    "Coronha Tática",
-    "Lâmina Serrilhada",
-    "Catalisador",
-    "Proteção Ritualística"
-
-];
-
-function addModification(button){
-
-    const existente =
-        button.parentElement.querySelector(".mods-search");
-
-    // evita abrir duas pesquisas
-    if(existente) return;
-
-    const searchBox =
-        document.createElement("div");
-
-    searchBox.classList.add("mods-search");
-
-    searchBox.innerHTML = `
-
-        <input
-            type="text"
-            class="mods-input"
-            placeholder="Pesquisar modificação..."
-        >
-
-        <div class="mods-results"></div>
-
-    `;
-
-    button.parentElement.appendChild(searchBox);
-
-    const input =
-        searchBox.querySelector(".mods-input");
-
-    const results =
-        searchBox.querySelector(".mods-results");
-
-    function renderMods(search = ""){
-
-        results.innerHTML = "";
-
-        modifications
-        .filter(mod =>
-            mod.toLowerCase()
-            .includes(search.toLowerCase())
-        )
-        .forEach(mod => {
-
-            const item =
-                document.createElement("div");
-
-            item.classList.add("mod-result");
-
-            item.innerText = mod;
-
-            item.onclick = () => {
-
-                const tag =
-                    document.createElement("div");
-
-                tag.classList.add("mod-tag");
-
-                tag.innerHTML = `
-
-                    ${mod}
-
-                    <button onclick="this.parentElement.remove()">
-                        X
-                    </button>
-
-                `;
-
-                button.parentElement
-                .querySelector(".mods-list")
-                .appendChild(tag);
-
-                searchBox.remove();
-
-            };
-
-            results.appendChild(item);
-
-        });
+        defesa.value =
+            base + atributosPenalidades.defesa;
 
     }
 
-    input.addEventListener("input", function(){
+    const pvMax =
+        document.getElementById("pvMax");
 
-        renderMods(this.value);
+    if(pvMax){
 
-    });
+        pvMax.value =
+            Number(pvMax.value)
+            + atributosPenalidades.pv;
 
-    renderMods();
+    }
+
+    const pdMax =
+        document.getElementById("pdMax");
+
+    if(pdMax){
+
+        pdMax.value =
+            Number(pdMax.value)
+            + atributosPenalidades.pd;
+
+    }
+
+    // ======================================
+    // RECALCULA PERÍCIAS
+    // ======================================
+
+    updateSkills();
 
 }
 
@@ -1153,499 +1302,6 @@ const condicoes = [
 
 ];
 
-function addCondition(){
-
-    let html = "";
-
-    condicoes.forEach(condicao => {
-
-        html += `
-
-            <div
-                class="assimilation-option"
-                onclick="selectCondition('${condicao.nome}')"
-            >
-
-                <h3>${condicao.nome}</h3>
-
-            </div>
-
-        `;
-
-    });
-
-    const menu =
-        document.createElement("div");
-
-    menu.classList.add("assimilation-menu");
-
-    menu.innerHTML = `
-
-        <div class="assimilation-menu-content">
-
-            <div class="menu-header">
-
-                <h2>CONDIÇÕES</h2>
-
-                <button onclick="closeMenu()">
-                    X
-                </button>
-
-            </div>
-
-            <input
-                type="text"
-                id="conditionSearch"
-                placeholder="Pesquisar condição..."
-            >
-
-            <div
-                class="assimilation-options"
-                id="conditionOptions"
-            >
-
-                ${html}
-
-            </div>
-
-        </div>
-
-    `;
-
-    document.body.appendChild(menu);
-
-    document.getElementById("conditionSearch")
-    .addEventListener("input", function(){
-
-        const value =
-            this.value.toLowerCase();
-
-        document.querySelectorAll(
-            "#conditionOptions .assimilation-option"
-        )
-        .forEach(option => {
-
-            option.style.display =
-                option.innerText
-                .toLowerCase()
-                .includes(value)
-                ? "flex"
-                : "none";
-
-        });
-
-    });
-
-}
-
-function removeCondition(button){
-
-    button.parentElement.remove();
-
-    recalculateConditions();
-
-    function removeCondition(button){
-
-    button.parentElement.remove();
-
-    updateConditionsEffects();
-
-    saveFicha();
-
-}
-}
-
-
-// ======================================
-// BOTÃO CONDIÇÃO
-// ======================================
-
-const conditionBtn =
-    document.getElementById("conditionBtn");
-
-if(conditionBtn){
-
-    conditionBtn.addEventListener(
-        "click",
-        addCondition
-    );
-
-}
-
-updateConditionsEffects();
-
-// ======================================
-// SAVE / LOAD
-// ======================================
-
-function saveFicha(){
-
-    const data = {
-
-        html:
-            document.getElementById("inventoryList").innerHTML,
-
-        abilities:
-            document.getElementById("abilitiesList").innerHTML,
-
-        assimilations:
-            document.getElementById("assimilationList").innerHTML,
-
-        conditions:
-            document.getElementById("conditionsList").innerHTML
-
-    };
-
-    localStorage.setItem(
-        "fichaParanormal",
-        JSON.stringify(data)
-    );
-
-}
-
-function loadFicha(){
-
-    const data =
-        JSON.parse(
-            localStorage.getItem("fichaParanormal")
-        );
-
-    if(!data) return;
-
-    if(data.html){
-
-        document.getElementById("inventoryList")
-        .innerHTML = data.html;
-
-    }
-
-    if(data.abilities){
-
-        document.getElementById("abilitiesList")
-        .innerHTML = data.abilities;
-
-    }
-
-    if(data.assimilations){
-
-        document.getElementById("assimilationList")
-        .innerHTML = data.assimilations;
-
-    }
-
-    if(data.conditions){
-
-        document.getElementById("conditionsList")
-        .innerHTML = data.conditions;
-
-    }
-
-    aplicarEfeitosCondicoes();
-
-}
-
-// ======================================
-// AUTO SAVE
-// ======================================
-
-document.addEventListener("input", () => {
-
-    saveFicha();
-
-});
-
-document.addEventListener("click", () => {
-
-    setTimeout(saveFicha, 100);
-
-});
-
-// ======================================
-// LOAD
-// ======================================
-
-loadFicha();
-
-// ======================================
-// FECHAR MODAL AO CLICAR FORA
-// ======================================
-
-const inventoryModal =
-    document.getElementById("inventoryModal");
-
-if(inventoryModal){
-
-    inventoryModal.addEventListener("click", function(e){
-
-        if(e.target === inventoryModal){
-
-            closeInventoryModal();
-
-        }
-
-    });
-
-}
-
-// ======================================
-// ENTER NOS INPUTS
-// ======================================
-
-document.addEventListener("keydown", function(e){
-
-    if(e.key === "Enter"){
-
-        if(
-            e.target.tagName === "INPUT"
-        ){
-
-            e.preventDefault();
-
-            e.target.blur();
-
-        }
-
-    }
-
-});
-
-// ======================================
-// DEBUG
-// ======================================
-
-console.log("Ficha carregada com sucesso.");
-
-// ======================================
-// REAPLICAR EVENTOS APÓS LOAD
-// ======================================
-
-function rebindEvents(){
-
-    // =========================
-    // REMOVER CONDIÇÕES
-    // =========================
-
-    document.querySelectorAll(".condition-card button")
-    .forEach(button => {
-
-        button.onclick = function(){
-
-            this.parentElement.remove();
-
-            saveFicha();
-
-        };
-
-    });
-
-    // =========================
-    // REMOVER MODS
-    // =========================
-
-    document.querySelectorAll(".mod-tag button")
-    .forEach(button => {
-
-        button.onclick = function(){
-
-            this.parentElement.remove();
-
-            saveFicha();
-
-        };
-
-    });
-
-    // =========================
-    // REMOVER CARDS
-    // =========================
-
-    document.querySelectorAll(
-        ".ability-header button"
-    )
-    .forEach(button => {
-
-        button.onclick = function(){
-
-            removeCard(this);
-
-        };
-
-    });
-
-    // =========================
-    // ROLAR PERÍCIAS
-    // =========================
-
-    document.querySelectorAll(".clickable-skill")
-    .forEach(skill => {
-
-        skill.onclick = function(e){
-
-            if(
-                e.target.tagName === "INPUT"
-            ) return;
-
-            rollSkill(this);
-
-        };
-
-    });
-
-}
-
-// ======================================
-// EXECUTA APÓS LOAD
-// ======================================
-
-rebindEvents();
-
-// ======================================
-// OBSERVER
-// ======================================
-
-const observer = new MutationObserver(() => {
-
-    rebindEvents();
-
-});
-
-observer.observe(document.body, {
-
-    childList: true,
-    subtree: true
-
-});
-
-// ======================================
-// FIM
-// ======================================
-
-// ======================================
-// MENU MODIFICAÇÕES
-// ======================================
-
-function openModificationMenu(button){
-
-    let html = "";
-
-    modifications.forEach(mod => {
-
-        html += `
-
-            <div
-                class="assimilation-option"
-                onclick="selectModification(
-                    '${mod}',
-                    this
-                )"
-            >
-
-                <h3>${mod}</h3>
-
-            </div>
-
-        `;
-
-    });
-
-    const menu =
-        document.createElement("div");
-
-    menu.classList.add("assimilation-menu");
-
-    menu.innerHTML = `
-
-        <div class="assimilation-menu-content">
-
-            <div class="menu-header">
-
-                <h2>MODIFICAÇÕES</h2>
-
-                <button onclick="closeMenu()">
-                    X
-                </button>
-
-            </div>
-
-            <input
-                type="text"
-                id="modSearch"
-                placeholder="Pesquisar modificação..."
-            >
-
-            <div
-                class="assimilation-options"
-                id="modOptions"
-            >
-
-                ${html}
-
-            </div>
-
-        </div>
-
-    `;
-
-    document.body.appendChild(menu);
-
-    menu.dataset.targetCard =
-        button.closest(".inventory-card")
-        .querySelector(".mods-list");
-
-    document.getElementById("modSearch")
-    .addEventListener("input", function(){
-
-        const value =
-            this.value.toLowerCase();
-
-        document.querySelectorAll(
-            "#modOptions .assimilation-option"
-        )
-        .forEach(option => {
-
-            option.style.display =
-                option.innerText
-                .toLowerCase()
-                .includes(value)
-                ? "flex"
-                : "none";
-
-        });
-
-    });
-
-}
-
-function selectModification(nome){
-
-    const target =
-        document.querySelector(".assimilation-menu")
-        .dataset.targetCard;
-
-    const modsList =
-        document.querySelector(target);
-
-    const tag =
-        document.createElement("div");
-
-    tag.classList.add("mod-tag");
-
-    tag.innerHTML = `
-
-        ${nome}
-
-        <button onclick="this.parentElement.remove()">
-            X
-        </button>
-
-    `;
-
-    modsList.appendChild(tag);
-
-    closeMenu();
-
-}
-
 // ======================================
 // MENU CONDIÇÕES
 // ======================================
@@ -1734,6 +1390,10 @@ function openConditionMenu(){
     });
 
 }
+
+// ======================================
+// ADICIONAR CONDIÇÃO
+// ======================================
 
 function selectCondition(nome){
 
@@ -1834,17 +1494,25 @@ function selectCondition(nome){
     // BLOQUEAR DUPLICADAS
     // =====================
 
-    const jaExiste =
-        [...document.querySelectorAll(".condition-card span")]
-        .some(span =>
-            span.innerText === nome
-        );
+    const podeStackar =
+        nome === "Sangramento"
+        || nome === "Envenenamento";
 
-    if(jaExiste){
+    if(!podeStackar){
 
-        alert("Essa condição já está ativa.");
+        const jaExiste =
+            [...document.querySelectorAll(".condition-card span")]
+            .some(span =>
+                span.innerText === nome
+            );
 
-        return;
+        if(jaExiste){
+
+            alert("Essa condição já está ativa.");
+
+            return;
+
+        }
 
     }
 
@@ -1878,20 +1546,13 @@ function selectCondition(nome){
 
     saveFicha();
 
-    recalculateConditions();
-
     aplicarEfeitosCondicoes();
 
 }
 
 // ======================================
-// TROCA BOTÕES
+// REMOVER CONDIÇÃO
 // ======================================
-
-document.getElementById("conditionBtn")
-.onclick = openConditionMenu;
-
-
 
 function removeCondition(button){
 
@@ -1903,352 +1564,17 @@ function removeCondition(button){
 
 }
 
-function closeMenu(){
+// ======================================
+// BOTÃO
+// ======================================
 
-    const menu =
-        document.querySelector(".assimilation-menu");
-
-    if(menu){
-
-        menu.remove();
-
-    }
-
-}
-
-function nextTurn(){
-
-    // =====================
-    // PEGA PA MÁXIMO
-    // =====================
-
-    const paTexto =
-        document.getElementById("paMaxText")
-        .innerText;
-
-    const paMax =
-        Number(
-            paTexto.replace(/\D/g, "")
-        );
-
-    // =====================
-    // RESET PA
-    // =====================
-
-    document.getElementById("paAtual").value =
-        paMax;
-
-    // =====================
-    // CONDIÇÕES
-    // =====================
-
-    let danoTotal = 0;
-
-    document.querySelectorAll(".condition-card span")
-    .forEach(condicaoEl => {
-
-        const nome =
-            condicaoEl.innerText;
-
-        const card =
-    condicaoEl.closest(".condition-card");
-
-const danoTexto =
-    card.querySelector(".condition-damage")
-    .innerText;
-
-if(
-    danoTexto &&
-    danoTexto.includes("d")
-){
-
-            const formula =
-    danoTexto;
-
-            const partes =
-                formula.split("d");
-
-            const quantidade =
-                Number(partes[0]);
-
-            const tipo =
-                Number(partes[1]);
-
-            for(let i = 0; i < quantidade; i++){
-
-                danoTotal +=
-                    randomDice(tipo);
-
-            }
-
-        }
-
-    });
-
-    // =====================
-    // APLICA DANO
-    // =====================
-
-    const pvAtual =
-        document.getElementById("pvAtual");
-
-    let pv =
-        Number(pvAtual.value) || 0;
-
-    pv -= danoTotal;
-
-    if(pv < 0){
-
-        pv = 0;
-
-    }
-
-    pvAtual.value = pv;
-
-    // =====================
-    // RESULTADO
-    // =====================
-
-    document.getElementById("diceResult")
-    .innerHTML = `
-
-        <div class="dice-big">
-            ${danoTotal}
-        </div>
-
-        <div class="dice-total">
-            Dano das condições
-        </div>
-
-    `;
-
-    saveFicha();
-
-}
+document.getElementById("conditionBtn")
+.onclick = openConditionMenu;
 
 function recalculateConditions(){
 
-    // =====================
-    // RESET VISUAL
-    // =====================
+    aplicarEfeitosCondicoes();
 
-    let defesaBonus = 0;
-
-    let deslocamentoBonus = 0;
-
-    let vigorPenalty = 0;
-
-    let forcaPenalty = 0;
-
-    let agilidadePenalty = 0;
-
-    let presencaPenalty = 0;
-
-    let intelectoPenalty = 0;
-
-    let pvPenalty = 0;
-
-    let pdPenalty = 0;
-
-    // =====================
-    // LER CONDIÇÕES
-    // =====================
-
-    document.querySelectorAll(".condition-card span")
-    .forEach(condicaoEl => {
-
-        const nome =
-            condicaoEl.innerText;
-
-        // =====================
-        // CAÍDO
-        // =====================
-
-        if(nome === "Caído"){
-
-            defesaBonus -= 5;
-
-        }
-
-        // =====================
-        // DESPREVENIDO
-        // =====================
-
-        if(nome === "Desprevenido"){
-
-            defesaBonus -= 3;
-
-        }
-
-        // =====================
-        // ENFRAQUECIDO
-        // =====================
-
-        if(nome === "Enfraquecido"){
-
-            forcaPenalty -= 5;
-
-            pvPenalty -= 10;
-
-        }
-
-        // =====================
-        // LENTIDÃO
-        // =====================
-
-        if(nome === "Lentidão"){
-
-            agilidadePenalty -= 5;
-
-            deslocamentoBonus -= 3;
-
-        }
-
-        // =====================
-        // TRAUMATIZADO
-        // =====================
-
-        if(nome === "Traumatizado"){
-
-            pdPenalty -= 8;
-
-        }
-
-    });
-
-    // =====================
-    // APLICAR DEFESA
-    // =====================
-
-    const defesaEl =
-        document.getElementById("defesa");
-
-    if(defesaEl){
-
-        const base =
-            Number(
-                defesaEl.dataset.base
-            ) || Number(defesaEl.value);
-
-        defesaEl.dataset.base = base;
-
-        defesaEl.value =
-            base + defesaBonus;
-
-    }
-
-    // =====================
-    // PV MAX
-    // =====================
-
-    const pvMax =
-        document.getElementById("pvMax");
-
-    if(pvMax){
-
-        const base =
-            Number(
-                pvMax.dataset.base
-            ) || Number(pvMax.value);
-
-        pvMax.dataset.base = base;
-
-        pvMax.value =
-            base + pvPenalty;
-
-    }
-
-    // =====================
-    // PD MAX
-    // =====================
-
-    const pdMax =
-        document.getElementById("pdMax");
-
-    if(pdMax){
-
-        const base =
-            Number(
-                pdMax.dataset.base
-            ) || Number(pdMax.value);
-
-        pdMax.dataset.base = base;
-
-        pdMax.value =
-            base + pdPenalty;
-
-    }
-
-}
-
-// ======================================
-// PENALIDADES DE ATRIBUTOS
-// ======================================
-
-const atributosPenalidades = {
-
-    forca:0,
-    agilidade:0,
-    vigor:0,
-    intelecto:0,
-    presenca:0
-
-};
-
-// ======================================
-// EFEITOS AUTOMÁTICOS DAS CONDIÇÕES
-// ======================================
-
-function aplicarEfeitosCondicoes(){
-
-    // RESETAR
-
-    atributosPenalidades.forca = 0;
-    atributosPenalidades.agilidade = 0;
-    atributosPenalidades.vigor = 0;
-    atributosPenalidades.intelecto = 0;
-    atributosPenalidades.presenca = 0;
-
-    // LER CONDIÇÕES
-
-    document.querySelectorAll(".condition-card span")
-    .forEach(condicaoEl => {
-
-        const nome =
-            condicaoEl.innerText;
-
-        // ENFRAQUECIDO
-
-        if(nome === "Enfraquecido"){
-
-            atributosPenalidades.forca -= 5;
-
-        }
-
-        // LENTIDÃO
-
-        if(nome === "Lentidão"){
-
-            atributosPenalidades.agilidade -= 5;
-
-        }
-
-        // ENVENENAMENTO
-
-        if(nome === "Envenenamento"){
-
-            atributosPenalidades.vigor -= 5;
-
-        }
-
-        // TRAUMATIZADO
-
-        if(nome === "Traumatizado"){
-
-            atributosPenalidades.presenca -= 5;
-
-        }
-
-    });
+    saveFicha();
 
 }
