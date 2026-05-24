@@ -1,34 +1,5 @@
 // ======================================
-// SKILLS
-// ======================================
-
-function updateSkills(){
-
-    const rows = document.querySelectorAll(".skill-row");
-
-    rows.forEach(row => {
-
-        const treino =
-            Number(
-                row.querySelector(".skill-train").value
-            ) || 0;
-
-        const bonus =
-            Number(
-                row.querySelector(".skill-bonus").value
-            ) || 0;
-
-        const total = treino + bonus;
-
-        row.querySelector(".skill-total")
-        .innerText = `+${total}`;
-
-    });
-
-}
-
-// ======================================
-// PEGAR ATRIBUTO
+// PERÍCIAS
 // ======================================
 
 function getAttributeValue(attr){
@@ -78,49 +49,121 @@ function getAttributeValue(attr){
 }
 
 // ======================================
+// UPDATE
+// ======================================
+
+function updateSkills(){
+
+    const rows =
+        document.querySelectorAll(".skill-row");
+
+    rows.forEach(row => {
+
+        const treino = Number(
+            row.querySelector(".skill-train").value
+        ) || 0;
+
+        const bonus = Number(
+            row.querySelector(".skill-bonus").value
+        ) || 0;
+
+        const attrText =
+            row.querySelector(".skill-attr")
+            .innerText;
+
+        const atributo =
+            getAttributeValue(attrText);
+
+        const total =
+            treino + bonus;
+
+        row.querySelector(".skill-total")
+        .innerText = "+" + total;
+
+        // =========================
+        // VISUAL TREINADA
+        // =========================
+
+        if(treino > 0){
+
+            row.classList.add("trained-skill");
+
+        }else{
+
+            row.classList.remove("trained-skill");
+
+        }
+
+        // =========================
+        // DATA
+        // =========================
+
+        row.dataset.attribute =
+            atributo;
+
+    });
+
+}
+
+// ======================================
 // ROLAR PERÍCIA
 // ======================================
 
 function rollSkill(row){
 
-    const attr =
-        row.querySelector(".skill-attr").innerText;
+    const atributo = Number(
+        row.dataset.attribute
+    ) || 1;
 
-    const atributo = getAttributeValue(attr);
+    const treino = Number(
+        row.querySelector(".skill-train").value
+    ) || 0;
 
-    const treino =
-        Number(
-            row.querySelector(".skill-train").value
-        ) || 0;
+    const bonus = Number(
+        row.querySelector(".skill-bonus").value
+    ) || 0;
 
-    const bonus =
-        Number(
-            row.querySelector(".skill-bonus").value
-        ) || 0;
+    const nome =
+        row.querySelector(".skill-name")
+        .innerText;
 
-    let resultados = [];
+    let rolls = [];
 
     for(let i = 0; i < atributo; i++){
 
-        resultados.push(randomDice(20));
+        rolls.push(randomDice(20));
 
     }
 
-    const maior = Math.max(...resultados);
+    const maior =
+        Math.max(...rolls);
 
-    const total = maior + treino + bonus;
+    const total =
+        maior + treino + bonus;
 
-    const nome =
-        row.querySelector(".skill-name").innerText;
+    let critico = "";
 
-    document.getElementById("diceResult").innerHTML = `
+    if(maior === 20){
+
+        critico = `
+
+            <div class="critical-text">
+                CRÍTICO!
+            </div>
+
+        `;
+
+    }
+
+    document.getElementById("diceResult")
+    .innerHTML = `
 
         <div class="dice-skill-name">
             ${nome}
         </div>
 
         <div class="dice-rolls">
-            ${resultados.join(" • ")}
+            ${rolls.join(" • ")}
         </div>
 
         <div class="dice-big">
@@ -131,12 +174,39 @@ function rollSkill(row){
             Total: ${total}
         </div>
 
+        ${critico}
+
     `;
 
 }
 
 // ======================================
-// EVENTOS
+// CLICK
+// ======================================
+
+function bindSkillEvents(){
+
+    document.querySelectorAll(".clickable-skill")
+    .forEach(skill => {
+
+        skill.onclick = function(e){
+
+            if(
+                e.target.tagName === "INPUT"
+            ){
+                return;
+            }
+
+            rollSkill(this);
+
+        };
+
+    });
+
+}
+
+// ======================================
+// EVENTOS INPUT
 // ======================================
 
 document.querySelectorAll(
@@ -151,17 +221,37 @@ document.querySelectorAll(
 
 });
 
-document.querySelectorAll(".clickable-skill")
-.forEach(skill => {
+// ======================================
+// UPDATE ATRIBUTOS
+// ======================================
 
-    skill.addEventListener("click", function(e){
+[
+    "forca",
+    "agilidade",
+    "intelecto",
+    "vigor",
+    "presenca"
+]
+.forEach(id => {
 
-        if(e.target.tagName === "INPUT") return;
+    const el =
+        document.getElementById(id);
 
-        rollSkill(this);
+    if(el){
 
-    });
+        el.addEventListener(
+            "input",
+            updateSkills
+        );
+
+    }
 
 });
 
+// ======================================
+// START
+// ======================================
+
 updateSkills();
+
+bindSkillEvents();
