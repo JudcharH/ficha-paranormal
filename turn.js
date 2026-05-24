@@ -1,16 +1,27 @@
+// ======================================
+// PASSAR RODADA
+// ======================================
+
 function nextTurn(){
+
+    // =====================
+    // RESET PA
+    // =====================
 
     const paTexto =
         document.getElementById("paMaxText")
         .innerText;
 
-    const paMax =
-        Number(
-            paTexto.replace(/\D/g, "")
-        );
+    const paMax = Number(
+        paTexto.replace(/\D/g, "")
+    );
 
     document.getElementById("paAtual").value =
         paMax;
+
+    // =====================
+    // DANO CONDIÇÕES
+    // =====================
 
     let danoTotal = 0;
 
@@ -19,7 +30,7 @@ function nextTurn(){
 
         const danoTexto =
             card.querySelector(".condition-damage")
-            ?.innerText;
+            .innerText;
 
         if(
             danoTexto &&
@@ -37,14 +48,17 @@ function nextTurn(){
 
             for(let i = 0; i < quantidade; i++){
 
-                danoTotal +=
-                    randomDice(tipo);
+                danoTotal += randomDice(tipo);
 
             }
 
         }
 
     });
+
+    // =====================
+    // APLICA DANO
+    // =====================
 
     const pvAtual =
         document.getElementById("pvAtual");
@@ -62,6 +76,10 @@ function nextTurn(){
 
     pvAtual.value = pv;
 
+    // =====================
+    // RESULTADO
+    // =====================
+
     document.getElementById("diceResult")
     .innerHTML = `
 
@@ -76,5 +94,21 @@ function nextTurn(){
     `;
 
     saveFicha();
+
+}
+
+// ======================================
+// BOTÃO
+// ======================================
+
+const nextTurnBtn =
+    document.getElementById("nextTurnBtn");
+
+if(nextTurnBtn){
+
+    nextTurnBtn.addEventListener(
+        "click",
+        nextTurn
+    );
 
 }

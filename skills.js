@@ -1,49 +1,39 @@
 // ======================================
-// PERÍCIAS
+// SKILLS
 // ======================================
 
-function updateSkills() {
+function updateSkills(){
 
-    const rows =
-        document.querySelectorAll(".skill-row");
+    const rows = document.querySelectorAll(".skill-row");
 
     rows.forEach(row => {
 
         const treino =
-            Number(row.querySelector(".skill-train").value) || 0;
+            Number(
+                row.querySelector(".skill-train").value
+            ) || 0;
 
         const bonus =
-            Number(row.querySelector(".skill-bonus").value) || 0;
+            Number(
+                row.querySelector(".skill-bonus").value
+            ) || 0;
 
         const total = treino + bonus;
 
         row.querySelector(".skill-total")
-            .innerText = `+${total}`;
+        .innerText = `+${total}`;
 
     });
 
 }
 
-document
-    .querySelectorAll(".skill-train, .skill-bonus")
-    .forEach(input => {
-
-        input.addEventListener(
-            "input",
-            updateSkills
-        );
-
-    });
-
-updateSkills();
-
 // ======================================
 // PEGAR ATRIBUTO
 // ======================================
 
-function getAttributeValue(attr) {
+function getAttributeValue(attr){
 
-    if (attr.includes("FOR")) {
+    if(attr.includes("FOR")){
 
         return Number(
             document.getElementById("forca").value
@@ -51,7 +41,7 @@ function getAttributeValue(attr) {
 
     }
 
-    if (attr.includes("AGI")) {
+    if(attr.includes("AGI")){
 
         return Number(
             document.getElementById("agilidade").value
@@ -59,7 +49,7 @@ function getAttributeValue(attr) {
 
     }
 
-    if (attr.includes("INT")) {
+    if(attr.includes("INT")){
 
         return Number(
             document.getElementById("intelecto").value
@@ -67,7 +57,7 @@ function getAttributeValue(attr) {
 
     }
 
-    if (attr.includes("VIG")) {
+    if(attr.includes("VIG")){
 
         return Number(
             document.getElementById("vigor").value
@@ -75,7 +65,7 @@ function getAttributeValue(attr) {
 
     }
 
-    if (attr.includes("PRE")) {
+    if(attr.includes("PRE")){
 
         return Number(
             document.getElementById("presenca").value
@@ -91,23 +81,26 @@ function getAttributeValue(attr) {
 // ROLAR PERÍCIA
 // ======================================
 
-function rollSkill(row) {
+function rollSkill(row){
 
     const attr =
         row.querySelector(".skill-attr").innerText;
 
-    const atributo =
-        getAttributeValue(attr);
+    const atributo = getAttributeValue(attr);
 
     const treino =
-        Number(row.querySelector(".skill-train").value) || 0;
+        Number(
+            row.querySelector(".skill-train").value
+        ) || 0;
 
     const bonus =
-        Number(row.querySelector(".skill-bonus").value) || 0;
+        Number(
+            row.querySelector(".skill-bonus").value
+        ) || 0;
 
     let resultados = [];
 
-    for (let i = 0; i < atributo; i++) {
+    for(let i = 0; i < atributo; i++){
 
         resultados.push(randomDice(20));
 
@@ -121,6 +114,7 @@ function rollSkill(row) {
         row.querySelector(".skill-name").innerText;
 
     document.getElementById("diceResult").innerHTML = `
+
         <div class="dice-skill-name">
             ${nome}
         </div>
@@ -136,20 +130,38 @@ function rollSkill(row) {
         <div class="dice-total">
             Total: ${total}
         </div>
+
     `;
 
 }
 
-document
-    .querySelectorAll(".clickable-skill")
-    .forEach(skill => {
+// ======================================
+// EVENTOS
+// ======================================
 
-        skill.addEventListener("click", function (e) {
+document.querySelectorAll(
+    ".skill-train, .skill-bonus"
+)
+.forEach(input => {
 
-            if (e.target.tagName === "INPUT") return;
+    input.addEventListener(
+        "input",
+        updateSkills
+    );
 
-            rollSkill(this);
+});
 
-        });
+document.querySelectorAll(".clickable-skill")
+.forEach(skill => {
+
+    skill.addEventListener("click", function(e){
+
+        if(e.target.tagName === "INPUT") return;
+
+        rollSkill(this);
 
     });
+
+});
+
+updateSkills();

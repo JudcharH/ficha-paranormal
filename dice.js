@@ -2,13 +2,13 @@
 // DADOS
 // ======================================
 
-function randomDice(type) {
+function randomDice(type){
 
     return Math.floor(Math.random() * type) + 1;
 
 }
 
-function rollDice() {
+function rollDice(){
 
     const quantidade =
         Number(document.getElementById("diceCount").value) || 1;
@@ -21,7 +21,7 @@ function rollDice() {
 
     let rolls = [];
 
-    for (let i = 0; i < quantidade; i++) {
+    for(let i = 0; i < quantidade; i++){
 
         rolls.push(randomDice(tipo));
 
@@ -33,7 +33,7 @@ function rollDice() {
 
     let critico = "";
 
-    if (tipo === 20 && maior === 20) {
+    if(tipo === 20 && maior === 20){
 
         critico = `
             <div class="critical-text">
@@ -44,6 +44,7 @@ function rollDice() {
     }
 
     document.getElementById("diceResult").innerHTML = `
+
         <div class="dice-rolls">
             ${rolls.join(" • ")}
         </div>
@@ -57,6 +58,7 @@ function rollDice() {
         </div>
 
         ${critico}
+
     `;
 
 }
@@ -65,7 +67,7 @@ function rollDice() {
 // ROLAR ATRIBUTO
 // ======================================
 
-function rollAttribute(attributeId) {
+function rollAttribute(attributeId){
 
     const atributo =
         Number(document.getElementById(attributeId).value) || 1;
@@ -79,3 +81,28 @@ function rollAttribute(attributeId) {
     rollDice();
 
 }
+
+// ======================================
+// EVENTOS
+// ======================================
+
+const rollDiceBtn = document.getElementById("rollDiceBtn");
+
+if(rollDiceBtn){
+
+    rollDiceBtn.addEventListener("click", rollDice);
+
+}
+
+document.querySelectorAll(".attribute-roll-btn")
+.forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        const attr = this.dataset.attr;
+
+        rollAttribute(attr);
+
+    });
+
+});
