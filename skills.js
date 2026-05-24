@@ -52,6 +52,157 @@ function getAttributeValue(attr){
 // UPDATE
 // ======================================
 
+function getSkillPenalty(skillName){
+
+    let penalty = 0;
+
+    const conditions =
+        document.querySelectorAll(".condition-card span");
+
+    conditions.forEach(cond => {
+
+        const nome = cond.innerText;
+
+        // =====================================
+        // ENFRAQUECIDO
+        // =====================================
+
+        if(
+            nome === "Enfraquecido"
+            &&
+            (
+                skillName === "Atletismo"
+                ||
+                skillName === "Luta"
+            )
+        ){
+            penalty -= 5;
+        }
+
+        // =====================================
+        // LENTIDÃO
+        // =====================================
+
+        if(
+            nome === "Lentidão"
+            &&
+            (
+                skillName === "Acrobacia"
+                ||
+                skillName === "Furtividade"
+                ||
+                skillName === "Reflexos"
+                ||
+                skillName === "Pilotagem"
+                ||
+                skillName === "Pontaria"
+                ||
+                skillName === "Crime"
+                ||
+                skillName === "Iniciativa"
+            )
+        ){
+            penalty -= 5;
+        }
+
+        // =====================================
+        // ENJOADO
+        // =====================================
+
+        if(
+            nome === "Enjoado"
+            &&
+            (
+                skillName === "Atletismo"
+                ||
+                skillName === "Luta"
+                ||
+                skillName === "Acrobacia"
+                ||
+                skillName === "Furtividade"
+            )
+        ){
+            penalty -= 3;
+        }
+
+        // =====================================
+        // TRAUMATIZADO
+        // =====================================
+
+        if(
+            nome === "Traumatizado"
+            &&
+            skillName === "Vontade"
+        ){
+            penalty -= 5;
+        }
+
+        // =====================================
+        // PENUMBRA
+        // =====================================
+
+        if(
+            nome === "Penumbra"
+            &&
+            skillName === "Percepção"
+        ){
+            penalty -= 5;
+        }
+
+        if(
+            nome === "Penumbra"
+            &&
+            skillName === "Reflexos"
+        ){
+            penalty -= 3;
+        }
+
+        // =====================================
+        // CEGO
+        // =====================================
+
+        if(
+            nome === "Cego"
+            &&
+            (
+                skillName === "Percepção"
+                ||
+                skillName === "Pontaria"
+            )
+        ){
+            penalty -= 10;
+        }
+
+        // =====================================
+        // SURDO
+        // =====================================
+
+        if(
+            nome === "Surdo"
+            &&
+            skillName === "Percepção"
+        ){
+            penalty -= 10;
+        }
+
+        // =====================================
+        // ENVENENAMENTO
+        // =====================================
+
+        if(
+            nome === "Envenenamento"
+            &&
+            skillName === "Fortitude"
+        ){
+            penalty -= 5;
+        }
+
+    });
+
+    return penalty;
+
+}
+
 function updateSkills(){
 
     const rows =
@@ -59,26 +210,33 @@ function updateSkills(){
 
     rows.forEach(row => {
 
-        const treino = Number(
-            row.querySelector(".skill-train").value
-        ) || 0;
+        const treino =
+            Number(
+                row.querySelector(".skill-train").value
+            ) || 0;
 
-        const bonus = Number(
-            row.querySelector(".skill-bonus").value
-        ) || 0;
+        const bonus =
+            Number(
+                row.querySelector(".skill-bonus").value
+            ) || 0;
 
-        const attrText =
-            row.querySelector(".skill-attr")
-            .innerText;
+        const skillName =
+            row.querySelector(".skill-name").innerText;
 
-        const atributo =
-            getAttributeValue(attrText);
+        const penalty =
+            getSkillPenalty(skillName);
 
         const total =
-            treino + bonus;
+            treino + bonus + penalty;
 
         row.querySelector(".skill-total")
-        .innerText = "+" + total;
+        .innerText = total >= 0
+            ? `+${total}`
+            : total;
+
+    
+
+
 
         // =========================
         // VISUAL TREINADA
