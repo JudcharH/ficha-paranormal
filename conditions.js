@@ -4,14 +4,95 @@
 
 const condicoes = [
 
-    { nome:"Sangramento", dano:"1d6" },
-    { nome:"Chamas", dano:"2d6" },
-    { nome:"Envenenamento", dano:"2d4" },
-    { nome:"Paralisia", dano:null },
-    { nome:"Lentidão", dano:null },
-    { nome:"Cego", dano:null },
-    { nome:"Confuso", dano:null },
-    { nome:"Caído", dano:null }
+    {
+        nome:"Sangramento",
+        dano:"1d6"
+    },
+
+    {
+        nome:"Envenenamento",
+        dano:"2d4"
+    },
+
+    {
+        nome:"Paralisia",
+        dano:null
+    },
+
+    {
+        nome:"Paralisia Total",
+        dano:null
+    },
+
+    {
+        nome:"Caído",
+        dano:null
+    },
+
+    {
+        nome:"Enjoado",
+        dano:null
+    },
+
+    {
+        nome:"Morrendo",
+        dano:null
+    },
+
+    {
+        nome:"Enfraquecido",
+        dano:null
+    },
+
+    {
+        nome:"Lentidão",
+        dano:null
+    },
+
+    {
+        nome:"Cansado",
+        dano:null
+    },
+
+    {
+        nome:"Controlado",
+        dano:null
+    },
+
+    {
+        nome:"Cego",
+        dano:null
+    },
+
+    {
+        nome:"Surdo",
+        dano:null
+    },
+
+    {
+        nome:"Traumatizado",
+        dano:null
+    },
+
+    {
+        nome:"Penumbra",
+        dano:null
+    },
+
+    {
+        nome:"Vulnerável",
+        dano:null
+    },
+
+    {
+        nome:"Desprevenido",
+        dano:null
+    },
+
+    {
+        nome:"Confuso",
+        dano:null
+    }
 
 ];
 
