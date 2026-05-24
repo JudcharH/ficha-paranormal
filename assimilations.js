@@ -1,21 +1,90 @@
-// ======================================
-// ASSIMILAÇÕES
-// ======================================
-
 const assimilations = [
 
     {
-        nome: "Teleporte Cinético",
-        elemento: "Energia",
-        custo: 4,
-        descricao: "Teleporta até 3m."
+        nome: "Sede Carmesim",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Sempre que causar dano recupera igual VIG em PV"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Recupera VIG x2 PV e +3 contra sangramento"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Recupera VIG x4 PV e +5 contra sangramento"
+            }
+
+        ]
     },
 
     {
-        nome: "Aceleração",
-        elemento: "Energia",
-        custo: 4,
-        descricao: "Recebe ação extra temporária."
+        nome: "Alteração Sanguínea",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Assume outra aparência e recebe +5 sociais"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Cria clone de sangue"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Cria receptáculo permanente"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Presas",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Após 2 ataques causa 2d4+1"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Dano aumenta para 3d4+2"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Dano aumenta para 4d4+3"
+            }
+
+        ]
     }
 
 ];
@@ -37,13 +106,7 @@ function openAssimilationMenu(){
                 onclick="selectAssimilation('${a.nome}')"
             >
 
-                <div>
-
-                    <h3>${a.nome}</h3>
-
-                    <span>${a.elemento}</span>
-
-                </div>
+                <h3>${a.nome}</h3>
 
             </div>
 
@@ -90,9 +153,26 @@ function selectAssimilation(nome){
 
     if(!assimilation) return;
 
+    createAssimilationCard(assimilation);
+
+    closeMenu();
+
+}
+
+// ======================================
+// CRIAR CARD
+// ======================================
+
+function createAssimilationCard(assimilation){
+
+    const evo = assimilation.evolucoes[0];
+
     const card = document.createElement("div");
 
     card.classList.add("assimilation-card");
+
+    card.dataset.nome = assimilation.nome;
+    card.dataset.level = 0;
 
     card.innerHTML = `
 
@@ -104,32 +184,148 @@ function selectAssimilation(nome){
                     ${assimilation.nome}
                 </h3>
 
-                <div class="assimilation-element">
-                    ${assimilation.elemento}
-                </div>
+                <small class="assimilation-level">
+                    ${evo.nivel}
+                </small>
 
             </div>
 
-            <button onclick="removeCard(this)">
+            <button onclick="removeAssimilation(this)">
                 X
             </button>
 
         </div>
 
         <div class="assimilation-description">
-            ${assimilation.descricao}
+
+            ${evo.descricao}
+
         </div>
 
         <div class="assimilation-cost">
-            Custo: ${assimilation.custo} PV
+
+            Custo:
+            <span class="assimilation-pv">
+                ${evo.custo}
+            </span>
+            PV
+
         </div>
 
     `;
 
+    card.addEventListener("click", function(e){
+
+        if(e.target.tagName === "BUTTON") return;
+
+        evolveAssimilation(this);
+
+    });
+
     document.getElementById("assimilationList")
     .appendChild(card);
 
-    closeMenu();
+    applyAssimilationCost();
+
+}
+
+// ======================================
+// EVOLUIR
+// ======================================
+
+function evolveAssimilation(card){
+
+    let level =
+        Number(card.dataset.level);
+
+    const nome =
+        card.dataset.nome;
+
+    const assimilation =
+        assimilations.find(a => a.nome === nome);
+
+    if(!assimilation) return;
+
+    if(level >= 2) return;
+
+    level++;
+
+    card.dataset.level = level;
+
+    const evo =
+        assimilation.evolucoes[level];
+
+    card.querySelector(".assimilation-level")
+    .innerText = evo.nivel;
+
+    card.querySelector(".assimilation-description")
+    .innerText = evo.descricao;
+
+    card.querySelector(".assimilation-pv")
+    .innerText = evo.custo;
+
+    applyAssimilationCost();
+
+}
+
+// ======================================
+// REMOVER
+// ======================================
+
+function removeAssimilation(button){
+
+    button.closest(".assimilation-card")
+    .remove();
+
+    applyAssimilationCost();
+
+}
+
+// ======================================
+// APLICAR CUSTO PV
+// ======================================
+
+function applyAssimilationCost(){
+
+    atualizarStatus();
+
+    let total = 0;
+
+    document.querySelectorAll(".assimilation-card")
+    .forEach(card => {
+
+        total += Number(
+            card.querySelector(".assimilation-pv")
+            .innerText
+        );
+
+    });
+
+    const pvMax =
+        document.getElementById("pvMax");
+
+    pvMax.value =
+        Math.max(
+            1,
+            Number(pvMax.value) - total
+        );
+
+}
+
+// ======================================
+// FECHAR MENU
+// ======================================
+
+function closeMenu(){
+
+    const menu =
+        document.querySelector(".assimilation-menu");
+
+    if(menu){
+
+        menu.remove();
+
+    }
 
 }
 
@@ -137,14 +333,8 @@ function selectAssimilation(nome){
 // BOTÃO
 // ======================================
 
-const assimilationBtn =
-    document.getElementById("assimilationBtn");
-
-if(assimilationBtn){
-
-    assimilationBtn.addEventListener(
-        "click",
-        openAssimilationMenu
-    );
-
-}
+document.getElementById("assimilationBtn")
+.addEventListener(
+    "click",
+    openAssimilationMenu
+);
