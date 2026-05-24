@@ -1,3 +1,7 @@
+// ======================================
+// ASSIMILAÇÕES
+// ======================================
+
 const assimilations = [
 
     {
@@ -143,6 +147,23 @@ function openAssimilationMenu(){
 }
 
 // ======================================
+// FECHAR MENU
+// ======================================
+
+function closeMenu(){
+
+    const menu =
+        document.querySelector(".assimilation-menu");
+
+    if(menu){
+
+        menu.remove();
+
+    }
+
+}
+
+// ======================================
 // SELECIONAR
 // ======================================
 
@@ -165,13 +186,17 @@ function selectAssimilation(nome){
 
 function createAssimilationCard(assimilation){
 
-    const evo = assimilation.evolucoes[0];
+    const evo =
+        assimilation.evolucoes[0];
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("assimilation-card");
 
-    card.dataset.nome = assimilation.nome;
+    card.dataset.nome =
+        assimilation.nome;
+
     card.dataset.level = 0;
 
     card.innerHTML = `
@@ -214,6 +239,10 @@ function createAssimilationCard(assimilation){
 
     `;
 
+    // =========================
+    // EVOLUIR AO CLICAR
+    // =========================
+
     card.addEventListener("click", function(e){
 
         if(e.target.tagName === "BUTTON") return;
@@ -225,7 +254,7 @@ function createAssimilationCard(assimilation){
     document.getElementById("assimilationList")
     .appendChild(card);
 
-    
+    atualizarStatus();
 
 }
 
@@ -246,6 +275,10 @@ function evolveAssimilation(card){
 
     if(!assimilation) return;
 
+    // =========================
+    // LIMITE
+    // =========================
+
     if(level >= 2) return;
 
     level++;
@@ -264,11 +297,9 @@ function evolveAssimilation(card){
     card.querySelector(".assimilation-pv")
     .innerText = evo.custo;
 
-    
+    atualizarStatus();
 
 }
-
-atualizarStatus();
 
 // ======================================
 // REMOVER
@@ -279,77 +310,7 @@ function removeAssimilation(button){
     button.closest(".assimilation-card")
     .remove();
 
-    
-
-}
-
-atualizarStatus();
-
-// ======================================
-// APLICAR CUSTO PV
-// ======================================
-
-function applyAssimilationCost(){
-
-    const nivel =
-        Number(
-            document.getElementById("nivel").value
-        ) || 1;
-
-    const vigor =
-        Number(
-            document.getElementById("vigor").value
-        ) || 1;
-
-    // =========================
-    // PV BASE REAL
-    // =========================
-
-    let pvBase =
-        (7 + vigor) * nivel;
-
-    // =========================
-    // SOMA CUSTOS
-    // =========================
-
-    let total = 0;
-
-    document.querySelectorAll(".assimilation-card")
-    .forEach(card => {
-
-        total += Number(
-            card.querySelector(".assimilation-pv")
-            .innerText
-        );
-
-    });
-
-    // =========================
-    // PV FINAL
-    // =========================
-
-    const pvFinal =
-        Math.max(1, pvBase - total);
-
-    document.getElementById("pvMax")
-    .value = pvFinal;
-
-}
-
-// ======================================
-// FECHAR MENU
-// ======================================
-
-function closeMenu(){
-
-    const menu =
-        document.querySelector(".assimilation-menu");
-
-    if(menu){
-
-        menu.remove();
-
-    }
+    atualizarStatus();
 
 }
 
@@ -357,8 +318,14 @@ function closeMenu(){
 // BOTÃO
 // ======================================
 
-document.getElementById("assimilationBtn")
-.addEventListener(
-    "click",
-    openAssimilationMenu
-);
+const assimilationBtn =
+    document.getElementById("assimilationBtn");
+
+if(assimilationBtn){
+
+    assimilationBtn.addEventListener(
+        "click",
+        openAssimilationMenu
+    );
+
+}
