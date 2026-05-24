@@ -1,23 +1,23 @@
-const photoInput =
-    document.getElementById("photoInput");
+// ======================================
+// FOTO PERSONAGEM
+// ======================================
 
-const photoPreview =
-    document.getElementById("photoPreview");
+const photoInput = document.getElementById("photoInput");
+const photoPreview = document.getElementById("photoPreview");
 
-if(photoInput){
+if (photoInput) {
 
-    photoInput.addEventListener("change", function(){
+    photoInput.addEventListener("change", function () {
 
         const file = this.files[0];
 
-        if(!file) return;
+        if (!file) return;
 
         const reader = new FileReader();
 
-        reader.onload = function(e){
+        reader.onload = function (e) {
 
             photoPreview.innerHTML = `
-
                 <img
                     src="${e.target.result}"
                     style="
@@ -26,7 +26,6 @@ if(photoInput){
                         object-fit:cover;
                     "
                 >
-
             `;
 
         };
