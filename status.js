@@ -1,78 +1,56 @@
-// ======================================
-// STATUS
-// ======================================
-
-function atualizarPA(){
-
-    const nivel =
-        Number(document.getElementById("nivel").value) || 1;
-
-    const paMax = 4 + Math.floor(nivel / 10);
-
-    const paAtual =
-        document.getElementById("paAtual");
-
-    const texto =
-        document.getElementById("paMaxText");
-
-    texto.innerText = `PA Máximo: ${paMax}`;
-
-    if(Number(paAtual.value) > paMax){
-
-        paAtual.value = paMax;
-
-    }
-
-}
-
 function atualizarStatus(){
 
     const nivel =
-        Number(document.getElementById("nivel").value) || 1;
+        Number(
+            document.getElementById("nivel").value
+        ) || 1;
 
     const vigor =
-        Number(document.getElementById("vigor").value) || 1;
+        Number(
+            document.getElementById("vigor").value
+        ) || 1;
 
     const presenca =
-        Number(document.getElementById("presenca").value) || 1;
+        Number(
+            document.getElementById("presenca").value
+        ) || 1;
 
-    const pvMax = (7 + vigor) * nivel;
+    // =========================
+    // BASE
+    // =========================
 
-    const pdMax = (5 + presenca) * nivel;
+    const pvBase =
+        (7 + vigor) * nivel;
 
-    document.getElementById("pvMax").value = pvMax;
+    const pdBase =
+        (5 + presenca) * nivel;
 
-    document.getElementById("pdMax").value = pdMax;
+    // =========================
+    // PD NORMAL
+    // =========================
 
-    atualizarPA();
+    document.getElementById("pdMax")
+    .value = pdBase;
 
-}
+    // =========================
+    // PV COM ASSIMILAÇÕES
+    // =========================
 
-// ======================================
-// EVENTOS
-// ======================================
+    let custoAssimilacoes = 0;
 
-["nivel", "vigor", "presenca"]
-.forEach(id => {
+    document.querySelectorAll(".assimilation-pv")
+    .forEach(el => {
 
-    const el = document.getElementById(id);
+        custoAssimilacoes +=
+            Number(el.innerText) || 0;
 
-    if(el){
+    });
 
-        el.addEventListener("input", atualizarStatus);
-
-    }
-
-});
-
-// ======================================
-// LOAD
-// ======================================
-
-atualizarStatus();
-
-if(typeof applyAssimilationCost === "function"){
-
-    applyAssimilationCost();
+    document.getElementById("pvMax")
+    .value =
+        Math.max(
+            1,
+            pvBase - custoAssimilacoes
+        );
 
 }

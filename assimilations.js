@@ -225,7 +225,7 @@ function createAssimilationCard(assimilation){
     document.getElementById("assimilationList")
     .appendChild(card);
 
-    applyAssimilationCost();
+    
 
 }
 
@@ -264,9 +264,11 @@ function evolveAssimilation(card){
     card.querySelector(".assimilation-pv")
     .innerText = evo.custo;
 
-    applyAssimilationCost();
+    
 
 }
+
+atualizarStatus();
 
 // ======================================
 // REMOVER
@@ -277,9 +279,11 @@ function removeAssimilation(button){
     button.closest(".assimilation-card")
     .remove();
 
-    applyAssimilationCost();
+    
 
 }
+
+atualizarStatus();
 
 // ======================================
 // APLICAR CUSTO PV
