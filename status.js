@@ -1,5 +1,9 @@
 function atualizarStatus(){
 
+    // =========================
+    // ATRIBUTOS
+    // =========================
+
     const nivel =
         Number(
             document.getElementById("nivel").value
@@ -19,21 +23,14 @@ function atualizarStatus(){
     // BASE
     // =========================
 
-    const pvBase =
+    let pvBase =
         (7 + vigor) * nivel;
 
-    const pdBase =
+    let pdBase =
         (5 + presenca) * nivel;
 
     // =========================
-    // PD NORMAL
-    // =========================
-
-    document.getElementById("pdMax")
-    .value = pdBase;
-
-    // =========================
-    // PV COM ASSIMILAÇÕES
+    // CUSTO ASSIMILAÇÕES
     // =========================
 
     let custoAssimilacoes = 0;
@@ -46,11 +43,47 @@ function atualizarStatus(){
 
     });
 
-    document.getElementById("pvMax")
-    .value =
+    // =========================
+    // FINAL
+    // =========================
+
+    const pvFinal =
         Math.max(
             1,
             pvBase - custoAssimilacoes
         );
 
+    // =========================
+    // APLICA
+    // =========================
+
+    document.getElementById("pvMax")
+    .value = pvFinal;
+
+    document.getElementById("pdMax")
+    .value = pdBase;
+
 }
+
+[
+    "nivel",
+    "vigor",
+    "presenca"
+]
+.forEach(id => {
+
+    const el =
+        document.getElementById(id);
+
+    if(el){
+
+        el.addEventListener(
+            "input",
+            atualizarStatus
+        );
+
+    }
+
+});
+
+atualizarStatus();
