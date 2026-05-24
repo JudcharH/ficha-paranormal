@@ -8,6 +8,7 @@ const condicoes = [
     { nome:"Chamas", dano:"2d6" },
     { nome:"Envenenamento", dano:"2d4" },
     { nome:"Paralisia", dano:null },
+    { nome:"Lentidão", dano:null },
     { nome:"Cego", dano:null },
     { nome:"Confuso", dano:null },
     { nome:"Caído", dano:null }
@@ -19,6 +20,8 @@ const condicoes = [
 // ======================================
 
 function openConditionMenu(){
+
+    closeMenu();
 
     let html = "";
 
@@ -57,11 +60,7 @@ function openConditionMenu(){
 
             </div>
 
-            <div id="conditionOptions">
-
-                ${html}
-
-            </div>
+            ${html}
 
         </div>
 
@@ -72,7 +71,7 @@ function openConditionMenu(){
 }
 
 // ======================================
-// SELECIONAR
+// SELECIONAR CONDIÇÃO
 // ======================================
 
 function selectCondition(nome){
@@ -88,7 +87,7 @@ function selectCondition(nome){
 
     card.innerHTML = `
 
-        <span>${nome}</span>
+        <span>${condicao.nome}</span>
 
         <small class="condition-damage">
             ${condicao.dano || "Sem dano"}
@@ -105,6 +104,8 @@ function selectCondition(nome){
 
     closeMenu();
 
+    saveFicha();
+
 }
 
 // ======================================
@@ -113,12 +114,24 @@ function selectCondition(nome){
 
 function removeCondition(button){
 
-    const card =
-        button.closest(".condition-card");
+    button.parentElement.remove();
 
-    if(card){
+    saveFicha();
 
-        card.remove();
+}
+
+// ======================================
+// FECHAR MENU
+// ======================================
+
+function closeMenu(){
+
+    const menu =
+        document.querySelector(".assimilation-menu");
+
+    if(menu){
+
+        menu.remove();
 
     }
 
