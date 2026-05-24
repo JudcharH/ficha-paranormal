@@ -254,7 +254,7 @@ function createAssimilationCard(assimilation){
     document.getElementById("assimilationList")
     .appendChild(card);
 
-    atualizarStatus();
+    
 
 }
 
@@ -297,7 +297,7 @@ function evolveAssimilation(card){
     card.querySelector(".assimilation-pv")
     .innerText = evo.custo;
 
-    atualizarStatus();
+    
 
 }
 
@@ -310,7 +310,7 @@ function removeAssimilation(button){
     button.closest(".assimilation-card")
     .remove();
 
-    atualizarStatus();
+    
 
 }
 
@@ -329,3 +329,22 @@ if(assimilationBtn){
     );
 
 }
+
+const assimilationObserver =
+new MutationObserver(() => {
+
+    atualizarStatus();
+
+});
+
+assimilationObserver.observe(
+
+    document.getElementById("assimilationList"),
+
+    {
+        childList: true,
+        subtree: true,
+        characterData: true
+    }
+
+);
