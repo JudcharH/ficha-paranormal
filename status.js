@@ -70,3 +70,9 @@ function atualizarStatus(){
 // ======================================
 
 atualizarStatus();
+
+if(typeof applyAssimilationCost === "function"){
+
+    applyAssimilationCost();
+
+}

@@ -287,7 +287,26 @@ function removeAssimilation(button){
 
 function applyAssimilationCost(){
 
-    atualizarStatus();
+    const nivel =
+        Number(
+            document.getElementById("nivel").value
+        ) || 1;
+
+    const vigor =
+        Number(
+            document.getElementById("vigor").value
+        ) || 1;
+
+    // =========================
+    // PV BASE REAL
+    // =========================
+
+    let pvBase =
+        (7 + vigor) * nivel;
+
+    // =========================
+    // SOMA CUSTOS
+    // =========================
 
     let total = 0;
 
@@ -301,14 +320,15 @@ function applyAssimilationCost(){
 
     });
 
-    const pvMax =
-        document.getElementById("pvMax");
+    // =========================
+    // PV FINAL
+    // =========================
 
-    pvMax.value =
-        Math.max(
-            1,
-            Number(pvMax.value) - total
-        );
+    const pvFinal =
+        Math.max(1, pvBase - total);
+
+    document.getElementById("pvMax")
+    .value = pvFinal;
 
 }
 
