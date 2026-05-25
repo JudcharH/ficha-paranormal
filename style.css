@@ -324,6 +324,20 @@ body{
 }
 
 /* ====================================== */
+/* PERÍCIAS */
+/* ====================================== */
+
+.skills-list{
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+/* ====================================== */
 /* HEADER */
 /* ====================================== */
 
@@ -332,22 +346,22 @@ body{
     display: grid;
 
     grid-template-columns:
-        1.6fr
+        1.7fr
         70px
-        70px
-        70px
-        70px
-        80px;
+        60px
+        60px
+        60px
+        70px;
 
-    gap: 10px;
+    gap: 8px;
 
     margin-bottom: 12px;
 
+    align-items: center;
+
     font-weight: bold;
 
-    opacity: 0.8;
-
-    align-items: center;
+    color: #cfcfcf;
 
 }
 
@@ -360,28 +374,36 @@ body{
     display: grid;
 
     grid-template-columns:
-        1.6fr
+        1.7fr
         70px
-        70px
-        70px
-        70px
-        80px;
+        60px
+        60px
+        60px
+        70px;
 
-    gap: 10px;
+    gap: 8px;
 
     align-items: center;
 
-    margin-bottom: 6px;
+    padding: 4px 0;
 
 }
 
 /* ====================================== */
-/* NOME */
+/* TEXTO */
 /* ====================================== */
 
 .skill-name{
 
-    min-width: 0;
+    color: white;
+
+}
+
+.skill-attr{
+
+    color: #00ff88;
+
+    text-align: center;
 
 }
 
@@ -397,15 +419,17 @@ body{
 
     height: 28px;
 
-    text-align: center;
-
     background: #111;
 
-    border: 1px solid #555;
+    border: 1px solid #444;
 
     color: white;
 
+    text-align: center;
+
     border-radius: 4px;
+
+    font-size: 14px;
 
 }
 
@@ -415,11 +439,11 @@ body{
 
 .skill-penalty{
 
-    background: #2a1111;
-
     border: 1px solid #ff4444;
 
     color: #ff6666;
+
+    background: #220909;
 
 }
 
@@ -433,31 +457,31 @@ body{
 
     font-weight: bold;
 
-    font-size: 18px;
-
     color: #c084fc;
+
+    font-size: 18px;
 
 }
 
 /* ====================================== */
-/* TREINAMENTOS */
+/* TREINAMENTO */
 /* ====================================== */
 
 .skill-trained{
 
-    border-left: 4px solid #4aa3ff;
+    border-left: 3px solid #4aa3ff;
 
 }
 
 .skill-veteran{
 
-    border-left: 4px solid #c084fc;
+    border-left: 3px solid #c084fc;
 
 }
 
 .skill-expert{
 
-    border-left: 4px solid #ffd700;
+    border-left: 3px solid #ffd700;
 
 }
 

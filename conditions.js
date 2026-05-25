@@ -276,36 +276,32 @@ function selectCondition(nome){
 
     }
 
-    // ======================================
-    // CRIAR CARD
-    // ======================================
-
     const card = document.createElement("div");
 
-    card.classList.add("condition-card");
+card.classList.add("condition-card");
 
-    card.innerHTML = `
+card.innerHTML = `
 
-        <span class="condition-name">
-    ${condition.nome}
-</span>
+    <span class="condition-name">
+        ${condition.nome}
+    </span>
 
-        <small class="condition-damage">
-            ${condicao.dano || "Sem dano"}
-        </small>
+    <small class="condition-damage">
+        ${condition.dano || "Sem dano"}
+    </small>
 
-        <button onclick="removeCondition(this)">
-            X
-        </button>
+    <button onclick="removeCondition(this)">
+        X
+    </button>
 
-    `;
+`;
 
-    document.getElementById("conditionsList")
-    .appendChild(card);
+document.getElementById("conditionsList")
+.appendChild(card);
 
-    closeMenu();
+closeMenu();
 
-    saveFicha();
+saveFicha();
 
 }
 
