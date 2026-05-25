@@ -349,6 +349,8 @@ function updateConditionEffects(){
     // LIMPA PENALIDADES
     // =========================
 
+     atualizarStatus();
+
     document.querySelectorAll(".skill-penalty")
     .forEach(input => {
 
@@ -378,6 +380,16 @@ function updateConditionEffects(){
                 ["Atletismo", "Luta"],
                 -5
             );
+
+            // PV TEMPORARIAMENTE REDUZIDO
+    const pvMax =
+        document.getElementById("pvMax");
+
+    pvMax.value =
+        Math.max(
+            1,
+            Number(pvMax.value) - 8
+        );
 
         }
 
@@ -430,6 +442,16 @@ function updateConditionEffects(){
                 ["Vontade"],
                 -5
             );
+
+             // PD TEMPORARIAMENTE REDUZIDO
+    const pdMax =
+        document.getElementById("pdMax");
+
+    pdMax.value =
+        Math.max(
+            0,
+            Number(pdMax.value) - 6
+        );
 
         }
 
@@ -494,6 +516,8 @@ function updateConditionEffects(){
         }
 
     });
+
+    
 
     // =========================
     // RECALCULA
