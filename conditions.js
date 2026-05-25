@@ -276,18 +276,25 @@ function selectCondition(nome){
 
     }
 
-    const card = document.createElement("div");
+    // ======================================
+// CRIAR CARD
+// ======================================
+
+const card = document.createElement("div");
 
 card.classList.add("condition-card");
+
+// IMPORTANTE
+card.dataset.name = condicao.nome;
 
 card.innerHTML = `
 
     <span class="condition-name">
-        ${condition.nome}
+        ${condicao.nome}
     </span>
 
     <small class="condition-damage">
-        ${condition.dano || "Sem dano"}
+        ${condicao.dano || "Sem dano"}
     </small>
 
     <button onclick="removeCondition(this)">
@@ -298,6 +305,9 @@ card.innerHTML = `
 
 document.getElementById("conditionsList")
 .appendChild(card);
+
+// IMPORTANTE
+updateConditionEffects();
 
 closeMenu();
 
