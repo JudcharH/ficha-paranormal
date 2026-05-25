@@ -287,8 +287,8 @@ function selectCondition(nome){
     card.innerHTML = `
 
         <span class="condition-name">
-            ${nome}
-        </span>
+    ${condition.nome}
+</span>
 
         <small class="condition-damage">
             ${condicao.dano || "Sem dano"}
