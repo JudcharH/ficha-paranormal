@@ -60,8 +60,32 @@ function atualizarStatus(){
     document.getElementById("pvMax")
     .value = pvFinal;
 
-    document.getElementById("pdMax")
-    .value = pdBase;
+    // =========================
+// CUSTO HABILIDADES
+// =========================
+
+let custoHabilidades = 0;
+
+document.querySelectorAll(".skill-cost")
+.forEach(el => {
+
+    custoHabilidades +=
+        Number(el.innerText) || 0;
+
+});
+
+// =========================
+// PD FINAL
+// =========================
+
+const pdFinal =
+    Math.max(
+        1,
+        pdBase - custoHabilidades
+    );
+
+document.getElementById("pdMax")
+.value = pdFinal;
 
 }
 
