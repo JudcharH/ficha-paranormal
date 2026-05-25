@@ -79,11 +79,58 @@ function atualizarStatus(){
 
         el.addEventListener(
             "input",
-            atualizarStatus
+            () => {
+
+                atualizarStatus();
+                atualizarPA();
+
+            }
         );
 
     }
 
 });
 
+// ======================================
+// PA
+// ======================================
+
+function atualizarPA(){
+
+    const nivel =
+        Number(
+            document.getElementById("nivel").value
+        ) || 1;
+
+    // =========================
+    // PA MÁXIMO
+    // =========================
+
+    const paMax =
+        4 + Math.floor(nivel / 10);
+
+    // =========================
+    // TEXTO
+    // =========================
+
+    document.getElementById("paMaxText")
+    .innerText =
+        `PA Máximo: ${paMax}`;
+
+    // =========================
+    // LIMITADOR
+    // =========================
+
+    const paAtual =
+        document.getElementById("paAtual");
+
+    if(Number(paAtual.value) > paMax){
+
+        paAtual.value = paMax;
+
+    }
+
+}
+
 atualizarStatus();
+atualizarPA();
