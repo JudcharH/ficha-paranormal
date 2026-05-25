@@ -337,367 +337,186 @@ function closeMenu(){
     }
 
 }
+function updateConditionEffects(){
 
-function aplicarEfeitosCondicoes(){
+    // =========================
+    // LIMPA PENALIDADES
+    // =========================
 
-    // ======================================
-    // RESET STATUS
-    // ======================================
+    document.querySelectorAll(".skill-penalty")
+    .forEach(input => {
 
-    atualizarStatus();
+        input.value = 0;
+
+    });
+
+    // =========================
+    // CONDIÇÕES
+    // =========================
+
+    const conditions =
+        document.querySelectorAll(".condition-card");
+
+    conditions.forEach(card => {
+
+        const nome =
+            card.dataset.name;
+
+        // =====================================
+        // ENFRAQUECIDO
+        // =====================================
+
+        if(nome === "Enfraquecido"){
+
+            applyPenalty(
+                ["Atletismo", "Luta"],
+                -5
+            );
+
+        }
+
+        // =====================================
+        // LENTIDÃO
+        // =====================================
+
+        if(nome === "Lentidão"){
+
+            applyPenalty(
+                [
+                    "Acrobacia",
+                    "Furtividade",
+                    "Reflexos",
+                    "Pilotagem",
+                    "Pontaria",
+                    "Crime",
+                    "Iniciativa"
+                ],
+                -5
+            );
+
+        }
+
+        // =====================================
+        // ENJOADO
+        // =====================================
+
+        if(nome === "Enjoado"){
+
+            applyPenalty(
+                [
+                    "Atletismo",
+                    "Luta",
+                    "Acrobacia",
+                    "Furtividade"
+                ],
+                -3
+            );
+
+        }
+
+        // =====================================
+        // TRAUMATIZADO
+        // =====================================
+
+        if(nome === "Traumatizado"){
+
+            applyPenalty(
+                ["Vontade"],
+                -5
+            );
+
+        }
+
+        // =====================================
+        // PENUMBRA
+        // =====================================
+
+        if(nome === "Penumbra"){
+
+            applyPenalty(
+                ["Percepção"],
+                -5
+            );
+
+            applyPenalty(
+                ["Reflexos"],
+                -3
+            );
+
+        }
+
+        // =====================================
+        // CEGO
+        // =====================================
+
+        if(nome === "Cego"){
+
+            applyPenalty(
+                [
+                    "Percepção",
+                    "Pontaria"
+                ],
+                -10
+            );
+
+        }
+
+        // =====================================
+        // SURDO
+        // =====================================
+
+        if(nome === "Surdo"){
+
+            applyPenalty(
+                ["Percepção"],
+                -10
+            );
+
+        }
+
+        // =====================================
+        // ENVENENAMENTO
+        // =====================================
+
+        if(nome === "Envenenamento"){
+
+            applyPenalty(
+                ["Fortitude"],
+                -5
+            );
+
+        }
+
+    });
+
+    // =========================
+    // RECALCULA
+    // =========================
+
     updateSkills();
 
-    // ======================================
-    // CONDIÇÕES ATIVAS
-    // ======================================
+}
 
-    const condicoesAtivas = [
-        ...document.querySelectorAll(".condition-name")
-    ].map(el => el.innerText);
-
-    // ======================================
-    // RESET DESLOCAMENTO
-    // ======================================
-
-    const deslocamentoInput =
-        document.querySelector(
-            '.status-box input[value="6m"]'
-        );
-
-    if(deslocamentoInput){
-
-        deslocamentoInput.value = "6m";
-
-    }
-
-    // ======================================
-    // TRAUMATIZADO
-    // -8 PD MAX
-    // ======================================
-
-    if(condicoesAtivas.includes("Traumatizado")){
-
-        const pdMax =
-            document.getElementById("pdMax");
-
-        pdMax.value =
-            Math.max(
-                0,
-                Number(pdMax.value) - 8
-            );
-
-    }
-
-    // ======================================
-    // ENFRAQUECIDO
-    // -10 PV MAX
-    // ======================================
-
-    if(condicoesAtivas.includes("Enfraquecido")){
-
-        const pvMax =
-            document.getElementById("pvMax");
-
-        pvMax.value =
-            Math.max(
-                0,
-                Number(pvMax.value) - 10
-            );
-
-    }
-
-    // ======================================
-    // MORRENDO
-    // PA = 0
-    // ======================================
-
-    if(condicoesAtivas.includes("Morrendo")){
-
-        document.getElementById("paAtual")
-        .value = 0;
-
-    }
-
-    // ======================================
-    // LENTIDÃO
-    // -3m deslocamento
-    // ======================================
-
-    if(
-        condicoesAtivas.includes("Lentidão")
-        &&
-        deslocamentoInput
-    ){
-
-        deslocamentoInput.value = "3m";
-
-    }
-
-    // ======================================
-    // CONFUSO
-    // consome 1 PA
-    // ======================================
-
-    if(condicoesAtivas.includes("Confuso")){
-
-        const pa =
-            document.getElementById("paAtual");
-
-        pa.value =
-            Math.max(
-                0,
-                Number(pa.value) - 1
-            );
-
-    }
-
-    // ======================================
-    // DESPREVENIDO
-    // -3 DEFESA
-    // ======================================
-
-    if(condicoesAtivas.includes("Desprevenido")){
-
-        const defesa =
-            document.querySelectorAll(
-                ".status-box input"
-            )[4];
-
-        defesa.value =
-            Math.max(
-                0,
-                Number(defesa.value || 0) - 3
-            );
-
-    }
-
-    // ======================================
-    // CAÍDO
-    // -5 DEFESA
-    // ======================================
-
-    if(condicoesAtivas.includes("Caído")){
-
-        const defesa =
-            document.querySelectorAll(
-                ".status-box input"
-            )[4];
-
-        defesa.value =
-            Math.max(
-                0,
-                Number(defesa.value || 0) - 5
-            );
-
-    }
-
-    // ======================================
-    // PENALIDADES PERÍCIAS
-    // ======================================
+function applyPenalty(skills, value){
 
     document.querySelectorAll(".skill-row")
     .forEach(row => {
 
-        const nome =
+        const skillName =
             row.querySelector(".skill-name")
             .innerText;
 
-        const attr =
-            row.querySelector(".skill-attr")
-            .innerText;
+        if(skills.includes(skillName)){
 
-        const bonusInput =
-            row.querySelector(".skill-bonus");
+            const penaltyInput =
+                row.querySelector(".skill-penalty");
 
-        let penalidade = 0;
-
-        // ==================================
-        // ENVENENAMENTO
-        // -5 VIG
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Envenenamento")
-            &&
-            attr.includes("VIG")
-        ){
-
-            penalidade -= 5;
+            penaltyInput.value =
+                Number(penaltyInput.value || 0)
+                + value;
 
         }
-
-        // ==================================
-        // ENJOADO
-        // -3 testes físicos
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Enjoado")
-            &&
-            (
-                attr.includes("FOR")
-                ||
-                attr.includes("AGI")
-                ||
-                attr.includes("VIG")
-            )
-        ){
-
-            penalidade -= 3;
-
-        }
-
-        // ==================================
-        // ENFRAQUECIDO
-        // -5 FOR
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Enfraquecido")
-            &&
-            attr.includes("FOR")
-        ){
-
-            penalidade -= 5;
-
-        }
-
-        // ==================================
-        // LENTIDÃO
-        // -5 AGI
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Lentidão")
-            &&
-            attr.includes("AGI")
-        ){
-
-            penalidade -= 5;
-
-        }
-
-        // ==================================
-        // CEGO
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Cego")
-        ){
-
-            if(nome === "Percepção"){
-
-                penalidade -= 10;
-
-            }
-
-            if(nome === "Pontaria"){
-
-                penalidade -= 10;
-
-            }
-
-        }
-
-        // ==================================
-        // SURDO
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Surdo")
-            &&
-            nome === "Percepção"
-        ){
-
-            penalidade -= 10;
-
-        }
-
-        // ==================================
-        // TRAUMATIZADO
-        // -5 vontade
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Traumatizado")
-            &&
-            nome === "Vontade"
-        ){
-
-            penalidade -= 5;
-
-        }
-
-        // ==================================
-        // PENUMBRA
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Penumbra")
-        ){
-
-            if(nome === "Percepção"){
-
-                penalidade -= 5;
-
-            }
-
-            if(nome === "Reflexos"){
-
-                penalidade -= 3;
-
-            }
-
-        }
-
-        // ==================================
-        // CAÍDO
-        // -1 dado físicos
-        // convertido em -5
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Caído")
-            &&
-            (
-                attr.includes("FOR")
-                ||
-                attr.includes("AGI")
-                ||
-                attr.includes("VIG")
-            )
-        ){
-
-            penalidade -= 5;
-
-        }
-
-        // ==================================
-        // PARALISIA
-        // ==================================
-
-        if(
-            condicoesAtivas.includes("Paralisia")
-            ||
-            condicoesAtivas.includes("Paralisia Total")
-        ){
-
-            penalidade -= 999;
-
-        }
-
-        // ==================================
-        // APLICA
-        // ==================================
-
-        bonusInput.value = penalidade;
 
     });
-
-    // ======================================
-    // UPDATE
-    // ======================================
-
-    updateSkills();
 
 }

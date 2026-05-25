@@ -323,75 +323,111 @@ body{
 
 }
 
-/* ========================= */
-/* PERÍCIAS */
-/* ========================= */
+.skills-header{
 
-.skills-list{
+    display: grid;
 
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+    grid-template-columns:
+        1.5fr
+        70px
+        55px
+        55px
+        55px
+        70px;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
+
+    opacity: 0.8;
 
 }
+
+/* ====================================== */
+/* PERÍCIAS */
+/* ====================================== */
 
 .skill-row{
 
-    display:grid;
+    display: grid;
 
     grid-template-columns:
-    minmax(140px,1fr)
-    80px
-    80px
-    80px
-    80px;
+        1.5fr
+        70px
+        55px
+        55px
+        55px
+        70px;
 
-    align-items:center;
+    align-items: center;
 
-    gap:10px;
-
-    padding:12px;
-
-    border-bottom:1px solid #222;
+    gap: 8px;
 
 }
 
-.skill-name{
-
-    color:white;
-    font-size:16px;
-
-}
-
-.skill-attr{
-
-    color:#44ff88;
-    font-size:15px;
-
-}
+/* ====================================== */
+/* INPUTS */
+/* ====================================== */
 
 .skill-train,
-.skill-bonus{
+.skill-bonus,
+.skill-penalty{
 
-    background:#111;
+    width: 100%;
 
-    border:1px solid #444;
-
-    color:white;
-
-    padding:8px;
-
-    border-radius:10px;
-
-    text-align:center;
+    text-align: center;
 
 }
+
+/* ====================================== */
+/* PENALIDADE */
+/* ====================================== */
+
+.skill-penalty{
+
+    background: #2a1111;
+
+    border: 1px solid #ff4444;
+
+    color: #ff6666;
+
+}
+
+/* ====================================== */
+/* TOTAL */
+/* ====================================== */
 
 .skill-total{
 
-    color:#c79cff;
-    font-size:20px;
-    font-weight:bold;
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+}
+
+/* ====================================== */
+/* TREINAMENTOS */
+/* ====================================== */
+
+.skill-trained{
+
+    border-left: 4px solid #4aa3ff;
+
+}
+
+.skill-veteran{
+
+    border-left: 4px solid #c084fc;
+
+}
+
+.skill-expert{
+
+    border-left: 4px solid #ffd700;
 
 }
 
