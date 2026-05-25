@@ -46,22 +46,18 @@ function getTrainingBonus(value){
 
     value = Number(value) || 0;
 
-    // 0 = destreinado
     if(value <= 0){
         return 0;
     }
 
-    // 1 = treinado
     if(value === 1){
         return 5;
     }
 
-    // 2 = veterano
     if(value === 2){
         return 10;
     }
 
-    // 3 = expert
     if(value >= 3){
         return 15;
     }
@@ -79,7 +75,7 @@ function getSkillPenalty(skillName){
     let penalty = 0;
 
     const conditions =
-        document.querySelectorAll(".condition-card span");
+        document.querySelectorAll(".condition-name");
 
     conditions.forEach(cond => {
 
@@ -248,7 +244,8 @@ function updateSkills(){
             row.querySelector(".skill-bonus").value
         ) || 0;
 
-        const penaltyInput = row.querySelector(".skill-penalty");
+        const penaltyInput =
+            row.querySelector(".skill-penalty");
 
         // =====================
         // NOME
@@ -270,7 +267,7 @@ function updateSkills(){
             getAttributeValue(attrText);
 
         // =====================
-        // TREINAMENTO
+        // TREINO
         // =====================
 
         const treino =
@@ -283,7 +280,6 @@ function updateSkills(){
         const penalty =
             getSkillPenalty(skillName);
 
-        // atualiza campo visual
         if(penaltyInput){
 
             penaltyInput.value = penalty;
