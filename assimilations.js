@@ -539,7 +539,7 @@ const assimilations = [
             }
 
         ]
-    }
+    },
 
     // ======================================
 // ASSIMILAÇÕES MORTE
@@ -1077,7 +1077,1125 @@ const assimilations = [
     ]
 },
 
+    {
+        nome: "Teleporte Cinético",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Teleporta até 3m ou posição adjacente sem provocar ataques de oportunidade"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Alcance aumenta para 6m ou 1-2 e pode ser usado como reação anulando o dano recebido"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Alcance aumenta para 12m ou 1-4 e pode ser usado sem custo de PA 1 vez por rodada"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Ops, Você Errou",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Sempre que um inimigo errar um ataque contra você sofre 1d6 de dano de Energia"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Dano aumenta para 2d6"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Dano aumenta para 3d6 e inimigos recebem -2 por ataque errado durante 1 rodada"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Ataque em Cadeia",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Ao acertar um ataque pode dividir o dano entre até 2 alvos a até 3m entre si"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode atingir até 3 alvos e alcance entre eles aumenta para 6m"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode atingir até 5 alvos sem dividir igualmente o dano e aplica Confusão ao atingir 5 alvos"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Duplicata Elétrica",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Cria duplicata a até 3m com 1 PV que conta como alvo válido"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode manter até 2 duplicatas e elas explodem causando 1d6 de Energia em 3m"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode manter até 3 duplicatas e teleportar para elas como reação"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Tempestade Viva",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Cria tempestade de 6m por 1d4 rodadas causando efeitos aleatórios"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Área aumenta para 9m e efeitos da tempestade são aprimorados"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Tempestade cobre a cena inteira e você escolhe os efeitos"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Acúmulo de Carga",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Ao causar dano ganha cargas até limite da AGI causando 1d8 por carga ao atingir o máximo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Limite de cargas aumenta para AGI x2"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode consumir todas as cargas causando 1d10+2 por carga"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Reflexos Sobrenaturais",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "+5 em Reflexos"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Após esquivar sua próxima esquiva não consome PA"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "+1 PA permanente"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Descarga Rápida",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Como reação causa 2d6 de dano de Energia ao redor"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Ataques causam +1d6 de dano de Energia"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Reação aumenta para 3d8+5 de dano de Energia"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Corpo Fantasma",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Ao se esquivar recebe RD 5 por 2 rodadas"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "+5 contra agarrar e imobilizar"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode atravessar criaturas e recebe RD 10 ao esquivar"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Aceleração",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Recebe 1 PA temporário a cada 3 rodadas"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Recebe 1 PA temporário no início da cena"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode realizar 1 ataque extra sem custo de PA a cada 4 rodadas"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Instabilidade",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Role 1d8 e receba efeitos aleatórios de sorte ou azar"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Agora rola 1d12 com novos efeitos positivos"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Recebe apenas efeitos positivos ao usar a habilidade"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Aprimorar",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Aprimora equipamento recebendo +3 em testes até o fim da cena"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode aprimorar veículos aumentando velocidade e dando +5 ao piloto"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Armas aprimoradas causam dano de Energia, +1 margem de crítico e +5 dano"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Fúria da Natureza",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Manipula o terreno transformando a cena em terreno difícil ou reduzindo sua complexidade"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Gastando 1 PA cria cobertura parcial"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode prender e imobilizar inimigos causando 3d10 de dano por rodada"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Fragmentado",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Pode trocar de mente com um marcado morto até o fim da cena"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Reduz custo da troca para 2 PA"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode trocar livremente gastando apenas 4 PD"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Imunidade",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "RD 5 contra dano mundano e Energia"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "RD 10 e ao sofrer dano de Energia recebe +5 RD por 1 rodada"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Imune a dano de fogo"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Piromaníaco",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Ataques básicos causam dano de fogo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Ataques aplicam Chamas ao acertar ou sofrer ataques"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Sempre que aplicar Chamas recupera 1 PD"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Magneto Wow",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Armas corpo a corpo recebem +1 alcance"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode reduzir dano balístico à metade como reação"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Sua arma alcança qualquer distância"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Pele Refletora",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Ao sofrer dano devolve 5 ao atacante"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Dano refletido aumenta em 10"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Recebe 25 PV temporários no início da cena"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Mini Anfitrião",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Recebe 10 PD temporários no início da cena"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "No início da rodada role 1d4 para receber bônus ou perder PD"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Mini anfitrião pode tomar ataques no seu lugar e concede RD 10 Energia"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Olhar Onisciente",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "1 PA +3 PD para descobrir PV, PD ou Resistências do alvo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Descobre até 2 informações incluindo atributos"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Descobre até 4 informações do alvo"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Dominar Mente",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "2 PA +4 PD. Falha em Vontade deixa alvo Controlado até próximo turno"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Controle dura 1 rodada e sucesso deixa Traumatizado"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "DT +5 e sucesso deixa Confuso"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Domínio da Mente",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Cria área mental de 9m impedindo saída voluntária por 1d4 rodadas"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Área aumenta para 12m e duração vira 1d4+2"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Escolhe bônus de Defesa, Ataque, Controle, Sorte ou Cura na área"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Barreira Justa",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "RD 10 contra dano mundano"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "RD dobra no início da cena mas perde 5 por rodada"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "RD triplica no início da cena mas perde 4 por rodada"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Mente Analítica",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "1 vez por rodada adiciona +5 ou -5 em um teste"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode usar 2 vezes por rodada e afeta dano"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "1 vez por cena transforma teste em sucesso ou falha automática"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Visão Além",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Enxerga invisíveis e recebe +5 em Percepção"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "1 PA para descobrir próxima ação do alvo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Ignora Furtividade e não pode ficar Desprevenido"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Sobrecarga Cognitiva",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "1 PA +3 PD reduz INT e PRE do alvo por 1d4 rodadas"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Falha deixa Confuso"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Falha deixa Paralisado por 1 rodada"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Biblioteca Viva",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Pode usar qualquer perícia como treinado"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "+5 em perícias baseadas em INT"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "1 vez a cada 4 rodadas trata teste como 20 natural"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Paradoxo Vivo",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Falhar em um teste concede +2 cumulativo no próximo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Bônus aumenta para +4"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Após 3 falhas o próximo teste vira sucesso automático"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Identidade Fragmentada",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "+5 contra efeitos mentais"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Imune a Confusão"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Inimigos recebem -5 para afetar você mentalmente"
+            }
+
+        ]
+    },
+
+        {
+        nome: "Palavra Absoluta",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Ação padrão +4 PD para dar ordem simples ao alvo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode emitir ordens complexas"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Afeta múltiplos alvos"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Arquivo Vivo",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Registra habilidades vistas e ganha +5 para resistir"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Pode usar como reação e bônus aumenta para +10"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "1 vez por cena reproduz versão reduzida da habilidade registrada"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Pensamento Acelerado",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "A cada 2 rodadas faz teste de INT sem gastar PA"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 10,
+                descricao:
+                "Identifica fraquezas e recebe +2 contra o alvo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Ao passar no teste recebe +1 PA"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Falha na Percepção",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Inimigos recebem -2 ao atacar você"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Penalidade aumenta para -5"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Se errarem ficam Desprevenidos"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Reescrever Ação",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Reação 1 PA +3 PD muda o alvo de uma ação inimiga"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Também altera posição final da ação"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "1 vez por cena cancela completamente uma ação"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Desconexão Mental",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "RD 5 contra dano mental"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "RD 10 contra dano mental e +5 em Vontade"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Imune a leitura mental"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Conexão",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "2 PA para compartilhar PD com aliado adjacente"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Conexão alcança até 2 posições"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Conectados ficam imunes a Controlado e recebem +5 Vontade"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Equilibrar",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Sofre -5 em defesa ou testes para aplicar igual ao alvo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Penalidade aumenta para -10"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Pode compartilhar redução de dano ou penalidade de atributo"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Acordo",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 4,
+                descricao:
+                "Cria acordo paranormal impossível de quebrar sem consequência"
+            },
+
+            {
+                nivel: "EVOLUÇÃO I",
+                custo: 8,
+                descricao:
+                "Cria campo isolado entre você e o alvo"
+            },
+
+            {
+                nivel: "EVOLUÇÃO II",
+                custo: 12,
+                descricao:
+                "Quem quebrar o acordo vira seu fantoche até morrer"
+            }
+
+        ]
+    },
+
+    {
+        nome: "Segunda Forma",
+
+        evolucoes: [
+
+            {
+                nivel: "BASE",
+                custo: 15,
+                descricao:
+                "Ao ficar abaixo de 33% PV entra em forma paranormal com +5 ataque, +10 dano, RD 15 e regeneração"
+            }
+
+        ]
+    },
+
 ]
+    
 
 
 
