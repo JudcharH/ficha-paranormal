@@ -272,72 +272,167 @@ function createInventoryCard(item){
 
 function rollItem(card, options = {}){
 
-    let dice =
-        Number(card.dataset.dice) || 1;
-
-    let diceType =
-        Number(card.dataset.diceType) || 6;
-
-    let bonus =
-        Number(card.dataset.bonus) || 0;
-
-    const attr =
-        card.dataset.bonusAttr;
-
     // ======================================
-    // ATRIBUTO
+    // PEGA TEXTO ATUAL
     // ======================================
 
-    if(attr && !options.semBonus){
+    const damageInput =
+        card.querySelector(
+            '.inventory-info input[type="text"]'
+        );
 
-        const attrInput =
-            document.getElementById(attr);
+    if(!damageInput) return;
 
-        if(attrInput){
+    let formula =
+        damageInput.value.toUpperCase();
 
-            bonus +=
-                Number(attrInput.value) || 0;
+    // ======================================
+    // ATRIBUTOS
+    // ======================================
+
+    const atributos = {
+
+        FOR:
+            Number(
+                document.getElementById("forca")?.value
+            ) || 0,
+
+        AGI:
+            Number(
+                document.getElementById("agilidade")?.value
+            ) || 0,
+
+        INT:
+            Number(
+                document.getElementById("intelecto")?.value
+            ) || 0,
+
+        VIG:
+            Number(
+                document.getElementById("vigor")?.value
+            ) || 0,
+
+        PRE:
+            Number(
+                document.getElementById("presenca")?.value
+            ) || 0
+
+    };
+
+    // ======================================
+    // SUBSTITUI ATRIBUTOS
+    // ======================================
+
+    Object.keys(atributos).forEach(attr => {
+
+        formula =
+            formula.replaceAll(
+                attr,
+                atributos[attr]
+            );
+
+    });
+
+    // ======================================
+    // PEGA DADOS
+    // ======================================
+
+    const diceRegex =
+        /(\d+)D(\d+)/g;
+
+    let rolls = [];
+
+    let total = 0;
+
+    let match;
+
+    while((match = diceRegex.exec(formula)) !== null){
+
+        let quantidade =
+            Number(match[1]);
+
+        const tipo =
+            Number(match[2]);
+
+        // ======================================
+        // CRÍTICO
+        // ======================================
+
+        if(options.critico){
+
+            quantidade *= 2;
+
+        }
+
+        // ======================================
+        // VANTAGEM
+        // ======================================
+
+        if(options.vantagem){
+
+            quantidade += 1;
+
+        }
+
+        // ======================================
+        // ROLA
+        // ======================================
+
+        for(let i = 0; i < quantidade; i++){
+
+            const roll =
+                randomDice(tipo);
+
+            rolls.push(
+                `d${tipo}: ${roll}`
+            );
+
+            total += roll;
 
         }
 
     }
 
     // ======================================
-    // CRÍTICO
+    // REMOVE DADOS DA FORMULA
     // ======================================
 
-    if(options.critico){
+    let bonusFormula =
+        formula.replace(diceRegex, "");
 
-        dice *= 2;
+    // ======================================
+    // REMOVE ESPAÇOS
+    // ======================================
+
+    bonusFormula =
+        bonusFormula.replace(/\s+/g, "");
+
+    // ======================================
+    // CALCULA BONUS
+    // ======================================
+
+    let bonus = 0;
+
+    const bonusMatches =
+        bonusFormula.match(/[+-]\d+/g);
+
+    if(bonusMatches){
+
+        bonusMatches.forEach(value => {
+
+            bonus += Number(value);
+
+        });
 
     }
 
     // ======================================
-    // VANTAGEM
+    // SEM BONUS
     // ======================================
 
-    if(options.vantagem){
+    if(options.semBonus){
 
-        dice += 1;
-
-    }
-
-    // ======================================
-    // ROLA
-    // ======================================
-
-    let rolls = [];
-
-    let total = 0;
-
-    for(let i = 0; i < dice; i++){
-
-        const roll =
-            randomDice(diceType);
-
-        rolls.push(roll);
-
-        total += roll;
+        bonus = 0;
 
     }
 
@@ -369,15 +464,21 @@ function rollItem(card, options = {}){
     .innerHTML = `
 
         <div class="dice-rolls">
+
             ${rolls.join(" • ")}
+
         </div>
 
         <div class="dice-big">
+
             ${total}
+
         </div>
 
         <div class="dice-total">
-            Total: ${total}
+
+            Bônus: ${bonus}
+
         </div>
 
         ${critico}
@@ -385,7 +486,6 @@ function rollItem(card, options = {}){
     `;
 
 }
-
 // ======================================
 // EVENTOS
 // ======================================
