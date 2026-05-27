@@ -43,6 +43,21 @@ function atualizarStatus(){
 
     });
 
+ // =========================
+    // HABILIDADES (PD)
+    // =========================
+
+    let custoHabilidades = 0;
+
+    document
+    .querySelectorAll(".skill-cost")
+    .forEach(el => {
+
+        custoHabilidades +=
+            Number(el.innerText) || 0;
+
+    });
+
     // =========================
     // FINAL
     // =========================
@@ -53,6 +68,12 @@ function atualizarStatus(){
             pvBase - custoAssimilacoes
         );
 
+    const pdFinal =
+        Math.max(
+            1,
+            pdBase - custoHabilidades
+        );
+
     // =========================
     // APLICA
     // =========================
@@ -60,32 +81,10 @@ function atualizarStatus(){
     document.getElementById("pvMax")
     .value = pvFinal;
 
-    // =========================
-// CUSTO HABILIDADES
-// =========================
+    document.getElementById("pdMax")
+    .value = pdFinal;
 
-let custoHabilidades = 0;
 
-document.querySelectorAll(".skill-cost")
-.forEach(el => {
-
-    custoHabilidades +=
-        Number(el.innerText) || 0;
-
-});
-
-// =========================
-// PD FINAL
-// =========================
-
-const pdFinal =
-    Math.max(
-        1,
-        pdBase - custoHabilidades
-    );
-
-document.getElementById("pdMax")
-.value = pdFinal;
 
 console.log(selectedSkills);
 
@@ -160,3 +159,18 @@ function atualizarPA(){
 
 atualizarStatus();
 atualizarPA();
+
+updateStatus();
+
+document
+.querySelectorAll(
+    "#nivel, #vigor, #presenca"
+)
+.forEach(input => {
+
+    input.addEventListener(
+        "input",
+        updateStatus
+    );
+
+});
