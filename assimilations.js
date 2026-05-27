@@ -2286,6 +2286,8 @@ function selectAssimilation(nome){
 
     closeMenu();
 
+    updateStatus();
+
 }
 
 // ======================================
@@ -2347,9 +2349,9 @@ function createAssimilationCard(assimilation){
 
     `;
 
-    // =========================
-    // EVOLUIR AO CLICAR
-    // =========================
+    // ======================================
+    // EVOLUIR
+    // ======================================
 
     card.addEventListener("click", function(e){
 
@@ -2359,10 +2361,11 @@ function createAssimilationCard(assimilation){
 
     });
 
-    document.getElementById("assimilationList")
+    document
+    .getElementById("assimilationList")
     .appendChild(card);
 
-    
+    updateStatus();
 
 }
 
@@ -2383,9 +2386,9 @@ function evolveAssimilation(card){
 
     if(!assimilation) return;
 
-    // =========================
+    // ======================================
     // LIMITE
-    // =========================
+    // ======================================
 
     if(level >= 2) return;
 
@@ -2396,16 +2399,19 @@ function evolveAssimilation(card){
     const evo =
         assimilation.evolucoes[level];
 
-    card.querySelector(".assimilation-level")
-    .innerText = evo.nivel;
+    card.querySelector(
+        ".assimilation-level"
+    ).innerText = evo.nivel;
 
-    card.querySelector(".assimilation-description")
-    .innerText = evo.descricao;
+    card.querySelector(
+        ".assimilation-description"
+    ).innerText = evo.descricao;
 
-    card.querySelector(".assimilation-pv")
-    .innerText = evo.custo;
+    card.querySelector(
+        ".assimilation-pv"
+    ).innerText = evo.custo;
 
-    
+    updateStatus();
 
 }
 
@@ -2415,10 +2421,16 @@ function evolveAssimilation(card){
 
 function removeAssimilation(button){
 
-    button.closest(".assimilation-card")
-    .remove();
+    const card =
+        button.closest(".assimilation-card");
 
-    
+    if(card){
+
+        card.remove();
+
+        updateStatus();
+
+    }
 
 }
 
@@ -2437,22 +2449,3 @@ if(assimilationBtn){
     );
 
 }
-
-const assimilationObserver =
-new MutationObserver(() => {
-
-    atualizarStatus();
-
-});
-
-assimilationObserver.observe(
-
-    document.getElementById("assimilationList"),
-
-    {
-        childList: true,
-        subtree: true,
-        characterData: true
-    }
-
-);
