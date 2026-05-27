@@ -140,17 +140,29 @@ document.addEventListener(
 
         updateStatus();
 
-        document
-        .getElementById("nivel")
-        .addEventListener("input", updateStatus);
+        const campos = [
 
-        document
-        .getElementById("vigor")
-        .addEventListener("input", updateStatus);
+            "nivel",
+            "vigor",
+            "presenca"
 
-        document
-        .getElementById("presenca")
-        .addEventListener("input", updateStatus);
+        ];
+
+        campos.forEach(id => {
+
+            const input =
+                document.getElementById(id);
+
+            if(input){
+
+                input.addEventListener(
+                    "input",
+                    updateStatus
+                );
+
+            }
+
+        });
 
     }
 );
