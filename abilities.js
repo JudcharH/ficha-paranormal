@@ -684,7 +684,16 @@ function removeCard(button){
 
         card.remove();
 
-        updateStatus();
+        // força atualizar
+        setTimeout(() => {
+
+            if(typeof updateStatus === "function"){
+
+                updateStatus();
+
+            }
+
+        }, 0);
 
     }
 
@@ -830,3 +839,5 @@ if(abilityBtn){
     );
 
 }
+
+window.updateStatus = updateStatus;
