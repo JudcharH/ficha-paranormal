@@ -673,7 +673,6 @@ const habilidades = [
 // ======================================
 // REMOVER CARD
 // ======================================
-
 function removeCard(button){
 
     const card = button.closest(
@@ -684,16 +683,7 @@ function removeCard(button){
 
         card.remove();
 
-        // força atualizar
-        setTimeout(() => {
-
-            if(typeof updateStatus === "function"){
-
-                updateStatus();
-
-            }
-
-        }, 0);
+        updateStatus();
 
     }
 
@@ -840,4 +830,3 @@ if(abilityBtn){
 
 }
 
-window.updateStatus = updateStatus;

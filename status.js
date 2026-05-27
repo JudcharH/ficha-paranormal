@@ -30,12 +30,13 @@ function updateStatus() {
         (5 + presenca) * nivel;
 
     // =========================
-    // CUSTO ASSIMILAÇÕES
+    // ASSIMILAÇÕES
     // =========================
 
     let custoAssimilacoes = 0;
 
-    document.querySelectorAll(".assimilation-pv")
+    document
+    .querySelectorAll(".assimilation-pv")
     .forEach(el => {
 
         custoAssimilacoes +=
@@ -44,12 +45,13 @@ function updateStatus() {
     });
 
     // =========================
-    // CUSTO HABILIDADES
+    // HABILIDADES
     // =========================
 
     let custoHabilidades = 0;
 
-    document.querySelectorAll(".skill-cost")
+    document
+    .querySelectorAll(".skill-cost")
     .forEach(el => {
 
         custoHabilidades +=
@@ -84,6 +86,46 @@ function updateStatus() {
     .value = pdFinal;
 
 }
+
+// GLOBAL
+window.updateStatus = updateStatus;
+
+// =========================
+// LISTENERS
+// =========================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        updateStatus();
+
+        [
+            "nivel",
+            "vigor",
+            "presenca"
+        ].forEach(id => {
+
+            const el =
+                document.getElementById(id);
+
+            if(el){
+
+                el.addEventListener(
+                    "input",
+                    () => {
+
+                        updateStatus();
+
+                    }
+                );
+
+            }
+
+        });
+
+    }
+);
 
 // ======================================
 // PA
@@ -126,43 +168,3 @@ function atualizarPA(){
 
 }
 
-atualizarStatus();
-atualizarPA();
-
-document
-.querySelectorAll(
-    "#nivel, #vigor, #presenca"
-)
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        updateStatus();
-
-        const campos = [
-
-            "nivel",
-            "vigor",
-            "presenca"
-
-        ];
-
-        campos.forEach(id => {
-
-            const input =
-                document.getElementById(id);
-
-            if(input){
-
-                input.addEventListener(
-                    "input",
-                    updateStatus
-                );
-
-            }
-
-        });
-
-    }
-);
