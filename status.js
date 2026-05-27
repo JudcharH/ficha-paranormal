@@ -1,3 +1,7 @@
+// ======================================
+// STATUS
+// ======================================
+
 function updateStatus() {
 
     // =========================
@@ -85,47 +89,16 @@ function updateStatus() {
     document.getElementById("pdMax")
     .value = pdFinal;
 
+    // =========================
+    // ATUALIZA PA
+    // =========================
+
+    atualizarPA();
+
 }
 
 // GLOBAL
 window.updateStatus = updateStatus;
-
-// =========================
-// LISTENERS
-// =========================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        updateStatus();
-
-        [
-            "nivel",
-            "vigor",
-            "presenca"
-        ].forEach(id => {
-
-            const el =
-                document.getElementById(id);
-
-            if(el){
-
-                el.addEventListener(
-                    "input",
-                    () => {
-
-                        updateStatus();
-
-                    }
-                );
-
-            }
-
-        });
-
-    }
-);
 
 // ======================================
 // PA
@@ -166,6 +139,41 @@ function atualizarPA(){
 
     }
 
-    atualizarStatus();
-
 }
+
+// ======================================
+// LISTENERS
+// ======================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        updateStatus();
+
+        [
+            "nivel",
+            "vigor",
+            "presenca"
+        ].forEach(id => {
+
+            const el =
+                document.getElementById(id);
+
+            if(el){
+
+                el.addEventListener(
+                    "input",
+                    () => {
+
+                        updateStatus();
+
+                    }
+                );
+
+            }
+
+        });
+
+    }
+);
