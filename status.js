@@ -1,4 +1,4 @@
-function atualizarStatus(){
+function updateStatus() {
 
     // =========================
     // ATRIBUTOS
@@ -43,14 +43,13 @@ function atualizarStatus(){
 
     });
 
- // =========================
-    // HABILIDADES (PD)
+    // =========================
+    // CUSTO HABILIDADES
     // =========================
 
     let custoHabilidades = 0;
 
-    document
-    .querySelectorAll(".skill-cost")
+    document.querySelectorAll(".skill-cost")
     .forEach(el => {
 
         custoHabilidades +=
@@ -84,37 +83,7 @@ function atualizarStatus(){
     document.getElementById("pdMax")
     .value = pdFinal;
 
-
-
-console.log(selectedSkills);
-
 }
-
-[
-    "nivel",
-    "vigor",
-    "presenca"
-]
-.forEach(id => {
-
-    const el =
-        document.getElementById(id);
-
-    if(el){
-
-        el.addEventListener(
-            "input",
-            () => {
-
-                atualizarStatus();
-                atualizarPA();
-
-            }
-        );
-
-    }
-
-});
 
 // ======================================
 // PA
@@ -160,17 +129,28 @@ function atualizarPA(){
 atualizarStatus();
 atualizarPA();
 
-updateStatus();
-
 document
 .querySelectorAll(
     "#nivel, #vigor, #presenca"
 )
-.forEach(input => {
 
-    input.addEventListener(
-        "input",
-        updateStatus
-    );
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-});
+        updateStatus();
+
+        document
+        .getElementById("nivel")
+        .addEventListener("input", updateStatus);
+
+        document
+        .getElementById("vigor")
+        .addEventListener("input", updateStatus);
+
+        document
+        .getElementById("presenca")
+        .addEventListener("input", updateStatus);
+
+    }
+);
