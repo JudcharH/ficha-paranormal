@@ -87,6 +87,8 @@ const pdFinal =
 document.getElementById("pdMax")
 .value = pdFinal;
 
+console.log(selectedSkills);
+
 }
 
 [

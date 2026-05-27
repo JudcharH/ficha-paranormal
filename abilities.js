@@ -684,6 +684,8 @@ function removeCard(button){
 
         card.remove();
 
+        updateStatus();
+
     }
 
 }
@@ -779,25 +781,29 @@ function selectAbility(nome){
 
     card.innerHTML = `
 
-        <div class="ability-header">
+    <div class="ability-header">
 
-            <h3 contenteditable="true">
-                ${habilidade.nome}
-            </h3>
+        <h3 contenteditable="true">
+            ${habilidade.nome}
+        </h3>
 
-            <button onclick="removeCard(this)">
-                X
-            </button>
+        <button onclick="removeCard(this)">
+            X
+        </button>
 
-        </div>
+    </div>
 
-        <p contenteditable="true">
-            ${habilidade.descricao}
-        </p>
+    <p contenteditable="true">
+        ${habilidade.descricao}
+    </p>
 
-        <span>
-            Custo: ${habilidade.custo} ${habilidade.tipo}
-        </span>
+    <span class="skill-cost">
+        ${habilidade.custo}
+    </span>
+
+    <span>
+        Tipo: ${habilidade.tipo}
+    </span>
 
     `;
 
@@ -805,6 +811,7 @@ function selectAbility(nome){
     .appendChild(card);
 
     closeMenu();
+    updateStatus();
 
 }
 
