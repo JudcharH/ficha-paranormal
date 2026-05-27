@@ -278,7 +278,7 @@ function rollItem(card, options = {}){
         Number(card.dataset.dice) || 1;
 
     let diceType =
-        Number(card.dataset.diceType) || 20;
+        Number(card.dataset.diceType) || 6;
 
     let bonus =
         Number(card.dataset.bonus) || 0;
@@ -287,7 +287,7 @@ function rollItem(card, options = {}){
         card.dataset.bonusAttr;
 
     // ======================================
-    // ATRIBUTO
+    // SOMA ATRIBUTO
     // ======================================
 
     if(attr && !options.semBonus){
@@ -325,81 +325,118 @@ function rollItem(card, options = {}){
     }
 
     // ======================================
-    // ENVIA PRO PAINEL
+    // ROLA TODOS OS DADOS
     // ======================================
 
-    document.getElementById("diceCount")
-    .value = dice;
+    let rolls = [];
 
-    document.getElementById("diceType")
-    .value = diceType;
+    let total = 0;
 
-    document.getElementById("diceBonus")
-    .value = bonus;
+    for(let i = 0; i < dice; i++){
 
-    // ======================================
-    // ROLA
-    // ======================================
+        const roll =
+            randomDice(diceType);
 
-    const btn =
-        document.getElementById("rollDiceBtn");
+        rolls.push(roll);
 
-    if(btn){
-
-        btn.click();
+        total += roll;
 
     }
 
+    // ======================================
+    // SOMA BÔNUS
+    // ======================================
+
+    total += bonus;
+
+    // ======================================
+    // CRÍTICO VISUAL
+    // ======================================
+
+    let critico = "";
+
+    if(options.critico){
+
+        critico = `
+
+            <div class="critical-text">
+                CRÍTICO!
+            </div>
+
+        `;
+
+    }
+
+    // ======================================
+    // RESULTADO
+    // ======================================
+
+    document.getElementById("diceResult")
+    .innerHTML = `
+
+        <div class="dice-rolls">
+            ${rolls.join(" • ")}
+        </div>
+
+        <div class="dice-big">
+            ${total}
+        </div>
+
+        <div class="dice-total">
+            Total: ${total}
+        </div>
+
+        ${critico}
+
+    `;
+
 }
 
 // ======================================
-// EVENTOS
+// CLIQUES
 // ======================================
 
-const inventoryBtn =
-    document.getElementById("inventoryBtn");
+card.addEventListener("click", function(e){
 
-if(inventoryBtn){
+    if(e.target.tagName === "BUTTON") return;
 
-    inventoryBtn.addEventListener(
-        "click",
-        openInventoryModal
-    );
+    // SHIFT = vantagem
+    if(e.shiftKey){
 
-}
+        rollItem(this, {
+            vantagem: true
+        });
 
-const itemSearch =
-    document.getElementById("itemSearch");
+        return;
 
-if(itemSearch){
+    }
 
-    itemSearch.addEventListener(
-        "input",
-        function(){
+    // CTRL = sem bônus
+    if(e.ctrlKey){
 
-            renderModalItems(this.value);
+        rollItem(this, {
+            semBonus: true
+        });
 
-        }
-    );
+        return;
 
-}
+    }
 
-const inventoryModal =
-    document.getElementById("inventoryModal");
+    // NORMAL
+    rollItem(this);
 
-if(inventoryModal){
+});
 
-    inventoryModal.addEventListener(
-        "click",
-        function(e){
+// ======================================
+// CRÍTICO
+// ======================================
 
-            if(e.target === inventoryModal){
+card.addEventListener("contextmenu", function(e){
 
-                closeInventoryModal();
+    e.preventDefault();
 
-            }
+    rollItem(this, {
+        critico: true
+    });
 
-        }
-    );
-
-}
+});
