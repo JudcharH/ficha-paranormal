@@ -383,9 +383,9 @@ function rollItem(card, options = {}){
             const roll =
                 randomDice(tipo);
 
-            rolls.push(
-                `d${tipo}: ${roll}`
-            );
+            rolls.push(roll);
+                
+            
 
             total += roll;
 
