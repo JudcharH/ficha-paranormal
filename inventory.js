@@ -9,7 +9,13 @@ const itens = [
         descricao: "1d4 + FOR",
         ep: 1,
         categoria: "Corpo a Corpo",
-        usos: 0
+        usos: 0,
+
+        // ROLAGEM
+        modo: "dano",
+        dice: 1,
+        diceType: 4,
+        bonusAttr: "forca"
     },
 
     {
@@ -17,15 +23,25 @@ const itens = [
         descricao: "1d8 + AGI",
         ep: 2,
         categoria: "Arma de Fogo",
-        usos: 0
+        usos: 0,
+
+        modo: "dano",
+        dice: 1,
+        diceType: 8,
+        bonusAttr: "agilidade"
     },
 
     {
         nome: "Kit Médico",
-        descricao: "Cura PV",
+        descricao: "Cura 2d8",
         ep: 2,
         categoria: "Consumível",
-        usos: 5
+        usos: 5,
+
+        modo: "cura",
+        dice: 2,
+        diceType: 8,
+        bonus: 0
     }
 
 ];
@@ -50,7 +66,6 @@ function closeInventoryModal(){
 
 }
 
-
 // ======================================
 // RENDER ITENS
 // ======================================
@@ -70,7 +85,8 @@ function renderModalItems(search){
     )
     .forEach(item => {
 
-        const div = document.createElement("div");
+        const div =
+            document.createElement("div");
 
         div.classList.add("modal-item");
 
@@ -104,9 +120,33 @@ function renderModalItems(search){
 
 function createInventoryCard(item){
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("inventory-card");
+
+    // ======================================
+    // DATASET
+    // ======================================
+
+    card.dataset.dice =
+        item.dice || 1;
+
+    card.dataset.diceType =
+        item.diceType || 20;
+
+    card.dataset.bonus =
+        item.bonus || 0;
+
+    card.dataset.bonusAttr =
+        item.bonusAttr || "";
+
+    card.dataset.modo =
+        item.modo || "dano";
+
+    // ======================================
+    // HTML
+    // ======================================
 
     card.innerHTML = `
 
@@ -172,17 +212,143 @@ function createInventoryCard(item){
 
     `;
 
-    document.getElementById("inventoryList")
+    // ======================================
+    // CLIQUE NORMAL
+    // ======================================
+
+    card.addEventListener("click", function(e){
+
+        if(e.target.tagName === "BUTTON") return;
+
+        rollItem(this);
+
+    });
+
+    // ======================================
+    // CRÍTICO
+    // ======================================
+
+    card.addEventListener("contextmenu", function(e){
+
+        e.preventDefault();
+
+        rollItem(this, {
+            critico: true
+        });
+
+    });
+
+    // ======================================
+    // VANTAGEM / SEM BÔNUS
+    // ======================================
+
+    card.addEventListener("click", function(e){
+
+        if(e.shiftKey){
+
+            rollItem(this, {
+                vantagem: true
+            });
+
+        }
+
+        if(e.ctrlKey){
+
+            rollItem(this, {
+                semBonus: true
+            });
+
+        }
+
+    });
+
+    document
+    .getElementById("inventoryList")
     .appendChild(card);
 
-    card.dataset.dice =
-    item.dice || 1;
+}
 
-card.dataset.diceType =
-    item.diceType || 20;
+// ======================================
+// ROLAR ITEM
+// ======================================
 
-card.dataset.bonus =
-    item.bonus || 0;
+function rollItem(card, options = {}){
+
+    let dice =
+        Number(card.dataset.dice) || 1;
+
+    let diceType =
+        Number(card.dataset.diceType) || 20;
+
+    let bonus =
+        Number(card.dataset.bonus) || 0;
+
+    const attr =
+        card.dataset.bonusAttr;
+
+    // ======================================
+    // ATRIBUTO
+    // ======================================
+
+    if(attr && !options.semBonus){
+
+        const attrInput =
+            document.getElementById(attr);
+
+        if(attrInput){
+
+            bonus +=
+                Number(attrInput.value) || 0;
+
+        }
+
+    }
+
+    // ======================================
+    // CRÍTICO
+    // ======================================
+
+    if(options.critico){
+
+        dice *= 2;
+
+    }
+
+    // ======================================
+    // VANTAGEM
+    // ======================================
+
+    if(options.vantagem){
+
+        dice += 1;
+
+    }
+
+    // ======================================
+    // ENVIA PRO PAINEL
+    // ======================================
+
+    document.getElementById("diceCount")
+    .value = dice;
+
+    document.getElementById("diceType")
+    .value = diceType;
+
+    document.getElementById("diceBonus")
+    .value = bonus;
+
+    // ======================================
+    // ROLA
+    // ======================================
+
+    const btn =
+        document.getElementById("rollDiceBtn");
+
+    if(btn){
+
+        btn.click();
+
+    }
 
 }
 
@@ -207,11 +373,14 @@ const itemSearch =
 
 if(itemSearch){
 
-    itemSearch.addEventListener("input", function(){
+    itemSearch.addEventListener(
+        "input",
+        function(){
 
-        renderModalItems(this.value);
+            renderModalItems(this.value);
 
-    });
+        }
+    );
 
 }
 
@@ -220,61 +389,17 @@ const inventoryModal =
 
 if(inventoryModal){
 
-    inventoryModal.addEventListener("click", function(e){
+    inventoryModal.addEventListener(
+        "click",
+        function(e){
 
-        if(e.target === inventoryModal){
+            if(e.target === inventoryModal){
 
-            closeInventoryModal();
+                closeInventoryModal();
+
+            }
 
         }
-
-    });
-
-}
-
-card.addEventListener("click", function(e){
-
-    if(e.target.tagName === "BUTTON") return;
-
-    rollItem(this);
-
-});
-
-function rollItem(card){
-
-    const dice =
-        Number(card.dataset.dice) || 1;
-
-    const diceType =
-        Number(card.dataset.diceType) || 20;
-
-    const bonus =
-        Number(card.dataset.bonus) || 0;
-
-    // =========================
-    // ENVIA PRO PAINEL
-    // =========================
-
-    document.getElementById("diceCount")
-    .value = dice;
-
-    document.getElementById("diceType")
-    .value = diceType;
-
-    document.getElementById("diceBonus")
-    .value = bonus;
-
-    // =========================
-    // ROLA AUTOMATICAMENTE
-    // =========================
-
-    const btn =
-        document.getElementById("rollDiceBtn");
-
-    if(btn){
-
-        btn.click();
-
-    }
+    );
 
 }
