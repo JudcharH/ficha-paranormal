@@ -175,6 +175,15 @@ function createInventoryCard(item){
     document.getElementById("inventoryList")
     .appendChild(card);
 
+    card.dataset.dice =
+    item.dice || 1;
+
+card.dataset.diceType =
+    item.diceType || 20;
+
+card.dataset.bonus =
+    item.bonus || 0;
+
 }
 
 // ======================================
@@ -220,5 +229,52 @@ if(inventoryModal){
         }
 
     });
+
+}
+
+card.addEventListener("click", function(e){
+
+    if(e.target.tagName === "BUTTON") return;
+
+    rollItem(this);
+
+});
+
+function rollItem(card){
+
+    const dice =
+        Number(card.dataset.dice) || 1;
+
+    const diceType =
+        Number(card.dataset.diceType) || 20;
+
+    const bonus =
+        Number(card.dataset.bonus) || 0;
+
+    // =========================
+    // ENVIA PRO PAINEL
+    // =========================
+
+    document.getElementById("diceCount")
+    .value = dice;
+
+    document.getElementById("diceType")
+    .value = diceType;
+
+    document.getElementById("diceBonus")
+    .value = bonus;
+
+    // =========================
+    // ROLA AUTOMATICAMENTE
+    // =========================
+
+    const btn =
+        document.getElementById("rollDiceBtn");
+
+    if(btn){
+
+        btn.click();
+
+    }
 
 }
