@@ -267,7 +267,6 @@ function createInventoryCard(item){
     .appendChild(card);
 
 }
-
 // ======================================
 // ROLAR ITEM
 // ======================================
@@ -440,3 +439,55 @@ card.addEventListener("contextmenu", function(e){
     });
 
 });
+
+// ======================================
+// EVENTOS
+// ======================================
+
+const inventoryBtn =
+    document.getElementById("inventoryBtn");
+
+if(inventoryBtn){
+
+    inventoryBtn.addEventListener(
+        "click",
+        openInventoryModal
+    );
+
+}
+
+const itemSearch =
+    document.getElementById("itemSearch");
+
+if(itemSearch){
+
+    itemSearch.addEventListener(
+        "input",
+        function(){
+
+            renderModalItems(this.value);
+
+        }
+    );
+
+}
+
+const inventoryModal =
+    document.getElementById("inventoryModal");
+
+if(inventoryModal){
+
+    inventoryModal.addEventListener(
+        "click",
+        function(e){
+
+            if(e.target === inventoryModal){
+
+                closeInventoryModal();
+
+            }
+
+        }
+    );
+
+}
