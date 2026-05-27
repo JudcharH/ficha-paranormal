@@ -11,7 +11,6 @@ const itens = [
         categoria: "Corpo a Corpo",
         usos: 0,
 
-        // ROLAGEM
         modo: "dano",
         dice: 1,
         diceType: 4,
@@ -67,7 +66,7 @@ function closeInventoryModal(){
 }
 
 // ======================================
-// RENDER ITENS
+// RENDER
 // ======================================
 
 function renderModalItems(search){
@@ -115,7 +114,7 @@ function renderModalItems(search){
 }
 
 // ======================================
-// CARD ITEM
+// CARD
 // ======================================
 
 function createInventoryCard(item){
@@ -126,14 +125,14 @@ function createInventoryCard(item){
     card.classList.add("inventory-card");
 
     // ======================================
-    // DATASET
+    // DATASETS
     // ======================================
 
     card.dataset.dice =
         item.dice || 1;
 
     card.dataset.diceType =
-        item.diceType || 20;
+        item.diceType || 6;
 
     card.dataset.bonus =
         item.bonus || 0;
@@ -213,13 +212,36 @@ function createInventoryCard(item){
     `;
 
     // ======================================
-    // CLIQUE NORMAL
+    // CLIQUE NORMAL / SHIFT / CTRL
     // ======================================
 
     card.addEventListener("click", function(e){
 
         if(e.target.tagName === "BUTTON") return;
 
+        // SHIFT = vantagem
+        if(e.shiftKey){
+
+            rollItem(this, {
+                vantagem: true
+            });
+
+            return;
+
+        }
+
+        // CTRL = sem bônus
+        if(e.ctrlKey){
+
+            rollItem(this, {
+                semBonus: true
+            });
+
+            return;
+
+        }
+
+        // NORMAL
         rollItem(this);
 
     });
@@ -238,35 +260,12 @@ function createInventoryCard(item){
 
     });
 
-    // ======================================
-    // VANTAGEM / SEM BÔNUS
-    // ======================================
-
-    card.addEventListener("click", function(e){
-
-        if(e.shiftKey){
-
-            rollItem(this, {
-                vantagem: true
-            });
-
-        }
-
-        if(e.ctrlKey){
-
-            rollItem(this, {
-                semBonus: true
-            });
-
-        }
-
-    });
-
     document
     .getElementById("inventoryList")
     .appendChild(card);
 
 }
+
 // ======================================
 // ROLAR ITEM
 // ======================================
@@ -286,7 +285,7 @@ function rollItem(card, options = {}){
         card.dataset.bonusAttr;
 
     // ======================================
-    // SOMA ATRIBUTO
+    // ATRIBUTO
     // ======================================
 
     if(attr && !options.semBonus){
@@ -324,7 +323,7 @@ function rollItem(card, options = {}){
     }
 
     // ======================================
-    // ROLA TODOS OS DADOS
+    // ROLA
     // ======================================
 
     let rolls = [];
@@ -342,14 +341,10 @@ function rollItem(card, options = {}){
 
     }
 
-    // ======================================
-    // SOMA BÔNUS
-    // ======================================
-
     total += bonus;
 
     // ======================================
-    // CRÍTICO VISUAL
+    // TEXTO CRÍTICO
     // ======================================
 
     let critico = "";
@@ -390,55 +385,6 @@ function rollItem(card, options = {}){
     `;
 
 }
-
-// ======================================
-// CLIQUES
-// ======================================
-
-card.addEventListener("click", function(e){
-
-    if(e.target.tagName === "BUTTON") return;
-
-    // SHIFT = vantagem
-    if(e.shiftKey){
-
-        rollItem(this, {
-            vantagem: true
-        });
-
-        return;
-
-    }
-
-    // CTRL = sem bônus
-    if(e.ctrlKey){
-
-        rollItem(this, {
-            semBonus: true
-        });
-
-        return;
-
-    }
-
-    // NORMAL
-    rollItem(this);
-
-});
-
-// ======================================
-// CRÍTICO
-// ======================================
-
-card.addEventListener("contextmenu", function(e){
-
-    e.preventDefault();
-
-    rollItem(this, {
-        critico: true
-    });
-
-});
 
 // ======================================
 // EVENTOS
