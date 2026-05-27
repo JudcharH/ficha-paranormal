@@ -165,8 +165,7 @@ function atualizarPA(){
         paAtual.value = paMax;
 
     }
-    updateStatus();
 
+    atualizarStatus();
 
 }
-
