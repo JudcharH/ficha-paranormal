@@ -25,10 +25,17 @@ function updateStatus() {
 
     const agi =
     Number(
-        document.getElementById("agi").value
+        document.getElementById("agi")?.value
     ) || 1;
 
-document.getElementById("deslocamento").value = agi;
+const deslocamento =
+    document.getElementById("deslocamento");
+
+if (deslocamento) {
+
+    deslocamento.value = agi;
+
+}
 
     // =========================
     // BASE
@@ -118,6 +125,12 @@ document.getElementById("deslocamento").value = agi;
         pdMax.value = pdFinal;
     }
 
+    // =========================
+    // DESLOCAMENTO
+    // =========================
+
+
+    
 
     // =========================
     // PA
@@ -184,7 +197,7 @@ document.addEventListener(
             "nivel",
             "vig",
             "pre",
-            "AGI",
+            "agi",
             "pvBonus",
             "pdBonus"
         ].forEach(id => {
