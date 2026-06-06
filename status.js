@@ -126,7 +126,7 @@ function updateStatus() {
     if (deslocamento) {
 
         deslocamento.value =
-            `${agilidade} posição${agilidade > 1 ? "ões" : ""}`;
+            `${agilidade} posição${AGI > 1 ? "ões" : ""}`;
 
     }
 
@@ -195,7 +195,7 @@ document.addEventListener(
             "nivel",
             "vig",
             "pre",
-            "agi",
+            "AGI",
             "pvBonus",
             "pdBonus"
         ].forEach(id => {
