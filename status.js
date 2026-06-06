@@ -151,7 +151,7 @@ function atualizarPA(){
 
     const agilidade =
     Number(
-        document.getElementById("agilidade").value
+        document.getElementById("agi").value
     ) || 1;
 
     document.getElementById("pdMax")
@@ -173,7 +173,7 @@ document.addEventListener(
     "nivel",
     "vigor",
     "presenca",
-    "agilidade",
+    "agi",
     "pvBonus",
     "pdBonus"
 ].forEach(id => {
