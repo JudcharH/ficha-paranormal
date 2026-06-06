@@ -37,6 +37,14 @@ const habilidades = [
     },
 
     {
+        nome: "Especialista em Critico",
+        custo: 4,
+        tipo: "PD",
+        descricao: 
+        "Sua margem de crítico é aumentada em 1"
+    },
+
+    {
         nome: "Golpe Pesado",
         custo: 3,
         tipo: "PD",
@@ -117,11 +125,56 @@ const habilidades = [
     },
 
     {
-        nome: "Lutador Incansável",
+        nome: "Atacante Rapido",
         custo: 5,
         tipo: "PD",
         descricao:
         "Ao acertar ataque desarmado pode gastar 2 PD para realizar outro ataque sem PA até errar. Cada ataque recebe -3 cumulativo."
+    },
+
+    
+    {
+        nome: "Combatente Incansavel",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Ao derrotar um inimigo, recupera 1 PA."
+    },
+
+        
+    {
+        nome: "Executor",
+        custo: 5,
+        tipo: "PD",
+        descricao:
+        "Recebe +15 dano contra alvos com condição Machucado."
+    },
+
+        
+    {
+        nome: "Duplo Golpe",
+        custo: 5,
+        tipo: "PD",
+        descricao:
+        "Realiza dois ataques consecutivos contra o mesmo alvo com -1 dado de ataque."
+    },
+
+            
+    {
+        nome: "Rompedor de Defesas",
+        custo: 5,
+        tipo: "PD",
+        descricao:
+        "Ignora redução de dano mundano ao bloquear por completo."
+    },
+
+                
+    {
+        nome: "Carrasco",
+        custo: 5,
+        tipo: "PD",
+        descricao:
+        "Quando causa um Acerto Crítico, Aplica condição Debilitado ao alvo."
     },
 
     {
@@ -209,7 +262,39 @@ const habilidades = [
         custo: 4,
         tipo: "PD",
         descricao:
-        "Recebe +5 em testes de esquiva."
+        "Recebe +5 em testes de presteza."
+    },
+
+    {
+        nome: "Corpo Treinado",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Recebe +5 em testes de Fortitude."
+    },
+ 
+    {
+        nome: "Movimento Fantasma",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Até o fim da rodada recebe +10 em testes de Discreto."
+    },
+    
+    {
+        nome: "Resistente",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Recebe +5 PV Máximos e 5 de RD mundano."
+    },
+
+    {
+        nome: "Arrancada",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Move-se até o dobro do deslocamento sem gastar PA adicional.."
     },
 
     {
@@ -260,13 +345,6 @@ const habilidades = [
         "Recebe +1 PA temporário até o final da rodada"
     },
 
-    {
-        nome: "Iniciativa Aprimorada",
-        custo: 3,
-        tipo: "PD",
-        descricao:
-        "Recebe +5 nos testes de iniciativa"
-    },
 
     {
         nome: "Surto de Ação",
@@ -281,7 +359,7 @@ const habilidades = [
         custo: 4,
         tipo: "PD",
         descricao:
-        "Ao gastar 2 PA para movimento consome apenas 1 PA"
+        "A cada posição avançada nessa rodada causa +1 dado de dano no proximo ataque dessa rodada"
     },
 
     {
@@ -297,7 +375,7 @@ const habilidades = [
         custo: 4,
         tipo: "PD",
         descricao:
-        "Ignora terreno difícil e recebe +3 em Acrobacia"
+        "Ignora terreno difícil e recebe +3 em Manobra"
     },
 
     {
@@ -305,7 +383,7 @@ const habilidades = [
         custo: 3,
         tipo: "PD",
         descricao:
-        "Pode se deslocar até 6m sem gastar PA e recebe INT x2 em cura"
+        "Pode se deslocar até 1 Posição sem gastar PA e recebe INT x2 em cura"
     },
 
     {
@@ -337,7 +415,7 @@ const habilidades = [
         custo: 4,
         tipo: "PD",
         descricao:
-        "Concede 1 PA seu a um aliado a até 6m"
+        "Concede 1 PA seu a um aliado a até 2 posições"
     },
 
     {
@@ -361,7 +439,7 @@ const habilidades = [
         custo: 3,
         tipo: "PD",
         descricao:
-        "Recebe treinamento em Diplomacia ou Enganação"
+        "Recebe treinamento em interação"
     },
 
     {
@@ -385,7 +463,7 @@ const habilidades = [
         custo: 3,
         tipo: "PD",
         descricao:
-        "Pode usar FOR ou AGI no lugar de INT em Investigação"
+        "Pode usar FOR ou AGI no lugar de INT em Dedução"
     },
 
     {
@@ -401,7 +479,7 @@ const habilidades = [
         custo: 3,
         tipo: "PD",
         descricao:
-        "Recebe +5 em testes de Furtividade"
+        "Recebe +5 em testes de Discreto"
     },
 
     {
@@ -498,6 +576,62 @@ const habilidades = [
         tipo: "PD",
         descricao:
         "Ao falhar ritual recupera metade do PD gasto"
+    },
+    
+    {
+        nome: "Segunda Respiração",
+        custo: 5,
+        tipo: "PD",
+        descricao:
+        "Recupera 10 PV"
+    },
+
+    {
+        nome: "Inabalavel",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Não sofre penalidades por estar caído ou ser empurrado."
+    },
+    
+    {
+        nome: "Observador",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Recebe +5 em testes de Percepção."
+    },
+    
+    {
+        nome: "Lider Nato",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Escolha um aliado que possa ouvir você."
+    },
+       
+    {
+        nome: "Sortudo",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Role novamente um teste recém realizado."
+    },
+       
+    {
+        nome: "Mente Disciplinada",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Recebe +5 em testes de Vontade."
+    },
+    
+    {
+        nome: "Suportar a Dor",
+        custo: 4,
+        tipo: "PD",
+        descricao:
+        "Enquanto estiver na condição de Machucado, recebe +5 em testes de Fortitude e Vontade."
     },
 
     {
@@ -642,14 +776,6 @@ const habilidades = [
         tipo: "PD",
         descricao:
         "Permite manifestação parcial de entidade"
-    },
-
-    {
-        nome: "Amaldiçoador",
-        custo: 4,
-        tipo: "PD",
-        descricao:
-        "Imbui equipamentos com dano elemental"
     },
 
     {
