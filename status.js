@@ -23,6 +23,13 @@ function updateStatus() {
             document.getElementById("pre")?.value
         ) || 1;
 
+    const agi =
+    Number(
+        document.getElementById("agi").value
+    ) || 1;
+
+document.getElementById("deslocamento").value = agi;
+
     // =========================
     // BASE
     // =========================
@@ -110,14 +117,6 @@ function updateStatus() {
     if (pdMax) {
         pdMax.value = pdFinal;
     }
-
-    // =========================
-    // DESLOCAMENTO
-    // =========================
-
-document.getElementById("deslocamento").value =
-    document.getElementById("agi").value;
-
 
 
     // =========================
