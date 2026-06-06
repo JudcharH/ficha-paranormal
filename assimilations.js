@@ -531,9 +531,6 @@ function selectAssimilation(nome){
 
 function createAssimilationCard(assimilation){
 
-    const evo =
-        assimilation.evolucoes[0];
-
     const card =
         document.createElement("div");
 
@@ -555,7 +552,7 @@ function createAssimilationCard(assimilation){
                 </h3>
 
                 <small class="assimilation-level">
-                    ${evo.nivel}
+                    Base
                 </small>
 
             </div>
@@ -568,7 +565,7 @@ function createAssimilationCard(assimilation){
 
         <div class="assimilation-description">
 
-            ${evo.descricao}
+            ${assimilation.base.efeito.join("<br>")}
 
         </div>
 
@@ -576,17 +573,13 @@ function createAssimilationCard(assimilation){
 
             Custo:
             <span class="assimilation-pv">
-                ${evo.custo}
+                ${assimilation.base.custo}
             </span>
             PV
 
         </div>
 
     `;
-
-    // ======================================
-    // EVOLUIR
-    // ======================================
 
     card.addEventListener("click", function(e){
 
@@ -597,8 +590,8 @@ function createAssimilationCard(assimilation){
     });
 
     document
-    .getElementById("assimilationList")
-    .appendChild(card);
+        .getElementById("assimilationList")
+        .appendChild(card);
 
     updateStatus();
 
@@ -617,13 +610,11 @@ function evolveAssimilation(card){
         card.dataset.nome;
 
     const assimilation =
-        assimilations.find(a => a.nome === nome);
+        assimilations.find(
+            a => a.nome === nome
+        );
 
     if(!assimilation) return;
-
-    // ======================================
-    // LIMITE
-    // ======================================
 
     if(level >= 2) return;
 
@@ -631,20 +622,41 @@ function evolveAssimilation(card){
 
     card.dataset.level = level;
 
-    const evo =
-        assimilation.evolucoes[level];
+    let evo;
+    let titulo;
+
+    if(level === 1){
+
+        evo =
+            assimilation.evolucao1;
+
+        titulo =
+            assimilation.evolucao1.nome;
+
+    }
+    else{
+
+        evo =
+            assimilation.evolucao2;
+
+        titulo =
+            assimilation.evolucao2.nome;
+
+    }
 
     card.querySelector(
         ".assimilation-level"
-    ).innerText = evo.nivel;
+    ).innerText = titulo;
 
     card.querySelector(
         ".assimilation-description"
-    ).innerText = evo.descricao;
+    ).innerHTML =
+        evo.efeito.join("<br>");
 
     card.querySelector(
         ".assimilation-pv"
-    ).innerText = evo.custo;
+    ).innerText =
+        evo.custo;
 
     updateStatus();
 
