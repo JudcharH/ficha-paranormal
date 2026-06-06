@@ -67,17 +67,27 @@ function updateStatus() {
     // FINAL
     // =========================
 
-    const pvFinal =
-        Math.max(
-            1,
-            pvBase - custoAssimilacoes
-        );
+    const pvBonus =
+    Number(
+        document.getElementById("pvBonus")?.value
+    ) || 0;
 
-    const pdFinal =
-        Math.max(
-            1,
-            pdBase - custoHabilidades
-        );
+const pdBonus =
+    Number(
+        document.getElementById("pdBonus")?.value
+    ) || 0;
+
+const pvFinal =
+    Math.max(
+        1,
+        pvBase - custoAssimilacoes + pvBonus
+    );
+
+const pdFinal =
+    Math.max(
+        1,
+        pdBase - custoHabilidades + pdBonus
+    );
 
     // =========================
     // APLICA
@@ -139,6 +149,14 @@ function atualizarPA(){
 
     }
 
+    const agilidade =
+    Number(
+        document.getElementById("agilidade").value
+    ) || 1;
+
+    document.getElementById("pdMax")
+.value = pdFinal;
+
 }
 
 // ======================================
@@ -152,10 +170,13 @@ document.addEventListener(
         updateStatus();
 
         [
-            "nivel",
-            "vigor",
-            "presenca"
-        ].forEach(id => {
+    "nivel",
+    "vigor",
+    "presenca",
+    "agilidade",
+    "pvBonus",
+    "pdBonus"
+].forEach(id => {
 
             const el =
                 document.getElementById(id);
