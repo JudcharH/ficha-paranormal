@@ -23,11 +23,6 @@ function updateStatus() {
             document.getElementById("pre")?.value
         ) || 1;
 
-    const agilidade =
-        Number(
-            document.getElementById("agi")?.value
-        ) || 1;
-
     // =========================
     // BASE
     // =========================
@@ -120,15 +115,10 @@ function updateStatus() {
     // DESLOCAMENTO
     // =========================
 
-    const deslocamento =
-        document.getElementById("deslocamento");
+document.getElementById("deslocamento").value =
+    document.getElementById("agi").value;
 
-    if (deslocamento) {
 
-        deslocamento.value =
-            `${agilidade} posição${AGI > 1 ? "ões" : ""}`;
-
-    }
 
     // =========================
     // PA
