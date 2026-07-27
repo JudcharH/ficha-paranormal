@@ -78,19 +78,39 @@
             <div class="status-grid">
 
                 <div class="status-box">
-
-    <span>PV Atual</span>
-    <input type="number" id="pvAtual">
+    <span>Cabeça</span>
+    <input type="number" id="cabecaAtual">
+    <small id="cabecaMax">0</small>
 </div>
 
 <div class="status-box">
-    <span>PV Máximo</span>
-    <input type="number" id="pvMax" value="0" readonly>
+    <span>Torso</span>
+    <input type="number" id="torsoAtual">
+    <small id="torsoMax">0</small>
 </div>
 
 <div class="status-box">
-    <span>PV Bônus</span>
-    <input type="number" id="pvBonus" value="0">
+    <span>Braço Esq.</span>
+    <input type="number" id="bracoEAtual">
+    <small id="bracoEMax">0</small>
+</div>
+
+<div class="status-box">
+    <span>Braço Dir.</span>
+    <input type="number" id="bracoDAtual">
+    <small id="bracoDMax">0</small>
+</div>
+
+<div class="status-box">
+    <span>Perna Esq.</span>
+    <input type="number" id="pernaEAtual">
+    <small id="pernaEMax">0</small>
+</div>
+
+<div class="status-box">
+    <span>Perna Dir.</span>
+    <input type="number" id="pernaDAtual">
+    <small id="pernaDMax">0</small>
 </div>
 
 <div class="status-box">
@@ -185,7 +205,12 @@
             <div class="skill-row clickable-skill">
                 <span class="skill-name">Manobra</span>
                 <span class="skill-attr">(FOR)</span>
-                <input type="number" class="skill-train">
+                <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
                 <input type="number" class="skill-bonus">
                 <input type="number" class="skill-penalty">
                 <span class="skill-total">0</span>
@@ -195,7 +220,12 @@
             <div class="skill-row clickable-skill">
     <span class="skill-name">Disciplina</span>
     <span class="skill-attr">(PRE)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -204,7 +234,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Informação</span>
     <span class="skill-attr">(INT)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -213,7 +248,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Especialização</span>
     <span class="skill-attr">(INT)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -222,7 +262,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Discreto</span>
     <span class="skill-attr">(AGI)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -231,7 +276,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Interação</span>
     <span class="skill-attr">(PRE)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -240,7 +290,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Fortitude</span>
     <span class="skill-attr">(VIG)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -249,7 +304,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Presteza</span>
     <span class="skill-attr">(AGI)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -258,7 +318,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Intimidação</span>
     <span class="skill-attr">(PRE)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -267,7 +332,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Dedução</span>
     <span class="skill-attr">(INT)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -276,7 +346,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Luta</span>
     <span class="skill-attr">(FOR)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -285,7 +360,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Medicina</span>
     <span class="skill-attr">(INT)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -294,7 +374,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Percepção</span>
     <span class="skill-attr">(PRE)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -303,7 +388,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Pilotagem</span>
     <span class="skill-attr">(AGI)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -312,7 +402,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Pontaria</span>
     <span class="skill-attr">(AGI)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -321,7 +416,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Sobrevivência</span>
     <span class="skill-attr">(INT)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -330,7 +430,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Vontade</span>
     <span class="skill-attr">(PRE)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -339,7 +444,12 @@
 <div class="skill-row clickable-skill">
     <span class="skill-name">Sorte</span>
     <span class="skill-attr">(PRE)</span>
-    <input type="number" class="skill-train">
+    <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
     <input type="number" class="skill-bonus">
     <input type="number" class="skill-penalty">
     <span class="skill-total">0</span>
@@ -348,7 +458,12 @@
             <div class="skill-row clickable-skill">
                 <span class="skill-name">Ocultismo</span>
                 <span class="skill-attr">(INT)</span>
-                <input type="number" class="skill-train">
+                <select class="skill-train">
+    <option value="0">Destreinado</option>
+    <option value="1">Treinado (1d4)</option>
+    <option value="2">Veterano (1d8)</option>
+    <option value="3">Expert (1d12)</option>
+</select>
                 <input type="number" class="skill-bonus">
                 <input type="number" class="skill-penalty">
                 <span class="skill-total">0</span>

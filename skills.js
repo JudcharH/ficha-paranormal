@@ -42,25 +42,13 @@ function getAttributeValue(attr){
 // GRAUS DE TREINAMENTO
 // ======================================
 
-function getTrainingBonus(value){
+function getTrainingDice(valor){
 
-    value = Number(value) || 0;
+    valor = Number(valor)||0;
 
-    if(value <= 0){
-        return 0;
-    }
-
-    if(value === 1){
-        return 5;
-    }
-
-    if(value === 2){
-        return 10;
-    }
-
-    if(value >= 3){
-        return 15;
-    }
+    if(valor===1) return 4;
+    if(valor===2) return 8;
+    if(valor>=3) return 12;
 
     return 0;
 
@@ -271,7 +259,8 @@ function updateSkills(){
         // =====================
 
         const treino =
-            getTrainingBonus(treinoValor);
+    getTrainingDice(treinoValor);
+            
 
         // =====================
         // PENALIDADE
@@ -291,7 +280,7 @@ function updateSkills(){
         // =====================
 
         const total =
-            treino + bonusExtra + penalty;
+    treino + bonusExtra + penalty;
 
         // =====================
         // TEXTO
@@ -344,8 +333,10 @@ function updateSkills(){
         row.dataset.attribute =
             atributo;
 
-        row.dataset.total =
-            total;
+        row.dataset.total = total;
+
+row.dataset.training =
+    treino;
 
     });
 
@@ -357,66 +348,123 @@ function updateSkills(){
 
 function rollSkill(row){
 
-    const atributo = Number(
-        row.dataset.attribute
-    ) || 1;
+    const atributo =
+        Number(row.dataset.attribute) || 1;
 
-    const totalBonus = Number(
-        row.dataset.total
-    ) || 0;
+    const bonus =
+        Number(row.querySelector(".skill-bonus").value) || 0;
+
+    const penalty =
+        Number(row.querySelector(".skill-penalty").value) || 0;
+
+    const treino =
+        Number(row.dataset.training) || 0;
 
     const nome =
-        row.querySelector(".skill-name")
-        .innerText;
+        row.querySelector(".skill-name").innerText;
 
-    let rolls = [];
+    // -------------------------
+    // Rolagem dos d20 do atributo
+    // -------------------------
+
+    let atributos = [];
 
     for(let i = 0; i < atributo; i++){
 
-        rolls.push(randomDice(20));
+        atributos.push(randomDice(20));
 
     }
 
     const maior =
-        Math.max(...rolls);
+        Math.max(...atributos);
 
-    const total =
-        maior + totalBonus;
+    // -------------------------
+    // Treinamento
+    // -------------------------
 
-    let critico = "";
+    let treinoValor = 0;
+    let treinoTexto = "Sem treinamento";
 
-    if(maior === 20){
+    const critico =
+        maior === 20;
 
-        critico = `
+    if(treino > 0){
 
-            <div class="critical-text">
-                CRÍTICO!
-            </div>
+        if(critico){
 
-        `;
+            const d1 = randomDice(treino);
+            const d2 = randomDice(treino);
+
+            treinoValor = d1 + d2;
+
+            treinoTexto =
+                `${d1} + ${d2}`;
+
+        }else{
+
+            const d1 = randomDice(treino);
+
+            treinoValor = d1;
+
+            treinoTexto =
+                `${d1}`;
+
+        }
 
     }
 
-    document.getElementById("diceResult")
-    .innerHTML = `
+    // -------------------------
+    // Total
+    // -------------------------
+
+    const total =
+        maior +
+        treinoValor +
+        bonus +
+        penalty;
+
+    // -------------------------
+    // Exibição
+    // -------------------------
+
+    document.getElementById("diceResult").innerHTML = `
 
         <div class="dice-skill-name">
             ${nome}
         </div>
 
         <div class="dice-rolls">
-            ${rolls.join(" • ")}
+            d20: ${atributos.join(" • ")}
+        </div>
+
+        <div class="dice-rolls">
+            Treinamento (d${treino}):
+            ${treinoTexto}
+        </div>
+
+        <div class="dice-rolls">
+            Bônus: ${bonus >= 0 ? "+"+bonus : bonus}
+        </div>
+
+        <div class="dice-rolls">
+            Penalidade: ${penalty}
         </div>
 
         <div class="dice-big">
-            ${maior}
+            ${total}
         </div>
 
-        <div class="dice-total">
-            Total: ${total}
-        </div>
-
-        ${critico}
+        ${
+            critico
+            ?
+            `<div class="critical-text">
+                CRÍTICO!
+                <br>
+                Treinamento Dobrado
+            </div>`
+            :
+            ""
+        }
 
     `;
 

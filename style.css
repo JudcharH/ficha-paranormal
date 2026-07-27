@@ -1922,3 +1922,504 @@ justify-content:center;
     background:#7b2cff;
 
 }
+
+/* ========================================= */
+/* SISTEMA DE MEMBROS */
+/* ========================================= */
+
+.body-status{
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:40px;
+
+    margin-top:25px;
+
+}
+
+.body-model{
+
+    position:relative;
+
+    width:240px;
+    height:520px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.body-model img{
+
+    width:100%;
+    height:100%;
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 0 12px rgba(123,47,255,.45));
+
+}
+
+.body-members{
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+    width:270px;
+
+}
+
+/* ========================================= */
+/* CAIXAS DOS MEMBROS */
+/* ========================================= */
+
+.member-box{
+
+    background:#111;
+
+    border:2px solid #732dff;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 12px rgba(123,47,255,.18);
+
+}
+
+.member-box:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 0 18px rgba(123,47,255,.35);
+
+}
+
+.member-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+}
+
+.member-title span{
+
+    color:#c79cff;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+}
+
+.member-values{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+}
+
+.member-values input{
+
+    width:70px;
+
+    background:#060606;
+
+    border:1px solid #444;
+
+    color:white;
+
+    text-align:center;
+
+    font-size:20px;
+
+    padding:8px;
+
+    border-radius:10px;
+
+}
+
+.member-values small{
+
+    color:#888;
+
+    font-size:18px;
+
+}
+
+/* ========================================= */
+/* ESTADOS DOS MEMBROS */
+/* ========================================= */
+
+.member-normal{
+
+    border-color:#43d16b;
+
+    box-shadow:
+        0 0 15px rgba(67,209,107,.25);
+
+}
+
+.member-warning{
+
+    border-color:#ffd93d;
+
+    box-shadow:
+        0 0 18px rgba(255,217,61,.35);
+
+}
+
+.member-critical{
+
+    border-color:#ff4b4b;
+
+    box-shadow:
+        0 0 20px rgba(255,75,75,.45);
+
+    animation:memberPulse 1s infinite;
+
+}
+
+.member-destroyed{
+
+    border-color:#8a0000;
+
+    background:#220707;
+
+    opacity:.75;
+
+}
+
+/* ========================================= */
+/* ANIMAÇÃO */
+/* ========================================= */
+
+@keyframes memberPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:
+            0 0 12px rgba(255,75,75,.30);
+
+    }
+
+    50%{
+
+        transform:scale(1.03);
+
+        box-shadow:
+            0 0 26px rgba(255,75,75,.65);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:
+            0 0 12px rgba(255,75,75,.30);
+
+    }
+
+}
+
+/* ========================================= */
+/* BARRA SUPERIOR DE PV */
+/* ========================================= */
+
+.body-top-status{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+
+    margin-bottom:25px;
+
+}
+
+.body-status-box{
+
+    background:#111;
+
+    border:2px solid #732dff;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    text-align:center;
+
+}
+
+.body-status-box span{
+
+    display:block;
+
+    color:#c79cff;
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+}
+
+.body-status-box input{
+
+    width:100%;
+
+    background:#050505;
+
+    border:none;
+
+    color:white;
+
+    font-size:26px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    padding:10px;
+
+}
+
+/* ========================================= */
+/* BARRA INFERIOR PD */
+/* ========================================= */
+
+.body-bottom-status{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+
+    margin-top:25px;
+
+}   
+/* ========================================= */
+/* RESPONSIVIDADE DO CORPO */
+/* ========================================= */
+
+@media(max-width:1200px){
+
+    .body-status{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .body-members{
+
+        width:100%;
+
+        max-width:500px;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    .body-top-status,
+    .body-bottom-status{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .body-model{
+
+        width:180px;
+        height:380px;
+
+    }
+
+}
+
+/* ========================================= */
+/* IMAGEM DO CORPO */
+/* ========================================= */
+
+.body-model{
+
+    position:relative;
+
+}
+
+.body-model::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:20px;
+
+    background:
+
+        radial-gradient(circle,
+        rgba(123,47,255,.10),
+        transparent 70%);
+
+    pointer-events:none;
+
+}
+
+/* ========================================= */
+/* BRILHO DOS MEMBROS */
+/* ========================================= */
+
+.member-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.member-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:80px;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.10),
+
+        transparent
+
+    );
+
+    transition:.6s;
+
+}
+
+.member-box:hover::after{
+
+    left:120%;
+
+}
+
+/* ========================================= */
+/* INPUTS PV DOS MEMBROS */
+/* ========================================= */
+
+.member-values input:focus{
+
+    border:1px solid #9d4dff;
+
+    box-shadow:
+
+        0 0 12px rgba(123,47,255,.55);
+
+}
+
+/* ========================================= */
+/* TÍTULO DO PAINEL */
+/* ========================================= */
+
+.body-panel-title{
+
+    text-align:center;
+
+    color:#c79cff;
+
+    font-size:22px;
+
+    letter-spacing:2px;
+
+    margin-bottom:20px;
+
+    text-shadow:
+
+        0 0 15px rgba(123,47,255,.5);
+
+}
+
+/* ========================================= */
+/* TRANSIÇÕES */
+/* ========================================= */
+
+.member-box,
+.body-status-box{
+
+    transition:
+
+        transform .2s,
+
+        box-shadow .2s,
+
+        border-color .2s;
+
+}
+
+.body-status-box:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 0 18px rgba(123,47,255,.35);
+
+}
+
+/* ========================================= */
+/* CORPO CENTRAL */
+/* ========================================= */
+
+.body-layout{
+
+    background:#0d0d0d;
+
+    border:2px solid #732dff;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    margin-top:20px;
+
+    box-shadow:
+
+        0 0 20px rgba(123,47,255,.20);
+
+}

@@ -1,220 +1,166 @@
-// ======================================
-// STATUS
-// ======================================
+//======================================
+// STATUS DOS MEMBROS
+//======================================
 
-function updateStatus() {
+function calcularMembro(base, vigor, nivel){
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
-
-    const nivel =
-        Number(
-            document.getElementById("nivel")?.value
-        ) || 1;
-
-    const vigor =
-        Number(
-            document.getElementById("vig")?.value
-        ) || 1;
-
-    const presenca =
-        Number(
-            document.getElementById("pre")?.value
-        ) || 1;
-
-    const agi =
-    Number(
-        document.getElementById("agi")?.value
-    ) || 1;
-
-const deslocamento =
-    document.getElementById("deslocamento");
-
-if (deslocamento) {
-
-    deslocamento.value = agi;
+    return base + vigor + (Math.max(0,nivel-1) * vigor);
 
 }
 
-    // =========================
-    // BASE
-    // =========================
+function updateStatus(){
 
-    const pvBase =
-        (7 + vigor) * nivel;
+    const nivel =
+        Number(document.getElementById("nivel")?.value) || 1;
 
-    const pdBase =
-        (5 + presenca) * nivel;
+    const vigor =
+        Number(document.getElementById("vigor")?.value) || 1;
 
-    // =========================
-    // BÔNUS
-    // =========================
+    const presenca =
+        Number(document.getElementById("presenca")?.value) || 1;
 
-    const pvBonus =
-        Number(
-            document.getElementById("pvBonus")?.value
-        ) || 0;
+    const agilidade =
+        Number(document.getElementById("agilidade")?.value) || 1;
+
+    //==============================
+    // MEMBROS
+    //==============================
+
+    const cabeca =
+        calcularMembro(2,vigor,nivel);
+
+    const torso =
+        calcularMembro(2,vigor,nivel);
+
+    const braco =
+        calcularMembro(1,vigor,nivel);
+
+    const perna =
+        calcularMembro(1,vigor,nivel);
+
+    //==============================
+    // MOSTRAR
+    //==============================
+
+    document.getElementById("cabecaMax").innerText =
+        "Máx: " + cabeca;
+
+    document.getElementById("torsoMax").innerText =
+        "Máx: " + torso;
+
+    document.getElementById("bracoEMax").innerText =
+        "Máx: " + braco;
+
+    document.getElementById("bracoDMax").innerText =
+        "Máx: " + braco;
+
+    document.getElementById("pernaEMax").innerText =
+        "Máx: " + perna;
+
+    document.getElementById("pernaDMax").innerText =
+        "Máx: " + perna;
+
+    //==============================
+    // PD
+    //==============================
 
     const pdBonus =
-        Number(
-            document.getElementById("pdBonus")?.value
-        ) || 0;
-
-    // =========================
-    // ASSIMILAÇÕES
-    // =========================
-
-    let custoAssimilacoes = 0;
-
-    document
-        .querySelectorAll(".assimilation-pv")
-        .forEach(el => {
-
-            custoAssimilacoes +=
-                Number(el.innerText) || 0;
-
-        });
-
-    // =========================
-    // HABILIDADES
-    // =========================
+        Number(document.getElementById("pdBonus")?.value) || 0;
 
     let custoHabilidades = 0;
 
-    document
-        .querySelectorAll(".skill-cost")
-        .forEach(el => {
+    document.querySelectorAll(".skill-cost")
+    .forEach(el=>{
 
-            custoHabilidades +=
-                Number(el.innerText) || 0;
+        custoHabilidades +=
+            Number(el.innerText)||0;
 
-        });
-
-    // =========================
-    // PV / PD FINAL
-    // =========================
-
-    const pvFinal =
-        Math.max(
-            1,
-            pvBase - custoAssimilacoes + pvBonus
-        );
-
-    const pdFinal =
-        Math.max(
-            1,
-            pdBase - custoHabilidades + pdBonus
-        );
-
-    // =========================
-    // APLICA
-    // =========================
-
-    const pvMax =
-        document.getElementById("pvMax");
+    });
 
     const pdMax =
-        document.getElementById("pdMax");
+        Math.max(
+            1,
+            ((5+presenca)*nivel)
+            -
+            custoHabilidades
+            +
+            pdBonus
+        );
 
-    if (pvMax) {
-        pvMax.value = pvFinal;
-    }
+    document.getElementById("pdMax").value =
+        pdMax;
 
-    if (pdMax) {
-        pdMax.value = pdFinal;
-    }
-
-    // =========================
+    //==============================
     // DESLOCAMENTO
-    // =========================
+    //==============================
 
-
-    
-
-    // =========================
-    // PA
-    // =========================
+    document.getElementById("deslocamento").value =
+        agilidade;
 
     atualizarPA();
 
 }
 
-// GLOBAL
 window.updateStatus = updateStatus;
 
 
-// ======================================
+//======================================
 // PA
-// ======================================
+//======================================
 
-function atualizarPA() {
+function atualizarPA(){
 
     const nivel =
-        Number(
-            document.getElementById("nivel")?.value
-        ) || 1;
+        Number(document.getElementById("nivel").value)||1;
 
     const paMax =
-        4 + Math.floor(nivel / 10);
+        4 + Math.floor(nivel/10);
 
-    const texto =
-        document.getElementById("paMaxText");
+    document.getElementById("paMaxText")
+        .innerText =
+        "PA Máximo: " + paMax;
 
-    if (texto) {
-
-        texto.innerText =
-            `PA Máximo: ${paMax}`;
-
-    }
-
-    const paAtual =
+    const atual =
         document.getElementById("paAtual");
 
-    if (
-        paAtual &&
-        Number(paAtual.value) > paMax
-    ) {
+    if(Number(atual.value)>paMax){
 
-        paAtual.value = paMax;
+        atual.value=paMax;
 
     }
 
 }
 
 
-// ======================================
+//======================================
 // LISTENERS
-// ======================================
+//======================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+document.addEventListener("DOMContentLoaded",()=>{
 
-        updateStatus();
+    updateStatus();
 
-        [
-            "nivel",
-            "vig",
-            "pre",
-            "agi",
-            "pvBonus",
-            "pdBonus"
-        ].forEach(id => {
+    [
 
-            const el =
-                document.getElementById(id);
+        "nivel",
+        "vigor",
+        "presenca",
+        "agilidade",
+        "pdBonus"
 
-            if (el) {
+    ].forEach(id=>{
 
-                el.addEventListener(
-                    "input",
-                    updateStatus
-                );
+        const el=document.getElementById(id);
 
-            }
+        if(el){
 
-        });
+            el.addEventListener(
+                "input",
+                updateStatus
+            );
 
-    }
-);
+        }
+
+    });
+
+});
