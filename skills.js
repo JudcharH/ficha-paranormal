@@ -1,211 +1,104 @@
 // ======================================
-// PERÍCIAS
+// SKILLS V2
 // ======================================
 
-function getAttributeValue(attr){
+// ----------------------------
+// ATRIBUTOS
+// ----------------------------
 
-    if(attr.includes("FOR")){
-        return Number(
-            document.getElementById("forca").value
-        ) || 1;
-    }
+const ATTRIBUTE_NAMES = {
 
-    if(attr.includes("AGI")){
-        return Number(
-            document.getElementById("agilidade").value
-        ) || 1;
-    }
+    FOR: "forca",
+    AGI: "agilidade",
+    INT: "intelecto",
+    VIG: "vigor",
+    PRE: "presenca"
 
-    if(attr.includes("INT")){
-        return Number(
-            document.getElementById("intelecto").value
-        ) || 1;
-    }
+};
 
-    if(attr.includes("VIG")){
-        return Number(
-            document.getElementById("vigor").value
-        ) || 1;
-    }
+// ----------------------------
+// DADOS TREINAMENTO
+// ----------------------------
 
-    if(attr.includes("PRE")){
-        return Number(
-            document.getElementById("presenca").value
-        ) || 1;
-    }
+const TRAINING_DICE = {
 
-    return 1;
+    0:0,
+    1:4,
+    2:8,
+    3:12
+
+};
+
+// ======================================
+// PEGAR ATRIBUTO
+// ======================================
+
+function getSkillAttribute(row){
+
+    return row.dataset.attribute;
 
 }
 
 // ======================================
-// GRAUS DE TREINAMENTO
+// VALOR ATRIBUTO
 // ======================================
 
-function getTrainingDice(valor){
+function getAttributeValue(name){
 
-    valor = Number(valor)||0;
+    const id =
+    ATTRIBUTE_NAMES[name];
 
-    if(valor===1) return 4;
-    if(valor===2) return 8;
-    if(valor>=3) return 12;
+    if(!id) return 1;
 
-    return 0;
+    return Number(
+        document.getElementById(id).value
+    )||1;
 
 }
 
 // ======================================
-// PENALIDADES
+// TREINAMENTO
 // ======================================
 
-function getSkillPenalty(skillName){
+function getTrainingValue(row){
 
-    let penalty = 0;
+    const value =
+    Number(
 
-    const conditions =
-        document.querySelectorAll(".condition-name");
+        row.querySelector(".skill-train").value
 
-    conditions.forEach(cond => {
+    )||0;
 
-        const nome = cond.innerText;
+    return TRAINING_DICE[value];
 
-        // =====================================
-        // ENFRAQUECIDO
-        // =====================================
+}
 
-        if(
-            nome === "Enfraquecido"
-            &&
-            (
-                skillName === "Atletismo"
-                ||
-                skillName === "Luta"
-            )
-        ){
-            penalty -= 5;
-        }
 
-        // =====================================
-        // LENTIDÃO
-        // =====================================
+// ======================================
+// BONUS
+// ======================================
 
-        if(
-            nome === "Lentidão"
-            &&
-            (
-                skillName === "Acrobacia"
-                ||
-                skillName === "Furtividade"
-                ||
-                skillName === "Reflexos"
-                ||
-                skillName === "Pilotagem"
-                ||
-                skillName === "Pontaria"
-                ||
-                skillName === "Crime"
-                ||
-                skillName === "Iniciativa"
-            )
-        ){
-            penalty -= 5;
-        }
+function getBonus(row){
 
-        // =====================================
-        // ENJOADO
-        // =====================================
+    return Number(
 
-        if(
-            nome === "Enjoado"
-            &&
-            (
-                skillName === "Atletismo"
-                ||
-                skillName === "Luta"
-                ||
-                skillName === "Acrobacia"
-                ||
-                skillName === "Furtividade"
-            )
-        ){
-            penalty -= 3;
-        }
+        row.querySelector(".skill-bonus").value
 
-        // =====================================
-        // TRAUMATIZADO
-        // =====================================
+    )||0;
 
-        if(
-            nome === "Traumatizado"
-            &&
-            skillName === "Vontade"
-        ){
-            penalty -= 5;
-        }
+}
 
-        // =====================================
-        // PENUMBRA
-        // =====================================
+// ======================================
+// PENALIDADE
+// ======================================
 
-        if(
-            nome === "Penumbra"
-            &&
-            skillName === "Percepção"
-        ){
-            penalty -= 5;
-        }
+function getPenalty(row){
 
-        if(
-            nome === "Penumbra"
-            &&
-            skillName === "Reflexos"
-        ){
-            penalty -= 3;
-        }
+    return Number(
 
-        // =====================================
-        // CEGO
-        // =====================================
+        row.querySelector(".skill-penalty").value
 
-        if(
-            nome === "Cego"
-            &&
-            (
-                skillName === "Percepção"
-                ||
-                skillName === "Pontaria"
-            )
-        ){
-            penalty -= 10;
-        }
-
-        // =====================================
-        // SURDO
-        // =====================================
-
-        if(
-            nome === "Surdo"
-            &&
-            skillName === "Percepção"
-        ){
-            penalty -= 10;
-        }
-
-        // =====================================
-        // ENVENENAMENTO
-        // =====================================
-
-        if(
-            nome === "Envenenamento"
-            &&
-            skillName === "Fortitude"
-        ){
-            penalty -= 5;
-        }
-
-    });
-
-    return penalty;
+    )||0;
 
 }
 
@@ -215,94 +108,61 @@ function getSkillPenalty(skillName){
 
 function updateSkills(){
 
-    const rows =
-        document.querySelectorAll(".skill-row");
-
-    rows.forEach(row => {
-
-        // =====================
-        // INPUTS
-        // =====================
-
-        const treinoValor = Number(
-            row.querySelector(".skill-train").value
-        ) || 0;
-
-        const bonusExtra = Number(
-            row.querySelector(".skill-bonus").value
-        ) || 0;
-
-        const penaltyInput =
-            row.querySelector(".skill-penalty");
-
-        // =====================
-        // NOME
-        // =====================
-
-        const skillName =
-            row.querySelector(".skill-name")
-            .innerText;
-
-        // =====================
-        // ATRIBUTO
-        // =====================
-
-        const attrText =
-            row.querySelector(".skill-attr")
-            .innerText;
+    document
+    .querySelectorAll(".skill-row")
+    .forEach(row=>{
 
         const atributo =
-            getAttributeValue(attrText);
+        getSkillAttribute(row);
 
-        // =====================
-        // TREINO
-        // =====================
+        const atributoValor =
+        getAttributeValue(atributo);
 
         const treino =
-    getTrainingDice(treinoValor);
-            
+        getTrainingValue(row);
 
-        // =====================
-        // PENALIDADE
-        // =====================
+        const bonus =
+        getBonus(row);
 
         const penalty =
-            getSkillPenalty(skillName);
+        getPenalty(row);
 
-        if(penaltyInput){
+        const total =
+        bonus+penalty;
 
-            penaltyInput.value = penalty;
+        row.dataset.attributeValue=
+        atributoValor;
+
+        row.dataset.trainingDice=
+        treino;
+
+        row.dataset.total=
+        total;
+
+        const totalText=
+        row.querySelector(".skill-total");
+
+        if(total>=0){
+
+            totalText.innerText=
+            "+"+total;
+
+        }else{
+
+            totalText.innerText=
+            total;
 
         }
 
-        // =====================
-        // TOTAL
-        // =====================
-
-        const total =
-    treino + bonusExtra + penalty;
-
-        // =====================
-        // TEXTO
-        // =====================
-
-        row.querySelector(".skill-total")
-        .innerText =
-            total >= 0
-            ? "+" + total
-            : total;
-
-        // =====================
-        // VISUAL
-        // =====================
-
         row.classList.remove(
+
             "skill-trained",
             "skill-veteran",
             "skill-expert"
+
         );
 
-        if(treinoValor === 1){
+        if(treino===4){
 
             row.classList.add(
                 "skill-trained"
@@ -310,7 +170,7 @@ function updateSkills(){
 
         }
 
-        if(treinoValor === 2){
+        if(treino===8){
 
             row.classList.add(
                 "skill-veteran"
@@ -318,7 +178,7 @@ function updateSkills(){
 
         }
 
-        if(treinoValor >= 3){
+        if(treino===12){
 
             row.classList.add(
                 "skill-expert"
@@ -326,222 +186,107 @@ function updateSkills(){
 
         }
 
-        // =====================
-        // DATA
-        // =====================
-
-        row.dataset.attribute =
-            atributo;
-
-        row.dataset.total = total;
-
-row.dataset.training =
-    treino;
-
     });
 
 }
 
 // ======================================
-// ROLAR PERÍCIA
+// ATRIBUTOS DISPONÍVEIS
 // ======================================
 
-function rollSkill(row){
+const skillAttributes = [
 
-    const atributo =
-        Number(row.dataset.attribute) || 1;
+    "FOR",
+    "AGI",
+    "INT",
+    "VIG",
+    "PRE"
 
-    const bonus =
-        Number(row.querySelector(".skill-bonus").value) || 0;
+];
 
-    const penalty =
-        Number(row.querySelector(".skill-penalty").value) || 0;
+// ======================================
+// TROCAR ATRIBUTO
+// ======================================
 
-    const treino =
-        Number(row.dataset.training) || 0;
+function changeSkillAttribute(skillRow){
 
-    const nome =
-        row.querySelector(".skill-name").innerText;
+    const atual =
+    skillRow.dataset.attribute;
 
-    // -------------------------
-    // Rolagem dos d20 do atributo
-    // -------------------------
+    let indice =
+    skillAttributes.indexOf(atual);
 
-    let atributos = [];
+    indice++;
 
-    for(let i = 0; i < atributo; i++){
+    if(indice>=skillAttributes.length){
 
-        atributos.push(randomDice(20));
-
-    }
-
-    const maior =
-        Math.max(...atributos);
-
-    // -------------------------
-    // Treinamento
-    // -------------------------
-
-    let treinoValor = 0;
-    let treinoTexto = "Sem treinamento";
-
-    const critico =
-        maior === 20;
-
-    if(treino > 0){
-
-        if(critico){
-
-            const d1 = randomDice(treino);
-            const d2 = randomDice(treino);
-
-            treinoValor = d1 + d2;
-
-            treinoTexto =
-                `${d1} + ${d2}`;
-
-        }else{
-
-            const d1 = randomDice(treino);
-
-            treinoValor = d1;
-
-            treinoTexto =
-                `${d1}`;
-
-        }
+        indice=0;
 
     }
 
-    // -------------------------
-    // Total
-    // -------------------------
+    const novo =
+    skillAttributes[indice];
 
-    const total =
-        maior +
-        treinoValor +
-        bonus +
-        penalty;
+    skillRow.dataset.attribute=
+    novo;
 
-    // -------------------------
-    // Exibição
-    // -------------------------
+    skillRow
+    .querySelector(".skill-attr")
+    .innerText=
+    "(" + novo + ")";
 
-    document.getElementById("diceResult").innerHTML = `
-
-        <div class="dice-skill-name">
-            ${nome}
-        </div>
-
-        <div class="dice-rolls">
-            d20: ${atributos.join(" • ")}
-        </div>
-
-        <div class="dice-rolls">
-            Treinamento (d${treino}):
-            ${treinoTexto}
-        </div>
-
-        <div class="dice-rolls">
-            Bônus: ${bonus >= 0 ? "+"+bonus : bonus}
-        </div>
-
-        <div class="dice-rolls">
-            Penalidade: ${penalty}
-        </div>
-
-        <div class="dice-big">
-            ${total}
-        </div>
-
-        ${
-            critico
-            ?
-            `<div class="critical-text">
-                CRÍTICO!
-                <br>
-                Treinamento Dobrado
-            </div>`
-            :
-            ""
-        }
-
-    `;
+    updateSkills();
 
 }
 
 // ======================================
-// CLICK
+// EVENTOS
 // ======================================
 
 function bindSkillEvents(){
 
-    document.querySelectorAll(".clickable-skill")
-    .forEach(skill => {
+    document
+    .querySelectorAll(".skill-row")
+    .forEach(row=>{
 
-        skill.onclick = function(e){
+        // ------------------------
+        // clicar no atributo
+        // ------------------------
+
+        row
+        .querySelector(".skill-attr")
+        .onclick=function(e){
+
+            e.stopPropagation();
+
+            changeSkillAttribute(row);
+
+        };
+
+        // ------------------------
+        // clicar na perícia
+        // ------------------------
+
+        row.onclick=function(e){
 
             if(
-                e.target.tagName === "INPUT"
+
+                e.target.tagName==="INPUT"
+
+                ||
+
+                e.target.tagName==="SELECT"
+
             ){
+
                 return;
+
             }
 
-            rollSkill(this);
+            rollSkill(row);
 
         };
 
     });
 
 }
-
-// ======================================
-// EVENTOS INPUT
-// ======================================
-
-document.querySelectorAll(
-    ".skill-train, .skill-bonus"
-)
-.forEach(input => {
-
-    input.addEventListener(
-        "input",
-        updateSkills
-    );
-
-});
-
-// ======================================
-// UPDATE ATRIBUTOS
-// ======================================
-
-[
-    "forca",
-    "agilidade",
-    "intelecto",
-    "vigor",
-    "presenca"
-]
-.forEach(id => {
-
-    const el =
-        document.getElementById(id);
-
-    if(el){
-
-        el.addEventListener(
-            "input",
-            updateSkills
-        );
-
-    }
-
-});
-
-// ======================================
-// START
-// ======================================
-
-updateSkills();
-
-bindSkillEvents();

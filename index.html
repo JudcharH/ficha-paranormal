@@ -1,33 +1,63 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Ficha Paranormal</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- HEADER -->
-    <div class="top-bar">
-        <h1>FICHA PARANORMAL</h1>
-    </div>
+    <!-- ================================= -->
+    <!-- TOPO -->
+    <!-- ================================= -->
 
+    <header class="top-bar">
+
+        <h1>FICHA PARANORMAL</h1>
+
+    </header>
+
+        <!-- ================================= -->
     <!-- PERSONAGEM -->
+    <!-- ================================= -->
+
     <section class="character-section">
 
+        <!-- ============================== -->
         <!-- FOTO -->
+        <!-- ============================== -->
+
         <div class="photo-area">
 
-            <div class="photo-preview" id="photoPreview">
+            <div
+                class="photo-preview"
+                id="photoPreview">
+
                 FOTO
+
             </div>
 
-            <input type="file" id="photoInput">
+            <input
+                type="file"
+                id="photoInput"
+            >
 
             <div class="pa-box">
 
@@ -40,575 +70,1900 @@
                 >
 
                 <small id="paMaxText">
+
                     PA Máximo: 4
+
                 </small>
 
             </div>
 
         </div>
 
-        <!-- INFOS -->
+        <!-- ============================== -->
+        <!-- DADOS -->
+        <!-- ============================== -->
+
         <div class="character-info">
 
             <div class="info-grid">
 
                 <div class="field">
+
                     <label>Nome</label>
-                    <input type="text">
+
+                    <input
+                        type="text"
+                        id="characterName"
+                    >
+
                 </div>
 
                 <div class="field">
+
                     <label>Nível</label>
-                    <input type="number" value="1" id="nivel">
+
+                    <input
+                        type="number"
+                        id="nivel"
+                        value="1"
+                    >
+
                 </div>
 
                 <div class="field">
+
                     <label>Origem</label>
-                    <input type="text">
+
+                    <input
+                        type="text"
+                        id="origem"
+                    >
+
                 </div>
 
                 <div class="field">
+
                     <label>Idade</label>
-                    <input type="number">
+
+                    <input
+                        type="number"
+                        id="idade"
+                    >
+
                 </div>
 
             </div>
 
-            <div class="body-top-status">
+                        <!-- ================================= -->
+            <!-- STATUS CORPORAL -->
+            <!-- ================================= -->
 
-    <div class="status-box">
-        <span>PV Atual</span>
-        <input type="number" id="pvAtual">
-    </div>
+            <div class="body-status">
 
-    <div class="status-box">
-        <span>PV Máximo</span>
-        <input type="number" id="pvMax" readonly>
-    </div>
+                <!-- ========================== -->
+                <!-- PV -->
+                <!-- ========================== -->
 
-    <div class="status-box">
-        <span>PV Bônus</span>
-        <input type="number" id="pvBonus">
-    </div>
+                <div class="body-top-status">
 
-</div>
+                    <div class="status-box">
 
-<div class="body-layout">
+                        <span>PV Atual</span>
 
-    <!-- imagem -->
+                        <input
+                            type="number"
+                            id="pvAtual"
+                        >
 
-    <!-- membros -->
+                    </div>
 
-</div>
+                    <div class="status-box">
 
-<div class="body-bottom-status">
+                        <span>PV Máximo</span>
 
-    <div class="status-box">
-        <span>PD Atual</span>
-        <input type="number" id="pdAtual">
-    </div>
+                        <input
+                            type="number"
+                            id="pvMax"
+                            readonly
+                        >
 
-    <div class="status-box">
-        <span>PD Máximo</span>
-        <input type="number" id="pdMax">
-    </div>
+                    </div>
 
-    <div class="status-box">
-        <span>PD Bônus</span>
-        <input type="number" id="pdBonus">
-    </div>
+                    <div class="status-box">
 
-</div>
-            
+                        <span>PV Bônus</span>
+
+                        <input
+                            type="number"
+                            id="pvBonus"
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- ========================== -->
+                <!-- CORPO -->
+                <!-- ========================== -->
+
+                <div class="body-layout">
+
+                    <div class="body-image">
+
+                        <img
+                            src="img/body.png"
+                            id="bodyImage"
+                            alt="Corpo"
+                        >
+
+                    </div>
+
+                    <div class="body-members">
+
+                        <div class="body-part">
+
+                            <span>Cabeça</span>
+
+                            <input
+                                type="number"
+                                id="hpHead"
+                                value="0"
+                            >
+
+                        </div>
+
+                        <div class="body-part">
+
+                            <span>Tronco</span>
+
+                            <input
+                                type="number"
+                                id="hpChest"
+                                value="0"
+                            >
+
+                        </div>
+
+                        <div class="body-part">
+
+                            <span>Braço Esq.</span>
+
+                            <input
+                                type="number"
+                                id="hpLeftArm"
+                                value="0"
+                            >
+
+                        </div>
+
+                        <div class="body-part">
+
+                            <span>Braço Dir.</span>
+
+                            <input
+                                type="number"
+                                id="hpRightArm"
+                                value="0"
+                            >
+
+                        </div>
+
+                        <div class="body-part">
+
+                            <span>Perna Esq.</span>
+
+                            <input
+                                type="number"
+                                id="hpLeftLeg"
+                                value="0"
+                            >
+
+                        </div>
+
+                        <div class="body-part">
+
+                            <span>Perna Dir.</span>
+
+                            <input
+                                type="number"
+                                id="hpRightLeg"
+                                value="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ========================== -->
+                <!-- PD -->
+                <!-- ========================== -->
+
+                <div class="body-bottom-status">
+
+                    <div class="status-box">
+
+                        <span>PD Atual</span>
+
+                        <input
+                            type="number"
+                            id="pdAtual"
+                        >
+
+                    </div>
+
+                    <div class="status-box">
+
+                        <span>PD Máximo</span>
+
+                        <input
+                            type="number"
+                            id="pdMax"
+                            readonly
+                        >
+
+                    </div>
+
+                    <div class="status-box">
+
+                        <span>PD Bônus</span>
+
+                        <input
+                            type="number"
+                            id="pdBonus"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </section>
 
+        <!-- ================================= -->
     <!-- ATRIBUTOS -->
+    <!-- ================================= -->
+
     <section class="card">
 
-        <h2>ATRIBUTOS</h2>
+        <div class="section-title">
+
+            <h2>ATRIBUTOS</h2>
+
+        </div>
 
         <div class="attributes-grid">
 
             <div class="attribute">
+
                 <span>FOR</span>
-                <input type="number" id="forca" value="1">
+
+                <input
+                    type="number"
+                    id="forca"
+                    value="1"
+                    min="1"
+                >
+
+                <small>Força</small>
+
             </div>
 
             <div class="attribute">
+
                 <span>AGI</span>
-                <input type="number" id="agilidade" value="1">
+
+                <input
+                    type="number"
+                    id="agilidade"
+                    value="1"
+                    min="1"
+                >
+
+                <small>Agilidade</small>
+
             </div>
 
             <div class="attribute">
+
                 <span>INT</span>
-                <input type="number" id="intelecto" value="1">
+
+                <input
+                    type="number"
+                    id="intelecto"
+                    value="1"
+                    min="1"
+                >
+
+                <small>Intelecto</small>
+
             </div>
 
             <div class="attribute">
+
                 <span>VIG</span>
-                <input type="number" id="vigor" value="1">
+
+                <input
+                    type="number"
+                    id="vigor"
+                    value="1"
+                    min="1"
+                >
+
+                <small>Vigor</small>
+
             </div>
 
             <div class="attribute">
+
                 <span>PRE</span>
-                <input type="number" id="presenca" value="1">
+
+                <input
+                    type="number"
+                    id="presenca"
+                    value="1"
+                    min="1"
+                >
+
+                <small>Presença</small>
+
             </div>
 
         </div>
 
     </section>
 
-    
-
+        <!-- ================================= -->
     <!-- PERÍCIAS -->
+    <!-- ================================= -->
+
     <section class="card">
 
         <div class="section-title">
+
             <h2>PERÍCIAS</h2>
+
         </div>
 
         <div class="skills-header">
 
-    <span>Perícia</span>
-    <span>Atributo</span>
-    <span>Treino</span>
-    <span>Bônus</span>
-    <span>Penal.</span>
-    <span>Total</span>
+            <span>Perícia</span>
 
-</div>
+            <span>Atributo</span>
 
-        <div class="skills-list">
+            <span>Treino</span>
 
-            <!-- EXEMPLO -->
+            <span>Bônus</span>
+
+            <span>Penal.</span>
+
+            <span>Total</span>
+
+        </div>
+
+        <div
+            class="skills-list"
+            id="skillsList">
+
+            <!-- MANOBRA -->
+
             <div class="skill-row clickable-skill">
-                <span class="skill-name">Manobra</span>
-                <span class="skill-attr">(FOR)</span>
+
+                <span class="skill-name">
+                    Manobra
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="FOR">
+
+                    FOR
+
+                </button>
+
                 <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-                <input type="number" class="skill-bonus">
-                <input type="number" class="skill-penalty">
-                <span class="skill-total">0</span>
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
             </div>
 
 
-            <div class="skill-row clickable-skill">
-    <span class="skill-name">Disciplina</span>
-    <span class="skill-attr">(PRE)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
 
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Informação</span>
-    <span class="skill-attr">(INT)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Especialização</span>
-    <span class="skill-attr">(INT)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Discreto</span>
-    <span class="skill-attr">(AGI)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Interação</span>
-    <span class="skill-attr">(PRE)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Fortitude</span>
-    <span class="skill-attr">(VIG)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Presteza</span>
-    <span class="skill-attr">(AGI)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Intimidação</span>
-    <span class="skill-attr">(PRE)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Dedução</span>
-    <span class="skill-attr">(INT)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Luta</span>
-    <span class="skill-attr">(FOR)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Medicina</span>
-    <span class="skill-attr">(INT)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Percepção</span>
-    <span class="skill-attr">(PRE)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Pilotagem</span>
-    <span class="skill-attr">(AGI)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Pontaria</span>
-    <span class="skill-attr">(AGI)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Sobrevivência</span>
-    <span class="skill-attr">(INT)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Vontade</span>
-    <span class="skill-attr">(PRE)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
-
-<div class="skill-row clickable-skill">
-    <span class="skill-name">Sorte</span>
-    <span class="skill-attr">(PRE)</span>
-    <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-    <input type="number" class="skill-bonus">
-    <input type="number" class="skill-penalty">
-    <span class="skill-total">0</span>
-</div>
+            <!-- DISCIPLINA -->
 
             <div class="skill-row clickable-skill">
-                <span class="skill-name">Ocultismo</span>
-                <span class="skill-attr">(INT)</span>
+
+                <span class="skill-name">
+
+                    Disciplina
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="PRE">
+
+                    PRE
+
+                </button>
+
                 <select class="skill-train">
-    <option value="0">Destreinado</option>
-    <option value="1">Treinado (1d4)</option>
-    <option value="2">Veterano (1d8)</option>
-    <option value="3">Expert (1d12)</option>
-</select>
-                <input type="number" class="skill-bonus">
-                <input type="number" class="skill-penalty">
-                <span class="skill-total">0</span>
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- INFORMAÇÃO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Informação
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="INT">
+
+                    INT
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+                        <!-- ESPECIALIZAÇÃO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Especialização
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="INT">
+
+                    INT
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- DISCRETO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Discreto
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="AGI">
+
+                    AGI
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- INTERAÇÃO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Interação
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="PRE">
+
+                    PRE
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- FORTITUDE -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Fortitude
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="VIG">
+
+                    VIG
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+                        <!-- PRESTEZA -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Presteza
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="AGI">
+
+                    AGI
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- INTIMIDAÇÃO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Intimidação
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="PRE">
+
+                    PRE
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- DEDUÇÃO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Dedução
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="INT">
+
+                    INT
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- LUTA -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Luta
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="FOR">
+
+                    FOR
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+                        <!-- MEDICINA -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Medicina
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="INT">
+
+                    INT
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- PERCEPÇÃO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Percepção
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="PRE">
+
+                    PRE
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- PILOTAGEM -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Pilotagem
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="AGI">
+
+                    AGI
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- PONTARIA -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Pontaria
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="AGI">
+
+                    AGI
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+                        <!-- SOBREVIVÊNCIA -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Sobrevivência
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="INT">
+
+                    INT
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- VONTADE -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Vontade
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="PRE">
+
+                    PRE
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- SORTE -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Sorte
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="PRE">
+
+                    PRE
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
+            </div>
+
+
+
+            <!-- OCULTISMO -->
+
+            <div class="skill-row clickable-skill">
+
+                <span class="skill-name">
+
+                    Ocultismo
+
+                </span>
+
+                <button
+                    class="skill-attribute"
+                    data-attribute="INT">
+
+                    INT
+
+                </button>
+
+                <select class="skill-train">
+
+                    <option value="0">-</option>
+                    <option value="1">1d4</option>
+                    <option value="2">1d8</option>
+                    <option value="3">1d12</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    class="skill-bonus"
+                    value="0"
+                >
+
+                <input
+                    type="number"
+                    class="skill-penalty"
+                    value="0"
+                    readonly
+                >
+
+                <span class="skill-total">
+
+                    +0
+
+                </span>
+
             </div>
 
         </div>
 
     </section>
 
-    <!-- ASSIMILAÇÕES -->
-    <section class="card">
+    <!-- ====================================== -->
+<!-- ASSIMILAÇÃO -->
+<!-- ====================================== -->
 
-        <div class="section-title">
+<div class="assimilation-card">
 
-            <h2>ASSIMILAÇÕES</h2>
+    <div class="assimilation-header">
 
-            <button
-                class="add-btn"
-                id="assimilationBtn">
-                +
-            </button>
+        <div>
 
-        </div>
+            <span class="assimilation-element">
+                🩸 Sangue
+            </span>
 
-        <div id="assimilationList"></div>
-
-    </section>
-
-    <!-- HABILIDADES -->
-    <section class="card">
-
-        <div class="section-title">
-
-            <h2>HABILIDADES GERAIS</h2>
-
-            <button
-                class="add-btn"
-                id="abilityBtn">
-                +
-            </button>
+            <h3>
+                Presas
+            </h3>
 
         </div>
 
-        <div id="abilitiesList"></div>
+        <button class="remove-assimilation">
+            ✕
+        </button>
 
-    </section>
+    </div>
 
-    <!-- CONDIÇÕES -->
-    <section class="card">
+    <div class="assimilation-info">
 
-        <div class="section-title">
+        <div class="assimilation-cost">
 
-            <h2>CONDIÇÕES</h2>
+            <strong>Custo</strong>
 
-            <button
-                class="add-btn"
-                 onclick="openConditionMenu()">
-                +
-            </button>
-
-        </div>
-
-        <div id="conditionsList"></div>
-
-    </section>
-
-    <!-- INVENTÁRIO -->
-    <section class="card">
-
-        <div class="section-title">
-
-            <h2>INVENTÁRIO</h2>
-
-            <button
-                class="add-btn"
-                id="inventoryBtn">
-                +
-            </button>
+            <span class="assimilation-pv">
+                4 PV
+            </span>
 
         </div>
 
-        <div id="inventoryList"></div>
+        <div class="assimilation-type">
 
-    </section>
+            <strong>Tipo</strong>
 
-</div>
+            <span>
+                Ativação • 1 PA
+            </span>
 
-<!-- PAINEL DADOS -->
-<div class="dice-panel">
-
-    <h2>🎲 Rolagem</h2>
-
-    <div class="dice-inputs">
-
-        <div class="dice-field">
-            <label>Dados</label>
-            <input type="number" id="diceCount" value="1">
-        </div>
-
-        <div class="dice-field">
-            <label>Tipo</label>
-            <input type="number" id="diceType" value="20">
-        </div>
-
-        <div class="dice-field">
-            <label>Bônus</label>
-            <input type="number" id="diceBonus" value="0">
         </div>
 
     </div>
 
-    <!-- BOTÕES -->
-    <div class="attribute-rolls">
+    <div class="assimilation-description">
 
-        <button
-            class="attribute-roll-btn"
-            data-attr="forca">
-            FOR
-        </button>
+        Cria garras e presas monstruosas.
 
-        <button
-            class="attribute-roll-btn"
-            data-attr="agilidade">
-            AGI
-        </button>
-
-        <button
-            class="attribute-roll-btn"
-            data-attr="intelecto">
-            INT
-        </button>
-
-        <button
-            class="attribute-roll-btn"
-            data-attr="vigor">
-            VIG
-        </button>
-
-        <button
-            class="attribute-roll-btn"
-            data-attr="presenca">
-            PRE
-        </button>
+        Enquanto estiverem ativas,
+        seus ataques desarmados
+        causam +1 dado de dano.
 
     </div>
 
-    <button
-        class="roll-button"
-        id="rollDiceBtn">
-        ROLAR
-    </button>
+    <div class="mods-area">
+
+        <div class="mods-header">
+
+            <span>MODIFICAÇÕES</span>
+
+            <button class="mini-add-btn">
+                +
+            </button>
+
+        </div>
+
+        <div class="mods-list">
+
+            <!-- Modificações aparecem aqui -->
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="assimilation-menu" id="assimilationMenu">
+
+    <div class="assimilation-menu-content">
+
+        <div class="menu-header">
+
+            <h2>
+                Assimilações
+            </h2>
+
+            <button onclick="closeAssimilationMenu()">
+                ✕
+            </button>
+
+        </div>
+
+        <input
+            id="assimilationSearch"
+            placeholder="Pesquisar Assimilação..."
+        >
+
+        <div
+            id="assimilationOptions"
+            class="assimilation-options">
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="assimilation-option">
+
+    <div>
+
+        <span class="assimilation-element">
+            🩸 Sangue
+        </span>
+
+        <h3>
+            Presas
+        </h3>
+
+        <small>
+            4 PV
+        </small>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- GRIMÓRIO -->
+<!-- ====================================== -->
+
+<section class="card">
+
+    <div class="section-title">
+
+        <h2>GRIMÓRIO</h2>
+
+    </div>
+
+    <div class="grimorio">
+
+        <!-- ELEMENTOS -->
+
+        <div class="grimorio-section">
+
+            <h3>ELEMENTOS</h3>
+
+            <div class="grimorio-list" id="grimorioElements">
+
+                <!-- preenchido pelo JS -->
+
+            </div>
+
+        </div>
+
+        <!-- AÇÕES -->
+
+        <div class="grimorio-section">
+
+            <h3>AÇÕES</h3>
+
+            <div class="grimorio-list" id="grimorioActions">
+
+            </div>
+
+        </div>
+
+        <!-- APRIMORAMENTOS -->
+
+        <div class="grimorio-section">
+
+            <h3>APRIMORAMENTOS</h3>
+
+            <div class="grimorio-list" id="grimorioMods">
+
+            </div>
+
+        </div>
+
+        <!-- COMBINAÇÃO -->
+
+        <div class="grimorio-result">
+
+            <span>Palavras Selecionadas</span>
+
+            <div
+                id="grimorioCurrentSpell"
+                class="grimorio-current">
+
+                Nenhuma palavra selecionada
+
+            </div>
+
+            <button
+                id="castWordButton"
+                class="grimorio-cast">
+
+                LANÇAR PALAVRA
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- INVENTÁRIO -->
+<!-- ====================================== -->
+
+<section class="card">
+
+    <div class="section-title">
+
+        <h2>INVENTÁRIO</h2>
+
+        <button
+            class="add-btn"
+            id="inventoryBtn">
+
+            +
+
+        </button>
+
+    </div>
 
     <div
-        class="dice-result"
-        id="diceResult">
+        id="inventoryList"
+        class="inventory-list">
 
-        Aguardando rolagem...
+    </div>
+
+</section>
+
+<div class="inventory-card">
+
+    <div class="inventory-header">
+
+        <div>
+
+            <h3>
+                Pistola
+            </h3>
+
+            <span class="inventory-category">
+                Arma de Fogo
+            </span>
+
+        </div>
+
+        <button class="remove-item">
+            ✕
+        </button>
+
+    </div>
+
+    <div class="inventory-grid">
+
+        <div>
+
+            <label>Peso</label>
+
+            <input
+                type="number"
+                value="2"
+            >
+
+        </div>
+
+        <div>
+
+            <label>Usos</label>
+
+            <input
+                type="number"
+                value="12"
+            >
+
+        </div>
+
+    </div>
+
+    <div class="inventory-description">
+
+        Pistola semiautomática calibre .40.
+
+    </div>
+
+    <div class="mods-area">
+
+        <div class="mods-header">
+
+            <span>MODIFICAÇÕES</span>
+
+            <button class="mini-add-btn">
+
+                +
+
+            </button>
+
+        </div>
+
+        <div class="mods-list">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MENU INVENTÁRIO -->
+<!-- ====================================== -->
+
+<div
+    class="inventory-modal"
+    id="inventoryModal">
+
+    <div class="inventory-modal-content">
+
+        <div class="menu-header">
+
+            <h2>
+
+                Adicionar Item
+
+            </h2>
+
+            <button
+                onclick="closeInventoryModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <input
+            id="itemSearch"
+            placeholder="Pesquisar Item..."
+        >
+
+        <div
+            id="modalItemsList"
+            class="modal-items-list">
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-item">
+
+    <div>
+
+        <h3>Pistola</h3>
+
+        <span>Arma de Fogo</span>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MENU ASSIMILAÇÕES -->
+<!-- ====================================== -->
+
+<div
+class="assimilation-modal"
+id="assimilationModal">
+
+    <div class="assimilation-modal-content">
+
+        <div class="menu-header">
+
+            <h2>Adicionar Assimilação</h2>
+
+            <button
+            onclick="closeAssimilationMenu()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <input
+        id="assimilationSearch"
+        type="text"
+        placeholder="Pesquisar Assimilação...">
+
+        <div
+        id="assimilationOptions"
+        class="assimilation-options">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MENU MODIFICAÇÕES -->
+<!-- ====================================== -->
+
+<div
+class="mods-modal"
+id="modsModal">
+
+    <div class="mods-modal-content">
+
+        <div class="menu-header">
+
+            <h2>Adicionar Modificação</h2>
+
+            <button
+            onclick="closeModsMenu()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <input
+        id="modsSearch"
+        type="text"
+        placeholder="Pesquisar Modificação...">
+
+        <div
+        id="modsResults"
+        class="mods-results">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- CONDIÇÕES -->
+<!-- ====================================== -->
+
+<div
+class="condition-modal"
+id="conditionModal">
+
+    <div class="condition-modal-content">
+
+        <div class="menu-header">
+
+            <h2>Condições</h2>
+
+            <button
+            onclick="closeConditionMenu()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <input
+        id="conditionSearch"
+        type="text"
+        placeholder="Pesquisar condição...">
+
+        <div
+        id="conditionListModal"
+        class="condition-options">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MENU INVENTÁRIO -->
+<!-- ====================================== -->
+
+<div
+class="inventory-modal"
+id="inventoryModal">
+
+    <div class="inventory-modal-content">
+
+        <div class="menu-header">
+
+            <h2>Adicionar Item</h2>
+
+            <button
+            onclick="closeInventoryModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <input
+        id="itemSearch"
+        type="text"
+        placeholder="Pesquisar Item...">
+
+        <div
+        id="modalItemsList"
+        class="modal-items-list">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MENU GRIMÓRIO -->
+<!-- ====================================== -->
+
+<div
+class="grimorio-modal"
+id="grimorioModal">
+
+    <div class="grimorio-modal-content">
+
+        <div class="menu-header">
+
+            <h2>Palavras Disponíveis</h2>
+
+            <button
+            onclick="closeGrimorioMenu()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div
+        id="grimorioWordList">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- PAINEL DE DADOS -->
+<!-- ====================================== -->
+
+<div class="dice-panel">
+
+    <h2>ROLAGEM</h2>
+
+    <div class="dice-result"
+    id="diceResult">
+
+        Aguardando Rolagem...
 
     </div>
 
     <button
-        class="next-turn-btn"
-        id="nextTurnBtn">
+    class="next-turn-btn"
+    id="nextTurnBtn">
 
         PASSAR RODADA
 
@@ -616,50 +1971,32 @@
 
 </div>
 
-<!-- MODAL INVENTÁRIO -->
-<div class="inventory-modal" id="inventoryModal">
-
-    <div class="inventory-modal-content">
-
-        <div class="modal-top">
-
-            <h2>Adicionar Item</h2>
-
-            <button
-                class="close-modal"
-                onclick="closeInventoryModal()">
-                X
-            </button>
-
-        </div>
-
-        <input
-            type="text"
-            id="itemSearch"
-            placeholder="Pesquisar item..."
-        >
-
-        <div
-            class="modal-items-list"
-            id="modalItemsList">
-        </div>
-
-    </div>
-
-</div>
-
+<!-- ====================================== -->
 <!-- SCRIPTS -->
+<!-- ====================================== -->
+
 <script src="photo.js"></script>
-<script src="dice.js"></script>
+
 <script src="status.js"></script>
+
+<script src="dice.js"></script>
+
 <script src="skills.js"></script>
-<script src="abilities.js"></script>
+
+<script src="grimorio.js"></script>
+
 <script src="assimilations.js"></script>
+
 <script src="conditions.js"></script>
+
 <script src="inventory.js"></script>
+
 <script src="save.js"></script>
+
 <script src="turn.js"></script>
+
 <script src="main.js"></script>
 
 </body>
+
 </html>

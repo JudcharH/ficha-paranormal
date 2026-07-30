@@ -939,3 +939,2884 @@ body{
         0 0 15px rgba(123,44,255,.25);
 
 }
+
+/* ========================================================= */
+/* ASSIMILAÇÕES V2 */
+/* ========================================================= */
+
+#assimilationList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.assimilation-card{
+
+    background:linear-gradient(
+        145deg,
+        #121212,
+        #1b1b1b
+    );
+
+    border:1px solid #333;
+
+    border-left:6px solid var(--purple);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 18px rgba(0,0,0,.35);
+
+}
+
+.assimilation-card:hover{
+
+    transform:translateY(-3px);
+
+    border-left-color:var(--purple2);
+
+    box-shadow:
+        0 0 25px rgba(123,44,255,.30);
+
+}
+
+.assimilation-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:18px;
+
+}
+
+.assimilation-header h3{
+
+    color:white;
+
+    font-size:24px;
+
+    margin-bottom:6px;
+
+}
+
+.assimilation-element{
+
+    color:var(--purple3);
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+.assimilation-stage{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:7px 18px;
+
+    border-radius:999px;
+
+    background:rgba(123,44,255,.15);
+
+    color:var(--purple3);
+
+    font-weight:bold;
+
+    font-size:13px;
+
+    margin-bottom:18px;
+
+}
+
+.assimilation-description{
+
+    color:#d9d9d9;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    margin-bottom:20px;
+
+}
+
+.assimilation-cost{
+
+    color:#ff7c7c;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+.assimilation-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.evolve-btn{
+
+    flex:1;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:linear-gradient(
+        90deg,
+        var(--purple),
+        var(--purple2)
+    );
+
+    transition:.20s;
+
+}
+
+.evolve-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 0 18px rgba(123,44,255,.35);
+
+}
+
+.remove-assimilation{
+
+    width:52px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2a0d0d;
+
+    color:#ff6060;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.20s;
+
+}
+
+.remove-assimilation:hover{
+
+    background:#5a1111;
+
+}
+
+/* ========================================================= */
+/* HABILIDADES GERAIS V2 */
+/* ========================================================= */
+
+#abilitiesList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.ability-card{
+
+    background:linear-gradient(
+        145deg,
+        #131313,
+        #1d1d1d
+    );
+
+    border:1px solid #333;
+
+    border-left:5px solid #4aa3ff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 18px rgba(0,0,0,.35);
+
+}
+
+.ability-card:hover{
+
+    transform:translateY(-3px);
+
+    border-left-color:#6bbcff;
+
+    box-shadow:
+        0 0 20px rgba(74,163,255,.20);
+
+}
+
+.ability-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.ability-header h3{
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+.ability-header button{
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#5c1515;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.ability-header button:hover{
+
+    background:#a51f1f;
+
+}
+
+.ability-card p{
+
+    color:#dddddd;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+.ability-card span{
+
+    color:#7fd0ff;
+
+    font-weight:bold;
+
+}
+
+.skill-cost{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:8px 15px;
+
+    border-radius:999px;
+
+    background:#102333;
+
+    color:#7fd0ff;
+
+    font-weight:bold;
+
+}
+
+/* ========================================================= */
+/* INVENTÁRIO V2 */
+/* ========================================================= */
+
+#inventoryList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.inventory-card{
+
+    background:linear-gradient(
+        145deg,
+        #121212,
+        #1d1d1d
+    );
+
+    border:1px solid #333;
+
+    border-left:5px solid #ffb84d;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 15px rgba(0,0,0,.35);
+
+}
+
+.inventory-card:hover{
+
+    transform:translateY(-3px);
+
+    border-left-color:#ffd26a;
+
+    box-shadow:
+        0 0 20px rgba(255,184,77,.18);
+
+}
+
+.inventory-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.inventory-header h3{
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+.inventory-header button{
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#5a1111;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.inventory-header button:hover{
+
+    background:#b42020;
+
+}
+
+.inventory-description{
+
+    color:#d5d5d5;
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+
+}
+
+.inventory-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+    margin-top:18px;
+
+}
+
+.inventory-info label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#ffcc7d;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+}
+
+.inventory-info input{
+
+    width:100%;
+
+    background:#090909;
+
+    border:1px solid #333;
+
+    border-radius:10px;
+
+    color:white;
+
+    padding:12px;
+
+    font-family:inherit;
+
+}
+
+.inventory-weight{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:18px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#332200;
+
+    color:#ffcc7d;
+
+    font-weight:bold;
+
+}
+
+.uses-box{
+
+    margin-top:18px;
+
+}
+
+.uses-box span{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#ffcc7d;
+
+}
+
+.uses-box input{
+
+    width:100%;
+
+    background:#090909;
+
+    border:1px solid #333;
+
+    border-radius:10px;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+.mod-area{
+
+    margin-top:20px;
+
+}
+
+.mod-area h4{
+
+    color:#ffcc7d;
+
+    margin-bottom:12px;
+
+}
+
+.mods-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.mod-tag{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#1c1c1c;
+
+    border:1px solid #444;
+
+    border-radius:999px;
+
+    padding:8px 14px;
+
+    color:white;
+
+}
+
+.mod-tag button{
+
+    width:22px;
+
+    height:22px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#8d2020;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.mini-add-btn{
+
+    width:36px;
+
+    height:36px;
+
+    margin-top:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--purple);
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.mini-add-btn:hover{
+
+    background:var(--purple2);
+
+}
+
+/* ========================================================= */
+/* CONDIÇÕES V2 */
+/* ========================================================= */
+
+#conditionsList{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+
+    align-items:flex-start;
+
+}
+
+.condition-card{
+
+    min-width:190px;
+
+    background:linear-gradient(
+        145deg,
+        #151515,
+        #202020
+    );
+
+    border:1px solid #333;
+
+    border-left:5px solid #ff5555;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 15px rgba(0,0,0,.30);
+
+}
+
+.condition-card:hover{
+
+    transform:translateY(-3px);
+
+    border-left-color:#ff8080;
+
+    box-shadow:
+        0 0 18px rgba(255,80,80,.20);
+
+}
+
+.condition-name{
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+}
+
+.condition-description{
+
+    color:#bbbbbb;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    margin-bottom:15px;
+
+}
+
+.condition-damage{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    background:#331111;
+
+    color:#ff7c7c;
+
+    font-weight:bold;
+
+    font-size:13px;
+
+}
+
+.condition-card button{
+
+    margin-top:15px;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#661919;
+
+    color:white;
+
+    padding:10px;
+
+    cursor:pointer;
+
+    transition:.20s;
+
+    font-family:inherit;
+
+}
+
+.condition-card button:hover{
+
+    background:#a62020;
+
+}
+
+/* ========================= */
+/* STATUS POSITIVOS */
+/* ========================= */
+
+.condition-positive{
+
+    border-left-color:#44dd88;
+
+}
+
+.condition-positive .condition-damage{
+
+    background:#133321;
+
+    color:#66ff99;
+
+}
+
+/* ========================= */
+/* STATUS NEGATIVOS */
+/* ========================= */
+
+.condition-negative{
+
+    border-left-color:#ff5555;
+
+}
+
+.condition-negative .condition-damage{
+
+    background:#331111;
+
+    color:#ff7777;
+
+}
+
+/* ========================================================= */
+/* PAINEL DE DADOS V2 */
+/* ========================================================= */
+
+.dice-panel{
+
+    position:fixed;
+
+    top:0;
+    right:0;
+
+    width:340px;
+    height:100vh;
+
+    overflow-y:auto;
+
+    background:linear-gradient(
+        180deg,
+        #090909,
+        #111111
+    );
+
+    border-left:2px solid #7b2cff;
+
+    padding:25px;
+
+    box-shadow:
+        -10px 0 30px rgba(123,44,255,.15);
+
+}
+
+.dice-panel h2{
+
+    text-align:center;
+
+    color:#d5b6ff;
+
+    font-size:30px;
+
+    margin-bottom:25px;
+
+    letter-spacing:2px;
+
+}
+
+/* ========================= */
+/* INPUTS */
+/* ========================= */
+
+.dice-inputs{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.dice-field{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.dice-field label{
+
+    color:#b98cff;
+
+    margin-bottom:8px;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+}
+
+.dice-field input{
+
+    background:#151515;
+
+    border:1px solid #444;
+
+    border-radius:12px;
+
+    color:white;
+
+    padding:12px;
+
+    font-size:18px;
+
+}
+
+/* ========================= */
+/* BOTÕES ATRIBUTOS */
+/* ========================= */
+
+.attribute-rolls{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+    margin-top:25px;
+
+}
+
+.attribute-roll-btn{
+
+    background:#181818;
+
+    border:1px solid #7b2cff;
+
+    border-radius:14px;
+
+    color:white;
+
+    padding:14px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    font-weight:bold;
+
+}
+
+.attribute-roll-btn:hover{
+
+    background:#7b2cff;
+
+    transform:translateY(-2px);
+
+}
+
+/* ========================= */
+/* BOTÃO ROLAR */
+/* ========================= */
+
+.roll-button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        90deg,
+        #7b2cff,
+        #9d4dff
+    );
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.roll-button:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ========================= */
+/* RESULTADO */
+/* ========================= */
+
+.dice-result{
+
+    margin-top:25px;
+
+    background:#151515;
+
+    border:1px solid #7b2cff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    text-align:center;
+
+    min-height:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.dice-skill-name{
+
+    color:#d8b8ff;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    margin-bottom:12px;
+
+}
+
+.dice-rolls{
+
+    color:#888;
+
+    font-size:17px;
+
+    margin-bottom:15px;
+
+    line-height:1.7;
+
+}
+
+.dice-big{
+
+    font-size:72px;
+
+    font-weight:bold;
+
+    color:#d89bff;
+
+    text-shadow:
+        0 0 20px #7b2cff;
+
+    margin-bottom:15px;
+
+}
+
+.dice-total{
+
+    font-size:26px;
+
+    color:white;
+
+}
+
+.critical-text{
+
+    margin-top:20px;
+
+    color:#ff4b4b;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    animation:critPulse .8s infinite alternate;
+
+}
+
+@keyframes critPulse{
+
+    from{
+
+        transform:scale(1);
+
+        text-shadow:
+            0 0 10px red;
+
+    }
+
+    to{
+
+        transform:scale(1.08);
+
+        text-shadow:
+            0 0 25px red;
+
+    }
+
+}
+
+/* ========================= */
+/* PASSAR RODADA */
+/* ========================= */
+
+.next-turn-btn{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#1d1d1d;
+
+    border:1px solid #7b2cff;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    font-size:18px;
+
+}
+
+.next-turn-btn:hover{
+
+    background:#7b2cff;
+
+}
+
+/* ========================= */
+/* HISTÓRICO */
+/* ========================= */
+
+.dice-history{
+
+    margin-top:25px;
+
+}
+
+.dice-history h3{
+
+    color:#b98cff;
+
+    margin-bottom:10px;
+
+}
+
+.history-entry{
+
+    background:#171717;
+
+    border-left:4px solid #7b2cff;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+    color:#ddd;
+
+    font-size:13px;
+
+}
+
+/* ========================================================= */
+/* GRIMÓRIO */
+/* ========================================================= */
+
+.grimorio{
+
+    background:linear-gradient(
+        145deg,
+        #0e0e0e,
+        #181818
+    );
+
+    border:2px solid #7b2cff;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    box-shadow:
+        0 0 20px rgba(123,44,255,.25);
+
+}
+
+.grimorio-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.grimorio-header h2{
+
+    color:#d8b8ff;
+
+    font-size:30px;
+
+    letter-spacing:2px;
+
+}
+
+.grimorio-header button{
+
+    background:#7b2cff;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.grimorio-header button:hover{
+
+    background:#9d4dff;
+
+}
+
+/* ========================================================= */
+/* ELEMENTOS */
+/* ========================================================= */
+
+.element-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+}
+
+.element-card{
+
+    background:#171717;
+
+    border:2px solid #333;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.element-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.element-card.selected{
+
+    border-color:#ffffff;
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,.20);
+
+}
+
+.element-card h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.element-card small{
+
+    color:#999;
+
+}
+
+/* ========================================================= */
+/* CORES ELEMENTOS */
+/* ========================================================= */
+
+.element-sangue.selected{
+
+    border-color:#ff2f2f;
+
+    box-shadow:
+        0 0 20px rgba(255,40,40,.45);
+
+}
+
+.element-morte.selected{
+
+    border-color:#7d7d7d;
+
+    box-shadow:
+        0 0 20px rgba(180,180,180,.35);
+
+}
+
+.element-energia.selected{
+
+    border-color:#ffe54c;
+
+    box-shadow:
+        0 0 20px rgba(255,220,40,.45);
+
+}
+
+.element-conhecimento.selected{
+
+    border-color:#7aa8ff;
+
+    box-shadow:
+        0 0 20px rgba(90,150,255,.45);
+
+}
+
+.element-medo.selected{
+
+    border-color:#8b3cff;
+
+    box-shadow:
+        0 0 25px rgba(139,60,255,.55);
+
+}
+
+/* ========================================================= */
+/* PALAVRAS */
+/* ========================================================= */
+
+.word-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+
+    gap:15px;
+
+}
+
+.word{
+
+    background:#191919;
+
+    border:1px solid #444;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.20s;
+
+}
+
+.word:hover{
+
+    border-color:#7b2cff;
+
+}
+
+.word.selected{
+
+    background:#7b2cff;
+
+    border-color:#c79cff;
+
+    color:white;
+
+    transform:scale(1.03);
+
+}
+
+/* ========================================================= */
+/* LANÇAR */
+/* ========================================================= */
+
+.grimorio-footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+}
+
+.cast-button{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        90deg,
+        #7b2cff,
+        #9d4dff
+    );
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.cast-button:hover{
+
+    transform:scale(1.02);
+
+}
+
+/* ========================================================= */
+/* LIVRO */
+/* ========================================================= */
+
+.grimorio-book{
+
+    width:100%;
+
+    min-height:650px;
+
+    background:#2a1a12;
+
+    border:6px solid #4a2a18;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,.55);
+
+}
+
+/* ========================= */
+/* PÁGINAS */
+/* ========================= */
+
+.book-page{
+
+    flex:1;
+
+    background:#f1e4c8;
+
+    color:#111;
+
+    padding:35px;
+
+    position:relative;
+
+}
+
+.book-page:first-child{
+
+    border-right:2px solid rgba(0,0,0,.15);
+
+}
+
+.book-page::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    radial-gradient(
+        rgba(255,255,255,.10),
+        transparent 70%
+    );
+
+    opacity:.4;
+
+}
+
+/* ========================= */
+/* TITULOS */
+/* ========================= */
+
+.book-page h2{
+
+    color:#3b1b0b;
+
+    font-size:28px;
+
+    margin-bottom:25px;
+
+    letter-spacing:2px;
+
+}
+
+.book-page h3{
+
+    color:#592a18;
+
+    margin-bottom:15px;
+
+}
+
+/* ========================= */
+/* TEXTO */
+/* ========================= */
+
+.book-page p{
+
+    color:#3b3b3b;
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+
+}
+
+/* ========================= */
+/* ABERTURA */
+/* ========================= */
+
+.book-opening{
+
+    animation:bookOpen .45s ease;
+
+}
+
+@keyframes bookOpen{
+
+    from{
+
+        transform:
+
+            perspective(1500px)
+
+            rotateY(-80deg);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:
+
+            perspective(1500px)
+
+            rotateY(0deg);
+
+        opacity:1;
+
+    }
+
+}
+
+/* ========================= */
+/* VIRAR PÁGINA */
+/* ========================= */
+
+.page-turn{
+
+    animation:pageTurn .35s ease;
+
+}
+
+@keyframes pageTurn{
+
+    from{
+
+        transform:
+
+            perspective(1200px)
+
+            rotateY(-25deg);
+
+    }
+
+    to{
+
+        transform:
+
+            perspective(1200px)
+
+            rotateY(0deg);
+
+    }
+
+}
+
+/* ========================================================= */
+/* TEMAS DOS ELEMENTOS */
+/* ========================================================= */
+
+/* ========================= */
+/* SANGUE */
+/* ========================= */
+
+.grimorio.sangue{
+
+    background:
+        linear-gradient(
+            180deg,
+            #220000,
+            #110000
+        );
+
+    border-color:#ff2d2d;
+
+    box-shadow:
+        0 0 40px rgba(255,0,0,.35);
+
+}
+
+.grimorio.sangue .book-page{
+
+    background:#f4d8d8;
+
+}
+
+/* ========================= */
+/* MORTE */
+/* ========================= */
+
+.grimorio.morte{
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b1b1b,
+            #080808
+        );
+
+    border-color:#888;
+
+}
+
+.grimorio.morte .book-page{
+
+    background:#d8d4c5;
+
+    filter:grayscale(.55);
+
+}
+
+/* ========================= */
+/* ENERGIA */
+/* ========================= */
+
+.grimorio.energia{
+
+    background:
+        linear-gradient(
+            180deg,
+            #352600,
+            #110d00
+        );
+
+    border-color:#ffd93d;
+
+    box-shadow:
+        0 0 40px rgba(255,220,50,.4);
+
+}
+
+.grimorio.energia .book-page{
+
+    background:#fff4c9;
+
+}
+
+/* ========================= */
+/* CONHECIMENTO */
+/* ========================= */
+
+.grimorio.conhecimento{
+
+    background:
+        linear-gradient(
+            180deg,
+            #18213d,
+            #0a1125
+        );
+
+    border-color:#5da6ff;
+
+}
+
+.grimorio.conhecimento .book-page{
+
+    background:#edf4ff;
+
+}
+
+/* ========================= */
+/* MEDO */
+/* ========================= */
+
+.grimorio.medo{
+
+    background:
+        linear-gradient(
+            180deg,
+            #14051f,
+            #06000b
+        );
+
+    border-color:#a03cff;
+
+    animation:fearPulse 3s infinite;
+
+}
+
+.grimorio.medo .book-page{
+
+    background:#ece2ff;
+
+}
+
+/* ========================================================= */
+/* EFEITOS */
+/* ========================================================= */
+
+@keyframes fearPulse{
+
+    0%{
+
+        box-shadow:
+        0 0 20px rgba(140,60,255,.2);
+
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 45px rgba(180,60,255,.6);
+
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 20px rgba(140,60,255,.2);
+
+    }
+
+}
+
+/* ========================================================= */
+/* PALAVRA SELECIONADA */
+/* ========================================================= */
+
+.word.selected{
+
+    transform:scale(1.05);
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+/* Sangue */
+
+.grimorio.sangue .word.selected{
+
+    background:#c40000;
+
+}
+
+/* Morte */
+
+.grimorio.morte .word.selected{
+
+    background:#666;
+
+}
+
+/* Energia */
+
+.grimorio.energia .word.selected{
+
+    background:#ffcf00;
+
+    color:#111;
+
+}
+
+/* Conhecimento */
+
+.grimorio.conhecimento .word.selected{
+
+    background:#4a8cff;
+
+}
+
+/* Medo */
+
+.grimorio.medo .word.selected{
+
+    background:#7b2cff;
+
+}
+
+/* ========================================================= */
+/* RESULTADO DAS ROLAGENS */
+/* ========================================================= */
+
+.dice-result{
+
+    margin-top:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111,
+            #181818
+        );
+
+    border:2px solid #7b2cff;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    min-height:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 18px rgba(123,44,255,.25);
+
+}
+
+/* ========================= */
+
+.dice-skill-name{
+
+    font-size:26px;
+
+    color:#d5b7ff;
+
+    margin-bottom:15px;
+
+    letter-spacing:2px;
+
+}
+
+/* ========================= */
+
+.dice-rolls{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin-bottom:20px;
+
+}
+
+/* ========================= */
+
+.roll-box{
+
+    width:58px;
+    height:58px;
+
+    border-radius:14px;
+
+    background:#222;
+
+    border:2px solid #7b2cff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:white;
+
+    box-shadow:
+        0 0 10px rgba(123,44,255,.3);
+
+}
+
+/* ========================= */
+
+.roll-box.best{
+
+    background:#7b2cff;
+
+    transform:scale(1.12);
+
+}
+
+/* ========================= */
+
+.training-box{
+
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    background:#181818;
+
+    border:2px solid #44ff88;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#44ff88;
+
+    font-size:20px;
+
+}
+
+/* ========================= */
+
+.dice-big{
+
+    font-size:78px;
+
+    color:#d5b7ff;
+
+    text-shadow:
+
+        0 0 25px #7b2cff;
+
+    margin-bottom:18px;
+
+}
+
+/* ========================= */
+
+.dice-total{
+
+    font-size:34px;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+/* ========================= */
+
+.critical-text{
+
+    margin-top:20px;
+
+    color:#ff4444;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    animation:criticalPulse 1s infinite;
+
+}
+
+@keyframes criticalPulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ========================================================= */
+/* ANIMAÇÕES DOS DADOS */
+/* ========================================================= */
+
+.roll-box{
+
+    animation:rollAppear .35s ease;
+
+}
+
+@keyframes rollAppear{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            scale(.3)
+            rotate(-180deg);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+}
+
+/* ========================= */
+
+.roll-box.best{
+
+    animation:
+        bestDice .8s ease;
+
+}
+
+@keyframes bestDice{
+
+    0%{
+
+        transform:scale(.7);
+
+    }
+
+    35%{
+
+        transform:scale(1.35);
+
+    }
+
+    100%{
+
+        transform:scale(1.12);
+
+    }
+
+}
+
+/* ========================= */
+
+.training-box{
+
+    animation:
+        trainingAppear .4s ease;
+
+}
+
+@keyframes trainingAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+/* ========================= */
+
+.dice-big{
+
+    animation:
+        numberPop .4s ease;
+
+}
+
+@keyframes numberPop{
+
+    from{
+
+        transform:scale(.4);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+/* ========================= */
+
+.dice-total{
+
+    animation:
+        totalFade .5s ease;
+
+}
+
+@keyframes totalFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ========================= */
+
+.roll-box:hover{
+
+    transform:scale(1.08);
+
+    transition:.15s;
+
+}
+
+.training-box:hover{
+
+    transform:scale(1.1);
+
+    transition:.15s;
+
+}
+
+/* ========================================================= */
+/* EFEITOS - SANGUE */
+/* ========================================================= */
+
+.grimorio.sangue{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* ========================= */
+
+.grimorio.sangue::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-80px;
+    left:0;
+
+    width:100%;
+    height:120px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,0,0,.65),
+            transparent
+        );
+
+    animation:
+        bloodFlow 8s linear infinite;
+
+}
+
+/* ========================= */
+
+.grimorio.sangue::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 25%,
+            rgba(255,20,20,.15),
+            transparent 40%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255,20,20,.12),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,50,50,.08),
+            transparent 30%
+        );
+
+}
+
+/* ========================= */
+
+@keyframes bloodFlow{
+
+    from{
+
+        transform:
+            translateY(-60px);
+
+    }
+
+    to{
+
+        transform:
+            translateY(650px);
+
+    }
+
+}
+
+/* ========================= */
+
+.grimorio.sangue .word.selected{
+
+    background:#a50000;
+
+    box-shadow:
+
+        0 0 20px red;
+
+}
+
+/* ========================================================= */
+/* ENERGIA */
+/* ========================================================= */
+
+.grimorio.energia{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* ========================= */
+
+.grimorio.energia::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent,
+
+            rgba(255,255,120,.25),
+
+            transparent
+
+        );
+
+    animation:
+
+        lightning 2.5s infinite;
+
+}
+
+/* ========================= */
+
+@keyframes lightning{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translateX(-120%);
+
+    }
+
+    25%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        transform:
+            translateX(120%);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ========================= */
+
+.grimorio.energia .word.selected{
+
+    background:#ffd400;
+
+    color:#111;
+
+    box-shadow:
+
+        0 0 25px gold;
+
+}
+
+/* ========================================================= */
+/* MORTE */
+/* ========================================================= */
+
+.grimorio.morte{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* ========================= */
+
+.grimorio.morte::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.08),
+            transparent 70%
+        );
+
+    animation:
+
+        deathSmoke 12s linear infinite;
+
+}
+
+/* ========================= */
+
+@keyframes deathSmoke{
+
+    from{
+
+        transform:
+            translateY(120px)
+            rotate(0deg);
+
+        opacity:.15;
+
+    }
+
+    50%{
+
+        opacity:.35;
+
+    }
+
+    to{
+
+        transform:
+            translateY(-120px)
+            rotate(360deg);
+
+        opacity:.15;
+
+    }
+
+}
+
+/* ========================= */
+
+.grimorio.morte .word.selected{
+
+    background:#5b5b5b;
+
+    color:white;
+
+    box-shadow:
+
+        0 0 20px #888;
+
+}
+
+/* ========================================================= */
+/* CONHECIMENTO */
+/* ========================================================= */
+
+.grimorio.conhecimento{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* ========================= */
+
+.grimorio.conhecimento::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            45deg,
+
+            transparent,
+
+            rgba(120,180,255,.12),
+
+            transparent
+
+        );
+
+    animation:
+
+        knowledgeLight 6s infinite;
+
+}
+
+/* ========================= */
+
+@keyframes knowledgeLight{
+
+    from{
+
+        transform:
+            translateX(-120%);
+
+    }
+
+    to{
+
+        transform:
+            translateX(120%);
+
+    }
+
+}
+
+/* ========================= */
+
+.grimorio.conhecimento .word.selected{
+
+    background:#4c90ff;
+
+    box-shadow:
+
+        0 0 20px #4c90ff;
+
+}
+
+/* ========================================================= */
+/* MEDO */
+/* ========================================================= */
+
+.grimorio.medo{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* ========================= */
+
+.grimorio.medo::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        repeating-linear-gradient(
+
+            180deg,
+
+            transparent 0px,
+
+            rgba(170,90,255,.04) 2px,
+
+            transparent 4px
+
+        );
+
+    animation:
+
+        fearGlitch .18s infinite;
+
+}
+
+/* ========================= */
+
+@keyframes fearGlitch{
+
+    0%{
+
+        transform:
+            translateX(0);
+
+    }
+
+    20%{
+
+        transform:
+            translateX(-2px);
+
+    }
+
+    40%{
+
+        transform:
+            translateX(2px);
+
+    }
+
+    60%{
+
+        transform:
+            translateX(-1px);
+
+    }
+
+    80%{
+
+        transform:
+            translateX(1px);
+
+    }
+
+    100%{
+
+        transform:
+            translateX(0);
+
+    }
+
+}
+
+/* ========================= */
+
+.grimorio.medo .word.selected{
+
+    background:#7b2cff;
+
+    box-shadow:
+
+        0 0 30px #7b2cff;
+
+}
+
+/* ========================================================= */
+/* ACABAMENTO FINAL */
+/* ========================================================= */
+
+.card,
+.attribute,
+.status-box,
+.member-card,
+.grimorio,
+.grimorio-book,
+.inventory-card,
+.assimilation-card,
+.ability-card{
+
+    transition:
+        .25s ease;
+
+}
+
+.card:hover,
+.member-card:hover,
+.attribute:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ========================================================= */
+/* BOTÕES */
+/* ========================================================= */
+
+button{
+
+    transition:
+        .2s;
+
+}
+
+button:hover{
+
+    transform:scale(1.04);
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+/* ========================================================= */
+/* INPUTS */
+/* ========================================================= */
+
+input{
+
+    transition:
+        .2s;
+
+}
+
+input:hover{
+
+    border-color:#8b4dff;
+
+}
+
+input:focus{
+
+    border-color:#b36cff;
+
+    box-shadow:
+
+        0 0 12px rgba(123,44,255,.35);
+
+}
+
+/* ========================================================= */
+/* SCROLL GERAL */
+/* ========================================================= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#090909;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#7b2cff;
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#9d4dff;
+
+}
+
+/* ========================================================= */
+/* SELEÇÃO */
+/* ========================================================= */
+
+::selection{
+
+    background:#7b2cff;
+
+    color:white;
+
+}
+
+/* ========================================================= */
+/* TRANSIÇÕES */
+/* ========================================================= */
+
+*{
+
+    scroll-behavior:smooth;
+
+}
+
+/* ========================================================= */
+/* RESPONSIVO */
+/* ========================================================= */
+
+@media(max-width:1200px){
+
+    .container{
+
+        padding-right:20px;
+
+    }
+
+    .dice-panel{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        border-left:none;
+
+        margin-top:25px;
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    .character-section{
+
+        flex-direction:column;
+
+    }
+
+    .status-row{
+
+        flex-direction:column;
+
+    }
+
+    .attributes-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .grimorio-main{
+
+        flex-direction:column;
+
+    }
+
+    .grimorio-sidebar{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:650px){
+
+    .member-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .attributes-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .grimorio-book{
+
+        min-height:420px;
+
+    }
+
+    .dice-big{
+
+        font-size:54px;
+
+    }
+
+}
+
+/* ========================================================= */
+/* EFEITO GLOBAL */
+/* ========================================================= */
+
+body{
+
+    animation:
+
+        fadeStart .4s ease;
+
+}
+
+@keyframes fadeStart{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}

@@ -1,166 +1,200 @@
-//======================================
-// STATUS DOS MEMBROS
-//======================================
+// ======================================
+// STATUS.JS
+// ======================================
 
-function calcularMembro(base, vigor, nivel){
+// -----------------------------
+// ELEMENTOS
+// -----------------------------
 
-    return base + vigor + (Math.max(0,nivel-1) * vigor);
+const nivelInput =
+document.getElementById("nivel");
+
+const vigorInput =
+document.getElementById("vigor");
+
+const presencaInput =
+document.getElementById("presenca");
+
+const pvAtual =
+document.getElementById("pvAtual");
+
+const pvMax =
+document.getElementById("pvMax");
+
+const pvBonus =
+document.getElementById("pvBonus");
+
+const pdAtual =
+document.getElementById("pdAtual");
+
+const pdMax =
+document.getElementById("pdMax");
+
+const pdBonus =
+document.getElementById("pdBonus");
+
+const paAtual =
+document.getElementById("paAtual");
+
+const paTexto =
+document.getElementById("paMaxText");
+
+// ======================================
+// PA
+// ======================================
+
+function getMaxPA(){
+
+    const nivel =
+    Number(nivelInput.value)||1;
+
+    if(nivel>=10){
+
+        return 4;
+
+    }
+
+    return 3;
 
 }
 
-function updateStatus(){
+// ======================================
+// PV
+// ======================================
+
+function getBasePV(){
 
     const nivel =
-        Number(document.getElementById("nivel")?.value) || 1;
+    Number(nivelInput.value)||1;
 
     const vigor =
-        Number(document.getElementById("vigor")?.value) || 1;
+    Number(vigorInput.value)||1;
 
-    const presenca =
-        Number(document.getElementById("presenca")?.value) || 1;
-
-    const agilidade =
-        Number(document.getElementById("agilidade")?.value) || 1;
-
-    //==============================
-    // MEMBROS
-    //==============================
-
-    const cabeca =
-        calcularMembro(2,vigor,nivel);
-
-    const torso =
-        calcularMembro(2,vigor,nivel);
-
-    const braco =
-        calcularMembro(1,vigor,nivel);
-
-    const perna =
-        calcularMembro(1,vigor,nivel);
-
-    //==============================
-    // MOSTRAR
-    //==============================
-
-    document.getElementById("cabecaMax").innerText =
-        "Máx: " + cabeca;
-
-    document.getElementById("torsoMax").innerText =
-        "Máx: " + torso;
-
-    document.getElementById("bracoEMax").innerText =
-        "Máx: " + braco;
-
-    document.getElementById("bracoDMax").innerText =
-        "Máx: " + braco;
-
-    document.getElementById("pernaEMax").innerText =
-        "Máx: " + perna;
-
-    document.getElementById("pernaDMax").innerText =
-        "Máx: " + perna;
-
-    //==============================
-    // PD
-    //==============================
-
-    const pdBonus =
-        Number(document.getElementById("pdBonus")?.value) || 0;
-
-    let custoHabilidades = 0;
-
-    document.querySelectorAll(".skill-cost")
-    .forEach(el=>{
-
-        custoHabilidades +=
-            Number(el.innerText)||0;
-
-    });
-
-    const pdMax =
-        Math.max(
-            1,
-            ((5+presenca)*nivel)
-            -
-            custoHabilidades
-            +
-            pdBonus
-        );
-
-    document.getElementById("pdMax").value =
-        pdMax;
-
-    //==============================
-    // DESLOCAMENTO
-    //==============================
-
-    document.getElementById("deslocamento").value =
-        agilidade;
-
-    atualizarPA();
+    return (7+vigor)*nivel;
 
 }
 
-window.updateStatus = updateStatus;
+// ======================================
+// PD
+// ======================================
 
-
-//======================================
-// PA
-//======================================
-
-function atualizarPA(){
+function getBasePD(){
 
     const nivel =
-        Number(document.getElementById("nivel").value)||1;
+    Number(nivelInput.value)||1;
 
-    const paMax =
-        4 + Math.floor(nivel/10);
+    const presenca =
+    Number(presencaInput.value)||1;
 
-    document.getElementById("paMaxText")
-        .innerText =
-        "PA Máximo: " + paMax;
+    return (4+presenca)*nivel;
 
-    const atual =
-        document.getElementById("paAtual");
+}
 
-    if(Number(atual.value)>paMax){
+// ======================================
+// ATUALIZAR PV
+// ======================================
 
-        atual.value=paMax;
+function updatePV(){
+
+    const bonus =
+    Number(pvBonus.value)||0;
+
+    const maximo =
+    getBasePV()+bonus;
+
+    pvMax.value=maximo;
+
+    if(Number(pvAtual.value)>maximo){
+
+        pvAtual.value=maximo;
 
     }
 
 }
 
+// ======================================
+// ATUALIZAR PD
+// ======================================
 
-//======================================
-// LISTENERS
-//======================================
+function updatePD(){
 
-document.addEventListener("DOMContentLoaded",()=>{
+    const bonus =
+    Number(pdBonus.value)||0;
 
-    updateStatus();
+    const maximo =
+    getBasePD()+bonus;
 
-    [
+    pdMax.value=maximo;
 
-        "nivel",
-        "vigor",
-        "presenca",
-        "agilidade",
-        "pdBonus"
+    if(Number(pdAtual.value)>maximo){
 
-    ].forEach(id=>{
+        pdAtual.value=maximo;
 
-        const el=document.getElementById(id);
+    }
 
-        if(el){
+}
 
-            el.addEventListener(
-                "input",
-                updateStatus
-            );
+// ======================================
+// PA
+// ======================================
 
-        }
+function updatePA(){
 
-    });
+    const maximo =
+    getMaxPA();
+
+    paTexto.innerText=
+    "PA Máximo: "+maximo;
+
+    if(Number(paAtual.value)>maximo){
+
+        paAtual.value=maximo;
+
+    }
+
+}
+
+// ======================================
+// STATUS
+// ======================================
+
+function updateStatus(){
+
+    updatePV();
+
+    updatePD();
+
+    updatePA();
+
+}
+
+// ======================================
+// EVENTOS
+// ======================================
+
+[
+nivelInput,
+vigorInput,
+presencaInput,
+pvBonus,
+pdBonus
+
+].forEach(el=>{
+
+    if(!el)return;
+
+    el.addEventListener(
+
+        "input",
+
+        updateStatus
+
+    );
 
 });
+
+// ======================================
+// START
+// ======================================
+
+updateStatus();
