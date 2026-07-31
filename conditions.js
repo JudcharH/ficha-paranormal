@@ -1,100 +1,66 @@
 // ======================================
-// CONDIÇÕES
+// CONDITIONS.JS
 // ======================================
 
-const condicoes = [
+// ======================================
+// BANCO
+// ======================================
 
-    {
-        nome:"Sangramento",
-        dano:"1d6"
-    },
+const conditions=[
 
-    {
-        nome:"Envenenamento",
-        dano:"2d4"
-    },
+{
+    nome:"Sangramento",
+    descricao:"Perde PV no início da rodada."
+},
 
-    {
-        nome:"Paralisia",
-        dano:null
-    },
+{
+    nome:"Queimando",
+    descricao:"Recebe dano de Energia."
+},
 
-    {
-        nome:"Paralisia Total",
-        dano:null
-    },
+{
+    nome:"Envenenado",
+    descricao:"Recebe dano contínuo."
+},
 
-    {
-        nome:"Caído",
-        dano:null
-    },
+{
+    nome:"Atordoado",
+    descricao:"Perde 1 PA."
+},
 
-    {
-        nome:"Enjoado",
-        dano:null
-    },
+{
+    nome:"Paralisado",
+    descricao:"Não pode agir."
+},
 
-    {
-        nome:"Morrendo",
-        dano:null
-    },
+{
+    nome:"Cego",
+    descricao:"-5 em testes de ataque."
+},
 
-    {
-        nome:"Enfraquecido",
-        dano:null
-    },
+{
+    nome:"Surdo",
+    descricao:"Não pode ouvir."
+},
 
-    {
-        nome:"Lentidão",
-        dano:null
-    },
+{
+    nome:"Assustado",
+    descricao:"-2 em testes."
+},
 
-    {
-        nome:"Cansado",
-        dano:null
-    },
-
-    {
-        nome:"Controlado",
-        dano:null
-    },
-
-    {
-        nome:"Cego",
-        dano:null
-    },
-
-    {
-        nome:"Surdo",
-        dano:null
-    },
-
-    {
-        nome:"Traumatizado",
-        dano:null
-    },
-
-    {
-        nome:"Penumbra",
-        dano:null
-    },
-
-    {
-        nome:"Vulnerável",
-        dano:null
-    },
-
-    {
-        nome:"Desprevenido",
-        dano:null
-    },
-
-    {
-        nome:"Confuso",
-        dano:null
-    }
+{
+    nome:"Insano",
+    descricao:"Age aleatoriamente."
+}
 
 ];
+
+
+// ======================================
+// CONDIÇÕES ATIVAS
+// ======================================
+
+let activeConditions=[];
 
 // ======================================
 // MENU
@@ -102,216 +68,167 @@ const condicoes = [
 
 function openConditionMenu(){
 
-    closeMenu();
+    document
 
-    let html = "";
+    .getElementById(
 
-    condicoes.forEach(condicao => {
+        "conditionModal"
 
-        html += `
+    )
 
-            <div
-                class="assimilation-option"
-                onclick="selectCondition('${condicao.nome}')"
-            >
+    .style.display="flex";
 
-                <h3>${condicao.nome}</h3>
+    renderConditionMenu();
 
-            </div>
+}
 
-        `;
+function closeConditionMenu(){
 
-    });
+    document
 
-    const menu = document.createElement("div");
+    .getElementById(
 
-    menu.classList.add("assimilation-menu");
+        "conditionModal"
 
-    menu.innerHTML = `
+    )
 
-        <div class="assimilation-menu-content">
-
-            <div class="menu-header">
-
-                <h2>CONDIÇÕES</h2>
-
-                <button onclick="closeMenu()">
-                    X
-                </button>
-
-            </div>
-
-            ${html}
-
-        </div>
-
-    `;
-
-    document.body.appendChild(menu);
+    .style.display="none";
 
 }
 
 // ======================================
-// SELECIONAR CONDIÇÃO
+// MENU
 // ======================================
 
-function selectCondition(nome){
+function renderConditionMenu(){
 
-    const condicao =
-        condicoes.find(c => c.nome === nome);
+    const list=
 
-    if(!condicao) return;
+    document.getElementById(
 
-    // ======================================
-    // STACK SANGRAMENTO
-    // ======================================
+        "conditionOptions"
 
-    if(nome === "Sangramento"){
-
-        const existente = [
-            ...document.querySelectorAll(".condition-card")
-        ].find(card =>
-            card.querySelector(".condition-name")
-            .innerText === "Sangramento"
-        );
-
-        if(existente){
-
-            const damageEl =
-                existente.querySelector(
-                    ".condition-damage"
-                );
-
-            let texto =
-                damageEl.innerText;
-
-            let partes =
-                texto.split("d");
-
-            let quantidade =
-                Number(partes[0]);
-
-            let tipo =
-                Number(partes[1]);
-
-            quantidade++;
-
-            damageEl.innerText =
-                `${quantidade}d${tipo}`;
-
-            saveFicha();
-
-            closeMenu();
-
-            return;
-
-        }
-
-    }
-
-    // ======================================
-    // STACK ENVENENAMENTO
-    // ======================================
-
-    if(nome === "Envenenamento"){
-
-        const existente = [
-            ...document.querySelectorAll(".condition-card")
-        ].find(card =>
-            card.querySelector(".condition-name")
-            .innerText === "Envenenamento"
-        );
-
-        if(existente){
-
-            const damageEl =
-                existente.querySelector(
-                    ".condition-damage"
-                );
-
-            let texto =
-                damageEl.innerText;
-
-            let partes =
-                texto.split("d");
-
-            let quantidade =
-                Number(partes[0]);
-
-            let tipo =
-                Number(partes[1]);
-
-            quantidade += 2;
-
-            damageEl.innerText =
-                `${quantidade}d${tipo}`;
-
-            saveFicha();
-
-            closeMenu();
-
-            return;
-
-        }
-
-    }
-
-    // ======================================
-    // BLOQUEAR DUPLICADAS
-    // ======================================
-
-    const jaExiste = [
-        ...document.querySelectorAll(
-            ".condition-name"
-        )
-    ].some(span =>
-        span.innerText === nome
     );
 
-    if(jaExiste){
+    list.innerHTML="";
 
-        alert("Essa condição já está ativa.");
+    conditions.forEach(data=>{
 
-        return;
+        const div=
 
-    }
+        document.createElement("div");
 
-    // ======================================
-// CRIAR CARD
+        div.className=
+
+        "condition-option";
+
+        div.innerHTML=
+
+        `
+
+        <h3>
+
+            ${data.nome}
+
+        </h3>
+
+        <p>
+
+            ${data.descricao}
+
+        </p>
+
+        `;
+
+        div.onclick=function(){
+
+            addCondition(data);
+
+        };
+
+        list.appendChild(div);
+
+    });
+
+}
+
+// ======================================
+// ADICIONAR
 // ======================================
 
-const card = document.createElement("div");
+function addCondition(data){
 
-card.classList.add("condition-card");
+    activeConditions.push({
 
-// IMPORTANTE
-card.dataset.name = condicao.nome;
+        ...data,
 
-card.innerHTML = `
+        dano:0
 
-    <span class="condition-name">
-        ${condicao.nome}
-    </span>
+    });
 
-    <small class="condition-damage">
-        ${condicao.dano || "Sem dano"}
-    </small>
+    renderConditions();
 
-    <button onclick="removeCondition(this)">
-        X
-    </button>
+    closeConditionMenu();
 
-`;
+}
 
-document.getElementById("conditionsList")
-.appendChild(card);
+// ======================================
+// RENDER
+// ======================================
 
-// IMPORTANTE
-updateConditionEffects();
+function renderConditions(){
 
-closeMenu();
+    const list=
 
-saveFicha();
+    document.getElementById(
+
+        "conditionsList"
+
+    );
+
+    list.innerHTML="";
+
+    activeConditions.forEach(condition=>{
+
+        const card=
+
+        document.createElement("div");
+
+        card.className=
+
+        "condition-card";
+
+        card.innerHTML=
+
+        `
+
+        <span>
+
+            ${condition.nome}
+
+        </span>
+
+        <button>
+
+            ✕
+
+        </button>
+
+        `;
+
+        card
+
+        .querySelector("button")
+
+        .onclick=function(){
+
+            removeCondition(condition.nome);
+
+        };
+
+        list.appendChild(card);
+
+    });
 
 }
 
@@ -319,231 +236,95 @@ saveFicha();
 // REMOVER
 // ======================================
 
-function removeCondition(button){
+function removeCondition(nome){
 
-    button.parentElement.remove();
+    activeConditions=
 
-    saveFicha();
+    activeConditions.filter(
+
+        c=>c.nome!==nome
+
+    );
+
+    renderConditions();
 
 }
 
 // ======================================
-// FECHAR MENU
+// PESQUISA
 // ======================================
 
-function closeMenu(){
+const conditionSearch=
 
-    const menu =
-        document.querySelector(".assimilation-menu");
+document.getElementById(
 
-    if(menu){
+    "conditionSearch"
 
-        menu.remove();
+);
 
-    }
+if(conditionSearch){
 
-}
-function updateConditionEffects(){
+    conditionSearch.oninput=function(){
 
-    // =========================
-    // LIMPA PENALIDADES
-    // =========================
+        const texto=
 
-     atualizarStatus();
+        this.value.toLowerCase();
 
-    document.querySelectorAll(".skill-penalty")
-    .forEach(input => {
+        document
 
-        input.value = 0;
+        .querySelectorAll(
 
-    });
+            ".condition-option"
 
-    // =========================
-    // CONDIÇÕES
-    // =========================
+        )
 
-    const conditions =
-        document.querySelectorAll(".condition-card");
+        .forEach(card=>{
 
-    conditions.forEach(card => {
+            card.style.display=
 
-        const nome =
-            card.dataset.name;
+            card.innerText
 
-        // =====================================
-        // ENFRAQUECIDO
-        // =====================================
+            .toLowerCase()
 
-        if(nome === "Enfraquecido"){
+            .includes(texto)
 
-            applyPenalty(
-                ["Atletismo", "Luta"],
-                -5
-            );
+            ?
 
-            // PV TEMPORARIAMENTE REDUZIDO
-    const pvMax =
-        document.getElementById("pvMax");
+            "block"
 
-    pvMax.value =
-        Math.max(
-            1,
-            Number(pvMax.value) - 8
-        );
+            :
 
-        }
+            "none";
 
-        // =====================================
-        // LENTIDÃO
-        // =====================================
+        });
 
-        if(nome === "Lentidão"){
-
-            applyPenalty(
-                [
-                    "Acrobacia",
-                    "Furtividade",
-                    "Reflexos",
-                    "Pilotagem",
-                    "Pontaria",
-                    "Crime",
-                    "Iniciativa"
-                ],
-                -5
-            );
-
-        }
-
-        // =====================================
-        // ENJOADO
-        // =====================================
-
-        if(nome === "Enjoado"){
-
-            applyPenalty(
-                [
-                    "Atletismo",
-                    "Luta",
-                    "Acrobacia",
-                    "Furtividade"
-                ],
-                -3
-            );
-
-        }
-
-        // =====================================
-        // TRAUMATIZADO
-        // =====================================
-
-        if(nome === "Traumatizado"){
-
-            applyPenalty(
-                ["Vontade"],
-                -5
-            );
-
-             // PD TEMPORARIAMENTE REDUZIDO
-    const pdMax =
-        document.getElementById("pdMax");
-
-    pdMax.value =
-        Math.max(
-            0,
-            Number(pdMax.value) - 6
-        );
-
-        }
-
-        // =====================================
-        // PENUMBRA
-        // =====================================
-
-        if(nome === "Penumbra"){
-
-            applyPenalty(
-                ["Percepção"],
-                -5
-            );
-
-            applyPenalty(
-                ["Reflexos"],
-                -3
-            );
-
-        }
-
-        // =====================================
-        // CEGO
-        // =====================================
-
-        if(nome === "Cego"){
-
-            applyPenalty(
-                [
-                    "Percepção",
-                    "Pontaria"
-                ],
-                -10
-            );
-
-        }
-
-        // =====================================
-        // SURDO
-        // =====================================
-
-        if(nome === "Surdo"){
-
-            applyPenalty(
-                ["Percepção"],
-                -10
-            );
-
-        }
-
-        // =====================================
-        // ENVENENAMENTO
-        // =====================================
-
-        if(nome === "Envenenamento"){
-
-            applyPenalty(
-                ["Fortitude"],
-                -5
-            );
-
-        }
-
-    });
-
-    
-
-    // =========================
-    // RECALCULA
-    // =========================
-
-    updateSkills();
+    };
 
 }
 
-function applyPenalty(skills, value){
+// ======================================
+// PASSAR RODADA
+// ======================================
 
-    document.querySelectorAll(".skill-row")
-    .forEach(row => {
+function processConditions(){
 
-        const skillName =
-            row.querySelector(".skill-name")
-            .innerText;
+    activeConditions.forEach(condition=>{
 
-        if(skills.includes(skillName)){
+        switch(condition.nome){
 
-            const penaltyInput =
-                row.querySelector(".skill-penalty");
+            case "Sangramento":
 
-            penaltyInput.value =
-                Number(penaltyInput.value || 0)
-                + value;
+                pvAtual.value=
+
+                Math.max(
+
+                    0,
+
+                    Number(pvAtual.value)-2
+
+                );
+
+            break;
 
         }
 

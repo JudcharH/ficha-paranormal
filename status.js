@@ -2,18 +2,9 @@
 // STATUS.JS
 // ======================================
 
-// -----------------------------
+// --------------------------------------
 // ELEMENTOS
-// -----------------------------
-
-const nivelInput =
-document.getElementById("nivel");
-
-const vigorInput =
-document.getElementById("vigor");
-
-const presencaInput =
-document.getElementById("presenca");
+// --------------------------------------
 
 const pvAtual =
 document.getElementById("pvAtual");
@@ -36,19 +27,63 @@ document.getElementById("pdBonus");
 const paAtual =
 document.getElementById("paAtual");
 
-const paTexto =
-document.getElementById("paMaxText");
+const nivel =
+document.getElementById("nivel");
+
+const vigor =
+document.getElementById("vigor");
+
+const presenca =
+document.getElementById("presenca");
 
 // ======================================
-// PA
+// CALCULAR PV
 // ======================================
 
-function getMaxPA(){
+function calculatePV(){
 
-    const nivel =
-    Number(nivelInput.value)||1;
+    const lvl =
+    Number(nivel.value)||1;
 
-    if(nivel>=10){
+    const vig =
+    Number(vigor.value)||1;
+
+    const bonus =
+    Number(pvBonus.value)||0;
+
+    return ((7+vig)*lvl)+bonus;
+
+}
+
+// ======================================
+// CALCULAR PD
+// ======================================
+
+function calculatePD(){
+
+    const lvl =
+    Number(nivel.value)||1;
+
+    const pre =
+    Number(presenca.value)||1;
+
+    const bonus =
+    Number(pdBonus.value)||0;
+
+    return ((4+pre)*lvl)+bonus;
+
+}
+
+// ======================================
+// CALCULAR PA
+// ======================================
+
+function calculatePA(){
+
+    const lvl =
+    Number(nivel.value)||1;
+
+    if(lvl>=10){
 
         return 4;
 
@@ -59,112 +94,66 @@ function getMaxPA(){
 }
 
 // ======================================
-// PV
-// ======================================
-
-function getBasePV(){
-
-    const nivel =
-    Number(nivelInput.value)||1;
-
-    const vigor =
-    Number(vigorInput.value)||1;
-
-    return (7+vigor)*nivel;
-
-}
-
-// ======================================
-// PD
-// ======================================
-
-function getBasePD(){
-
-    const nivel =
-    Number(nivelInput.value)||1;
-
-    const presenca =
-    Number(presencaInput.value)||1;
-
-    return (4+presenca)*nivel;
-
-}
-
-// ======================================
-// ATUALIZAR PV
-// ======================================
-
-function updatePV(){
-
-    const bonus =
-    Number(pvBonus.value)||0;
-
-    const maximo =
-    getBasePV()+bonus;
-
-    pvMax.value=maximo;
-
-    if(Number(pvAtual.value)>maximo){
-
-        pvAtual.value=maximo;
-
-    }
-
-}
-
-// ======================================
-// ATUALIZAR PD
-// ======================================
-
-function updatePD(){
-
-    const bonus =
-    Number(pdBonus.value)||0;
-
-    const maximo =
-    getBasePD()+bonus;
-
-    pdMax.value=maximo;
-
-    if(Number(pdAtual.value)>maximo){
-
-        pdAtual.value=maximo;
-
-    }
-
-}
-
-// ======================================
-// PA
-// ======================================
-
-function updatePA(){
-
-    const maximo =
-    getMaxPA();
-
-    paTexto.innerText=
-    "PA Máximo: "+maximo;
-
-    if(Number(paAtual.value)>maximo){
-
-        paAtual.value=maximo;
-
-    }
-
-}
-
-// ======================================
-// STATUS
+// ATUALIZAR STATUS
 // ======================================
 
 function updateStatus(){
 
-    updatePV();
+    const maxPV =
+    calculatePV();
 
-    updatePD();
+    const maxPD =
+    calculatePD();
 
-    updatePA();
+    const maxPA =
+    calculatePA();
+
+    pvMax.value =
+    maxPV;
+
+    pdMax.value =
+    maxPD;
+
+    document
+    .getElementById("paMaxText")
+    .innerText =
+    "PA Máximo: "+maxPA;
+
+    if(Number(pvAtual.value)>maxPV){
+
+        pvAtual.value=maxPV;
+
+    }
+
+    if(Number(pdAtual.value)>maxPD){
+
+        pdAtual.value=maxPD;
+
+    }
+
+    if(Number(paAtual.value)>maxPA){
+
+        paAtual.value=maxPA;
+
+    }
+
+    if(Number(pvAtual.value)<0){
+
+        pvAtual.value=0;
+
+    }
+
+    if(Number(pdAtual.value)<0){
+
+        pdAtual.value=0;
+
+    }
+
+    if(Number(paAtual.value)<0){
+
+        paAtual.value=0;
+
+    }
 
 }
 
@@ -173,28 +162,46 @@ function updateStatus(){
 // ======================================
 
 [
-nivelInput,
-vigorInput,
-presencaInput,
+nivel,
+vigor,
+presenca,
 pvBonus,
 pdBonus
 
 ].forEach(el=>{
 
-    if(!el)return;
+    if(el){
 
-    el.addEventListener(
+        el.addEventListener(
 
-        "input",
+            "input",
 
-        updateStatus
+            updateStatus
 
-    );
+        );
+
+    }
 
 });
 
 // ======================================
-// START
+// RESTAURAR
+// ======================================
+
+function fullHeal(){
+
+    updateStatus();
+
+    pvAtual.value =
+    pvMax.value;
+
+    pdAtual.value =
+    pdMax.value;
+
+}
+
+// ======================================
+// INICIAR
 // ======================================
 
 updateStatus();

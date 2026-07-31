@@ -1,108 +1,173 @@
 // ======================================
-// DADOS
+// DICE.JS
+// Motor de Rolagem
 // ======================================
 
-function randomDice(type){
+// ======================================
+// DADO
+// ======================================
 
-    return Math.floor(Math.random() * type) + 1;
+function randomDice(faces){
+
+    return Math.floor(
+        Math.random()*faces
+    )+1;
 
 }
 
-function rollDice(){
+// ======================================
+// ROLAR VÁRIOS DADOS
+// ======================================
 
-    const quantidade =
-        Number(document.getElementById("diceCount").value) || 1;
+function rollDice(qtd,faces){
 
-    const tipo =
-        Number(document.getElementById("diceType").value) || 20;
+    let resultados=[];
 
-    const bonus =
-        Number(document.getElementById("diceBonus").value) || 0;
+    let total=0;
 
-    let rolls = [];
+    for(let i=0;i<qtd;i++){
 
-    for(let i = 0; i < quantidade; i++){
+        const valor=
+        randomDice(faces);
 
-        rolls.push(randomDice(tipo));
+        resultados.push(valor);
 
-    }
-
-    const maior = Math.max(...rolls);
-
-    const total = maior + bonus;
-
-    let critico = "";
-
-    if(tipo === 20 && maior === 20){
-
-        critico = `
-            <div class="critical-text">
-                CRÍTICO!
-            </div>
-        `;
+        total+=valor;
 
     }
 
-    document.getElementById("diceResult").innerHTML = `
+    return{
 
+        rolls:resultados,
+
+        total:total
+
+    };
+
+}
+
+// ======================================
+// D20 POR ATRIBUTO
+// ======================================
+
+function rollAttribute(attribute){
+
+    let resultados=[];
+
+    for(let i=0;i<attribute;i++){
+
+        resultados.push(
+            randomDice(20)
+        );
+
+    }
+
+    return{
+
+        rolls:resultados,
+
+        highest:Math.max(...resultados)
+
+    };
+
+}
+
+// ======================================
+// CRÍTICO
+// ======================================
+
+function isCritical(value){
+
+    return value===20;
+
+}
+
+// ======================================
+// FALHA CRÍTICA
+// ======================================
+
+function isFumble(value){
+
+    return value===1;
+
+}
+
+// ======================================
+// RESULTADO
+// ======================================
+
+function showDiceResult(html){
+
+    document
+    .getElementById("diceResult")
+    .innerHTML=html;
+
+}
+
+// ======================================
+// ROLAGEM SIMPLES
+// ======================================
+
+function simpleRoll(){
+
+    const qtd=
+    Number(
+        document.getElementById("diceCount").value
+    )||1;
+
+    const faces=
+    Number(
+        document.getElementById("diceType").value
+    )||20;
+
+    const bonus=
+    Number(
+        document.getElementById("diceBonus").value
+    )||0;
+
+    const resultado=
+    rollDice(qtd,faces);
+
+    const total=
+    resultado.total+bonus;
+
+    showDiceResult(
+
+    `
         <div class="dice-rolls">
-            ${rolls.join(" • ")}
+
+            ${resultado.rolls.join(" • ")}
+
         </div>
 
         <div class="dice-big">
-            ${maior}
+
+            ${resultado.total}
+
         </div>
 
         <div class="dice-total">
+
             Total: ${total}
+
         </div>
 
-        ${critico}
+    `
 
-    `;
-
-}
-
-// ======================================
-// ROLAR ATRIBUTO
-// ======================================
-
-function rollAttribute(attributeId){
-
-    const atributo =
-        Number(document.getElementById(attributeId).value) || 1;
-
-    document.getElementById("diceCount").value = atributo;
-
-    document.getElementById("diceType").value = 20;
-
-    document.getElementById("diceBonus").value = 0;
-
-    rollDice();
+    );
 
 }
 
 // ======================================
-// EVENTOS
+// BOTÃO
 // ======================================
 
-const rollDiceBtn = document.getElementById("rollDiceBtn");
+const rollButton=
+document.getElementById("rollDiceBtn");
 
-if(rollDiceBtn){
+if(rollButton){
 
-    rollDiceBtn.addEventListener("click", rollDice);
+    rollButton.onclick=
+    simpleRoll;
 
 }
-
-document.querySelectorAll(".attribute-roll-btn")
-.forEach(button => {
-
-    button.addEventListener("click", function(){
-
-        const attr = this.dataset.attr;
-
-        rollAttribute(attr);
-
-    });
-
-});

@@ -1,99 +1,136 @@
 // ======================================
-// PASSAR RODADA
+// TURN.JS
+// ======================================
+
+// ======================================
+// RODADA
+// ======================================
+
+let currentTurn=1;
+
+// ======================================
+// PA MÁXIMO
+// ======================================
+
+function getMaxPA(){
+
+    return calculatePA();
+
+}
+
+// ======================================
+// RESTAURAR PA
+// ======================================
+
+function restorePA(){
+
+    paAtual.value=
+
+    getMaxPA();
+
+}
+
+// ======================================
+// NOVA RODADA
 // ======================================
 
 function nextTurn(){
 
-    // =====================
-    // RESET PA
-    // =====================
+    currentTurn++;
 
-    const paTexto =
-        document.getElementById("paMaxText")
-        .innerText;
+    restorePA();
 
-    const paMax = Number(
-        paTexto.replace(/\D/g, "")
+    processConditions();
+
+    processPassiveAbilities();
+
+    processAssimilations();
+
+    updateStatus();
+
+    updateTurnDisplay();
+
+}
+
+// ======================================
+// TEXTO
+// ======================================
+
+function updateTurnDisplay(){
+
+    const text=
+
+    document.getElementById(
+
+        "turnText"
+
     );
 
-    document.getElementById("paAtual").value =
-        paMax;
+    if(text){
 
-    // =====================
-    // DANO CONDIÇÕES
-    // =====================
+        text.innerText=
 
-    let danoTotal = 0;
+        "Rodada "+currentTurn;
 
-    document.querySelectorAll(".condition-card")
-    .forEach(card => {
+    }
 
-        const danoTexto =
-            card.querySelector(".condition-damage")
-            .innerText;
+}
 
-        if(
-            danoTexto &&
-            danoTexto.includes("d")
-        ){
+// ======================================
+// PASSIVAS
+// ======================================
 
-            const partes =
-                danoTexto.split("d");
+function processPassiveAbilities(){
 
-            const quantidade =
-                Number(partes[0]);
+    playerAbilities.forEach(ability=>{
 
-            const tipo =
-                Number(partes[1]);
-
-            for(let i = 0; i < quantidade; i++){
-
-                danoTotal += randomDice(tipo);
-
-            }
+        switch(ability.nome){
 
         }
 
     });
 
-    // =====================
-    // APLICA DANO
-    // =====================
+}
 
-    const pvAtual =
-        document.getElementById("pvAtual");
+// ======================================
+// ASSIMILAÇÕES
+// ======================================
 
-    let pv =
-        Number(pvAtual.value) || 0;
+function processAssimilations(){
 
-    pv -= danoTotal;
+    playerAssimilations.forEach(
 
-    if(pv < 0){
+        assimilation=>{
 
-        pv = 0;
+            switch(
 
-    }
+                assimilation.nome
 
-    pvAtual.value = pv;
+            ){
 
-    // =====================
-    // RESULTADO
-    // =====================
+                case "Células Regenerativas":
 
-    document.getElementById("diceResult")
-    .innerHTML = `
+                    const cura=
 
-        <div class="dice-big">
-            ${danoTotal}
-        </div>
+                    rollDice(2,6);
 
-        <div class="dice-total">
-            Dano das condições
-        </div>
+                    pvAtual.value=
 
-    `;
+                    Math.min(
 
-    saveFicha();
+                        Number(pvMax.value),
+
+                        Number(pvAtual.value)+cura.total
+
+                    );
+
+                break;
+
+            }
+
+        }
+
+    );
 
 }
 
@@ -101,14 +138,26 @@ function nextTurn(){
 // BOTÃO
 // ======================================
 
-const nextTurnBtn =
-    document.getElementById("nextTurnBtn");
+const nextTurnButton=
 
-if(nextTurnBtn){
+document.getElementById(
 
-    nextTurnBtn.addEventListener(
-        "click",
-        nextTurn
-    );
+    "nextTurnBtn"
+
+);
+
+if(nextTurnButton){
+
+    nextTurnButton.onclick=
+
+    nextTurn;
 
 }
+
+// ======================================
+// INICIAR
+// ======================================
+
+updateTurnDisplay();
+
+restorePA();

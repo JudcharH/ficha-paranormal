@@ -1,101 +1,173 @@
 // ======================================
-// SAVE / LOAD
+// SAVE.JS
 // ======================================
 
-function saveFicha(){
+// ======================================
+// CHAVE
+// ======================================
 
-    const data = {
+const SAVE_KEY="FichaParanormalV2";
 
-        inventory:
-            document.getElementById("inventoryList").innerHTML,
+// ======================================
+// SALVAR
+// ======================================
 
-        abilities:
-            document.getElementById("abilitiesList").innerHTML,
+function saveCharacter(){
 
-        assimilations:
-            document.getElementById("assimilationList").innerHTML,
+    const data={
 
-        conditions:
-            document.getElementById("conditionsList").innerHTML,
+        nome:
+        document.querySelector(
+            'input[type="text"]'
+        ).value,
+
+        nivel:
+        nivel.value,
+
+        origem:
+        document.querySelectorAll(
+            'input[type="text"]'
+        )[1].value,
+
+        idade:
+        document.querySelectorAll(
+            'input[type="number"]'
+        )[0].value,
 
         pvAtual:
-            document.getElementById("pvAtual").value,
+        pvAtual.value,
+
+        pvBonus:
+        pvBonus.value,
 
         pdAtual:
-            document.getElementById("pdAtual").value,
+        pdAtual.value,
+
+        pdBonus:
+        pdBonus.value,
 
         paAtual:
-            document.getElementById("paAtual").value
+        paAtual.value,
+
+        atributos:{
+
+            forca:forca.value,
+
+            agilidade:agilidade.value,
+
+            intelecto:intelecto.value,
+
+            vigor:vigor.value,
+
+            presenca:presenca.value
+
+        },
+
+        inventory,
+
+        playerAbilities,
+
+        playerAssimilations,
+
+        activeConditions,
+
+        currentTurn
 
     };
 
     localStorage.setItem(
-        "fichaParanormal",
+
+        SAVE_KEY,
+
         JSON.stringify(data)
+
     );
 
 }
 
 // ======================================
-// LOAD
+// CARREGAR
 // ======================================
 
-function loadFicha(){
+function loadCharacter(){
 
-    const data = JSON.parse(
-        localStorage.getItem("fichaParanormal")
+    const save=
+
+    localStorage.getItem(
+
+        SAVE_KEY
+
     );
 
-    if(!data) return;
+    if(!save){
 
-    if(data.inventory){
-
-        document.getElementById("inventoryList")
-        .innerHTML = data.inventory;
+        return;
 
     }
 
-    if(data.abilities){
+    const data=
 
-        document.getElementById("abilitiesList")
-        .innerHTML = data.abilities;
+    JSON.parse(save);
 
-    }
+        nivel.value=
+    data.nivel;
 
-    if(data.assimilations){
+    pvAtual.value=
+    data.pvAtual;
 
-        document.getElementById("assimilationList")
-        .innerHTML = data.assimilations;
+    pvBonus.value=
+    data.pvBonus;
 
-    }
+    pdAtual.value=
+    data.pdAtual;
 
-    if(data.conditions){
+    pdBonus.value=
+    data.pdBonus;
 
-        document.getElementById("conditionsList")
-        .innerHTML = data.conditions;
+    paAtual.value=
+    data.paAtual;
 
-    }
+    forca.value=
+    data.atributos.forca;
 
-    if(data.pvAtual){
+    agilidade.value=
+    data.atributos.agilidade;
 
-        document.getElementById("pvAtual").value =
-            data.pvAtual;
+    intelecto.value=
+    data.atributos.intelecto;
 
-    }
+    vigor.value=
+    data.atributos.vigor;
 
-    if(data.pdAtual){
+    presenca.value=
+    data.atributos.presenca;
 
-        document.getElementById("pdAtual").value =
-            data.pdAtual;
+        inventory=
+    data.inventory||[];
 
-    }
+    playerAbilities=
+    data.playerAbilities||[];
 
-    if(data.paAtual){
+    playerAssimilations=
+    data.playerAssimilations||[];
 
-        document.getElementById("paAtual").value =
-            data.paAtual;
+    activeConditions=
+    data.activeConditions||[];
 
-    }
+    currentTurn=
+    data.currentTurn||1;
+
+        renderInventory();
+
+    renderAbilities();
+
+    renderAssimilations();
+
+    renderConditions();
+
+    updateStatus();
+
+    updateTurnDisplay();
 
 }
 
@@ -103,20 +175,22 @@ function loadFicha(){
 // AUTO SAVE
 // ======================================
 
-document.addEventListener("input", () => {
+setInterval(
 
-    saveFicha();
+    saveCharacter,
 
-});
+    5000
 
-document.addEventListener("click", () => {
-
-    setTimeout(saveFicha, 100);
-
-});
+);
 
 // ======================================
-// LOAD INICIAL
+// SAIR
 // ======================================
 
-loadFicha();
+window.addEventListener(
+
+    "beforeunload",
+
+    saveCharacter
+
+);

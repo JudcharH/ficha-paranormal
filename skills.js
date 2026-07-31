@@ -290,3 +290,135 @@ function bindSkillEvents(){
     });
 
 }
+
+// ======================================
+// ROLAR PERÍCIA
+// ======================================
+
+function rollSkill(row){
+
+    const atributo =
+    Number(row.dataset.attributeValue)||1;
+
+    const bonus =
+    Number(row.dataset.total)||0;
+
+    const treino =
+    Number(row.dataset.trainingDice)||0;
+
+    const nome =
+    row.querySelector(".skill-name").innerText;
+
+    let rolls=[];
+
+    for(let i=0;i<atributo;i++){
+
+        rolls.push(
+
+            randomDice(20)
+
+        );
+
+    }
+
+    const maior=
+    Math.max(...rolls);
+
+    let treinoValor=0;
+
+    let treinoTexto="";
+
+    const critico=
+    maior===20;
+
+    if(treino>0){
+
+        if(critico){
+
+            const dado1=
+            randomDice(treino);
+
+            const dado2=
+            randomDice(treino);
+
+            treinoValor=
+            dado1+dado2;
+
+            treinoTexto=
+            dado1+" + "+dado2;
+
+        }
+
+        else{
+
+            treinoValor=
+            randomDice(treino);
+
+            treinoTexto=
+            treinoValor;
+
+        }
+
+    }
+
+    const total=
+
+        maior+
+        treinoValor+
+        bonus;
+
+    document
+    .getElementById("diceResult")
+    .innerHTML=
+
+    `
+    <div class="dice-skill-name">
+
+        ${nome}
+
+    </div>
+
+    <div class="dice-rolls">
+
+        d20:
+        ${rolls.join(" • ")}
+
+    </div>
+
+    <div class="dice-rolls">
+
+        Treinamento:
+        ${treinoTexto}
+
+    </div>
+
+    <div class="dice-big">
+
+        ${maior}
+
+    </div>
+
+    <div class="dice-total">
+
+        Total:
+        ${total}
+
+    </div>
+
+    ${critico ?
+
+    `<div class="critical-text">
+
+        CRÍTICO
+
+    </div>`
+
+    :
+
+    ""
+
+    }
+
+    `;
+
+}
