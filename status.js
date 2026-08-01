@@ -1,207 +1,497 @@
-// ======================================
-// STATUS.JS
-// ======================================
+/*==========================================================
+                    STATUS.JS
+==========================================================*/
 
-// --------------------------------------
-// ELEMENTOS
-// --------------------------------------
+const Status = {
 
-const pvAtual =
-document.getElementById("pvAtual");
+    pvAtual: document.getElementById("pvAtual"),
+    pvMax: document.getElementById("pvMax"),
+    pvTemp: document.getElementById("pvTemp"),
 
-const pvMax =
-document.getElementById("pvMax");
+    pdAtual: document.getElementById("pdAtual"),
+    pdMax: document.getElementById("pdMax"),
+    pdTemp: document.getElementById("pdTemp"),
 
-const pvBonus =
-document.getElementById("pvBonus");
+    paAtual: document.getElementById("paAtual"),
+    paMax: document.getElementById("paMaxText"),
 
-const pdAtual =
-document.getElementById("pdAtual");
+    nivel: document.getElementById("nivel"),
 
-const pdMax =
-document.getElementById("pdMax");
+    vigor: document.getElementById("vigor"),
+    presenca: document.getElementById("presenca"),
 
-const pdBonus =
-document.getElementById("pdBonus");
+    membros:{
 
-const paAtual =
-document.getElementById("paAtual");
+        cabeca:document.getElementById("headHP"),
 
-const nivel =
-document.getElementById("nivel");
+        peito:document.getElementById("chestHP"),
 
-const vigor =
-document.getElementById("vigor");
+        abdomen:document.getElementById("abdomenHP"),
 
-const presenca =
-document.getElementById("presenca");
+        bracoE:document.getElementById("leftArmHP"),
 
-// ======================================
-// CALCULAR PV
-// ======================================
+        bracoD:document.getElementById("rightArmHP"),
 
-function calculatePV(){
+        pernaE:document.getElementById("leftLegHP"),
 
-    const lvl =
-    Number(nivel.value)||1;
+        pernaD:document.getElementById("rightLegHP")
 
-    const vig =
-    Number(vigor.value)||1;
+    }
 
-    const bonus =
-    Number(pvBonus.value)||0;
+};
 
-    return ((7+vig)*lvl)+bonus;
+/*==========================================================
+                CÁLCULO DOS STATUS
+==========================================================*/
+
+function calcularPVMax(){
+
+    const nivel=Number(Status.nivel.value)||1;
+
+    const vigor=Number(Status.vigor.value)||0;
+
+    return (7+vigor)*nivel;
 
 }
 
-// ======================================
-// CALCULAR PD
-// ======================================
+function calcularPDMax(){
 
-function calculatePD(){
+    const nivel=Number(Status.nivel.value)||1;
 
-    const lvl =
-    Number(nivel.value)||1;
+    const presenca=Number(Status.presenca.value)||0;
 
-    const pre =
-    Number(presenca.value)||1;
-
-    const bonus =
-    Number(pdBonus.value)||0;
-
-    return ((4+pre)*lvl)+bonus;
+    return (4+presenca)*nivel;
 
 }
 
-// ======================================
-// CALCULAR PA
-// ======================================
+function calcularPAMax(){
 
-function calculatePA(){
+    const nivel=Number(Status.nivel.value)||1;
 
-    const lvl =
-    Number(nivel.value)||1;
-
-    if(lvl>=10){
-
-        return 4;
-
-    }
-
-    return 3;
+    return nivel>=10 ? 4 : 3;
 
 }
 
-// ======================================
-// ATUALIZAR STATUS
-// ======================================
+/*==========================================================
+                ATUALIZA STATUS
+==========================================================*/
 
-function updateStatus(){
+function atualizarStatus(){
 
-    const maxPV =
-    calculatePV();
+    const pvMax=calcularPVMax();
 
-    const maxPD =
-    calculatePD();
+    const pdMax=calcularPDMax();
 
-    const maxPA =
-    calculatePA();
+    const paMax=calcularPAMax();
 
-    pvMax.value =
-    maxPV;
+    Status.pvMax.value=pvMax;
 
-    pdMax.value =
-    maxPD;
+    Status.pdMax.value=pdMax;
 
-    document
-    .getElementById("paMaxText")
-    .innerText =
-    "PA Máximo: "+maxPA;
+    Status.paMax.textContent=paMax;
 
-    if(Number(pvAtual.value)>maxPV){
+    if(Status.pvAtual.value===""){
 
-        pvAtual.value=maxPV;
+        Status.pvAtual.value=pvMax;
 
     }
 
-    if(Number(pdAtual.value)>maxPD){
+    if(Status.pdAtual.value===""){
 
-        pdAtual.value=maxPD;
-
-    }
-
-    if(Number(paAtual.value)>maxPA){
-
-        paAtual.value=maxPA;
+        Status.pdAtual.value=pdMax;
 
     }
 
-    if(Number(pvAtual.value)<0){
+    if(Status.paAtual.value===""){
 
-        pvAtual.value=0;
-
-    }
-
-    if(Number(pdAtual.value)<0){
-
-        pdAtual.value=0;
+        Status.paAtual.value=paMax;
 
     }
 
-    if(Number(paAtual.value)<0){
+    limitarValores();
 
-        paAtual.value=0;
+    atualizarMembros();
+
+}
+
+/*==========================================================
+            LIMITE DOS CAMPOS
+==========================================================*/
+
+function limitarValores(){
+
+    if(Number(Status.pvAtual.value)>Number(Status.pvMax.value)){
+
+        Status.pvAtual.value=Status.pvMax.value;
+
+    }
+
+    if(Number(Status.pdAtual.value)>Number(Status.pdMax.value)){
+
+        Status.pdAtual.value=Status.pdMax.value;
+
+    }
+
+    if(Number(Status.paAtual.value)>Number(Status.paMax.textContent)){
+
+        Status.paAtual.value=Status.paMax.textContent;
+
+    }
+
+    if(Number(Status.pvAtual.value)<0){
+
+        Status.pvAtual.value=0;
+
+    }
+
+    if(Number(Status.pdAtual.value)<0){
+
+        Status.pdAtual.value=0;
+
+    }
+
+    if(Number(Status.paAtual.value)<0){
+
+        Status.paAtual.value=0;
 
     }
 
 }
 
-// ======================================
-// EVENTOS
-// ======================================
+/*==========================================================
+                MEMBROS DO CORPO
+==========================================================*/
 
-[
-nivel,
-vigor,
-presenca,
-pvBonus,
-pdBonus
+function atualizarMembros(){
 
-].forEach(el=>{
+    const pvMax=Number(Status.pvMax.value);
 
-    if(el){
+    const membro=Math.ceil(pvMax/7);
 
-        el.addEventListener(
+    Object.values(Status.membros).forEach(input=>{
 
-            "input",
+        if(input){
 
-            updateStatus
+            input.max=membro;
 
-        );
+            if(input.value===""){
+
+                input.value=membro;
+
+            }
+
+            if(Number(input.value)>membro){
+
+                input.value=membro;
+
+            }
+
+            if(Number(input.value)<0){
+
+                input.value=0;
+
+            }
+
+        }
+
+    });
+
+}
+
+/*==========================================================
+                EVENTOS
+==========================================================*/
+
+Status.nivel.addEventListener("input",atualizarStatus);
+
+Status.vigor.addEventListener("input",atualizarStatus);
+
+Status.presenca.addEventListener("input",atualizarStatus);
+
+Status.pvAtual.addEventListener("input",limitarValores);
+
+Status.pdAtual.addEventListener("input",limitarValores);
+
+Status.paAtual.addEventListener("input",limitarValores);
+
+Status.pvTemp.addEventListener("input",()=>{
+
+    if(Number(Status.pvTemp.value)<0){
+
+        Status.pvTemp.value=0;
 
     }
 
 });
 
-// ======================================
-// RESTAURAR
-// ======================================
+Status.pdTemp.addEventListener("input",()=>{
 
-function fullHeal(){
+    if(Number(Status.pdTemp.value)<0){
 
-    updateStatus();
+        Status.pdTemp.value=0;
 
-    pvAtual.value =
-    pvMax.value;
+    }
 
-    pdAtual.value =
-    pdMax.value;
+});
+
+/*==========================================================
+                CURA
+==========================================================*/
+
+function curarPV(valor){
+
+    Status.pvAtual.value=
+
+        Math.min(
+
+            Number(Status.pvAtual.value)+valor,
+
+            Number(Status.pvMax.value)
+
+        );
 
 }
 
-// ======================================
-// INICIAR
-// ======================================
+function recuperarPD(valor){
 
-updateStatus();
+    Status.pdAtual.value=
+
+        Math.min(
+
+            Number(Status.pdAtual.value)+valor,
+
+            Number(Status.pdMax.value)
+
+        );
+
+}
+
+/*==========================================================
+                DANO
+==========================================================*/
+
+function causarDanoPV(valor){
+
+    Status.pvAtual.value=
+
+        Math.max(
+
+            Number(Status.pvAtual.value)-valor,
+
+            0
+
+        );
+
+}
+
+function causarDanoPD(valor){
+
+    Status.pdAtual.value=
+
+        Math.max(
+
+            Number(Status.pdAtual.value)-valor,
+
+            0
+
+        );
+
+}
+
+/*==========================================================
+                RESET DE PA
+==========================================================*/
+
+function restaurarPA(){
+
+    Status.paAtual.value=
+
+        Number(Status.paMax.textContent);
+
+}
+
+/*==========================================================
+                INICIALIZAÇÃO
+==========================================================*/
+
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        atualizarStatus();
+
+    }
+
+);
+
+/*==========================================================
+                STATUS GERAL
+==========================================================*/
+
+function personagemVivo(){
+
+    return Number(Status.pvAtual.value)>0;
+
+}
+
+function personagemInsano(){
+
+    return Number(Status.pdAtual.value)<=0;
+
+}
+
+function personagemCaido(){
+
+    return Number(Status.pvAtual.value)<=0;
+
+}
+
+/*==========================================================
+                TEMPORÁRIOS
+==========================================================*/
+
+function adicionarPVTemporario(valor){
+
+    Status.pvTemp.value=
+
+        Number(Status.pvTemp.value)+valor;
+
+}
+
+function adicionarPDTemporario(valor){
+
+    Status.pdTemp.value=
+
+        Number(Status.pdTemp.value)+valor;
+
+}
+
+function removerPVTemporario(valor){
+
+    Status.pvTemp.value=
+
+        Math.max(
+
+            0,
+
+            Number(Status.pvTemp.value)-valor
+
+        );
+
+}
+
+function removerPDTemporario(valor){
+
+    Status.pdTemp.value=
+
+        Math.max(
+
+            0,
+
+            Number(Status.pdTemp.value)-valor
+
+        );
+
+}
+
+/*==========================================================
+                GASTO DE PA
+==========================================================*/
+
+function gastarPA(valor=1){
+
+    if(Number(Status.paAtual.value)<valor){
+
+        return false;
+
+    }
+
+    Status.paAtual.value=
+
+        Number(Status.paAtual.value)-valor;
+
+    return true;
+
+}
+
+/*==========================================================
+                GASTO DE PD
+==========================================================*/
+
+function gastarPD(valor){
+
+    if(Number(Status.pdAtual.value)<valor){
+
+        return false;
+
+    }
+
+    Status.pdAtual.value=
+
+        Number(Status.pdAtual.value)-valor;
+
+    return true;
+
+}
+
+/*==========================================================
+                GASTO DE PV
+==========================================================*/
+
+function gastarPV(valor){
+
+    if(Number(Status.pvAtual.value)<=valor){
+
+        return false;
+
+    }
+
+    Status.pvAtual.value=
+
+        Number(Status.pvAtual.value)-valor;
+
+    return true;
+
+}
+
+/*==========================================================
+                EXPORTAR
+==========================================================*/
+
+window.StatusAPI={
+
+    atualizarStatus,
+
+    curarPV,
+
+    recuperarPD,
+
+    causarDanoPV,
+
+    causarDanoPD,
+
+    gastarPV,
+
+    gastarPD,
+
+    gastarPA,
+
+    restaurarPA,
+
+    adicionarPVTemporario,
+
+    adicionarPDTemporario,
+
+    removerPVTemporario,
+
+    removerPDTemporario,
+
+    personagemVivo,
+
+    personagemInsano,
+
+    personagemCaido
+
+};

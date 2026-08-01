@@ -1,9 +1,6 @@
-/* ========================================================= */
-/* ORDEM - ECOS DO DESCONHECIDO */
-/* STYLE.CSS V2 */
-/* ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+/*==========================================================
+=                      RESET GERAL                         =
+==========================================================*/
 
 *{
     margin:0;
@@ -11,3649 +8,67 @@
     box-sizing:border-box;
 }
 
-:root{
+html{
 
-    --bg:#050505;
-    --card:#101010;
-    --card2:#181818;
-
-    --purple:#7b2cff;
-    --purple2:#9b4dff;
-    --purple3:#d7b2ff;
-
-    --border:#3b3b3b;
-
-    --green:#44ff88;
-    --yellow:#ffd54f;
-    --red:#ff5b5b;
-
-    --shadow:0 0 18px rgba(123,44,255,.35);
+    scroll-behavior:smooth;
 
 }
 
 body{
 
-    background:var(--bg);
+    background:#060606;
 
-    color:white;
+    color:#F5F5F5;
 
-    font-family:'Orbitron',sans-serif;
+    font-family:Orbitron,sans-serif;
 
     overflow-x:hidden;
 
 }
 
-/* ========================================================= */
-/* CONTAINER */
-/* ========================================================= */
+/*==========================================================
+=                      VARIÁVEIS                           =
+==========================================================*/
 
-.container{
+:root{
 
-    width:100%;
+    --bg:#0B0B0B;
 
-    padding:20px;
+    --bg2:#121212;
 
-    padding-right:310px;
+    --bg3:#1A1A1A;
 
-}
-
-/* ========================================================= */
-/* TITULO */
-/* ========================================================= */
-
-.top-bar{
-
-    margin-bottom:25px;
-
-}
-
-.top-bar h1{
-
-    font-size:52px;
-
-    color:var(--purple3);
-
-    letter-spacing:3px;
-
-    text-shadow:
-    0 0 20px var(--purple);
-
-}
-
-/* ========================================================= */
-/* CARDS */
-/* ========================================================= */
-
-.card{
-
-    background:var(--card);
-
-    border:1px solid var(--purple);
-
-    border-radius:22px;
-
-    padding:24px;
-
-    margin-bottom:25px;
-
-    box-shadow:var(--shadow);
-
-    transition:.25s;
-
-}
-
-.card:hover{
-
-    transform:translateY(-2px);
-
-}
-
-.card h2{
-
-    color:var(--purple3);
-
-    margin-bottom:20px;
-
-    letter-spacing:2px;
-
-}
-
-/* ========================================================= */
-/* PERSONAGEM */
-/* ========================================================= */
-
-.character-section{
-
-    display:flex;
-
-    gap:30px;
-
-    background:var(--card);
-
-    border:1px solid var(--purple);
-
-    border-radius:24px;
-
-    padding:24px;
-
-    margin-bottom:25px;
-
-    box-shadow:var(--shadow);
-
-}
-
-/* ========================================================= */
-/* FOTO */
-/* ========================================================= */
-
-.photo-area{
-
-    width:260px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:15px;
-
-}
-
-.photo-preview{
-
-    width:100%;
-
-    height:330px;
-
-    border:2px solid var(--purple);
-
-    border-radius:22px;
-
-    background:black;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    overflow:hidden;
-
-    color:#666;
-
-    box-shadow:0 0 20px rgba(123,44,255,.40);
-
-}
-
-.photo-preview img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-}
-
-#photoInput{
-
-    width:100%;
-
-    background:#111;
-
-    color:white;
-
-    padding:10px;
-
-    border-radius:12px;
-
-    border:1px solid #333;
-
-}
-
-/* ========================================================= */
-/* PA */
-/* ========================================================= */
-
-.pa-box{
-
-    background:#111;
-
-    border:2px solid var(--purple);
-
-    border-radius:18px;
-
-    padding:15px;
-
-    box-shadow:var(--shadow);
-
-}
-
-.pa-box span{
-
-    display:block;
-
-    margin-bottom:10px;
-
-    color:var(--purple3);
-
-}
-
-.pa-box input{
-
-    width:100%;
-
-    background:black;
-
-    border:none;
-
-    color:white;
-
-    text-align:center;
-
-    font-size:32px;
-
-    padding:10px;
-
-    border-radius:10px;
-
-}
-
-#paMaxText{
-
-    display:block;
-
-    margin-top:10px;
-
-    color:#999;
-
-}
-
-/* ========================================================= */
-/* DADOS PERSONAGEM */
-/* ========================================================= */
-
-.character-info{
-
-    flex:1;
-
-}
-
-.info-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-}
-
-.field{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.field label{
-
-    color:var(--purple3);
-
-    margin-bottom:8px;
-
-}
-
-.field input{
-
-    background:#0a0a0a;
-
-    border:1px solid #333;
-
-    color:white;
-
-    padding:12px;
-
-    border-radius:12px;
-
-}
-
-/* ========================================================= */
-/* SISTEMA CORPORAL */
-/* ========================================================= */
-
-.body-system{
-
-    margin-top:25px;
-
-}
-
-/* ========================= */
-/* PV */
-/* ========================= */
-
-.body-top-status{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:18px;
-
-    margin-bottom:25px;
-
-}
-
-.body-bottom-status{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:18px;
-
-    margin-top:25px;
-
-}
-
-.status-box{
-
-    background:#111;
-
-    border:2px solid var(--purple);
-
-    border-radius:18px;
-
-    padding:14px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow);
-
-}
-
-.status-box span{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:var(--purple3);
-
-    font-size:15px;
-
-}
-
-.status-box input{
-
-    width:100%;
-
-    background:black;
-
-    border:none;
-
-    color:white;
-
-    text-align:center;
-
-    font-size:28px;
-
-    padding:8px;
-
-    border-radius:10px;
-
-}
-
-/* ========================= */
-/* CORPO */
-/* ========================= */
-
-.body-layout{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:60px;
-
-}
-
-.body-image{
-
-    width:260px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.body-image img{
-
-    width:100%;
-
-    height:auto;
-
-    user-select:none;
-
-    filter:drop-shadow(0 0 15px rgba(123,44,255,.25));
-
-}
-
-/* ========================= */
-/* MEMBROS */
-/* ========================= */
-
-.body-parts{
-
-    width:320px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
-
-.member-box{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    background:#151515;
-
-    border:1px solid #333;
-
-    border-left:5px solid var(--purple);
-
-    border-radius:15px;
-
-    padding:12px 16px;
-
-    transition:.20s;
-
-}
-
-.member-box:hover{
-
-    border-left-color:var(--green);
-
-    transform:translateX(3px);
-
-}
-
-.member-name{
-
-    color:white;
-
-    font-size:17px;
-
-    letter-spacing:1px;
-
-}
-
-/* ========================= */
-/* PV MEMBROS */
-/* ========================= */
-
-.member-values{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-}
-
-.member-values input{
-
-    width:55px;
-
-    height:34px;
-
-    background:black;
-
-    border:none;
-
-    border-radius:8px;
-
-    color:white;
-
-    font-size:20px;
-
-    text-align:center;
-
-}
-
-.member-values span{
-
-    color:var(--purple3);
-
-    font-size:18px;
-
-}
-
-.member-max{
-
-    color:var(--green);
-
-    font-size:20px;
-
-    min-width:30px;
-
-    text-align:center;
-
-}
-
-/* ========================= */
-/* ESTADOS */
-/* ========================= */
-
-.member-normal{
-
-    border-left-color:#44ff88;
-
-}
-
-.member-warning{
-
-    border-left-color:#ffd54f;
-
-}
-
-.member-danger{
-
-    border-left-color:#ff5555;
-
-}
-
-.member-broken{
-
-    border-left-color:#990000;
-
-    opacity:.55;
-
-    filter:grayscale(1);
-
-}
-
-/* ========================= */
-/* RESPONSIVO */
-/* ========================= */
-
-@media(max-width:1100px){
-
-    .body-layout{
-
-        flex-direction:column;
-
-    }
-
-    .body-parts{
-
-        width:100%;
-
-    }
-
-}
-
-/* ========================================================= */
-/* ATRIBUTOS */
-/* ========================================================= */
-
-.attributes-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(5,1fr);
-
-    gap:22px;
-
-}
-
-.attribute{
-
-    background:linear-gradient(
-        180deg,
-        #181818,
-        #101010
-    );
-
-    border:2px solid var(--purple);
-
-    border-radius:22px;
-
-    padding:20px;
-
-    text-align:center;
-
-    transition:.20s;
-
-    box-shadow:var(--shadow);
-
-}
-
-.attribute:hover{
-
-    transform:translateY(-4px);
-
-    border-color:var(--green);
-
-}
-
-.attribute span{
-
-    display:block;
-
-    font-size:26px;
-
-    color:var(--purple3);
-
-    margin-bottom:16px;
-
-    letter-spacing:2px;
-
-}
-
-.attribute input{
-
-    width:100%;
-
-    height:65px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:black;
-
-    color:white;
-
-    text-align:center;
-
-    font-size:36px;
-
-    font-weight:bold;
-
-    transition:.20s;
-
-}
-
-.attribute input:focus{
-
-    outline:none;
-
-    box-shadow:
-
-        0 0 15px rgba(123,44,255,.6);
-
-}
-
-/* ========================================================= */
-/* ATRIBUTOS RESPONSIVO */
-/* ========================================================= */
-
-@media(max-width:1000px){
-
-    .attributes-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-}
-
-@media(max-width:600px){
-
-    .attributes-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-/* ========================================================= */
-/* PERÍCIAS V2 */
-/* ========================================================= */
-
-.skills-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-}
-
-/* ========================= */
-/* CABEÇALHO */
-/* ========================= */
-
-.skills-header{
-
-    display:grid;
-
-    grid-template-columns:
-
-        2fr
-        70px
-        110px
-        70px;
-
-    gap:15px;
-
-    padding:12px 15px;
-
-    border-bottom:2px solid var(--purple);
-
-    color:var(--purple3);
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-}
-
-/* ========================= */
-/* LINHA */
-/* ========================= */
-
-.skill-row{
-
-    display:grid;
-
-    grid-template-columns:
-
-        2fr
-        70px
-        110px
-        70px;
-
-    gap:15px;
-
-    align-items:center;
-
-    background:#121212;
-
-    border:1px solid #2a2a2a;
-
-    border-left:5px solid transparent;
-
-    border-radius:14px;
-
-    padding:12px 15px;
-
-    transition:.20s;
-
-}
-
-.skill-row:hover{
-
-    background:#191919;
-
-    border-left-color:var(--purple);
-
-    transform:translateX(3px);
-
-}
-
-/* ========================= */
-/* NOME */
-/* ========================= */
-
-.skill-name{
-
-    color:white;
-
-    font-size:16px;
-
-}
-
-/* ========================= */
-/* ATRIBUTO */
-/* ========================= */
-
-.skill-attr{
-
-    color:var(--green);
-
-    font-weight:bold;
-
-    text-align:center;
-
-}
-
-/* ========================= */
-/* TREINAMENTO */
-/* ========================= */
-
-.skill-train{
-
-    width:100%;
-
-    height:34px;
-
-    background:black;
-
-    border:1px solid #333;
-
-    border-radius:8px;
-
-    color:white;
-
-    text-align:center;
-
-    font-family:inherit;
-
-    cursor:pointer;
-
-}
-
-/* ========================= */
-/* BONUS */
-/* ========================= */
-
-.skill-bonus{
-
-    width:100%;
-
-    height:34px;
-
-    background:black;
-
-    border:1px solid #333;
-
-    border-radius:8px;
-
-    color:white;
-
-    text-align:center;
-
-}
-
-/* ========================= */
-/* ESCONDER PENALIDADE */
-/* ========================= */
-
-.skill-penalty{
-
-    display:none;
-
-}
-
-.skill-total{
-
-    display:none;
-
-}
-
-/* ========================= */
-/* CORES */
-/* ========================= */
-
-.skill-trained{
-
-    border-left-color:#4aa3ff;
-
-}
-
-.skill-veteran{
-
-    border-left-color:#b86dff;
-
-}
-
-.skill-expert{
-
-    border-left-color:#ffd700;
-
-}
-
-/* ========================= */
-/* CLIQUE */
-/* ========================= */
-
-.clickable-skill{
-
-    cursor:pointer;
-
-}
-
-.clickable-skill:hover{
-
-    box-shadow:
-
-        0 0 15px rgba(123,44,255,.25);
-
-}
-
-/* ========================================================= */
-/* ASSIMILAÇÕES V2 */
-/* ========================================================= */
-
-#assimilationList{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-.assimilation-card{
-
-    background:linear-gradient(
-        145deg,
-        #121212,
-        #1b1b1b
-    );
-
-    border:1px solid #333;
-
-    border-left:6px solid var(--purple);
-
-    border-radius:18px;
-
-    padding:22px;
-
-    transition:.25s;
-
-    box-shadow:
-        0 0 18px rgba(0,0,0,.35);
-
-}
-
-.assimilation-card:hover{
-
-    transform:translateY(-3px);
-
-    border-left-color:var(--purple2);
-
-    box-shadow:
-        0 0 25px rgba(123,44,255,.30);
-
-}
-
-.assimilation-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    margin-bottom:18px;
-
-}
-
-.assimilation-header h3{
-
-    color:white;
-
-    font-size:24px;
-
-    margin-bottom:6px;
-
-}
-
-.assimilation-element{
-
-    color:var(--purple3);
-
-    font-size:13px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-}
-
-.assimilation-stage{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:7px 18px;
-
-    border-radius:999px;
-
-    background:rgba(123,44,255,.15);
-
-    color:var(--purple3);
-
-    font-weight:bold;
-
-    font-size:13px;
-
-    margin-bottom:18px;
-
-}
-
-.assimilation-description{
-
-    color:#d9d9d9;
-
-    line-height:1.8;
-
-    font-size:15px;
-
-    margin-bottom:20px;
-
-}
-
-.assimilation-cost{
-
-    color:#ff7c7c;
-
-    font-size:14px;
-
-    font-weight:bold;
-
-    margin-bottom:20px;
-
-}
-
-.assimilation-buttons{
-
-    display:flex;
-
-    gap:12px;
-
-}
-
-.evolve-btn{
-
-    flex:1;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:14px;
-
-    cursor:pointer;
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    color:white;
-
-    background:linear-gradient(
-        90deg,
-        var(--purple),
-        var(--purple2)
-    );
-
-    transition:.20s;
-
-}
-
-.evolve-btn:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-
-        0 0 18px rgba(123,44,255,.35);
-
-}
-
-.remove-assimilation{
-
-    width:52px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#2a0d0d;
-
-    color:#ff6060;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    transition:.20s;
-
-}
-
-.remove-assimilation:hover{
-
-    background:#5a1111;
-
-}
-
-/* ========================================================= */
-/* HABILIDADES GERAIS V2 */
-/* ========================================================= */
-
-#abilitiesList{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-.ability-card{
-
-    background:linear-gradient(
-        145deg,
-        #131313,
-        #1d1d1d
-    );
-
-    border:1px solid #333;
-
-    border-left:5px solid #4aa3ff;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    transition:.25s;
-
-    box-shadow:
-        0 0 18px rgba(0,0,0,.35);
-
-}
-
-.ability-card:hover{
-
-    transform:translateY(-3px);
-
-    border-left-color:#6bbcff;
-
-    box-shadow:
-        0 0 20px rgba(74,163,255,.20);
-
-}
-
-.ability-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:18px;
-
-}
-
-.ability-header h3{
-
-    color:white;
-
-    font-size:22px;
-
-}
-
-.ability-header button{
-
-    width:36px;
-
-    height:36px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#5c1515;
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.ability-header button:hover{
-
-    background:#a51f1f;
-
-}
-
-.ability-card p{
-
-    color:#dddddd;
-
-    line-height:1.8;
-
-    font-size:15px;
-
-}
-
-.ability-card span{
-
-    color:#7fd0ff;
-
-    font-weight:bold;
-
-}
-
-.skill-cost{
-
-    display:inline-block;
-
-    margin-top:18px;
-
-    padding:8px 15px;
-
-    border-radius:999px;
-
-    background:#102333;
-
-    color:#7fd0ff;
-
-    font-weight:bold;
-
-}
-
-/* ========================================================= */
-/* INVENTÁRIO V2 */
-/* ========================================================= */
-
-#inventoryList{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-.inventory-card{
-
-    background:linear-gradient(
-        145deg,
-        #121212,
-        #1d1d1d
-    );
-
-    border:1px solid #333;
-
-    border-left:5px solid #ffb84d;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    transition:.25s;
-
-    box-shadow:
-        0 0 15px rgba(0,0,0,.35);
-
-}
-
-.inventory-card:hover{
-
-    transform:translateY(-3px);
-
-    border-left-color:#ffd26a;
-
-    box-shadow:
-        0 0 20px rgba(255,184,77,.18);
-
-}
-
-.inventory-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:18px;
-
-}
-
-.inventory-header h3{
-
-    color:white;
-
-    font-size:22px;
-
-}
-
-.inventory-header button{
-
-    width:36px;
-
-    height:36px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#5a1111;
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.inventory-header button:hover{
-
-    background:#b42020;
-
-}
-
-.inventory-description{
-
-    color:#d5d5d5;
-
-    line-height:1.8;
-
-    margin-bottom:18px;
-
-}
-
-.inventory-info{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-    margin-top:18px;
-
-}
-
-.inventory-info label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#ffcc7d;
-
-    font-size:13px;
-
-    letter-spacing:1px;
-
-}
-
-.inventory-info input{
-
-    width:100%;
-
-    background:#090909;
-
-    border:1px solid #333;
-
-    border-radius:10px;
-
-    color:white;
-
-    padding:12px;
-
-    font-family:inherit;
-
-}
-
-.inventory-weight{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin-top:18px;
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    background:#332200;
-
-    color:#ffcc7d;
-
-    font-weight:bold;
-
-}
-
-.uses-box{
-
-    margin-top:18px;
-
-}
-
-.uses-box span{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#ffcc7d;
-
-}
-
-.uses-box input{
-
-    width:100%;
-
-    background:#090909;
-
-    border:1px solid #333;
-
-    border-radius:10px;
-
-    color:white;
-
-    padding:12px;
-
-}
-
-.mod-area{
-
-    margin-top:20px;
-
-}
-
-.mod-area h4{
-
-    color:#ffcc7d;
-
-    margin-bottom:12px;
-
-}
-
-.mods-list{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-}
-
-.mod-tag{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    background:#1c1c1c;
-
-    border:1px solid #444;
-
-    border-radius:999px;
-
-    padding:8px 14px;
-
-    color:white;
-
-}
-
-.mod-tag button{
-
-    width:22px;
-
-    height:22px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:#8d2020;
-
-    color:white;
-
-    cursor:pointer;
-
-}
-
-.mini-add-btn{
-
-    width:36px;
-
-    height:36px;
-
-    margin-top:14px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:var(--purple);
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.mini-add-btn:hover{
-
-    background:var(--purple2);
-
-}
-
-/* ========================================================= */
-/* CONDIÇÕES V2 */
-/* ========================================================= */
-
-#conditionsList{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:16px;
-
-    align-items:flex-start;
-
-}
-
-.condition-card{
-
-    min-width:190px;
-
-    background:linear-gradient(
-        145deg,
-        #151515,
-        #202020
-    );
-
-    border:1px solid #333;
-
-    border-left:5px solid #ff5555;
-
-    border-radius:16px;
-
-    padding:16px;
-
-    transition:.25s;
-
-    box-shadow:
-        0 0 15px rgba(0,0,0,.30);
-
-}
-
-.condition-card:hover{
-
-    transform:translateY(-3px);
-
-    border-left-color:#ff8080;
-
-    box-shadow:
-        0 0 18px rgba(255,80,80,.20);
-
-}
-
-.condition-name{
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    margin-bottom:10px;
-
-}
-
-.condition-description{
-
-    color:#bbbbbb;
-
-    font-size:13px;
-
-    line-height:1.6;
-
-    margin-bottom:15px;
-
-}
-
-.condition-damage{
-
-    display:inline-block;
-
-    padding:6px 12px;
-
-    border-radius:999px;
-
-    background:#331111;
-
-    color:#ff7c7c;
-
-    font-weight:bold;
-
-    font-size:13px;
-
-}
-
-.condition-card button{
-
-    margin-top:15px;
-
-    width:100%;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#661919;
-
-    color:white;
-
-    padding:10px;
-
-    cursor:pointer;
-
-    transition:.20s;
-
-    font-family:inherit;
-
-}
-
-.condition-card button:hover{
-
-    background:#a62020;
-
-}
-
-/* ========================= */
-/* STATUS POSITIVOS */
-/* ========================= */
-
-.condition-positive{
-
-    border-left-color:#44dd88;
-
-}
-
-.condition-positive .condition-damage{
-
-    background:#133321;
-
-    color:#66ff99;
-
-}
-
-/* ========================= */
-/* STATUS NEGATIVOS */
-/* ========================= */
-
-.condition-negative{
-
-    border-left-color:#ff5555;
-
-}
-
-.condition-negative .condition-damage{
-
-    background:#331111;
-
-    color:#ff7777;
-
-}
-
-/* ========================================================= */
-/* PAINEL DE DADOS V2 */
-/* ========================================================= */
-
-.dice-panel{
-
-    position:fixed;
-
-    top:0;
-    right:0;
-
-    width:340px;
-    height:100vh;
-
-    overflow-y:auto;
-
-    background:linear-gradient(
-        180deg,
-        #090909,
-        #111111
-    );
-
-    border-left:2px solid #7b2cff;
-
-    padding:25px;
-
-    box-shadow:
-        -10px 0 30px rgba(123,44,255,.15);
-
-}
-
-.dice-panel h2{
-
-    text-align:center;
-
-    color:#d5b6ff;
-
-    font-size:30px;
-
-    margin-bottom:25px;
-
-    letter-spacing:2px;
-
-}
-
-/* ========================= */
-/* INPUTS */
-/* ========================= */
-
-.dice-inputs{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-.dice-field{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.dice-field label{
-
-    color:#b98cff;
-
-    margin-bottom:8px;
-
-    font-size:13px;
-
-    letter-spacing:1px;
-
-}
-
-.dice-field input{
-
-    background:#151515;
-
-    border:1px solid #444;
-
-    border-radius:12px;
-
-    color:white;
-
-    padding:12px;
-
-    font-size:18px;
-
-}
-
-/* ========================= */
-/* BOTÕES ATRIBUTOS */
-/* ========================= */
-
-.attribute-rolls{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:12px;
-
-    margin-top:25px;
-
-}
-
-.attribute-roll-btn{
-
-    background:#181818;
-
-    border:1px solid #7b2cff;
-
-    border-radius:14px;
-
-    color:white;
-
-    padding:14px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-    font-weight:bold;
-
-}
-
-.attribute-roll-btn:hover{
-
-    background:#7b2cff;
-
-    transform:translateY(-2px);
-
-}
-
-/* ========================= */
-/* BOTÃO ROLAR */
-/* ========================= */
-
-.roll-button{
-
-    width:100%;
-
-    margin-top:20px;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:linear-gradient(
-        90deg,
-        #7b2cff,
-        #9d4dff
-    );
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.roll-button:hover{
-
-    transform:scale(1.03);
-
-}
-
-/* ========================= */
-/* RESULTADO */
-/* ========================= */
-
-.dice-result{
-
-    margin-top:25px;
-
-    background:#151515;
-
-    border:1px solid #7b2cff;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    text-align:center;
-
-    min-height:220px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-}
-
-.dice-skill-name{
-
-    color:#d8b8ff;
-
-    font-size:24px;
-
-    font-weight:bold;
-
-    margin-bottom:12px;
-
-}
-
-.dice-rolls{
-
-    color:#888;
-
-    font-size:17px;
-
-    margin-bottom:15px;
-
-    line-height:1.7;
-
-}
-
-.dice-big{
-
-    font-size:72px;
-
-    font-weight:bold;
-
-    color:#d89bff;
-
-    text-shadow:
-        0 0 20px #7b2cff;
-
-    margin-bottom:15px;
-
-}
-
-.dice-total{
-
-    font-size:26px;
-
-    color:white;
-
-}
-
-.critical-text{
-
-    margin-top:20px;
-
-    color:#ff4b4b;
-
-    font-size:30px;
-
-    font-weight:bold;
-
-    animation:critPulse .8s infinite alternate;
-
-}
-
-@keyframes critPulse{
-
-    from{
-
-        transform:scale(1);
-
-        text-shadow:
-            0 0 10px red;
-
-    }
-
-    to{
-
-        transform:scale(1.08);
-
-        text-shadow:
-            0 0 25px red;
-
-    }
-
-}
-
-/* ========================= */
-/* PASSAR RODADA */
-/* ========================= */
-
-.next-turn-btn{
-
-    width:100%;
-
-    margin-top:20px;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#1d1d1d;
-
-    border:1px solid #7b2cff;
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-    font-size:18px;
-
-}
-
-.next-turn-btn:hover{
-
-    background:#7b2cff;
-
-}
-
-/* ========================= */
-/* HISTÓRICO */
-/* ========================= */
-
-.dice-history{
-
-    margin-top:25px;
-
-}
-
-.dice-history h3{
-
-    color:#b98cff;
-
-    margin-bottom:10px;
-
-}
-
-.history-entry{
-
-    background:#171717;
-
-    border-left:4px solid #7b2cff;
-
-    padding:10px;
-
-    border-radius:10px;
-
-    margin-bottom:8px;
-
-    color:#ddd;
-
-    font-size:13px;
-
-}
-
-/* ========================================================= */
-/* GRIMÓRIO */
-/* ========================================================= */
-
-.grimorio{
-
-    background:linear-gradient(
-        145deg,
-        #0e0e0e,
-        #181818
-    );
-
-    border:2px solid #7b2cff;
-
-    border-radius:22px;
-
-    padding:25px;
-
-    box-shadow:
-        0 0 20px rgba(123,44,255,.25);
-
-}
-
-.grimorio-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
-}
-
-.grimorio-header h2{
-
-    color:#d8b8ff;
-
-    font-size:30px;
-
-    letter-spacing:2px;
-
-}
-
-.grimorio-header button{
-
-    background:#7b2cff;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 22px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-.grimorio-header button:hover{
-
-    background:#9d4dff;
-
-}
-
-/* ========================================================= */
-/* ELEMENTOS */
-/* ========================================================= */
-
-.element-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(5,1fr);
-
-    gap:18px;
-
-    margin-bottom:30px;
-
-}
-
-.element-card{
-
-    background:#171717;
-
-    border:2px solid #333;
-
-    border-radius:16px;
-
-    padding:20px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.element-card:hover{
-
-    transform:translateY(-4px);
-
-}
-
-.element-card.selected{
-
-    border-color:#ffffff;
-
-    box-shadow:
-        0 0 20px rgba(255,255,255,.20);
-
-}
-
-.element-card h3{
-
-    color:white;
-
-    margin-bottom:10px;
-
-}
-
-.element-card small{
-
-    color:#999;
-
-}
-
-/* ========================================================= */
-/* CORES ELEMENTOS */
-/* ========================================================= */
-
-.element-sangue.selected{
-
-    border-color:#ff2f2f;
-
-    box-shadow:
-        0 0 20px rgba(255,40,40,.45);
-
-}
-
-.element-morte.selected{
-
-    border-color:#7d7d7d;
-
-    box-shadow:
-        0 0 20px rgba(180,180,180,.35);
-
-}
-
-.element-energia.selected{
-
-    border-color:#ffe54c;
-
-    box-shadow:
-        0 0 20px rgba(255,220,40,.45);
-
-}
-
-.element-conhecimento.selected{
-
-    border-color:#7aa8ff;
-
-    box-shadow:
-        0 0 20px rgba(90,150,255,.45);
-
-}
-
-.element-medo.selected{
-
-    border-color:#8b3cff;
-
-    box-shadow:
-        0 0 25px rgba(139,60,255,.55);
-
-}
-
-/* ========================================================= */
-/* PALAVRAS */
-/* ========================================================= */
-
-.word-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-
-    gap:15px;
-
-}
-
-.word{
-
-    background:#191919;
-
-    border:1px solid #444;
-
-    border-radius:14px;
-
-    padding:15px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.20s;
-
-}
-
-.word:hover{
-
-    border-color:#7b2cff;
-
-}
-
-.word.selected{
-
-    background:#7b2cff;
-
-    border-color:#c79cff;
-
-    color:white;
-
-    transform:scale(1.03);
-
-}
-
-/* ========================================================= */
-/* LANÇAR */
-/* ========================================================= */
-
-.grimorio-footer{
-
-    margin-top:30px;
-
-    text-align:center;
-
-}
-
-.cast-button{
-
-    width:100%;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:18px;
-
-    background:linear-gradient(
-        90deg,
-        #7b2cff,
-        #9d4dff
-    );
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.cast-button:hover{
-
-    transform:scale(1.02);
-
-}
-
-/* ========================================================= */
-/* LIVRO */
-/* ========================================================= */
-
-.grimorio-book{
-
-    width:100%;
-
-    min-height:650px;
-
-    background:#2a1a12;
-
-    border:6px solid #4a2a18;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    display:flex;
-
-    box-shadow:
-        0 0 40px rgba(0,0,0,.55);
-
-}
-
-/* ========================= */
-/* PÁGINAS */
-/* ========================= */
-
-.book-page{
-
-    flex:1;
-
-    background:#f1e4c8;
-
-    color:#111;
-
-    padding:35px;
-
-    position:relative;
-
-}
-
-.book-page:first-child{
-
-    border-right:2px solid rgba(0,0,0,.15);
-
-}
-
-.book-page::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-
-    radial-gradient(
-        rgba(255,255,255,.10),
-        transparent 70%
-    );
-
-    opacity:.4;
-
-}
-
-/* ========================= */
-/* TITULOS */
-/* ========================= */
-
-.book-page h2{
-
-    color:#3b1b0b;
-
-    font-size:28px;
-
-    margin-bottom:25px;
-
-    letter-spacing:2px;
-
-}
-
-.book-page h3{
-
-    color:#592a18;
-
-    margin-bottom:15px;
-
-}
-
-/* ========================= */
-/* TEXTO */
-/* ========================= */
-
-.book-page p{
-
-    color:#3b3b3b;
-
-    line-height:1.8;
-
-    margin-bottom:18px;
-
-}
-
-/* ========================= */
-/* ABERTURA */
-/* ========================= */
-
-.book-opening{
-
-    animation:bookOpen .45s ease;
-
-}
-
-@keyframes bookOpen{
-
-    from{
-
-        transform:
-
-            perspective(1500px)
-
-            rotateY(-80deg);
-
-        opacity:0;
-
-    }
-
-    to{
-
-        transform:
-
-            perspective(1500px)
-
-            rotateY(0deg);
-
-        opacity:1;
-
-    }
-
-}
-
-/* ========================= */
-/* VIRAR PÁGINA */
-/* ========================= */
-
-.page-turn{
-
-    animation:pageTurn .35s ease;
-
-}
-
-@keyframes pageTurn{
-
-    from{
-
-        transform:
-
-            perspective(1200px)
-
-            rotateY(-25deg);
-
-    }
-
-    to{
-
-        transform:
-
-            perspective(1200px)
-
-            rotateY(0deg);
-
-    }
-
-}
-
-/* ========================================================= */
-/* TEMAS DOS ELEMENTOS */
-/* ========================================================= */
-
-/* ========================= */
-/* SANGUE */
-/* ========================= */
-
-.grimorio.sangue{
-
-    background:
-        linear-gradient(
-            180deg,
-            #220000,
-            #110000
-        );
-
-    border-color:#ff2d2d;
-
-    box-shadow:
-        0 0 40px rgba(255,0,0,.35);
-
-}
-
-.grimorio.sangue .book-page{
-
-    background:#f4d8d8;
-
-}
-
-/* ========================= */
-/* MORTE */
-/* ========================= */
-
-.grimorio.morte{
-
-    background:
-        linear-gradient(
-            180deg,
-            #1b1b1b,
-            #080808
-        );
-
-    border-color:#888;
-
-}
-
-.grimorio.morte .book-page{
-
-    background:#d8d4c5;
-
-    filter:grayscale(.55);
-
-}
-
-/* ========================= */
-/* ENERGIA */
-/* ========================= */
-
-.grimorio.energia{
-
-    background:
-        linear-gradient(
-            180deg,
-            #352600,
-            #110d00
-        );
-
-    border-color:#ffd93d;
-
-    box-shadow:
-        0 0 40px rgba(255,220,50,.4);
-
-}
-
-.grimorio.energia .book-page{
-
-    background:#fff4c9;
-
-}
-
-/* ========================= */
-/* CONHECIMENTO */
-/* ========================= */
-
-.grimorio.conhecimento{
-
-    background:
-        linear-gradient(
-            180deg,
-            #18213d,
-            #0a1125
-        );
-
-    border-color:#5da6ff;
-
-}
-
-.grimorio.conhecimento .book-page{
-
-    background:#edf4ff;
-
-}
-
-/* ========================= */
-/* MEDO */
-/* ========================= */
-
-.grimorio.medo{
-
-    background:
-        linear-gradient(
-            180deg,
-            #14051f,
-            #06000b
-        );
-
-    border-color:#a03cff;
-
-    animation:fearPulse 3s infinite;
-
-}
-
-.grimorio.medo .book-page{
-
-    background:#ece2ff;
-
-}
-
-/* ========================================================= */
-/* EFEITOS */
-/* ========================================================= */
-
-@keyframes fearPulse{
-
-    0%{
-
-        box-shadow:
-        0 0 20px rgba(140,60,255,.2);
-
-    }
-
-    50%{
-
-        box-shadow:
-        0 0 45px rgba(180,60,255,.6);
-
-    }
-
-    100%{
-
-        box-shadow:
-        0 0 20px rgba(140,60,255,.2);
-
-    }
-
-}
-
-/* ========================================================= */
-/* PALAVRA SELECIONADA */
-/* ========================================================= */
-
-.word.selected{
-
-    transform:scale(1.05);
-
-    color:white;
-
-    font-weight:bold;
-
-}
-
-/* Sangue */
-
-.grimorio.sangue .word.selected{
-
-    background:#c40000;
-
-}
-
-/* Morte */
-
-.grimorio.morte .word.selected{
-
-    background:#666;
-
-}
-
-/* Energia */
-
-.grimorio.energia .word.selected{
-
-    background:#ffcf00;
-
-    color:#111;
-
-}
-
-/* Conhecimento */
-
-.grimorio.conhecimento .word.selected{
-
-    background:#4a8cff;
-
-}
-
-/* Medo */
-
-.grimorio.medo .word.selected{
-
-    background:#7b2cff;
-
-}
-
-/* ========================================================= */
-/* RESULTADO DAS ROLAGENS */
-/* ========================================================= */
-
-.dice-result{
-
-    margin-top:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111,
-            #181818
-        );
-
-    border:2px solid #7b2cff;
-
-    border-radius:22px;
-
-    padding:22px;
-
-    min-height:220px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    transition:.25s;
-
-    box-shadow:
-        0 0 18px rgba(123,44,255,.25);
-
-}
-
-/* ========================= */
-
-.dice-skill-name{
-
-    font-size:26px;
-
-    color:#d5b7ff;
-
-    margin-bottom:15px;
-
-    letter-spacing:2px;
-
-}
-
-/* ========================= */
-
-.dice-rolls{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:12px;
-
-    margin-bottom:20px;
-
-}
-
-/* ========================= */
-
-.roll-box{
-
-    width:58px;
-    height:58px;
-
-    border-radius:14px;
-
-    background:#222;
-
-    border:2px solid #7b2cff;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:24px;
-
-    font-weight:bold;
-
-    color:white;
-
-    box-shadow:
-        0 0 10px rgba(123,44,255,.3);
-
-}
-
-/* ========================= */
-
-.roll-box.best{
-
-    background:#7b2cff;
-
-    transform:scale(1.12);
-
-}
-
-/* ========================= */
-
-.training-box{
-
-    width:52px;
-    height:52px;
-
-    border-radius:50%;
-
-    background:#181818;
-
-    border:2px solid #44ff88;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#44ff88;
-
-    font-size:20px;
-
-}
-
-/* ========================= */
-
-.dice-big{
-
-    font-size:78px;
-
-    color:#d5b7ff;
-
-    text-shadow:
-
-        0 0 25px #7b2cff;
-
-    margin-bottom:18px;
-
-}
-
-/* ========================= */
-
-.dice-total{
-
-    font-size:34px;
-
-    color:white;
-
-    font-weight:bold;
-
-}
-
-/* ========================= */
-
-.critical-text{
-
-    margin-top:20px;
-
-    color:#ff4444;
-
-    font-size:30px;
-
-    font-weight:bold;
-
-    animation:criticalPulse 1s infinite;
-
-}
-
-@keyframes criticalPulse{
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-    50%{
-
-        transform:scale(1.08);
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-    }
-
-}
-
-/* ========================================================= */
-/* ANIMAÇÕES DOS DADOS */
-/* ========================================================= */
-
-.roll-box{
-
-    animation:rollAppear .35s ease;
-
-}
-
-@keyframes rollAppear{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(.3)
-            rotate(-180deg);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            rotate(0deg);
-
-    }
-
-}
-
-/* ========================= */
-
-.roll-box.best{
-
-    animation:
-        bestDice .8s ease;
-
-}
-
-@keyframes bestDice{
-
-    0%{
-
-        transform:scale(.7);
-
-    }
-
-    35%{
-
-        transform:scale(1.35);
-
-    }
-
-    100%{
-
-        transform:scale(1.12);
-
-    }
-
-}
-
-/* ========================= */
-
-.training-box{
-
-    animation:
-        trainingAppear .4s ease;
-
-}
-
-@keyframes trainingAppear{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-/* ========================= */
-
-.dice-big{
-
-    animation:
-        numberPop .4s ease;
-
-}
-
-@keyframes numberPop{
-
-    from{
-
-        transform:scale(.4);
-
-        opacity:0;
-
-    }
-
-    to{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-}
-
-/* ========================= */
-
-.dice-total{
-
-    animation:
-        totalFade .5s ease;
-
-}
-
-@keyframes totalFade{
-
-    from{
-
-        opacity:0;
-
-    }
-
-    to{
-
-        opacity:1;
-
-    }
+    --roxo:#8A2BFF;
 
-}
-
-/* ========================= */
-
-.roll-box:hover{
-
-    transform:scale(1.08);
-
-    transition:.15s;
-
-}
-
-.training-box:hover{
-
-    transform:scale(1.1);
-
-    transition:.15s;
-
-}
-
-/* ========================================================= */
-/* EFEITOS - SANGUE */
-/* ========================================================= */
-
-.grimorio.sangue{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-/* ========================= */
-
-.grimorio.sangue::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-80px;
-    left:0;
-
-    width:100%;
-    height:120px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(255,0,0,.65),
-            transparent
-        );
-
-    animation:
-        bloodFlow 8s linear infinite;
-
-}
-
-/* ========================= */
-
-.grimorio.sangue::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-        radial-gradient(
-            circle at 20% 25%,
-            rgba(255,20,20,.15),
-            transparent 40%
-        ),
-
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(255,20,20,.12),
-            transparent 35%
-        ),
-
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(255,50,50,.08),
-            transparent 30%
-        );
-
-}
-
-/* ========================= */
-
-@keyframes bloodFlow{
-
-    from{
-
-        transform:
-            translateY(-60px);
-
-    }
-
-    to{
-
-        transform:
-            translateY(650px);
-
-    }
-
-}
-
-/* ========================= */
-
-.grimorio.sangue .word.selected{
-
-    background:#a50000;
-
-    box-shadow:
-
-        0 0 20px red;
-
-}
-
-/* ========================================================= */
-/* ENERGIA */
-/* ========================================================= */
-
-.grimorio.energia{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-/* ========================= */
-
-.grimorio.energia::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-        linear-gradient(
-
-            120deg,
-
-            transparent,
-
-            rgba(255,255,120,.25),
-
-            transparent
-
-        );
-
-    animation:
-
-        lightning 2.5s infinite;
-
-}
-
-/* ========================= */
-
-@keyframes lightning{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            translateX(-120%);
-
-    }
-
-    25%{
-
-        opacity:1;
-
-    }
-
-    50%{
-
-        transform:
-            translateX(120%);
-
-    }
-
-    100%{
-
-        opacity:0;
-
-    }
-
-}
-
-/* ========================= */
-
-.grimorio.energia .word.selected{
-
-    background:#ffd400;
-
-    color:#111;
-
-    box-shadow:
-
-        0 0 25px gold;
-
-}
-
-/* ========================================================= */
-/* MORTE */
-/* ========================================================= */
-
-.grimorio.morte{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-/* ========================= */
-
-.grimorio.morte::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-20%;
-
-    background:
-
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.08),
-            transparent 70%
-        );
-
-    animation:
-
-        deathSmoke 12s linear infinite;
-
-}
-
-/* ========================= */
-
-@keyframes deathSmoke{
-
-    from{
-
-        transform:
-            translateY(120px)
-            rotate(0deg);
-
-        opacity:.15;
-
-    }
-
-    50%{
-
-        opacity:.35;
+    --roxoClaro:#C89BFF;
 
-    }
+    --roxoEscuro:#46148C;
 
-    to{
+    --texto:#F4F4F4;
 
-        transform:
-            translateY(-120px)
-            rotate(360deg);
+    --cinza:#7E7E7E;
 
-        opacity:.15;
+    --verde:#2ECC71;
 
-    }
+    --vermelho:#FF4B5C;
 
-}
-
-/* ========================= */
-
-.grimorio.morte .word.selected{
-
-    background:#5b5b5b;
-
-    color:white;
-
-    box-shadow:
-
-        0 0 20px #888;
-
-}
-
-/* ========================================================= */
-/* CONHECIMENTO */
-/* ========================================================= */
-
-.grimorio.conhecimento{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-/* ========================= */
-
-.grimorio.conhecimento::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-        linear-gradient(
-
-            45deg,
-
-            transparent,
-
-            rgba(120,180,255,.12),
-
-            transparent
-
-        );
-
-    animation:
-
-        knowledgeLight 6s infinite;
-
-}
-
-/* ========================= */
-
-@keyframes knowledgeLight{
-
-    from{
-
-        transform:
-            translateX(-120%);
-
-    }
-
-    to{
-
-        transform:
-            translateX(120%);
-
-    }
-
-}
-
-/* ========================= */
-
-.grimorio.conhecimento .word.selected{
-
-    background:#4c90ff;
-
-    box-shadow:
-
-        0 0 20px #4c90ff;
-
-}
-
-/* ========================================================= */
-/* MEDO */
-/* ========================================================= */
-
-.grimorio.medo{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-/* ========================= */
-
-.grimorio.medo::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-        repeating-linear-gradient(
-
-            180deg,
-
-            transparent 0px,
-
-            rgba(170,90,255,.04) 2px,
+    --laranja:#FFAA33;
 
-            transparent 4px
-
-        );
-
-    animation:
-
-        fearGlitch .18s infinite;
-
-}
-
-/* ========================= */
-
-@keyframes fearGlitch{
-
-    0%{
-
-        transform:
-            translateX(0);
-
-    }
-
-    20%{
-
-        transform:
-            translateX(-2px);
-
-    }
-
-    40%{
-
-        transform:
-            translateX(2px);
-
-    }
-
-    60%{
-
-        transform:
-            translateX(-1px);
-
-    }
-
-    80%{
-
-        transform:
-            translateX(1px);
-
-    }
-
-    100%{
-
-        transform:
-            translateX(0);
-
-    }
-
-}
-
-/* ========================= */
-
-.grimorio.medo .word.selected{
-
-    background:#7b2cff;
-
-    box-shadow:
-
-        0 0 30px #7b2cff;
-
-}
-
-/* ========================================================= */
-/* ACABAMENTO FINAL */
-/* ========================================================= */
-
-.card,
-.attribute,
-.status-box,
-.member-card,
-.grimorio,
-.grimorio-book,
-.inventory-card,
-.assimilation-card,
-.ability-card{
-
-    transition:
-        .25s ease;
-
-}
-
-.card:hover,
-.member-card:hover,
-.attribute:hover{
-
-    transform:translateY(-3px);
-
-}
-
-/* ========================================================= */
-/* BOTÕES */
-/* ========================================================= */
-
-button{
-
-    transition:
-        .2s;
-
-}
-
-button:hover{
-
-    transform:scale(1.04);
-
-}
-
-button:active{
-
-    transform:scale(.96);
-
-}
-
-/* ========================================================= */
-/* INPUTS */
-/* ========================================================= */
-
-input{
-
-    transition:
-        .2s;
-
-}
-
-input:hover{
-
-    border-color:#8b4dff;
-
-}
+    --borda:2px solid #8A2BFF;
 
-input:focus{
+    --radius:18px;
 
-    border-color:#b36cff;
+    --shadow:
 
-    box-shadow:
+    0 0 6px rgba(138,43,255,.35),
 
-        0 0 12px rgba(123,44,255,.35);
+    0 0 18px rgba(138,43,255,.15);
 
 }
 
-/* ========================================================= */
-/* SCROLL GERAL */
-/* ========================================================= */
+/*==========================================================
+=                    SCROLLBAR                            =
+==========================================================*/
 
 ::-webkit-scrollbar{
 
@@ -3669,143 +84,1872 @@ input:focus{
 
 ::-webkit-scrollbar-thumb{
 
-    background:#7b2cff;
+    background:#7E2CFF;
 
-    border-radius:50px;
+    border-radius:20px;
 
 }
 
 ::-webkit-scrollbar-thumb:hover{
 
-    background:#9d4dff;
+    background:#B06EFF;
 
 }
 
-/* ========================================================= */
-/* SELEÇÃO */
-/* ========================================================= */
+/*==========================================================
+=                  CONTAINER PRINCIPAL                    =
+==========================================================*/
 
-::selection{
+.container{
 
-    background:#7b2cff;
+    width:1450px;
+
+    margin:auto;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:26px;
+
+}
+
+/*==========================================================
+=                        HEADER                           =
+==========================================================*/
+
+.top-bar{
+
+    width:100%;
+
+    border:var(--borda);
+
+    border-radius:22px;
+
+    background:#090909;
+
+    padding:18px 28px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.top-bar h1{
+
+    font-size:54px;
+
+    color:var(--roxoClaro);
+
+    letter-spacing:2px;
+
+    text-shadow:
+
+    0 0 10px rgba(138,43,255,.6);
+
+}
+
+/*==========================================================
+=                    CARDS GERAIS                         =
+==========================================================*/
+
+.card{
+
+    background:#111;
+
+    border:var(--borda);
+
+    border-radius:22px;
+
+    padding:20px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.card h2{
+
+    color:var(--roxoClaro);
+
+    font-size:34px;
+
+    margin-bottom:20px;
+
+}
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+
+}
+
+/*==========================================================
+=                     BOTÕES                              =
+==========================================================*/
+
+button{
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-family:inherit;
+
+}
+
+.add-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--roxo);
+
+    color:white;
+
+    font-size:24px;
+
+}
+
+.add-btn:hover{
+
+    transform:scale(1.08);
+
+    background:#A552FF;
+
+}
+
+/*==========================================================
+=                     INPUTS                              =
+==========================================================*/
+
+input,
+
+textarea,
+
+select{
+
+    width:100%;
+
+    background:#090909;
+
+    color:white;
+
+    border:2px solid #262626;
+
+    border-radius:12px;
+
+    padding:10px;
+
+    outline:none;
+
+    font-size:16px;
+
+    transition:.2s;
+
+}
+
+input:focus,
+
+textarea:focus,
+
+select:focus{
+
+    border-color:var(--roxo);
+
+    box-shadow:
+
+    0 0 8px rgba(138,43,255,.4);
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#D6B7FF;
+
+    font-size:17px;
+
+}
+
+/*==========================================================
+=                PERSONAGEM                               =
+==========================================================*/
+
+.character-section{
+
+    display:grid;
+
+    grid-template-columns:
+
+    280px
+
+    1fr;
+
+    gap:25px;
+
+}
+
+/*==========================================================
+=                    FOTO                                 =
+==========================================================*/
+
+.photo-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.photo-preview{
+
+    width:100%;
+
+    height:380px;
+
+    background:#090909;
+
+    border:var(--borda);
+
+    border-radius:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#666;
+
+    font-size:26px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+.photo-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+#photoInput{
+
+    background:#111;
+
+}
+
+/*==========================================================
+=                     PA                                  =
+==========================================================*/
+
+.pa-box{
+
+    background:#111;
+
+    border:var(--borda);
+
+    border-radius:20px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.pa-box span{
+
+    display:block;
+
+    color:#D7B6FF;
+
+    margin-bottom:12px;
+
+}
+
+.pa-box input{
+
+    text-align:center;
+
+    font-size:34px;
+
+    font-weight:bold;
+
+}
+
+.pa-box small{
+
+    display:block;
+
+    margin-top:10px;
+
+    color:#AFAFAF;
+
+}
+
+/*==========================================================
+=                 CHARACTER INFO                          =
+==========================================================*/
+
+.character-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 220px;
+
+    gap:18px;
+
+}
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/*==========================================================
+=                    STATUS GERAL                         =
+==========================================================*/
+
+.status-row{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+}
+
+.status-box{
+
+    background:#111;
+
+    border:var(--borda);
+
+    border-radius:20px;
+
+    padding:14px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.status-box span{
+
+    text-align:center;
+
+    color:var(--roxoClaro);
+
+    font-size:17px;
+
+}
+
+.status-box input{
+
+    height:58px;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+}
+
+/*==========================================================
+=                    CORPO                                =
+==========================================================*/
+
+.body-layout{
+
+    display:grid;
+
+    grid-template-columns:
+
+    1fr
+
+    320px;
+
+    gap:35px;
+
+    align-items:center;
+
+}
+
+.body-image{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.body-image img{
+
+    width:270px;
+
+    user-select:none;
+
+    pointer-events:none;
+
+}
+
+.body-status{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.member-row{
+
+    display:grid;
+
+    grid-template-columns:120px 1fr;
+
+    gap:10px;
+
+    align-items:center;
+
+}
+
+.member-row span{
+
+    color:#E6D2FF;
+
+    font-size:17px;
+
+}
+
+.member-row input{
+
+    text-align:center;
+
+    font-weight:bold;
+
+}
+
+/*==========================================================
+=                     ATRIBUTOS                           =
+==========================================================*/
+
+.attributes-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(5,1fr);
+
+    gap:22px;
+
+}
+
+.attribute{
+
+    background:#121212;
+
+    border:var(--borda);
+
+    border-radius:22px;
+
+    padding:22px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+    align-items:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.attribute:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#A65CFF;
+
+}
+
+.attribute span{
+
+    font-size:36px;
+
+    color:var(--roxoClaro);
+
+    letter-spacing:1px;
+
+}
+
+.attribute input{
+
+    height:78px;
+
+    text-align:center;
+
+    font-size:42px;
+
+    font-weight:bold;
+
+}
+
+/*==========================================================
+=                    PERÍCIAS                             =
+==========================================================*/
+
+.skills-header{
+
+    display:grid;
+
+    grid-template-columns:
+
+    2.4fr
+
+    .9fr
+
+    1.2fr
+
+    .8fr
+
+    .8fr
+
+    .8fr;
+
+    gap:10px;
+
+    padding:16px;
+
+    border-radius:16px;
+
+    background:#191919;
+
+    margin-bottom:12px;
+
+    color:var(--roxoClaro);
+
+    font-size:17px;
+
+    border:1px solid #2B2B2B;
+
+}
+
+.skills-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.skill-row{
+
+    display:grid;
+
+    grid-template-columns:
+
+    2.4fr
+
+    .9fr
+
+    1.2fr
+
+    .8fr
+
+    .8fr
+
+    .8fr;
+
+    gap:10px;
+
+    padding:12px;
+
+    background:#111;
+
+    border-radius:14px;
+
+    border:1px solid #222;
+
+    transition:.2s;
+
+    align-items:center;
+
+}
+
+.skill-row:hover{
+
+    border-color:var(--roxo);
+
+    background:#151515;
+
+}
+
+.skill-name{
+
+    color:white;
+
+    font-size:17px;
+
+}
+
+.skill-attr{
+
+    color:#B990FF;
+
+    text-align:center;
+
+}
+
+.skill-total{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:46px;
+
+    border-radius:10px;
+
+    background:#090909;
+
+    font-size:22px;
+
+    color:white;
+
+    border:1px solid #292929;
+
+    font-weight:bold;
+
+}
+
+.skill-row select{
+
+    height:46px;
+
+}
+
+.skill-row input{
+
+    height:46px;
+
+    text-align:center;
+
+}
+
+.clickable-skill{
+
+    cursor:pointer;
+
+}
+
+/*==========================================================
+=                 MENU DA PERÍCIA                         =
+==========================================================*/
+
+.skill-editor{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(4px);
+
+    z-index:500;
+
+}
+
+.skill-editor-content{
+
+    width:520px;
+
+    background:#101010;
+
+    border:var(--borda);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    box-shadow:0 0 30px rgba(138,43,255,.35);
+
+}
+
+.skill-editor h2{
+
+    color:var(--roxoClaro);
+
+    font-size:28px;
+
+}
+
+.skill-editor-buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:14px;
+
+}
+
+.skill-editor-buttons button{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--roxo);
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+/*==========================================================
+=                    ASSIMILAÇÕES                         =
+==========================================================*/
+
+.assimilations-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+.assimilation-card{
+
+    background:#151515;
+
+    border:2px solid #2D2D2D;
+
+    border-left:6px solid var(--roxo);
+
+    border-radius:22px;
+
+    padding:24px;
+
+    transition:.25s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.assimilation-card:hover{
+
+    border-color:var(--roxo);
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow);
+
+}
+
+.assimilation-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:18px;
+
+}
+
+.assimilation-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.assimilation-element{
+
+    font-size:14px;
+
+    color:#FF5A8B;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}
+
+.assimilation-name{
+
+    font-size:34px;
 
     color:white;
 
 }
 
-/* ========================================================= */
-/* TRANSIÇÕES */
-/* ========================================================= */
+.assimilation-cost{
 
-*{
+    font-size:22px;
 
-    scroll-behavior:smooth;
+    color:#FF7B7B;
 
-}
-
-/* ========================================================= */
-/* RESPONSIVO */
-/* ========================================================= */
-
-@media(max-width:1200px){
-
-    .container{
-
-        padding-right:20px;
-
-    }
-
-    .dice-panel{
-
-        position:relative;
-
-        width:100%;
-
-        height:auto;
-
-        border-left:none;
-
-        margin-top:25px;
-
-    }
+    font-weight:bold;
 
 }
 
-@media(max-width:900px){
+.assimilation-type{
 
-    .character-section{
+    color:#E6E6E6;
 
-        flex-direction:column;
+    font-size:18px;
 
-    }
-
-    .status-row{
-
-        flex-direction:column;
-
-    }
-
-    .attributes-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-    .grimorio-main{
-
-        flex-direction:column;
-
-    }
-
-    .grimorio-sidebar{
-
-        width:100%;
-
-    }
+    margin-bottom:14px;
 
 }
 
-@media(max-width:650px){
+.assimilation-description{
 
-    .member-grid{
+    color:#CFCFCF;
 
-        grid-template-columns:1fr;
+    line-height:1.7;
 
-    }
-
-    .attributes-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .grimorio-book{
-
-        min-height:420px;
-
-    }
-
-    .dice-big{
-
-        font-size:54px;
-
-    }
+    font-size:17px;
 
 }
 
-/* ========================================================= */
-/* EFEITO GLOBAL */
-/* ========================================================= */
+.assimilation-footer{
 
-body{
+    display:flex;
 
-    animation:
+    justify-content:space-between;
 
-        fadeStart .4s ease;
+    align-items:center;
+
+    margin-top:22px;
 
 }
 
-@keyframes fadeStart{
+.modifications-button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.modifications-button span{
+
+    color:white;
+
+    font-size:18px;
+
+}
+
+.modifications-button button{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--roxo);
+
+    color:white;
+
+    font-size:24px;
+
+}
+
+.remove-card{
+
+    position:absolute;
+
+    top:16px;
+
+    right:16px;
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#611414;
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+/*==========================================================
+=                 HABILIDADES                             =
+==========================================================*/
+
+.abilities-list{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.ability-card{
+
+    background:#151515;
+
+    border:var(--borda);
+
+    border-radius:20px;
+
+    padding:22px;
+
+    transition:.25s;
+
+}
+
+.ability-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow);
+
+}
+
+.ability-name{
+
+    font-size:28px;
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.ability-cost{
+
+    color:#5DE37A;
+
+    font-size:18px;
+
+    margin-bottom:12px;
+
+}
+
+.ability-description{
+
+    color:#D4D4D4;
+
+    line-height:1.7;
+
+}
+
+/*==========================================================
+=                 CONDIÇÕES                               =
+==========================================================*/
+
+.conditions-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+}
+
+.condition{
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    background:#202020;
+
+    border:2px solid #323232;
+
+    color:white;
+
+    font-size:17px;
+
+    transition:.2s;
+
+}
+
+.condition:hover{
+
+    border-color:var(--roxo);
+
+}
+
+.condition.negative{
+
+    border-left:5px solid #D83A3A;
+
+}
+
+.condition.positive{
+
+    border-left:5px solid #2ECC71;
+
+}
+
+.condition.neutral{
+
+    border-left:5px solid #B27CFF;
+
+}
+
+/*==========================================================
+=                    INVENTÁRIO                           =
+==========================================================*/
+
+.inventory-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.inventory-card{
+
+    background:#171717;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    border:2px solid #C58A2A;
+
+    position:relative;
+
+    transition:.25s;
+
+}
+
+.inventory-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 0 16px rgba(255,170,51,.25);
+
+}
+
+.inventory-name{
+
+    font-size:34px;
+
+    color:white;
+
+}
+
+.inventory-category{
+
+    color:#FFD37C;
+
+    font-size:18px;
+
+    margin-bottom:20px;
+
+}
+
+.inventory-info{
+
+    display:grid;
+
+    grid-template-columns:120px 120px;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+}
+
+.inventory-description{
+
+    color:#D5D5D5;
+
+    line-height:1.7;
+
+}
+
+.inventory-footer{
+
+    margin-top:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.inventory-footer button{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--roxo);
+
+    color:white;
+
+    font-size:24px;
+
+}
+
+/*==========================================================
+=                      GRIMÓRIO                           =
+==========================================================*/
+
+.grimorio{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.grimorio-layout{
+
+    display:grid;
+
+    grid-template-columns:300px 1fr;
+
+    gap:22px;
+
+}
+
+.grimorio-sidebar{
+
+    background:#151515;
+
+    border:var(--borda);
+
+    border-radius:22px;
+
+    padding:22px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.grimorio-title{
+
+    color:var(--roxoClaro);
+
+    font-size:26px;
+
+    margin-bottom:10px;
+
+}
+
+.grimorio-button{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#1E1E1E;
+
+    color:white;
+
+    text-align:left;
+
+    padding:14px;
+
+    font-size:17px;
+
+    transition:.2s;
+
+}
+
+.grimorio-button:hover{
+
+    background:var(--roxo);
+
+}
+
+.grimorio-button.active{
+
+    background:var(--roxo);
+
+}
+
+.grimorio-content{
+
+    background:#151515;
+
+    border:var(--borda);
+
+    border-radius:22px;
+
+    padding:24px;
+
+    min-height:520px;
+
+}
+
+.grimorio-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.grimorio-section h3{
+
+    color:var(--roxoClaro);
+
+    font-size:28px;
+
+}
+
+.word-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+
+    gap:14px;
+
+}
+
+.word-card{
+
+    background:#1D1D1D;
+
+    border:2px solid #2E2E2E;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    transition:.2s;
+
+    cursor:pointer;
+
+}
+
+.word-card:hover{
+
+    border-color:var(--roxo);
+
+    transform:translateY(-2px);
+
+}
+
+.word-card.selected{
+
+    border-color:#B06EFF;
+
+    background:#2A183B;
+
+}
+
+.word-name{
+
+    color:white;
+
+    font-size:20px;
+
+    margin-bottom:8px;
+
+}
+
+.word-description{
+
+    color:#CFCFCF;
+
+    font-size:15px;
+
+    line-height:1.5;
+
+}
+
+/*==========================================================
+=                     PAINEL DADOS                        =
+==========================================================*/
+
+.dice-panel{
+
+    position:fixed;
+
+    top:0;
+
+    right:0;
+
+    width:320px;
+
+    height:100vh;
+
+    background:#090909;
+
+    border-left:var(--borda);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:22px;
+
+    gap:20px;
+
+    z-index:100;
+
+}
+
+.dice-panel h2{
+
+    color:var(--roxoClaro);
+
+    text-align:center;
+
+    font-size:42px;
+
+}
+
+.dice-inputs{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:12px;
+
+}
+
+.dice-field{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.attribute-rolls{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:8px;
+
+}
+
+.attribute-roll-btn{
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1E1E1E;
+
+    color:white;
+
+}
+
+.attribute-roll-btn:hover{
+
+    background:var(--roxo);
+
+}
+
+.roll-button{
+
+    height:54px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--roxo);
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+.roll-button:hover{
+
+    background:#A75BFF;
+
+}
+
+.dice-result{
+
+    flex:1;
+
+    border:var(--borda);
+
+    border-radius:18px;
+
+    background:#141414;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+
+    font-size:24px;
+
+}
+
+.next-turn-btn{
+
+    height:56px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#252525;
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+.next-turn-btn:hover{
+
+    background:var(--roxo);
+}
+
+/*==========================================================
+=                        MODAIS                           =
+==========================================================*/
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.80);
+
+    backdrop-filter:blur(6px);
+
+    z-index:999;
+
+}
+
+.modal.hidden{
+
+    display:none;
+
+}
+
+.modal-content{
+
+    width:900px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:#121212;
+
+    border:var(--borda);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    box-shadow:0 0 30px rgba(138,43,255,.35);
+
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.modal-header h2{
+
+    color:var(--roxoClaro);
+
+    font-size:34px;
+
+}
+
+.close-modal{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#611414;
+
+    color:white;
+
+    font-size:24px;
+}
+
+.close-modal:hover{
+
+    background:#A02222;
+
+}
+
+.search-box{
+
+    margin-bottom:20px;
+}
+
+.search-box input{
+
+    height:52px;
+}
+
+.modal-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.modal-item{
+
+    background:#1B1B1B;
+
+    border:2px solid #2B2B2B;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    transition:.2s;
+
+    cursor:pointer;
+}
+
+.modal-item:hover{
+
+    border-color:var(--roxo);
+
+    transform:translateX(4px);
+}
+
+/*==========================================================
+=                  TOOLTIPS                               =
+==========================================================*/
+
+.tooltip{
+
+    position:absolute;
+
+    background:#181818;
+
+    border:2px solid var(--roxo);
+
+    border-radius:14px;
+
+    padding:14px;
+
+    min-width:260px;
+
+    color:white;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    box-shadow:var(--shadow);
+
+    z-index:9999;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    transition:.2s;
+
+}
+
+.tooltip.show{
+
+    opacity:1;
+
+}
+
+/*==========================================================
+=                     TAGS                                =
+==========================================================*/
+
+.tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.tag-sangue{
+
+    background:#6E1010;
+
+    color:#FFB4B4;
+
+}
+
+.tag-morte{
+
+    background:#3B3B3B;
+
+    color:#F0F0F0;
+
+}
+
+.tag-energia{
+
+    background:#D08900;
+
+    color:#FFF3C2;
+
+}
+
+.tag-conhecimento{
+
+    background:#1D4D8A;
+
+    color:#D6E9FF;
+
+}
+
+.tag-medo{
+
+    background:#6A1B9A;
+
+    color:#F2D7FF;
+
+}
+
+/*==========================================================
+=                 UTILIDADES                              =
+==========================================================*/
+
+.hidden{
+
+    display:none!important;
+
+}
+
+.center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.column{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.row{
+
+    display:flex;
+
+    flex-direction:row;
+
+}
+
+.space-between{
+
+    justify-content:space-between;
+
+}
+
+.gap10{
+
+    gap:10px;
+
+}
+
+.gap20{
+
+    gap:20px;
+
+}
+
+.w100{
+
+    width:100%;
+
+}
+
+.h100{
+
+    height:100%;
+
+}
+
+/*==========================================================
+=                    ANIMAÇÕES                            =
+==========================================================*/
+
+@keyframes fadeIn{
 
     from{
 
@@ -3820,3 +1964,201 @@ body{
     }
 
 }
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.03);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.card{
+
+    animation:fadeIn .25s ease;
+
+}
+
+.modal-content{
+
+    animation:slideUp .25s ease;
+
+}
+
+.attribute:hover,
+
+.assimilation-card:hover,
+
+.inventory-card:hover,
+
+.ability-card:hover{
+
+    animation:pulse .35s ease;
+
+}
+
+/*==========================================================
+=                    RESPONSIVO                           =
+==========================================================*/
+
+@media(max-width:1700px){
+
+    .container{
+
+        width:calc(100% - 360px);
+
+    }
+
+}
+
+@media(max-width:1400px){
+
+    .character-section{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .body-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .grimorio-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .abilities-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .attributes-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
+@media(max-width:1000px){
+
+    .container{
+
+        width:100%;
+
+        padding:12px;
+
+    }
+
+    .dice-panel{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        border-left:none;
+
+        border-top:var(--borda);
+
+    }
+
+    .attributes-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .status-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .info-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    .attributes-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .skills-header{
+
+        display:none;
+
+    }
+
+    .skill-row{
+
+        grid-template-columns:1fr;
+
+        gap:8px;
+
+    }
+
+    .top-bar h1{
+
+        font-size:36px;
+
+    }
+
+    .modal-content{
+
+        width:95%;
+
+    }
+
+}
+
+/*==========================================================
+=                      FIM                                =
+==========================================================*/

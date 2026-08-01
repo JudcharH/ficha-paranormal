@@ -1,160 +1,417 @@
-// ======================================
-// BODY.JS
-// Sistema do Corpo
-// ======================================
+/*==========================================================
+                    BODY.JS
+==========================================================*/
 
-// ------------------------------
-// ELEMENTOS
-// ------------------------------
+const Body={
 
-const bodyParts = {
+    image:document.getElementById("bodyImage"),
 
-    cabeca:{
-        atual:document.getElementById("cabecaAtual"),
-        max:document.getElementById("cabecaMax")
-    },
+    members:{
 
-    torso:{
-        atual:document.getElementById("torsoAtual"),
-        max:document.getElementById("torsoMax")
-    },
+        head:document.getElementById("headHP"),
 
-    bracoEsq:{
-        atual:document.getElementById("bracoEsqAtual"),
-        max:document.getElementById("bracoEsqMax")
-    },
+        chest:document.getElementById("chestHP"),
 
-    bracoDir:{
-        atual:document.getElementById("bracoDirAtual"),
-        max:document.getElementById("bracoDirMax")
-    },
+        abdomen:document.getElementById("abdomenHP"),
 
-    pernaEsq:{
-        atual:document.getElementById("pernaEsqAtual"),
-        max:document.getElementById("pernaEsqMax")
-    },
+        leftArm:document.getElementById("leftArmHP"),
 
-    pernaDir:{
-        atual:document.getElementById("pernaDirAtual"),
-        max:document.getElementById("pernaDirMax")
+        rightArm:document.getElementById("rightArmHP"),
+
+        leftLeg:document.getElementById("leftLegHP"),
+
+        rightLeg:document.getElementById("rightLegHP")
+
     }
 
 };
 
-// ======================================
-// CALCULAR MEMBROS
-// ======================================
+/*==========================================================
+                VIDA DOS MEMBROS
+==========================================================*/
 
-function updateBody(){
+function getMemberMaxLife(){
 
-    const pvTotal =
-    Number(document.getElementById("pvMax").value)||0;
+    return Math.ceil(
 
-    const cabeca =
-    Math.ceil(pvTotal*0.15);
+        Number(Status.pvMax.value)/7
 
-    const torso =
-    Math.ceil(pvTotal*0.35);
-
-    const braco =
-    Math.ceil(pvTotal*0.125);
-
-    const perna =
-    Math.ceil(pvTotal*0.125);
-
-    setMember(bodyParts.cabeca,cabeca);
-
-    setMember(bodyParts.torso,torso);
-
-    setMember(bodyParts.bracoEsq,braco);
-
-    setMember(bodyParts.bracoDir,braco);
-
-    setMember(bodyParts.pernaEsq,perna);
-
-    setMember(bodyParts.pernaDir,perna);
+    );
 
 }
 
-// ======================================
-// DEFINIR MEMBRO
-// ======================================
+function resetBodyLife(){
 
-function setMember(member,max){
+    const max=getMemberMaxLife();
 
-    member.max.innerText=max;
+    Object.values(
 
-    if(member.atual.value===""){
+        Body.members
 
-        member.atual.value=max;
+    ).forEach(member=>{
 
-    }
+        member.max=max;
 
-    if(Number(member.atual.value)>max){
-
-        member.atual.value=max;
-
-    }
-
-}
-
-// ======================================
-// CURA TOTAL
-// ======================================
-
-function healBody(){
-
-    Object.values(bodyParts).forEach(part=>{
-
-        part.atual.value=
-        part.max.innerText;
+        member.value=max;
 
     });
 
 }
 
-// ======================================
-// DANO
-// ======================================
+/*==========================================================
+                DANO LOCALIZADO
+==========================================================*/
 
-function damageMember(nome,dano){
+function damageMember(
 
-    const part=
-    bodyParts[nome];
+    member,
 
-    if(!part)return;
+    damage
 
-    let atual=
-    Number(part.atual.value);
+){
 
-    atual-=dano;
+    if(
 
-    if(atual<0){
+        !Body.members[member]
 
-        atual=0;
+    ) return;
 
-    }
+    const current=
 
-    part.atual.value=atual;
+    Number(
+
+        Body.members[member].value
+
+    );
+
+    Body.members[member].value=
+
+    Math.max(
+
+        0,
+
+        current-damage
+
+    );
+
+    updateBodyVisual();
 
 }
 
-// ======================================
-// EVENTOS
-// ======================================
+/*==========================================================
+                CURAR MEMBRO
+==========================================================*/
 
-document
-.getElementById("pvMax")
-.addEventListener(
+function healMember(
 
-    "input",
+    member,
 
-    updateBody
+    value
+
+){
+
+    if(
+
+        !Body.members[member]
+
+    ) return;
+
+    const max=
+
+    getMemberMaxLife();
+
+    const current=
+
+    Number(
+
+        Body.members[member].value
+
+    );
+
+    Body.members[member].value=
+
+    Math.min(
+
+        max,
+
+        current+value
+
+    );
+
+    updateBodyVisual();
+
+}
+
+/*==========================================================
+                VISUAL DO CORPO
+==========================================================*/
+
+function updateBodyVisual(){
+
+    Object.entries(
+
+        Body.members
+
+    ).forEach(([name,input])=>{
+
+        const max=
+
+        getMemberMaxLife();
+
+        const value=
+
+        Number(input.value);
+
+        const percent=
+
+        value/max;
+
+        input.classList.remove(
+
+            "body-full",
+
+            "body-medium",
+
+            "body-low",
+
+            "body-broken"
+
+        );
+
+        if(percent>.70){
+
+            input.classList.add(
+
+                "body-full"
+
+            );
+
+        }
+
+        else if(percent>.35){
+
+            input.classList.add(
+
+                "body-medium"
+
+            );
+
+        }
+
+        else if(value>0){
+
+            input.classList.add(
+
+                "body-low"
+
+            );
+
+        }
+
+        else{
+
+            input.classList.add(
+
+                "body-broken"
+
+            );
+
+        }
+
+    });
+
+}
+
+/*==========================================================
+                LIMITAR VALORES
+==========================================================*/
+
+Object.values(
+
+    Body.members
+
+).forEach(member=>{
+
+    member.addEventListener(
+
+        "input",
+
+        ()=>{
+
+            const max=
+
+            getMemberMaxLife();
+
+            if(
+
+                Number(member.value)<0
+
+            ){
+
+                member.value=0;
+
+            }
+
+            if(
+
+                Number(member.value)>max
+
+            ){
+
+                member.value=max;
+
+            }
+
+            updateBodyVisual();
+
+        }
+
+    );
+
+});
+
+/*==========================================================
+                INICIALIZAÇÃO
+==========================================================*/
+
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        resetBodyLife();
+
+        updateBodyVisual();
+
+    }
 
 );
 
-// ======================================
-// START
-// ======================================
+/*==========================================================
+                EFEITOS DOS MEMBROS
+==========================================================*/
 
-updateBody();
+function memberDestroyed(member){
+
+    return Number(
+
+        Body.members[member].value
+
+    )<=0;
+
+}
+
+function bodyEffects(){
+
+    const effects=[];
+
+    if(memberDestroyed("head")){
+
+        effects.push({
+
+            name:"Cabeça",
+
+            effect:"Morto."
+
+        });
+
+    }
+
+    if(memberDestroyed("chest")){
+
+        effects.push({
+
+            name:"Peito",
+
+            effect:"Incapacitado."
+
+        });
+
+    }
+
+    if(memberDestroyed("abdomen")){
+
+        effects.push({
+
+            name:"Abdômen",
+
+            effect:"-2 PA."
+
+        });
+
+    }
+
+    if(memberDestroyed("leftArm")){
+
+        effects.push({
+
+            name:"Braço Esquerdo",
+
+            effect:"Não pode utilizar itens nessa mão."
+
+        });
+
+    }
+
+    if(memberDestroyed("rightArm")){
+
+        effects.push({
+
+            name:"Braço Direito",
+
+            effect:"Não pode atacar com essa mão."
+
+        });
+
+    }
+
+    if(memberDestroyed("leftLeg")){
+
+        effects.push({
+
+            name:"Perna Esquerda",
+
+            effect:"Movimento reduzido pela metade."
+
+        });
+
+    }
+
+    if(memberDestroyed("rightLeg")){
+
+        effects.push({
+
+            name:"Perna Direita",
+
+            effect:"Movimento reduzido pela metade."
+
+        });
+
+    }
+
+    return effects;
+
+}
+
+/*==========================================================
+                EXPORTAR
+==========================================================*/
+
+window.BodyAPI={
+
+    resetBodyLife,
+
+    damageMember,
+
+    healMember,
+
+    updateBodyVisual,
+
+    bodyEffects,
+
+    memberDestroyed,
+
+    getMemberMaxLife
+
+};
