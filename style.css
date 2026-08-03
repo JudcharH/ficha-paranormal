@@ -548,6 +548,86 @@ label{
 
 }
 
+.body-grid{
+
+display:grid;
+
+grid-template-columns:260px 1fr 280px;
+
+gap:30px;
+
+align-items:start;
+
+min-height:470px;
+
+}
+
+.body-left{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.body-left img{
+
+width:230px;
+
+height:auto;
+
+}
+
+.body-center{
+
+background:#171717;
+
+border:1px solid #7b2cff;
+
+border-radius:15px;
+
+padding:20px;
+
+min-height:420px;
+
+}
+
+.body-center h3{
+
+margin-bottom:20px;
+
+}
+
+.body-info{
+
+line-height:1.8;
+
+}
+
+.body-right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.body-bottom{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+margin-top:25px;
+
+}
+
 .member-row{
 
     display:grid;
@@ -1478,25 +1558,31 @@ label{
 
 .dice-panel{
 
-    position:fixed;
+position:fixed;
 
-    top:0;
+top:0;
 
-    right:0;
+right:0;
 
-    width:280px;
+width:270px;
 
-    height:100vh;
+height:calc(100vh - 40px);
 
-    background:#0d0d0d;
+background:#111;
 
-    border-left:2px solid #7b2cff;
+border-left:2px solid #7b2cff;
 
-    padding:20px;
+padding:18px;
 
-    box-sizing:border-box;
+display:flex;
 
-    overflow-y:auto;
+flex-direction:column;
+
+gap:18px;
+
+box-sizing:border-box;
+
+overflow:hidden;
 
 }
 
@@ -1512,11 +1598,11 @@ label{
 
 .dice-inputs{
 
-    display:grid;
+display:flex;
 
-    grid-template-columns:1fr;
+flex-direction:column;
 
-    gap:12px;
+gap:10px;
 
 }
 
@@ -1532,11 +1618,11 @@ label{
 
 .attribute-rolls{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(5,1fr);
 
-    gap:8px;
+gap:8px;
 
 }
 
@@ -1586,41 +1672,33 @@ label{
 
 .dice-result{
 
-    flex:1;
+flex:1;
 
-    border:var(--borda);
+border:2px solid #7b2cff;
 
-    border-radius:18px;
+border-radius:15px;
 
-    background:#141414;
+padding:15px;
 
-    display:flex;
+display:flex;
 
-    justify-content:center;
+justify-content:center;
 
-    align-items:center;
+align-items:center;
 
-    text-align:center;
+text-align:center;
 
-    padding:20px;
+font-size:28px;
 
-    font-size:24px;
+font-weight:bold;
 
-}
+overflow:auto;
 
 .next-turn-btn{
 
-    height:56px;
+height:55px;
 
-    border:none;
-
-    border-radius:14px;
-
-    background:#252525;
-
-    color:white;
-
-    font-size:22px;
+font-size:22px;
 
 }
 
