@@ -102,17 +102,19 @@ body{
 
 .container{
 
-    width:1450px;
+    width:calc(100% - 330px);
 
-    margin:auto;
+    max-width:1500px;
 
-    padding:18px;
+    margin:20px auto;
+
+    margin-right:300px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:26px;
+    gap:25px;
 
 }
 
@@ -156,15 +158,17 @@ body{
 
 .card{
 
-    background:#111;
+    width:100%;
 
-    border:var(--borda);
+    background:#121212;
 
-    border-radius:22px;
+    border:1px solid #7b2cff;
+
+    border-radius:18px;
 
     padding:20px;
 
-    box-shadow:var(--shadow);
+    box-sizing:border-box;
 
 }
 
@@ -294,13 +298,11 @@ label{
 
     display:grid;
 
-    grid-template-columns:
-
-    280px
-
-    1fr;
+    grid-template-columns:260px 1fr;
 
     gap:25px;
+
+    align-items:start;
 
 }
 
@@ -428,9 +430,9 @@ label{
 
     display:grid;
 
-    grid-template-columns:1fr 220px;
+    grid-template-columns:2fr 120px;
 
-    gap:18px;
+    gap:15px;
 
 }
 
@@ -506,15 +508,13 @@ label{
 
     display:grid;
 
-    grid-template-columns:
+    grid-template-columns:1fr 300px;
 
-    1fr
-
-    320px;
-
-    gap:35px;
+    gap:30px;
 
     align-items:center;
+
+    min-height:340px;
 
 }
 
@@ -530,11 +530,11 @@ label{
 
 .body-image img{
 
-    width:270px;
+    width:220px;
 
-    user-select:none;
+    height:auto;
 
-    pointer-events:none;
+    object-fit:contain;
 
 }
 
@@ -544,7 +544,7 @@ label{
 
     flex-direction:column;
 
-    gap:10px;
+    gap:12px;
 
 }
 
@@ -584,11 +584,9 @@ label{
 
     display:grid;
 
-    grid-template-columns:
+    grid-template-columns:repeat(5,1fr);
 
-    repeat(5,1fr);
-
-    gap:22px;
+    gap:18px;
 
 }
 
@@ -1486,23 +1484,19 @@ label{
 
     right:0;
 
-    width:320px;
+    width:280px;
 
     height:100vh;
 
-    background:#090909;
+    background:#0d0d0d;
 
-    border-left:var(--borda);
+    border-left:2px solid #7b2cff;
 
-    display:flex;
+    padding:20px;
 
-    flex-direction:column;
+    box-sizing:border-box;
 
-    padding:22px;
-
-    gap:20px;
-
-    z-index:100;
+    overflow-y:auto;
 
 }
 
@@ -2156,6 +2150,30 @@ label{
         width:95%;
 
     }
+
+}
+
+.life-system{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+#bodySystem{
+
+display:none;
+
+}
+
+.hidden{
+
+display:none !important;
 
 }
 

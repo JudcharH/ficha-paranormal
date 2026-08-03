@@ -46,6 +46,46 @@ function initializeEvents(){
 
 }
 
+const lifeSystem=
+
+document.getElementById("lifeSystem");
+
+const pvSystem=
+
+document.getElementById("pvSystem");
+
+const bodySystem=
+
+document.getElementById("bodySystem");
+
+lifeSystem.addEventListener(
+
+"change",
+
+changeLifeSystem
+
+);
+
+function changeLifeSystem(){
+
+if(lifeSystem.value==="pv"){
+
+pvSystem.style.display="block";
+
+bodySystem.style.display="none";
+
+}
+
+else{
+
+pvSystem.style.display="none";
+
+bodySystem.style.display="block";
+
+}
+
+}
+
 // ======================================
 // ATRIBUTOS
 // ======================================

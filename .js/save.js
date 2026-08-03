@@ -169,6 +169,16 @@ function loadCharacter(){
 
     updateTurnDisplay();
 
+    save.lifeSystem=
+
+lifeSystem.value;
+
+lifeSystem.value=
+
+save.lifeSystem||"pv";
+
+changeLifeSystem();
+
 }
 
 // ======================================
