@@ -111,6 +111,10 @@ Máximo:
 
     </div>
 
+    <!--==============================================
+                    SISTEMA DE VIDA
+    ==============================================-->
+
     <div class="life-system">
 
         <label>Sistema de Vida</label>
@@ -126,8 +130,8 @@ Máximo:
     </div>
 
     <!--==============================================
-                    SISTEMA DE PV
-    ===============================================-->
+                    PV CLÁSSICO
+    ==============================================-->
 
     <div id="pvSystem">
 
@@ -170,175 +174,180 @@ Máximo:
     </div>
 
     <!--==============================================
-                SISTEMA DE PARTES DO CORPO
-    ===============================================-->
+                PARTES DO CORPO
+    ==============================================-->
 
     <div id="bodySystem">
 
-    <div class="body-grid">
+        <div class="body-grid">
 
-        <!--========================
-                LADO ESQUERDO
-        =========================-->
+            <!-- ESQUERDA -->
 
-        <div class="body-left">
+            <div class="body-left">
 
-            <img
-                src="assets/body.png"
-                id="bodyImage">
-
-        </div>
-
-        <!--========================
-                CENTRO
-        =========================-->
-
-        <div class="body-center">
-
-            <h3>INFORMAÇÕES DO CORPO</h3>
-
-            <div
-                id="bodyInfo"
-                class="body-info">
-
-                Selecione um membro ou receba dano para visualizar informações.
+                <img
+                    src="assets/body.png"
+                    id="bodyImage">
 
             </div>
 
-        </div>
+            <!-- CENTRO -->
 
-        <!--========================
-                DIREITA
-        =========================-->
+            <div class="body-center">
 
-        <div class="body-right">
+                <h3>INFORMAÇÕES DO CORPO</h3>
 
-            <div class="member-row">
+                <div
+                    id="bodyInfo"
+                    class="body-info">
 
-                <span>Cabeça</span>
+                    Selecione um membro para visualizar informações.
 
-                <input type="number" id="headHP">
-
-            </div>
-
-            <div class="member-row">
-
-                <span>Peito</span>
-
-                <input type="number" id="chestHP">
+                </div>
 
             </div>
 
-            <div class="member-row">
+            <!-- DIREITA -->
 
-                <span>Abdômen</span>
+            <div class="body-right">
 
-                <input type="number" id="abdomenHP">
+                <div class="member-row">
+
+                    <span>Cabeça</span>
+
+                    <input
+                        type="number"
+                        id="headHP">
+
+                </div>
+
+                <div class="member-row">
+
+                    <span>Peito</span>
+
+                    <input
+                        type="number"
+                        id="chestHP">
+
+                </div>
+
+                <div class="member-row">
+
+                    <span>Abdômen</span>
+
+                    <input
+                        type="number"
+                        id="abdomenHP">
+
+                </div>
+
+                <div class="member-row">
+
+                    <span>Braço Esq.</span>
+
+                    <input
+                        type="number"
+                        id="leftArmHP">
+
+                </div>
+
+                <div class="member-row">
+
+                    <span>Braço Dir.</span>
+
+                    <input
+                        type="number"
+                        id="rightArmHP">
+
+                </div>
+
+                <div class="member-row">
+
+                    <span>Perna Esq.</span>
+
+                    <input
+                        type="number"
+                        id="leftLegHP">
+
+                </div>
+
+                <div class="member-row">
+
+                    <span>Perna Dir.</span>
+
+                    <input
+                        type="number"
+                        id="rightLegHP">
+
+                </div>
+
+                <div class="status-box">
+
+                    <span>PV Temporário</span>
+
+                    <input
+                        type="number"
+                        id="bodyTempPV"
+                        value="0">
+
+                </div>
 
             </div>
-
-            <div class="member-row">
-
-                <span>Braço Esq.</span>
-
-                <input type="number" id="leftArmHP">
-
-            </div>
-
-            <div class="member-row">
-
-                <span>Braço Dir.</span>
-
-                <input type="number" id="rightArmHP">
-
-            </div>
-
-            <div class="member-row">
-
-                <span>Perna Esq.</span>
-
-                <input type="number" id="leftLegHP">
-
-            </div>
-
-            <div class="member-row">
-
-                <span>Perna Dir.</span>
-
-                <input type="number" id="rightLegHP">
-
-            </div>
-
-            <div class="pa-card">
-
-    <span>PV Temporário</span>
-
-    <input
-        type="number"
-        id="bodyTempPV"
-        value="0">
-
-</div>
 
         </div>
 
     </div>
 
-    <div id="pvSystem">
-
-...
-
-</div>
-
-<div id="bodySystem">
-
-...
-
-</div>
-
-<div id="pdSystem">
-
-    <div class="status-row">
-
-        <div class="status-box">
-
-            <span>PD Atual</span>
-
-            <input
-            id="pdAtual">
-
-        </div>
-
-        <div class="status-box">
-
-            <span>PD Máximo</span>
-
-            <input
-            id="pdMax">
-
-        </div>
-
-        <div class="status-box">
-
-            <span>PD Temporário</span>
-
-            <input
-            id="pdTemp">
-
-        </div>
-
-    </div>
-
-</div>
-
-<!--======================================================
+    <!--==============================================
                     PD
-=======================================================-->
+    ==============================================-->
 
+    <div id="pdSystem">
+
+        <div class="status-row">
+
+            <div class="status-box">
+
+                <span>PD Atual</span>
+
+                <input
+                    type="number"
+                    id="pdAtual">
+
+            </div>
+
+            <div class="status-box">
+
+                <span>PD Máximo</span>
+
+                <input
+                    type="number"
+                    id="pdMax"
+                    readonly>
+
+            </div>
+
+            <div class="status-box">
+
+                <span>PD Temporário</span>
+
+                <input
+                    type="number"
+                    id="pdTemp"
+                    value="0">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!--======================================================
                     ATRIBUTOS
 =======================================================-->
+
 
 <section class="card">
 
