@@ -1,213 +1,43 @@
-// ======================================
-// MAIN.JS
-// ======================================
+const lifeSystem=document.getElementById("lifeSystem");
 
-// ======================================
-// INICIALIZAÇÃO
-// ======================================
+const pvSystem=document.getElementById("pvSystem");
 
-function initializeCharacter(){
-
-    updateStatus();
-
-    updateTurnDisplay();
-
-    renderInventory();
-
-    renderAbilities();
-
-    renderAssimilations();
-
-    renderConditions();
-
-}
-
-// ======================================
-// EVENTOS
-// ======================================
-
-function initializeEvents(){
-
-    document
-
-    .querySelectorAll("input")
-
-    .forEach(input=>{
-
-        input.addEventListener(
-
-            "input",
-
-            saveCharacter
-
-        );
-
-    });
-
-}
-
-const lifeSystem=
-
-document.getElementById("lifeSystem");
-
-const pvSystem=
-
-document.getElementById("pvSystem");
-
-const bodySystem=
-
-document.getElementById("bodySystem");
+const bodySystem=document.getElementById("bodySystem");
 
 lifeSystem.addEventListener(
 
 "change",
 
-changeLifeSystem
+toggleLifeSystem
 
 );
 
-function changeLifeSystem(){
+function toggleLifeSystem(){
 
-if(lifeSystem.value==="pv"){
+const modo=lifeSystem.value;
 
-pvSystem.style.display="block";
+pvSystem.style.display=
 
-bodySystem.style.display="none";
+modo==="pv"
 
-}
+?
 
-else{
+"block"
 
-pvSystem.style.display="none";
+:
 
-bodySystem.style.display="block";
+"none";
 
-}
+bodySystem.style.display=
 
-}
+modo==="body"
 
-// ======================================
-// ATRIBUTOS
-// ======================================
+?
 
-function initializeAttributes(){
+"block"
 
-    [
+:
 
-        forca,
-
-        agilidade,
-
-        intelecto,
-
-        vigor,
-
-        presenca
-
-    ]
-
-    .forEach(attr=>{
-
-        attr.addEventListener(
-
-            "input",
-
-            ()=>{
-
-                updateStatus();
-
-                updateSkills();
-
-                saveCharacter();
-
-            }
-
-        );
-
-    });
+"none";
 
 }
-
-// ======================================
-// NÍVEL
-// ======================================
-
-nivel.addEventListener(
-
-    "input",
-
-    ()=>{
-
-        updateStatus();
-
-        updateSkills();
-
-        saveCharacter();
-
-    }
-
-);
-
-// ======================================
-// PERÍCIAS
-// ======================================
-
-document
-
-.querySelectorAll(
-
-    ".skill-row"
-
-)
-
-.forEach(skill=>{
-
-    skill.onclick=function(){
-
-        openSkillEditor(this);
-
-    };
-
-});
-
-// ======================================
-// FOTO
-// ======================================
-
-if(photoInput){
-
-    photoInput.addEventListener(
-
-        "change",
-
-        saveCharacter
-
-    );
-
-}
-
-// ======================================
-// CARREGAR
-// ======================================
-
-window.onload=function(){
-
-    loadCharacter();
-
-    initializeCharacter();
-
-    initializeEvents();
-
-    initializeAttributes();
-
-};
-
-// ======================================
-// DEBUG
-// ======================================
-
-console.log(
-
-    "Ficha Paranormal carregada."
-
-);

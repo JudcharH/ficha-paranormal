@@ -2155,13 +2155,21 @@ label{
 
 .life-system{
 
-display:flex;
+display:grid;
+
+grid-template-columns:140px 1fr;
+
+gap:18px;
 
 align-items:center;
 
-gap:15px;
+margin:20px 0;
 
-margin-bottom:20px;
+}
+
+.life-system select{
+
+width:100%;
 
 }
 
@@ -2174,6 +2182,18 @@ display:none;
 .hidden{
 
 display:none !important;
+
+}
+
+#pvSystem{
+
+display:block;
+
+}
+
+#bodySystem{
+
+display:none;
 
 }
 
