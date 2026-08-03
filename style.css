@@ -158,17 +158,9 @@ body{
 
 .card{
 
-    width:100%;
+height:auto;
 
-    background:#121212;
-
-    border:1px solid #7b2cff;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    box-sizing:border-box;
+min-height:unset;
 
 }
 
@@ -296,13 +288,11 @@ label{
 
 .character-section{
 
-    display:grid;
+display:flex;
 
-    grid-template-columns:260px 1fr;
+flex-direction:column;
 
-    gap:25px;
-
-    align-items:start;
+gap:25px;
 
 }
 
@@ -1694,6 +1684,8 @@ font-weight:bold;
 
 overflow:auto;
 
+}
+
 .next-turn-btn{
 
 height:55px;
@@ -2272,6 +2264,12 @@ display:block;
 #bodySystem{
 
 display:none;
+
+}
+
+#pdSystem{
+
+margin-top:25px;
 
 }
 
