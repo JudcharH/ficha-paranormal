@@ -4,15 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Ficha Paranormal</title>
 
-<link
-rel="stylesheet"
-href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -21,7 +17,7 @@ href="style.css">
 <div class="container">
 
 <!--======================================================
-                        HEADER
+                    TÍTULO
 =======================================================-->
 
 <header class="top-bar">
@@ -31,22 +27,18 @@ href="style.css">
 </header>
 
 <!--======================================================
-                    PERSONAGEM
+                FICHA PRINCIPAL
 =======================================================-->
 
-<section class="card">
-
-<div class="character-section">
+<section class="card character-section">
 
 <!--======================================================
-                        FOTO
+                COLUNA ESQUERDA
 =======================================================-->
 
 <div class="photo-area">
 
-<div
-class="photo-preview"
-id="photoPreview">
+<div class="photo-preview" id="photoPreview">
 
 FOTO
 
@@ -57,23 +49,19 @@ type="file"
 id="photoInput"
 accept="image/*">
 
-<div class="pa-box">
+<div class="pa-card">
 
-<span>Pontos de Ação</span>
+<label>Pontos de Ação</label>
 
 <input
 type="number"
 id="paAtual"
-value="4">
+value="3">
 
 <small>
 
 Máximo:
-<span id="paMaxText">
-
-4
-
-</span>
+<span id="paMaximo">3</span>
 
 </small>
 
@@ -82,276 +70,323 @@ Máximo:
 </div>
 
 <!--======================================================
-                    INFORMAÇÕES
+                COLUNA DIREITA
 =======================================================-->
 
 <div class="character-info">
 
-    <div class="info-grid">
+<div class="info-grid">
 
-        <div class="field">
-            <label>Nome</label>
-            <input type="text" id="characterName">
-        </div>
+<div class="field">
 
-        <div class="field">
-            <label>Nível</label>
-            <input type="number" id="nivel" value="1">
-        </div>
+<label>Nome</label>
 
-        <div class="field">
-            <label>Origem</label>
-            <input type="text" id="origem">
-        </div>
+<input
+type="text"
+id="characterName">
 
-        <div class="field">
-            <label>Idade</label>
-            <input type="number" id="idade">
-        </div>
+</div>
 
-    </div>
+<div class="field">
 
-    <!--==============================================
-                    SISTEMA DE VIDA
-    ==============================================-->
+<label>Nível</label>
 
-    <div class="life-system">
+<input
+type="number"
+id="nivel"
+value="1">
 
-        <label>Sistema de Vida</label>
+</div>
 
-        <select id="lifeSystem">
+<div class="field">
 
-            <option value="pv">PV Clássico</option>
+<label>Origem</label>
 
-            <option value="body">Partes do Corpo</option>
+<input
+type="text"
+id="origem">
 
-        </select>
+</div>
 
-    </div>
+<div class="field">
 
-    <!--==============================================
-                    PV CLÁSSICO
-    ==============================================-->
+<label>Idade</label>
 
-    <div id="pvSystem">
+<input
+type="number"
+id="idade">
 
-        <div class="status-row">
-
-            <div class="status-box">
-
-                <span>PV Atual</span>
-
-                <input
-                    type="number"
-                    id="pvAtual">
-
-            </div>
-
-            <div class="status-box">
-
-                <span>PV Máximo</span>
-
-                <input
-                    type="number"
-                    id="pvMax"
-                    readonly>
-
-            </div>
-
-            <div class="status-box">
-
-                <span>PV Temporário</span>
-
-                <input
-                    type="number"
-                    id="pvTemp"
-                    value="0">
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!--==============================================
-                PARTES DO CORPO
-    ==============================================-->
-
-    <div id="bodySystem">
-
-        <div class="body-grid">
-
-            <!-- ESQUERDA -->
-
-            <div class="body-left">
-
-                <img
-                    src="assets/body.png"
-                    id="bodyImage">
-
-            </div>
-
-            <!-- CENTRO -->
-
-            <div class="body-center">
-
-                <h3>INFORMAÇÕES DO CORPO</h3>
-
-                <div
-                    id="bodyInfo"
-                    class="body-info">
-
-                    Selecione um membro para visualizar informações.
-
-                </div>
-
-            </div>
-
-            <!-- DIREITA -->
-
-            <div class="body-right">
-
-                <div class="member-row">
-
-                    <span>Cabeça</span>
-
-                    <input
-                        type="number"
-                        id="headHP">
-
-                </div>
-
-                <div class="member-row">
-
-                    <span>Peito</span>
-
-                    <input
-                        type="number"
-                        id="chestHP">
-
-                </div>
-
-                <div class="member-row">
-
-                    <span>Abdômen</span>
-
-                    <input
-                        type="number"
-                        id="abdomenHP">
-
-                </div>
-
-                <div class="member-row">
-
-                    <span>Braço Esq.</span>
-
-                    <input
-                        type="number"
-                        id="leftArmHP">
-
-                </div>
-
-                <div class="member-row">
-
-                    <span>Braço Dir.</span>
-
-                    <input
-                        type="number"
-                        id="rightArmHP">
-
-                </div>
-
-                <div class="member-row">
-
-                    <span>Perna Esq.</span>
-
-                    <input
-                        type="number"
-                        id="leftLegHP">
-
-                </div>
-
-                <div class="member-row">
-
-                    <span>Perna Dir.</span>
-
-                    <input
-                        type="number"
-                        id="rightLegHP">
-
-                </div>
-
-                <div class="status-box">
-
-                    <span>PV Temporário</span>
-
-                    <input
-                        type="number"
-                        id="bodyTempPV"
-                        value="0">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!--==============================================
-                    PD
-    ==============================================-->
-
-    <div id="pdSystem">
-
-        <div class="status-row">
-
-            <div class="status-box">
-
-                <span>PD Atual</span>
-
-                <input
-                    type="number"
-                    id="pdAtual">
-
-            </div>
-
-            <div class="status-box">
-
-                <span>PD Máximo</span>
-
-                <input
-                    type="number"
-                    id="pdMax"
-                    readonly>
-
-            </div>
-
-            <div class="status-box">
-
-                <span>PD Temporário</span>
-
-                <input
-                    type="number"
-                    id="pdTemp"
-                    value="0">
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 <!--======================================================
-                    ATRIBUTOS
+                SISTEMA DE VIDA
 =======================================================-->
 
+<div class="life-system">
+
+<label>Sistema de Vida</label>
+
+<select id="lifeSystem">
+
+<option value="pv">
+
+PV Clássico
+
+</option>
+
+<option value="body">
+
+Partes do Corpo
+
+</option>
+
+</select>
+
+</div>
+
+<!--======================================================
+                PV CLÁSSICO
+=======================================================-->
+
+<div id="pvSystem">
+
+<div class="status-row">
+
+<div class="status-box">
+
+<span>PV Atual</span>
+
+<input
+type="number"
+id="pvAtual">
+
+</div>
+
+<div class="status-box">
+
+<span>PV Máximo</span>
+
+<input
+type="number"
+id="pvMax"
+readonly>
+
+</div>
+
+<div class="status-box">
+
+<span>PV Temporário</span>
+
+<input
+type="number"
+id="pvTemp"
+value="0">
+
+</div>
+
+</div>
+
+</div>
+
+<!--======================================================
+                PARTES DO CORPO
+=======================================================-->
+
+<div id="bodySystem">
+
+<div class="body-grid">
+
+<!--==================================
+            ESQUERDA
+===================================-->
+
+<div class="body-left">
+
+<img
+src="assets/body.png"
+id="bodyImage">
+
+</div>
+
+<!--==================================
+            CENTRO
+===================================-->
+
+<div class="body-center">
+
+<h3>INFORMAÇÕES DO CORPO</h3>
+
+<div
+id="bodyInfo"
+class="body-info">
+
+Selecione um membro para visualizar suas informações.
+
+</div>
+
+</div>
+
+<!--==================================
+            DIREITA
+===================================-->
+
+<div class="body-right">
+
+<div class="member-row">
+
+<span>Cabeça</span>
+
+<input
+type="number"
+id="headHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>Peito</span>
+
+<input
+type="number"
+id="chestHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>Abdômen</span>
+
+<input
+type="number"
+id="abdomenHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>Braço Esq.</span>
+
+<input
+type="number"
+id="leftArmHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>Braço Dir.</span>
+
+<input
+type="number"
+id="rightArmHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>Perna Esq.</span>
+
+<input
+type="number"
+id="leftLegHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>Perna Dir.</span>
+
+<input
+type="number"
+id="rightLegHP"
+value="2">
+
+</div>
+
+<div class="member-row">
+
+<span>PV Temporário</span>
+
+<input
+type="number"
+id="bodyTempPV"
+value="0">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!--======================================================
+                    PD
+=======================================================-->
+
+<div id="pdSystem">
+
+<div class="status-row">
+
+<div class="status-box">
+
+<span>PD Atual</span>
+
+<input
+type="number"
+id="pdAtual">
+
+</div>
+
+<div class="status-box">
+
+<span>PD Máximo</span>
+
+<input
+type="number"
+id="pdMax"
+readonly>
+
+</div>
+
+<div class="status-box">
+
+<span>PD Temporário</span>
+
+<input
+type="number"
+id="pdTemp"
+value="0">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--======================================================
+            ATRIBUTOS (continua Parte 3)
+=======================================================-->
 
 <section class="card">
 
+<div class="section-title">
+
 <h2>ATRIBUTOS</h2>
+
+</div>
 
 <div class="attributes-grid">
 
@@ -359,10 +394,7 @@ Máximo:
 
 <span>FOR</span>
 
-<input
-type="number"
-id="forca"
-value="1">
+<input type="number" id="for">
 
 </div>
 
@@ -370,10 +402,7 @@ value="1">
 
 <span>AGI</span>
 
-<input
-type="number"
-id="agilidade"
-value="1">
+<input type="number" id="agi">
 
 </div>
 
@@ -381,10 +410,7 @@ value="1">
 
 <span>INT</span>
 
-<input
-type="number"
-id="intelecto"
-value="1">
+<input type="number" id="int">
 
 </div>
 
@@ -392,10 +418,7 @@ value="1">
 
 <span>VIG</span>
 
-<input
-type="number"
-id="vigor"
-value="1">
+<input type="number" id="vig">
 
 </div>
 
@@ -403,10 +426,7 @@ value="1">
 
 <span>PRE</span>
 
-<input
-type="number"
-id="presenca"
-value="1">
+<input type="number" id="pre">
 
 </div>
 
@@ -424,267 +444,45 @@ value="1">
 
 <h2>PERÍCIAS</h2>
 
+<button
+class="add-btn"
+id="addSkill">
+
++
+
+</button>
+
 </div>
 
 <div class="skills-header">
 
-<span>Perícia</span>
+<div>Perícia</div>
 
-<span>Atributo</span>
+<div>Atributo</div>
 
-<span>Treino</span>
+<div>Treino</div>
 
-<span>Bônus</span>
+<div>Bônus</div>
 
-<span>Penal.</span>
+<div>Penal.</div>
 
-<span>Total</span>
+<div>Total</div>
 
 </div>
 
 <div
-class="skills-list"
-id="skillsList">
+id="skillsList"
+class="skills-list">
 
-<!-- MANOBRA -->
-
-<div
-class="skill-row clickable-skill"
-data-skill="Manobra">
-
-<span class="skill-name">
-
-Manobra
-
-</span>
-
-<span class="skill-attr">
-
-FOR
-
-</span>
-
-<select class="skill-train">
-
-<option value="0">
-
-Destreinado
-
-</option>
-
-<option value="1">
-
-Treinado
-
-</option>
-
-<option value="2">
-
-Veterano
-
-</option>
-
-<option value="3">
-
-Expert
-
-</option>
-
-</select>
-
-<input
-type="number"
-class="skill-bonus"
-value="0">
-
-<input
-type="number"
-class="skill-penalty"
-value="0">
-
-<span class="skill-total">
-
-0
-
-</span>
-
-</div>
-
-<!-- As demais perícias serão criadas pelo JavaScript -->
+<!-- JavaScript -->
 
 </div>
 
 </section>
 
 <!--======================================================
-            MODAL EDITOR DE PERÍCIAS
+            ASSIMILAÇÕES (Parte 4)
 =======================================================-->
-
-<div
-class="modal hidden"
-id="skillModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-
-Editar Perícia
-
-</h2>
-
-<button
-class="close-modal"
-onclick="closeSkillModal()">
-
-×
-
-</button>
-
-</div>
-
-<div class="field">
-
-<label>
-
-Nome
-
-</label>
-
-<input
-type="text"
-id="skillName"
-readonly>
-
-</div>
-
-<div class="field">
-
-<label>
-
-Atributo
-
-</label>
-
-<select
-id="skillAttribute">
-
-<option value="FOR">
-
-FOR
-
-</option>
-
-<option value="AGI">
-
-AGI
-
-</option>
-
-<option value="INT">
-
-INT
-
-</option>
-
-<option value="VIG">
-
-VIG
-
-</option>
-
-<option value="PRE">
-
-PRE
-
-</option>
-
-</select>
-
-</div>
-
-<div class="field">
-
-<label>
-
-Treinamento
-
-</label>
-
-<select
-id="skillTraining">
-
-<option value="0">
-
-Destreinado
-
-</option>
-
-<option value="1">
-
-Treinado
-
-</option>
-
-<option value="2">
-
-Veterano
-
-</option>
-
-<option value="3">
-
-Expert
-
-</option>
-
-</select>
-
-</div>
-
-<div class="field">
-
-<label>
-
-Bônus
-
-</label>
-
-<input
-type="number"
-id="skillBonus">
-
-</div>
-
-<div class="field">
-
-<label>
-
-Penalidade
-
-</label>
-
-<input
-type="number"
-id="skillPenalty">
-
-</div>
-
-<div class="skill-editor-buttons">
-
-<button
-onclick="saveSkill()">
-
-Salvar
-
-</button>
-
-</div>
-
-</div>
-
-</div>
 
 <!--======================================================
                     ASSIMILAÇÕES
@@ -707,73 +505,24 @@ id="addAssimilation">
 </div>
 
 <div
-class="assimilations-list"
-id="assimilationList">
+id="assimilationsList"
+class="assimilations-list">
+
+<!-- JavaScript -->
 
 </div>
 
 </section>
 
 <!--======================================================
-            MODAL ASSIMILAÇÕES
-=======================================================-->
-
-<div
-class="modal hidden"
-id="assimilationModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-
-Adicionar Assimilação
-
-</h2>
-
-<button
-class="close-modal"
-onclick="closeAssimilationModal()">
-
-×
-
-</button>
-
-</div>
-
-<div class="search-box">
-
-<input
-type="text"
-id="assimilationSearch"
-placeholder="Pesquisar...">
-
-</div>
-
-<div
-class="modal-list"
-id="assimilationDatabase">
-
-</div>
-
-</div>
-
-</div>
-
-<!--======================================================
-                HABILIDADES
+                    HABILIDADES
 =======================================================-->
 
 <section class="card">
 
 <div class="section-title">
 
-<h2>
-
-HABILIDADES
-
-</h2>
+<h2>HABILIDADES</h2>
 
 <button
 class="add-btn"
@@ -786,73 +535,24 @@ id="addAbility">
 </div>
 
 <div
-class="abilities-list"
-id="abilitiesList">
+id="abilitiesList"
+class="abilities-list">
+
+<!-- JavaScript -->
 
 </div>
 
 </section>
 
 <!--======================================================
-            MODAL HABILIDADES
-=======================================================-->
-
-<div
-class="modal hidden"
-id="abilityModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-
-Adicionar Habilidade
-
-</h2>
-
-<button
-class="close-modal"
-onclick="closeAbilityModal()">
-
-×
-
-</button>
-
-</div>
-
-<div class="search-box">
-
-<input
-type="text"
-id="abilitySearch"
-placeholder="Pesquisar habilidade...">
-
-</div>
-
-<div
-class="modal-list"
-id="abilityDatabase">
-
-</div>
-
-</div>
-
-</div>
-
-<!--======================================================
-                CONDIÇÕES
+                    CONDIÇÕES
 =======================================================-->
 
 <section class="card">
 
 <div class="section-title">
 
-<h2>
-
-CONDIÇÕES
-
-</h2>
+<h2>CONDIÇÕES</h2>
 
 <button
 class="add-btn"
@@ -865,64 +565,24 @@ id="addCondition">
 </div>
 
 <div
-class="conditions-list"
-id="conditionsList">
+id="conditionsList"
+class="conditions-list">
+
+<!-- JavaScript -->
 
 </div>
 
 </section>
 
 <!--======================================================
-            MODAL CONDIÇÕES
-=======================================================-->
-
-<div
-class="modal hidden"
-id="conditionModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-
-Condições
-
-</h2>
-
-<button
-class="close-modal"
-onclick="closeConditionModal()">
-
-×
-
-</button>
-
-</div>
-
-<div
-class="modal-list"
-id="conditionDatabase">
-
-</div>
-
-</div>
-
-</div>
-
-<!--======================================================
-                INVENTÁRIO
+                    INVENTÁRIO
 =======================================================-->
 
 <section class="card">
 
 <div class="section-title">
 
-<h2>
-
-INVENTÁRIO
-
-</h2>
+<h2>INVENTÁRIO</h2>
 
 <button
 class="add-btn"
@@ -935,59 +595,19 @@ id="addInventory">
 </div>
 
 <div
-class="inventory-list"
-id="inventoryList">
+id="inventoryList"
+class="inventory-list">
+
+<!-- JavaScript -->
 
 </div>
 
 </section>
 
 <!--======================================================
-            MODAL INVENTÁRIO
+                    GRIMÓRIO
+                    (Parte 5)
 =======================================================-->
-
-<div
-class="modal hidden"
-id="inventoryModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-
-Adicionar Item
-
-</h2>
-
-<button
-class="close-modal"
-onclick="closeInventoryModal()">
-
-×
-
-</button>
-
-</div>
-
-<div class="search-box">
-
-<input
-type="text"
-id="inventorySearch"
-placeholder="Pesquisar item...">
-
-</div>
-
-<div
-class="modal-list"
-id="inventoryDatabase">
-
-</div>
-
-</div>
-
-</div>
 
 <!--======================================================
                     GRIMÓRIO
@@ -995,65 +615,79 @@ id="inventoryDatabase">
 
 <section class="card">
 
-<h2>
+<div class="section-title">
 
-GRIMÓRIO
-
-</h2>
-
-<div class="grimorio">
-
-<div class="grimorio-layout">
-
-<div class="grimorio-sidebar">
-
-<h3
-class="grimorio-title">
-
-ELEMENTOS
-
-</h3>
+<h2>GRIMÓRIO</h2>
 
 <button
-class="grimorio-button active">
+class="add-btn"
+id="addRitual">
 
-Sangue
-
-</button>
-
-<button
-class="grimorio-button">
-
-Morte
-
-</button>
-
-<button
-class="grimorio-button">
-
-Energia
-
-</button>
-
-<button
-class="grimorio-button">
-
-Conhecimento
-
-</button>
-
-<button
-class="grimorio-button">
-
-Medo
++
 
 </button>
 
 </div>
 
+<div class="grimorio-layout">
+
+<!--====================================
+            LISTA
+=====================================-->
+
+<div class="grimorio-sidebar">
+
+<h3>Rituais</h3>
+
 <div
-class="grimorio-content"
-id="grimorioContent">
+id="grimorioList"
+class="grimorio-list">
+
+<!-- JavaScript -->
+
+</div>
+
+</div>
+
+<!--====================================
+            VISUALIZAÇÃO
+=====================================-->
+
+<div class="grimorio-view">
+
+<h2 id="ritualName">
+
+Selecione um Ritual
+
+</h2>
+
+<div class="ritual-tags">
+
+<span
+id="ritualElement"
+class="tag">
+
+Elemento
+
+</span>
+
+<span
+id="ritualCircle"
+class="tag">
+
+Círculo
+
+</span>
+
+</div>
+
+<div class="ritual-effect">
+
+<p id="ritualDescription">
+
+Selecione um ritual para visualizar todas as informações.
+
+</p>
 
 </div>
 
@@ -1064,161 +698,29 @@ id="grimorioContent">
 </section>
 
 <!--======================================================
-                    PAINEL DE ROLAGEM
+                    MODAIS
 =======================================================-->
 
-</div> <!-- container -->
-
-<aside class="dice-panel">
-
-<h2>ROLAGEM</h2>
-
-<div class="dice-inputs">
-
-<div class="dice-field">
-
-<label>Quantidade</label>
-
-<input
-type="number"
-id="diceCount"
-value="1">
-
-</div>
-
-<div class="dice-field">
-
-<label>Dado</label>
-
-<input
-type="number"
-id="diceType"
-value="20">
-
-</div>
-
-<div class="dice-field">
-
-<label>Bônus</label>
-
-<input
-type="number"
-id="diceBonus"
-value="0">
-
-</div>
-
-</div>
-
-<div class="attribute-rolls">
-
-<button
-class="attribute-roll-btn"
-data-attr="FOR">
-
-FOR
-
-</button>
-
-<button
-class="attribute-roll-btn"
-data-attr="AGI">
-
-AGI
-
-</button>
-
-<button
-class="attribute-roll-btn"
-data-attr="INT">
-
-INT
-
-</button>
-
-<button
-class="attribute-roll-btn"
-data-attr="VIG">
-
-VIG
-
-</button>
-
-<button
-class="attribute-roll-btn"
-data-attr="PRE">
-
-PRE
-
-</button>
-
-</div>
-
-<button
-class="roll-button"
-id="rollButton">
-
-ROLAR
-
-</button>
-
 <div
-class="dice-result"
-id="diceResult">
+id="modalContainer">
 
-Aguardando rolagem...
+<!-- Todos os modais serão criados pelo JavaScript -->
 
 </div>
-
-<button
-class="next-turn-btn"
-id="nextTurn">
-
-PASSAR RODADA
-
-</button>
-
-</aside>
 
 <!--======================================================
                     TOOLTIP
 =======================================================-->
 
 <div
-class="tooltip"
-id="tooltip">
+id="tooltip"
+class="tooltip">
 
 </div>
 
-<!--======================================================
-                    SCRIPTS
-=======================================================-->
+</div>
 
-<script src="main.js"></script>
-
-<script src="status.js"></script>
-
-<script src="photo.js"></script>
-
-<script src="attributes.js"></script>
-
-<script src="skills.js"></script>
-
-<script src="assimilations.js"></script>
-
-<script src="abilities.js"></script>
-
-<script src="conditions.js"></script>
-
-<script src="inventory.js"></script>
-
-<script src="grimorio.js"></script>
-
-<script src="dice.js"></script>
-
-<script src="turn.js"></script>
-
-<script src="save.js"></script>
+<script src="script.js"></script>
 
 </body>
 
