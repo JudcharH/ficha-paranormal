@@ -1,1889 +1,404 @@
 /*==========================================================
-=                    CARDS GERAIS
+=                     RESET / BASE                         =
 ==========================================================*/
 
-.card{
-    width:100%;
-    background:#141414;
-    border:1px solid #7b2cff;
-    border-radius:18px;
-    padding:28px;
-    margin-bottom:28px;
+*{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
-.card h2{
-    color:#d7a8ff;
-    font-size:28px;
-    margin-bottom:22px;
+:root{
+
+    --bg:#090909;
+    --card:#151515;
+    --card2:#1B1B1B;
+
+    --roxo:#8A2BFF;
+    --roxoClaro:#C79BFF;
+
+    --texto:#FFFFFF;
+    --texto2:#D7D7D7;
+
+    --borda:2px solid #8A2BFF;
+
+    --shadow:
+    0 0 15px rgba(138,43,255,.20);
+
 }
 
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+body{
+
+    background:var(--bg);
+
+    color:white;
+
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+
+    overflow-x:hidden;
+
+}
+
+.hidden{
+
+    display:none !important;
+
 }
 
 /*==========================================================
-=                    INPUTS
+=                    CONTAINER                             =
+==========================================================*/
+
+.container{
+
+    width:calc(100% - 330px);
+
+    padding:30px;
+
+}
+
+.main-layout{
+
+    display:flex;
+
+    align-items:flex-start;
+
+}
+
+/*==========================================================
+=                     CARDS                                =
+==========================================================*/
+
+.card{
+
+    width:100%;
+
+    background:var(--card);
+
+    border:var(--borda);
+
+    border-radius:24px;
+
+    padding:28px;
+
+    margin-bottom:28px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.card h2{
+
+    color:var(--roxoClaro);
+
+    font-size:38px;
+
+    margin-bottom:25px;
+
+}
+
+/*==========================================================
+=                     TÍTULOS                              =
+==========================================================*/
+
+.section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+}
+
+/*==========================================================
+=                      BOTÕES                              =
+==========================================================*/
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    transition:.25s;
+
+    font-family:inherit;
+
+}
+
+.add-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:var(--roxo);
+
+    color:white;
+
+    font-size:26px;
+
+}
+
+.add-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+/*==========================================================
+=                     INPUTS                               =
 ==========================================================*/
 
 input,
 textarea,
 select{
+
     width:100%;
-    background:#090909;
-    color:#fff;
-    border:2px solid #252525;
+
+    background:#0D0D0D;
+
+    color:white;
+
+    border:2px solid #282828;
+
     border-radius:12px;
-    padding:10px;
+
+    padding:12px;
+
     font-size:16px;
-    box-sizing:border-box;
+
+    outline:none;
+
+    transition:.2s;
+
 }
 
 input:focus,
 textarea:focus,
 select:focus{
-    border-color:#8b2cff;
-    outline:none;
+
+    border-color:var(--roxo);
+
+    box-shadow:0 0 10px rgba(138,43,255,.35);
+
 }
 
 label{
+
     display:block;
-    color:#d7b5ff;
+
     margin-bottom:6px;
-}
 
-/*==========================================================
-=                    FOTO
-==========================================================*/
+    color:#DDBEFF;
 
-.photo-area{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-.photo-preview{
-    width:100%;
-    height:360px;
-    background:#080808;
-    border:2px solid #7b2cff;
-    border-radius:20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#777;
-    overflow:hidden;
-}
-
-.photo-preview img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/*==========================================================
-=                    INFO
-==========================================================*/
-
-.info-grid{
-    display:grid;
-    grid-template-columns:1fr 110px;
-    gap:18px;
-    margin-bottom:18px;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-}
-
-/*==========================================================
-=                    SISTEMA VIDA
-==========================================================*/
-
-.life-system{
-    display:grid;
-    grid-template-columns:140px 1fr;
-    gap:16px;
-    align-items:center;
-    margin:25px 0;
-}
-
-/*==========================================================
-=                    STATUS
-==========================================================*/
-
-.status-row{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.status-box{
-    background:#111;
-    border:2px solid #7b2cff;
-    border-radius:18px;
-    padding:14px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.status-box span{
-    color:#d7a8ff;
-    text-align:center;
-}
-
-.status-box input{
-    height:58px;
-    text-align:center;
-    font-size:22px;
-    font-weight:bold;
-}
-
-/*==========================================================
-=                  PARTES DO CORPO
-==========================================================*/
-
-#bodySystem{
-    display:none;
-}
-
-.body-grid{
-    display:grid;
-    grid-template-columns:230px 1fr 260px;
-    gap:30px;
-    align-items:start;
-}
-
-.body-left{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.body-left img{
-    width:210px;
-}
-
-.body-center{
-    min-height:430px;
-    border:2px solid #7b2cff;
-    border-radius:16px;
-    padding:22px;
-    background:#171717;
-}
-
-.body-center h3{
-    margin-bottom:20px;
-}
-
-.body-info{
-    line-height:1.8;
-}
-
-.body-right{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.member-row{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    gap:12px;
-    align-items:center;
-}
-
-.member-row span{
-    color:#e6d2ff;
-}
-
-.member-row input{
-    text-align:center;
-}
-
-.pa-card{
-    margin-top:12px;
-    border:2px solid #7b2cff;
-    border-radius:15px;
-    padding:12px;
-}
-
-.pa-card span{
-    display:block;
-    text-align:center;
-    margin-bottom:8px;
-    color:#d7a8ff;
-}
-
-.pa-card input{
-    text-align:center;
-}
-
-/*==========================================================
-=                    ATRIBUTOS
-==========================================================*/
-
-.attributes-section{
-
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
-
-}
-
-.attributes-grid{
-
-display:grid;
-
-grid-template-columns:repeat(5,1fr);
-
-gap:20px;
-
-}
-
-.attribute{
-
-background:#151515;
-
-border:2px solid #7b2cff;
-
-border-radius:20px;
-
-padding:22px;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-gap:18px;
-
-transition:.20s;
-
-}
-
-.attribute:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 0 15px rgba(123,44,255,.35);
-
-}
-
-.attribute span{
-
-font-size:34px;
-
-font-weight:bold;
-
-color:#D9AFFF;
-
-}
-
-.attribute input{
-
-width:90px;
-
-height:72px;
-
-text-align:center;
-
-font-size:34px;
-
-font-weight:bold;
-
-border-radius:15px;
+    font-size:17px;
 
 }
 
 /*==========================================================
-=                    PERÍCIAS
+=                CABEÇALHO                                 =
 ==========================================================*/
 
-.skills-section{
+.top-bar{
 
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
-
-}
-
-.skills-header{
-
-display:grid;
-
-grid-template-columns:
-
-2.3fr
-
-1fr
-
-1fr
-
-70px
-
-70px
-
-70px;
-
-gap:12px;
-
-background:#1A1A1A;
-
-border:2px solid #7b2cff;
-
-border-radius:16px;
-
-padding:14px;
-
-font-weight:bold;
-
-color:#D9AFFF;
-
-}
-
-.skills-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
-
-}
-
-.skill-row{
-
-display:grid;
-
-grid-template-columns:
-
-2.3fr
-
-1fr
-
-1fr
-
-70px
-
-70px
-
-70px;
-
-gap:12px;
-
-align-items:center;
-
-background:#141414;
-
-border:1px solid #2A2A2A;
-
-border-radius:14px;
-
-padding:12px;
-
-transition:.2s;
-
-}
-
-.skill-row:hover{
-
-border-color:#7b2cff;
-
-}
-
-.skill-name{
-
-font-size:17px;
-
-color:#FFF;
-
-}
-
-.skill-attr{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-height:42px;
-
-background:#0D0D0D;
-
-border-radius:10px;
-
-border:1px solid #2F2F2F;
-
-color:#D9AFFF;
-
-font-weight:bold;
-
-}
-
-.skill-total{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-height:42px;
-
-background:#0D0D0D;
-
-border-radius:10px;
-
-border:1px solid #2F2F2F;
-
-font-size:20px;
-
-font-weight:bold;
-
-color:white;
-
-}
-
-.skill-row input{
-
-height:42px;
-
-text-align:center;
-
-}
-
-.skill-row select{
-
-height:42px;
-
-}
-
-.clickable-skill{
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.clickable-skill:hover{
-
-color:#C788FF;
-
-}
-
-/*==========================================================
-=                 MENU PERÍCIA
-==========================================================*/
-
-.skill-editor{
-
-position:fixed;
-
-inset:0;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:rgba(0,0,0,.8);
-
-backdrop-filter:blur(4px);
-
-z-index:500;
-
-}
-
-.skill-editor-content{
-
-width:520px;
-
-background:#151515;
-
-border:2px solid #7b2cff;
-
-border-radius:22px;
-
-padding:24px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.skill-editor h2{
-
-font-size:28px;
-
-color:#D9AFFF;
-
-}
-
-.skill-editor-buttons{
-
-display:flex;
-
-justify-content:flex-end;
-
-gap:12px;
-
-}
-
-.skill-editor-buttons button{
-
-padding:10px 18px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7b2cff;
-
-color:white;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.skill-editor-buttons button:hover{
-
-background:#9957ff;
-
-}
-
-/*==========================================================
-=                ASSIMILAÇÕES
-==========================================================*/
-
-.assimilations-section{
-
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
-
-}
-
-.assimilations-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.assimilation-card{
-
-background:#151515;
-
-border:2px solid #2A2A2A;
-
-border-left:6px solid #7b2cff;
-
-border-radius:18px;
-
-padding:22px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-transition:.25s;
-
-position:relative;
-
-}
-
-.assimilation-card:hover{
-
-border-color:#7b2cff;
-
-transform:translateY(-3px);
-
-box-shadow:0 0 15px rgba(123,44,255,.25);
-
-}
-
-.assimilation-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:flex-start;
-
-gap:20px;
-
-}
-
-.assimilation-title{
-
-display:flex;
-
-flex-direction:column;
-
-gap:6px;
-
-}
-
-.assimilation-name{
-
-font-size:28px;
-
-font-weight:bold;
-
-color:white;
-
-}
-
-.assimilation-element{
-
-font-size:14px;
-
-letter-spacing:1px;
-
-font-weight:bold;
-
-color:#D9AFFF;
-
-text-transform:uppercase;
-
-}
-
-.assimilation-cost{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#FF7878;
-
-white-space:nowrap;
-
-}
-
-.assimilation-type{
-
-font-size:17px;
-
-color:#CFCFCF;
-
-}
-
-.assimilation-description{
-
-font-size:17px;
-
-line-height:1.8;
-
-color:#E5E5E5;
-
-}
-
-.assimilation-footer{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-top:8px;
-
-}
-
-.assimilation-footer button{
-
-height:40px;
-
-padding:0 18px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7b2cff;
-
-color:white;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.assimilation-footer button:hover{
-
-background:#9957ff;
-
-}
-
-.remove-card{
-
-position:absolute;
-
-top:15px;
-
-right:15px;
-
-width:36px;
-
-height:36px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7A1A1A;
-
-color:white;
-
-font-size:18px;
-
-cursor:pointer;
-
-}
-
-/*==========================================================
-=                HABILIDADES
-==========================================================*/
-
-.abilities-list{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:18px;
-
-}
-
-.ability-card{
-
-background:#151515;
-
-border:2px solid #2A2A2A;
-
-border-radius:18px;
-
-padding:20px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-transition:.2s;
-
-}
-
-.ability-card:hover{
-
-border-color:#7b2cff;
-
-}
-
-.ability-name{
-
-font-size:26px;
-
-font-weight:bold;
-
-color:white;
-
-}
-
-.ability-cost{
-
-font-size:17px;
-
-color:#73F19A;
-
-}
-
-.ability-description{
-
-font-size:16px;
-
-line-height:1.7;
-
-color:#DDDDDD;
-
-}
-
-/*==========================================================
-=                CONDIÇÕES
-==========================================================*/
-
-.conditions-section{
-
-display:flex;
-
-flex-direction:column;
-
-gap:22px;
-
-}
-
-.conditions-list{
-
-display:flex;
-
-flex-wrap:wrap;
-
-gap:14px;
-
-}
-
-.condition{
-
-padding:12px 18px;
-
-background:#191919;
-
-border:2px solid #2F2F2F;
-
-border-radius:14px;
-
-font-size:16px;
-
-color:white;
-
-transition:.2s;
-
-cursor:pointer;
-
-}
-
-.condition:hover{
-
-border-color:#7b2cff;
-
-}
-
-.condition.negative{
-
-border-left:5px solid #D43636;
-
-}
-
-.condition.positive{
-
-border-left:5px solid #3BD16F;
-
-}
-
-.condition.neutral{
-
-border-left:5px solid #7b2cff;
-
-}
-
-/*==========================================================
-=                    INVENTÁRIO
-==========================================================*/
-
-.inventory-section{
-
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
-
-}
-
-.inventory-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.inventory-card{
-
-position:relative;
-
-background:#151515;
-
-border:2px solid #2A2A2A;
-
-border-left:6px solid #D89A2A;
-
-border-radius:18px;
-
-padding:22px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-transition:.25s;
-
-}
-
-.inventory-card:hover{
-
-border-color:#D89A2A;
-
-transform:translateY(-3px);
-
-box-shadow:0 0 15px rgba(216,154,42,.20);
-
-}
-
-.inventory-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:flex-start;
-
-gap:20px;
-
-}
-
-.inventory-title{
-
-display:flex;
-
-flex-direction:column;
-
-gap:6px;
-
-}
-
-.inventory-name{
-
-font-size:28px;
-
-font-weight:bold;
-
-color:white;
-
-}
-
-.inventory-category{
-
-font-size:14px;
-
-font-weight:bold;
-
-letter-spacing:1px;
-
-text-transform:uppercase;
-
-color:#FFD27A;
-
-}
-
-.inventory-weight{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#FFD27A;
-
-white-space:nowrap;
-
-}
-
-.inventory-info{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:12px;
-
-}
-
-.inventory-info div{
-
-background:#0E0E0E;
-
-border:1px solid #2B2B2B;
-
-border-radius:10px;
-
-padding:12px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:5px;
-
-}
-
-.inventory-info span{
-
-font-size:13px;
-
-color:#BFBFBF;
-
-}
-
-.inventory-info strong{
-
-font-size:18px;
-
-color:white;
-
-}
-
-.inventory-description{
-
-font-size:16px;
-
-line-height:1.8;
-
-color:#DDDDDD;
-
-}
-
-.inventory-footer{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-top:8px;
-
-}
-
-.inventory-footer button{
-
-height:40px;
-
-padding:0 18px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7b2cff;
-
-color:white;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.inventory-footer button:hover{
-
-background:#9957ff;
-
-}
-
-.inventory-remove{
-
-position:absolute;
-
-top:15px;
-
-right:15px;
-
-width:36px;
-
-height:36px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7A1A1A;
-
-color:white;
-
-font-size:18px;
-
-cursor:pointer;
-
-}
-
-/*==========================================================
-=                    GRIMÓRIO
-==========================================================*/
-
-.grimorio-section{
-
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
-
-}
-
-.grimorio-layout{
-
-display:grid;
-
-grid-template-columns:320px 1fr;
-
-gap:22px;
-
-align-items:start;
-
-}
-
-.grimorio-sidebar{
-
-background:#151515;
-
-border:2px solid #7b2cff;
-
-border-radius:18px;
-
-padding:20px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:15px;
-
-}
-
-.grimorio-sidebar h3{
-
-font-size:22px;
-
-color:#D9AFFF;
-
-}
-
-.grimorio-sidebar button{
-
-height:42px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7b2cff;
-
-color:white;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.grimorio-sidebar button:hover{
-
-background:#9957ff;
-
-}
-
-.grimorio-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-max-height:650px;
-
-overflow-y:auto;
-
-padding-right:5px;
-
-}
-
-.ritual-card{
-
-background:#171717;
-
-border:2px solid #2A2A2A;
-
-border-left:6px solid #7b2cff;
-
-border-radius:16px;
-
-padding:18px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.ritual-card:hover{
-
-border-color:#7b2cff;
-
-}
-
-.ritual-name{
-
-font-size:22px;
-
-font-weight:bold;
-
-color:white;
-
-}
-
-.ritual-circle{
-
-font-size:15px;
-
-color:#D9AFFF;
-
-font-weight:bold;
-
-}
-
-.ritual-element{
-
-font-size:15px;
-
-color:#DDDDDD;
-
-}
-
-.grimorio-view{
-
-background:#151515;
-
-border:2px solid #7b2cff;
-
-border-radius:18px;
-
-padding:24px;
-
-min-height:650px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.grimorio-view h2{
-
-font-size:32px;
-
-color:white;
-
-}
-
-.grimorio-view h3{
-
-font-size:22px;
-
-color:#D9AFFF;
-
-}
-
-.grimorio-view p{
-
-font-size:16px;
-
-line-height:1.8;
-
-color:#E3E3E3;
-
-}
-
-.ritual-tags{
-
-display:flex;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-}
-
-.ritual-effect{
-
-background:#101010;
-
-border:1px solid #2A2A2A;
-
-border-radius:12px;
-
-padding:14px;
-
-line-height:1.7;
-
-color:#DDD;
-
-}
-
-/*==========================================================
-=                    MODAIS
-==========================================================*/
-
-.modal{
-
-position:fixed;
-
-inset:0;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:rgba(0,0,0,.82);
-
-backdrop-filter:blur(6px);
-
-z-index:999;
-
-}
-
-.modal.hidden{
-
-display:none;
-
-}
-
-.modal-content{
-
-width:900px;
-
-max-width:95%;
-
-max-height:90vh;
-
-overflow-y:auto;
-
-background:#141414;
-
-border:2px solid #7b2cff;
-
-border-radius:22px;
-
-padding:25px;
-
-box-shadow:0 0 30px rgba(123,44,255,.35);
-
-}
-
-.modal-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:22px;
-
-}
-
-.modal-header h2{
-
-font-size:30px;
-
-color:#D9AFFF;
-
-}
-
-.close-modal{
-
-width:42px;
-
-height:42px;
-
-border:none;
-
-border-radius:10px;
-
-background:#7A1A1A;
-
-color:white;
-
-font-size:22px;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.close-modal:hover{
-
-background:#B12525;
-
-}
-
-.search-box{
-
-margin-bottom:20px;
-
-}
-
-.search-box input{
-
-height:50px;
-
-}
-
-.modal-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-}
-
-.modal-item{
-
-background:#191919;
-
-border:2px solid #2B2B2B;
-
-border-radius:14px;
-
-padding:16px;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.modal-item:hover{
-
-border-color:#7b2cff;
-
-transform:translateX(5px);
-
-}
-
-/*==========================================================
-=                    TOOLTIP
-==========================================================*/
-
-.tooltip{
-
-position:absolute;
-
-background:#181818;
-
-border:2px solid #7b2cff;
-
-border-radius:14px;
-
-padding:14px;
-
-min-width:250px;
-
-color:white;
-
-font-size:15px;
-
-line-height:1.6;
-
-box-shadow:0 0 18px rgba(123,44,255,.30);
-
-opacity:0;
-
-pointer-events:none;
-
-transition:.2s;
-
-z-index:9999;
-
-}
-
-.tooltip.show{
-
-opacity:1;
-
-}
-
-/*==========================================================
-=                    TAGS
-==========================================================*/
-
-.tag{
-
-display:inline-flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:6px 12px;
-
-border-radius:999px;
-
-font-size:13px;
-
-font-weight:bold;
-
-}
-
-.tag-sangue{
-
-background:#6B1313;
-
-color:#FFCACA;
-
-}
-
-.tag-morte{
-
-background:#404040;
-
-color:#F2F2F2;
-
-}
-
-.tag-energia{
-
-background:#D28B00;
-
-color:#FFF2C6;
-
-}
-
-.tag-conhecimento{
-
-background:#2A66B3;
-
-color:#DCEBFF;
-
-}
-
-.tag-medo{
-
-background:#6B1EA8;
-
-color:#F2DAFF;
-
-}
-
-/*==========================================================
-=                    UTILIDADES
-==========================================================*/
-
-.hidden{
-
-display:none !important;
-
-}
-
-.center{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-}
-
-.flex{
-
-display:flex;
-
-}
-
-.column{
-
-display:flex;
-
-flex-direction:column;
-
-}
-
-.row{
-
-display:flex;
-
-flex-direction:row;
-
-}
-
-.space-between{
-
-justify-content:space-between;
-
-}
-
-.gap10{
-
-gap:10px;
-
-}
-
-.gap20{
-
-gap:20px;
-
-}
-
-.w100{
-
-width:100%;
-
-}
-
-/*==========================================================
-=                    ANIMAÇÕES
-==========================================================*/
-
-@keyframes fadeIn{
-
-from{
-
-opacity:0;
-
-}
-
-to{
-
-opacity:1;
-
-}
-
-}
-
-@keyframes slideUp{
-
-from{
-
-opacity:0;
-
-transform:translateY(25px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-.card{
-
-animation:fadeIn .25s ease;
-
-}
-
-.modal-content{
-
-animation:slideUp .25s ease;
-
-}
-
-/*==========================================================
-=                    RESPONSIVO
-==========================================================*/
-
-@media(max-width:1600px){
-
-.container{
-
-width:calc(100% - 330px);
-
-}
-
-}
-
-@media(max-width:1350px){
-
-.character-section{
-
-grid-template-columns:1fr;
-
-}
-
-.grimorio-layout{
-
-grid-template-columns:1fr;
-
-}
-
-.body-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.attributes-grid{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-.abilities-list{
-
-grid-template-columns:1fr;
-
-}
-
-.inventory-info{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:1000px){
-
-.container{
-
-width:100%;
-
-padding:15px;
-
-}
-
-.dice-panel{
-
-position:relative;
-
-width:100%;
-
-height:auto;
-
-border-left:none;
-
-border-top:2px solid #7b2cff;
-
-}
-
-.status-row{
-
-grid-template-columns:1fr;
-
-}
-
-.attributes-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.info-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.body-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.body-bottom{
-
-grid-template-columns:1fr;
-
-}
-
-.grimorio-layout{
-
-grid-template-columns:1fr;
-
-}
-
-.inventory-info{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-@media(max-width:700px){
-
-.attributes-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.skills-header{
-
-display:none;
-
-}
-
-.skill-row{
-
-grid-template-columns:1fr;
-
-gap:10px;
-
-}
-
-.modal-content{
-
-width:95%;
+    margin-bottom:30px;
 
 }
 
 .top-bar h1{
 
-font-size:34px;
+    font-size:62px;
+
+    color:var(--roxoClaro);
+
+    text-shadow:0 0 18px rgba(138,43,255,.35);
 
 }
+
+/*==========================================================
+=              PERSONAGEM / INFORMAÇÕES                    =
+==========================================================*/
+
+.character-section{
+
+    display:grid;
+
+    grid-template-columns:300px 1fr;
+
+    gap:30px;
+
+    align-items:start;
+
+}
+
+/*==========================================================
+=                      FOTO                                =
+==========================================================*/
+
+.photo-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.photo-preview{
+
+    width:100%;
+
+    height:360px;
+
+    background:#0A0A0A;
+
+    border:var(--borda);
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#666;
+
+    font-size:30px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+.photo-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+#photoInput{
+
+    width:100%;
+
+}
+
+/*==========================================================
+=                   PA CARD                                =
+==========================================================*/
+
+.pa-card{
+
+    background:var(--card);
+
+    border:var(--borda);
+
+    border-radius:20px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.pa-card span{
+
+    display:block;
+
+    color:var(--roxoClaro);
+
+    margin-bottom:12px;
+
+    font-size:18px;
+
+}
+
+.pa-card input{
+
+    height:62px;
+
+    text-align:center;
+
+    font-size:36px;
+
+    font-weight:bold;
+
+}
+
+.pa-max{
+
+    margin-top:10px;
+
+    color:#BBBBBB;
+
+    font-size:15px;
+
+}
+
+/*==========================================================
+=                DADOS DO PERSONAGEM                       =
+==========================================================*/
+
+.character-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 130px;
+
+    gap:18px;
+
+}
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.life-system{
+
+    display:grid;
+
+    grid-template-columns:150px 1fr;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+.life-system label{
+
+    margin:0;
+
+}
+
+.life-system select{
+
+    height:52px;
 
 }
